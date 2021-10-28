@@ -1,0 +1,16 @@
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+/Users/yannakoun/.rvm/rubies/ruby-3.0.0/bin/ruby -I /Users/yannakoun/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20211028-23019-7disst.rb extconf.rb --with-cppflags\=-I/usr/local/opt/openssl@3/include
+creating Makefile
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make "DESTDIR=" clean
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make "DESTDIR="
+compiling mapper.cpp
+compiling rubymain.cpp
+linking shared-object fastfilereaderext.bundle
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/eventmachine-1.2.7/ext/fastfilereader
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 fastfilereaderext.bundle ./.gem.20211028-23019-uso6yp

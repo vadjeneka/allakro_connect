@@ -1,0 +1,15 @@
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+/Users/yannakoun/.rvm/rubies/ruby-3.0.0/bin/ruby -I /Users/yannakoun/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20211028-23019-4jkjnc.rb extconf.rb
+creating Makefile
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/yannakoun/Project/techshelter/formation/test_ok/.vendor/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20211028-23019-xog0ut/bootsnap
