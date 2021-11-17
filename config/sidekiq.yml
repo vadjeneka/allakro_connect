@@ -1,5 +1,5 @@
 ---
 :concurrency: 2
 :queues:
-  - test_ok_development_default
-  - test_ok_development_mailers
+  - jokou_development_default
+  - jokou_development_mailers
