@@ -20,7 +20,9 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%=render 'shared/banners' %>
+    <div>
+      <%=render 'shared/banners'%>
+    </div>
     <%= yield %>
   </body>
 </html>
