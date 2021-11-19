@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
   def find_or_create_cart(user, store)
-    cart = Cart.find_by(user_id: user.id, store_id: store.id, validate: false)
+    cart = Cart.find_by(user_id: user.id, store_id: store.id, validated: false)
     cart.nil? ? Cart.create(user_id: user.id, store_id: store.id) : cart
   end
 end
