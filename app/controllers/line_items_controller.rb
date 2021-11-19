@@ -1,23 +1,20 @@
 class LineItems < ApplicationController
-  before_action :get_user_store_cart, only: [:create]
 
   def create
-    # product = Product.find(params[:product_id]).include(:store)
-    user_store_cart = @user_store_cart
-    @product = Product.include(:store).first
-    @store = Store.include(:products).first
+    # product = Product.includes(:store).find(params[:product_id])
+    @product = Product.includes(:store).first
+    cart = user_store_cart(current_user, @product.store)
 
-    if user_store_cart.products.include?(@product)
-      @line_item = user_store_cart.line_items.find_by(product_id: @product.id)
-      @line_item.quantity += 1 
+    if cart.products.include?(@product)
+      flash[:notice] = "You already have this product in your cart"
     else
-      @line_item = LineItem.new
-      @line_item.product_id = @product.id
+      @line_item = LineItem.create(product_id: @product.id, cart_id: cart.id)
     end
+    redirect_to root_path # TODO: Redirect to Cart
   end
 
-  private
-  def get_user_store_cart
-    set_user_store_cart(curent_user, @product.store)
+  def destroy
+    @user_store_cart.destroy
+    flash[:notice] = "You cart has been deleted"
   end
 end

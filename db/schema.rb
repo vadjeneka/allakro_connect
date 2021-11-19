@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_164116) do
+ActiveRecord::Schema.define(version: 2021_11_19_104113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -48,9 +48,10 @@ ActiveRecord::Schema.define(version: 2021_11_18_164116) do
 
   create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.uuid "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "store_id"
+    t.boolean "validated", default: false
     t.index ["store_id"], name: "index_carts_on_store_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
@@ -83,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_164116) do
 
   create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "product_id", null: false
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.uuid "cart_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
