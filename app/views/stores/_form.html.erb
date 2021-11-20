@@ -15,6 +15,13 @@
     <span style='color: red'><%= store.errors[:description][0] %></span>
   <% end %>
    <div>
+    <%= form.label :background, 'Store Image' %>
+    <%= form.file_field :background %>
+  </div>
+  <% if store.errors[:description] %>
+    <span style='color: red'><%= store.errors[:description][0] %></span>
+  <% end %>
+   <div>
     <%= form.label :city, 'City' %>
     <%= form.text_field  :city %>
   </div>

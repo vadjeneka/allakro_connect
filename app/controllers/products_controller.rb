@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
     @products = store.products
   end
 
+  # def products
+  #   @products = Product.includes(:user, :categories).available
+  # end
+
   def new
     @store = Store.find(params[:store_id])
     @user = current_user  
@@ -17,7 +21,7 @@ class ProductsController < ApplicationController
   def create
     @product = store.products.build(product_params)
     if @product.save
-      redirect_to user_stores_path(), notice: 'Product was successfully created'
+      redirect_to user_store_products_path(@product), notice: 'Product was successfully created'
     else
       flash[:error] = "Product could not be created"
       render 'new'

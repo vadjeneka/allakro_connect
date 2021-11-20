@@ -1,11 +1,12 @@
 class StoresController < ApplicationController
 
   def index
-    @stores = user.stores
+    @store = user.store
   end
 
   def new
-    @store = user.stores.build
+    @user = current_user
+    @store = Store.new(user_id: params[:user_id])
   end
 
   def show
@@ -14,7 +15,7 @@ class StoresController < ApplicationController
   end
 
   def create
-    @store = current_user.stores.build(store_params)
+    @store = Store.new(store_params)
     if @store.save
       redirect_to user_stores_path(), notice: 'Store was successfully created'
     else
@@ -24,7 +25,7 @@ class StoresController < ApplicationController
   end
 
   def edit
-    @store = user.stores.find(params[:id])
+    @store = user.store
   end
 
   def update
@@ -56,7 +57,8 @@ class StoresController < ApplicationController
       :description,
       :city,
       :town,
-      :user_id
+      :user_id,
+      :background
     )
   end
 end

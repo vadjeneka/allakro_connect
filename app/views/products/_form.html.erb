@@ -15,6 +15,12 @@
   <% if product.errors[:description] %>
     <span style='color: red'><%= product.errors[:description][0] %></span>
   <% end %>
+  <div>
+    <%= form.text_field :all_categories, class: 'input-label', placeholder: "Categories (Separated by comma)" %>
+  </div>
+  <% if product.errors[:all_categories] %>
+    <span style='color: red'><%= product.errors[:all_categories][0] %></span>
+  <% end %>
    <div>
     <%= form.label :price, 'Price' %>
     <%= form.number_field  :price %>
