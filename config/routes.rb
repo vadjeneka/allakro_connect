@@ -12,4 +12,11 @@ Rails.application.routes.draw do
     end
   end
   root to: "home#index"
+
+  resources :users do
+    resources :stores do 
+      resources :products
+    end
+  end
+
 end
