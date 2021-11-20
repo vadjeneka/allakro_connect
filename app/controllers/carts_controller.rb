@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
-  def show
-    @carts = Cart.includes(:line_items, :products).find_by(user_id: current_user.id, validated: false)
+  def index
+    @carts = current_user.carts.includes(:line_items, :products).where(validated: false)
+    # raise @carts.inspect
   end
 
   def destroy

@@ -1,17 +1,17 @@
-class LineItems < ApplicationController
+class LineItemsController < ApplicationController
 
   def create
-    # product = Product.includes(:store).find(params[:product_id])
-    @product = Product.includes(:store).first
-    cart = user_store_cart(current_user, @product.store)
+    # raise params.inspect
+    product = Product.includes(:store).find(params[:product_id])
+    cart = user_store_cart(current_user, product.store)
 
-    if cart.products.include?(@product)
+    if cart.products.include?(product)
       flash[:notice] = "You already have this product in your cart"
     else
-      @line_item = LineItem.create(product_id: @product.id, cart_id: cart.id)
-      cart.add_product(@product)
+      @line_item = LineItem.create(product_id: product.id, cart_id: cart.id)
+      cart.add_product(product)
     end
-    redirect_to root_path # TODO: Redirect to Cart
+    redirect_to root_path, notice: "Product successfully added to cart" # TODO: Redirect to Cart
   end
 
   def add_quantity

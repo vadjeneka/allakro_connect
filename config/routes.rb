@@ -12,4 +12,14 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
+  
+  resources :users do
+    resources :carts, only: [:index, :destroy]
+    resources :stores do 
+      resources :products do
+        resources :line_items
+      end
+    end
+  end
+
 end
