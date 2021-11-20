@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TestOk</title>
+    <title>Jokou</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -20,9 +20,8 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <div>
-      <%=render 'shared/banners'%>
-    </div>
+    <%=render 'shared/banners'%>
+    <%#=render 'shared/footer'%>
     <%= yield %>
   </body>
 </html>
