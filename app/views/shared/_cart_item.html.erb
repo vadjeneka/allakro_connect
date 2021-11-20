@@ -1,1 +1,17 @@
-<%= cart.store.name %>
+<table>
+  <tr>
+    <td>Name: <%= item.product.name %></td>
+    <td>Description: <%= item.product.description %></td>
+    <td>Weight: <%= item.product.weight %></td>
+    <td>Price: <%= item.product.price %></td>
+    <td>
+      Quantity:
+      <%= link_to 'Moins (-1)', line_item_reduce_path(item), method: :post %>
+      <%= item.quantity %>
+      <%= link_to 'Plus (+1)', line_item_add_path(item), method: :post %>
+    </td>
+    <td>
+      | <%= link_to 'Delete', line_item_delete_path(item), method: :delete %>
+    </td>
+  </tr>
+</table>

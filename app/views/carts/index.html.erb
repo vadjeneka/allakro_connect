@@ -1,4 +1,4 @@
 <% @carts.each do |cart| %>
-  Cart N.<%= cart.id %> from <%= cart.store.name %>
+  <%= render partial: "shared/cart", locals: { cart: cart } %>
 <% end %>
 
