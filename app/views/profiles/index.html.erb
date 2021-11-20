@@ -1,0 +1,75 @@
+<header class="flex flex-row justify-between font-bold bg-white h-12 pt-4 w-screen">
+  <h1 class="pl-8">Logo</h1>
+  <nav class="flex">
+    <div class="pr-10">
+      <%= link_to 'Tous les produits'%>
+    </div>
+    <div class="pr-10">
+      <%= link_to 'Categories'%>
+    </div>
+    <div class="pr-10">
+      <%= link_to 'Tendances'%>
+    </div>
+    <div class="pr-10">
+      <%= link_to 'Encheres'%>
+    </div>
+  </nav>
+  <nav class="flex">
+    <h1 class="pr-5">Logo</h1>
+    <div class="pr-5">
+      <%= link_to  do %>
+        <%= image_tag "" %>
+      <% end %>
+    </div>
+    <div class="pr-5">
+      <%= link_to  do %>
+        <%= image_tag "" %>
+      <% end %>
+    </div>
+  </nav>
+</header>
+<main class="w-screen h-auto flex flex-row justify-between">
+  <div class="flex flex-col bg-gray-300 w-4/12">
+    <h1>Mon Profil</h1>
+    <nav class="flex flex-col mt-12 leading-loose">
+      <%= link_to 'Jokou VIP'%>
+      <%= link_to 'Mes adresses'%>
+      <%= link_to 'Mes options De Paiement'%>
+      <%= link_to 'Securite Du Compte'%>
+    </nav>
+  </div>
+  <div class="flex flex-col bg-gray-300 w-4/12">
+    <h1>Mes commandes</h1>
+    <div class="flex flex-row justify-between px-4">
+      <%= link_to  do %>
+        <%= image_tag "" %>
+        <figcaption>En cours de traitement</figcaption>
+      <% end %>
+      <%= link_to  do %>
+        <%= image_tag "" %>
+        <figcaption>Expediés</figcaption>
+      <% end %>
+      <%= link_to  do %>
+        <%= image_tag "" %>
+        <figcaption>Enchérés</figcaption>
+      <% end %>
+    </div>
+  </div>
+  <div class="w-4/12">
+    <div class="flex flex-row justify-between px-4">
+      <%= link_to  do %>
+        <%= image_tag "" %>
+        <figcaption>Mes notifications</figcaption>
+      <% end %>
+      <%= link_to  do %>
+        <%= image_tag "" %>
+        <figcaption>Mes commentaires</figcaption>
+      <% end %>
+    </div>
+    <div>
+      <h1 class="text-center">Ma boutique</h1>
+      <button class="h-auto py-2 w-auto px-2 bg-red-600 text-white block mx-auto">Ajouter un article</button>
+    </div>
+  </div>
+</main>
+<footer></footer>
