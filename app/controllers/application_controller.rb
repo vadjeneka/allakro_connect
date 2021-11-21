@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
 
   def user_store_cart(user, store)
     @user_store_cart ||= find_or_create_cart(user, store)
