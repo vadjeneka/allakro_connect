@@ -1,5 +1,5 @@
 <div class="block my-1">
-<%= form_with url:root_path do |form| %>
+<%=  form_with url: root_path, method: 'GET'  do |form| %>
   <div class='flex w-full px-5'>
     <%= form.text_field :search, placeholder:"Search...",class:"w-5/6 py-3 px-4 bg-gray-600 outline-none text-white" %>
     <%= form.submit 'Search', class:"w-1/6 bg-gray-500 outline-none text-white"%>

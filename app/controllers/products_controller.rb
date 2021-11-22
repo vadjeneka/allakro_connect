@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @store = Store.find(params[:store_id])
     id = params[:id]
     @product = Product.find(id)
   end

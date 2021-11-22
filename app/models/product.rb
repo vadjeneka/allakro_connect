@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   
   belongs_to :store 
+  has_one :stock
   has_and_belongs_to_many :categories
   has_one_attached :product_background
 
