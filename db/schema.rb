@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_175302) do
+ActiveRecord::Schema.define(version: 2021_11_20_145712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -90,6 +90,15 @@ ActiveRecord::Schema.define(version: 2021_11_19_175302) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.uuid "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "sender_id", null: false
     t.uuid "receiver_id", null: false
@@ -132,15 +141,6 @@ ActiveRecord::Schema.define(version: 2021_11_19_175302) do
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
-  create_table "products_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id", null: false
-    t.uuid "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_products_categories_on_category_id"
-    t.index ["product_id"], name: "index_products_categories_on_product_id"
-  end
-
   create_table "ratings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "product_id", null: false
@@ -178,6 +178,15 @@ ActiveRecord::Schema.define(version: 2021_11_19_175302) do
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
+  create_table "tendances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_tendances_on_product_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -212,18 +221,19 @@ ActiveRecord::Schema.define(version: 2021_11_19_175302) do
   add_foreign_key "bids_offers", "users"
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "users"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
-  add_foreign_key "products_categories", "categories"
-  add_foreign_key "products_categories", "products"
   add_foreign_key "ratings", "products"
   add_foreign_key "ratings", "users"
   add_foreign_key "searches", "users"
   add_foreign_key "stocks", "products"
   add_foreign_key "stores", "users"
+  add_foreign_key "tendances", "products"
   add_foreign_key "views", "products"
   add_foreign_key "views", "users"
 end
