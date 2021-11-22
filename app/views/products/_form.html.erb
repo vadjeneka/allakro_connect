@@ -35,6 +35,12 @@
   <% if product.errors[:weight] %>
     <span style='color: red'><%= product.errors[:weight][0] %></span>
   <% end %>
-
+   <div>
+    <%= form.label :product_background, 'Product Image' %>
+    <%= form.file_field :product_background %>
+  </div>
+  <% if product.errors[:product_background] %>
+    <span style='color: red'><%= product.errors[:product_background][0] %></span>
+  <% end %>
     <%= form.submit submit, class:"bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded" %>
 <% end %>

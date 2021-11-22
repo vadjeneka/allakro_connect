@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   end
 
   # def products
-  #   @products = Product.includes(:user, :categories).available
+  #   @products = Product.includes(:store, :categories).available
   # end
 
   def new
@@ -63,7 +63,9 @@ class ProductsController < ApplicationController
       :description,
       :price,
       :weight,
+      :all_categories,
       :store_id,
+      :product_background
     )
   end
 end
