@@ -1,5 +1,9 @@
 <div class="max-w-xs rounded-xl shadow-lg">
-  
+   <div class="w-full h-48 bg-black">
+    <% if product.product_background.persisted? %>
+      <%= image_tag product.product_background, class: 'h-48 w-full' %>
+    <% end %>
+  </div>
     <div class="px-6 py-4">
       <h4 class="mb-3 text-xl font-semibold tracking-tight text-gray-800">
         <%= product.name %>
