@@ -1,4 +1,4 @@
-    <%=  form_with url: root_path do |form| %>
+    <%=  form_with url: root_path, method: 'GET'  do |form| %>
         <div class=“flex”>
           <%= form.text_field :search, placeholder:"Search...",class:"w-5/6 py-3 px-4 bg-gray-600 outline-none text-white" %>
           <%= form.submit 'Search', class:"w-1/6 bg-gray-500 outline-none text-white"%>
@@ -15,25 +15,14 @@
     <% end %>
 
 
- <%
-=begin%>
- <div class="row product-teaser">
+   <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
 
-  <h4 class="text-center teaser-text"> Products from same category </h4>
-  
-   <% @products_rand.each do |product| %>
-      <div class="col-sm-2 col-xs-3 center-block product-thumbs-product-view" >
-
-       <%= link_to product_path (product) do %>
-         <%= image_tag product.image.url, :size => "100%x100%", class: "img-responsive center-block" %>
-       <% end %>
-
-          <h5 class="text-center"><%= link_to product.title, product, class: "text-center" %></h5>
-
-      </div>
-      <% end %>
-
-  </div> 
-<%
-=end%>
-  
+   <% @products.each do |products| %>
+        <p>
+              <%= products.name %>
+              <%= image_tag products.product_background %> 
+              <%= products.description %> <br>
+              <%= products.price %> <br>
+              <%= products.all_categories %>
+        </p>
+<% end %>
