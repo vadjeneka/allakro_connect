@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.text :description
       t.integer :price
       t.integer :weight
+      t.boolean :is_available, default: true
       t.references :store, null: false, foreign_key: true, type: :uuid
 
       t.timestamps

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
+  get 'products', to: 'products#products'
+  get 'products/categories/:id', to: 'categories#show', as: 'category'
   
   resources :users do
     resources :carts, only: [:index, :destroy]

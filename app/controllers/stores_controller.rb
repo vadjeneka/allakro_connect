@@ -17,7 +17,7 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     if @store.save
-      redirect_to user_stores_path(), notice: 'Store was successfully created'
+      redirect_to user_store_path(current_user,@store), notice: 'Store was successfully created'
     else
       flash[:error] = "Store could not be created"
       render 'new'
@@ -31,7 +31,7 @@ class StoresController < ApplicationController
   def update
     @store = Store.find(params[:id])
     if @store.update(store_params)
-      redirect_to user_stores_path(), notice: 'Store updated successfully'
+      redirect_to user_store_path(current_user,@store), notice: 'Store updated successfully'
     else
       flash[:error] = 'Cannot update Store'
       render 'edit'

@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.uuid "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id", unique: true
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "sender_id", null: false
     t.uuid "receiver_id", null: false
@@ -136,20 +147,11 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
     t.text "description"
     t.integer "price"
     t.integer "weight"
+    t.boolean "is_available", default: true
     t.uuid "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["store_id"], name: "index_products_on_store_id"
-  end
-
-  create_table "products_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id", null: false
-    t.uuid "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_products_categories_on_category_id"
-    t.index ["product_id", "category_id"], name: "index_products_categories_on_product_id_and_category_id", unique: true
-    t.index ["product_id"], name: "index_products_categories_on_product_id"
   end
 
   create_table "ratings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -223,6 +225,8 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   add_foreign_key "bids_offers", "users"
   add_foreign_key "carts", "stores"
   add_foreign_key "carts", "users"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "line_items", "carts"
@@ -230,8 +234,6 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
-  add_foreign_key "products_categories", "categories"
-  add_foreign_key "products_categories", "products"
   add_foreign_key "ratings", "products"
   add_foreign_key "ratings", "users"
   add_foreign_key "searches", "users"

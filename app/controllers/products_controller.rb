@@ -3,9 +3,9 @@ class ProductsController < ApplicationController
     @products = store.products
   end
 
-  # def products
-  #   @products = Product.includes(:store, :categories).available
-  # end
+  def products
+    @products = Product.includes(:store, :categories).available
+  end
 
   def new
     @store = Store.find(params[:store_id])
@@ -65,6 +65,7 @@ class ProductsController < ApplicationController
       :weight,
       :all_categories,
       :store_id,
+      :is_available,
       :product_background
     )
   end
