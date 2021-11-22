@@ -1,0 +1,27 @@
+<p>
+  <strong>Name:</strong>
+  <%= @chat.name %>
+</p>
+
+<div class="h-full overflow-y-scroll">
+  <% @message.each do |message| %>
+    <p><%= message.content %></p>
+    <small><%= message.user.email %></small>
+    
+  <%end%>
+
+</div>
+
+
+
+
+  <%= form_with model: [current_user ,@chat, @messages] do |form| %>
+    <div style='width:48%; display:inline-block;margin:2% 0;'>
+      <%= form.text_field :content, style:'width:95%;padding:12px 5px;border:none;background:#f5f5f5;border-radius:3px', placeholder:'Enter your message here' %>
+      <% if @chat.errors[:content] %>
+        <span style='color: red'><%= @chat.errors[:content][0] %></span>
+      <% end %>
+    </div>
+    <!-- <%#= form.hidden_field :chat_id, value: @chat.id %> -->
+      <%= form.submit "Add", class: "btn btn-outline-primary btn-block py-2 px-10" %>
+  <%end%>
