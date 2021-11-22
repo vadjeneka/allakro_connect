@@ -1,4 +1,24 @@
 class ProductsController < ApplicationController
+  def index
+    @products = store.products
+  end
+
+  def products
+    @products = Product.includes(:store, :categories).available
+  end
+
+  def new
+    @store = Store.find(params[:store_id])
+    @user = current_user  
+    @product = @store.products.build
+  end
+
+  def show
+    id = params[:id]
+    @product = Product.find(id)
+  end
+
+  def create
     @product = store.products.build(product_params)
     if @product.save
       redirect_to user_store_products_path(@product), notice: 'Product was successfully created'
@@ -43,7 +63,10 @@ class ProductsController < ApplicationController
       :description,
       :price,
       :weight,
+      :all_categories,
       :store_id,
+      :is_available,
+      :product_background
     )
   end
 end

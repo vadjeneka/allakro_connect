@@ -13,10 +13,20 @@ Rails.application.routes.draw do
   end
   root to: "home#index"
 
+  get 'products', to: 'products#products'
+  get 'products/categories/:id', to: 'categories#show', as: 'category'
+  
   resources :users do
+    resources :carts, only: [:index, :destroy]
     resources :stores do 
-      resources :products
+      resources :products do
+        resources :line_items, only: [:create]
+      end
     end
   end
+
+  post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
+  post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
+  delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
 
 end

@@ -1,10 +1,16 @@
+<% if @store.background.persisted? %>
+<div class="h-12 w-screen"><%= image_tag @store.background%></div>
+<% end %>
+
+<div class="flex justify-center text-red-600">
+<div>
 <h1><%= @store.name%></h1>
+
+
  <button>
     <%= link_to 'Add a Product', new_user_store_product_path(current_user, @store)%>
   </button>
-<ul>
-  <li><%= link_to 'edit',  edit_user_store_path %></li>
-</ul>
+
 <hr/>
 <table>
   <thead>
@@ -13,6 +19,7 @@
       <th>description</th>
       <th>city</th>
       <th>town</th>
+      
      
     </tr>
   </thead>
@@ -40,3 +47,8 @@
     </tr>
   </tbody>
 </table>
+
+</div>
+
+</div>
+
