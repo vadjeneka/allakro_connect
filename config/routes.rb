@@ -14,4 +14,13 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
+
+
+  resources :users do
+    resources :stores do 
+      resources :products
+    end
+
+  end
+
 end

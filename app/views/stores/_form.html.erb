@@ -1,0 +1,42 @@
+<%= form_with model: [user, store] do |form|%>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <div>
+    <%= form.label :name, 'Name' %>
+    <%= form.text_field :name %>
+    <% if store.errors[:name] %>
+      <span style='color: red'><%= store.errors[:first_name][0] %></span>
+    <% end %>
+  </div>  
+  <div>
+    <%= form.label :description, 'Description' %>
+    <%= form.text_field :description %>
+  </div>
+  <% if store.errors[:description] %>
+    <span style='color: red'><%= store.errors[:description][0] %></span>
+  <% end %>
+   <div>
+    <%= form.label :background, 'Store Image' %>
+    <%= form.file_field :background %>
+  </div>
+  <% if store.errors[:description] %>
+    <span style='color: red'><%= store.errors[:description][0] %></span>
+  <% end %>
+   <div>
+    <%= form.label :city, 'City' %>
+    <%= form.text_field  :city %>
+  </div>
+  <% if store.errors[:city] %>
+    <span style='color: red'><%= store.errors[:city][0] %></span>
+  <% end %>
+  <div>
+    <%= form.label :town, 'Town' %>
+    <%= form.text_field  :town %>
+  </div>
+  <% if store.errors[:town] %>
+    <span style='color: red'><%= store.errors[:town][0] %></span>
+  <% end %>
+
+  <button class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded">
+    <%= form.submit submit %>
+  </button>
+<% end %>
