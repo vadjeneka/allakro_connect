@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_184011) do
+ActiveRecord::Schema.define(version: 2021_11_18_171429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_184011) do
     t.datetime "end_date"
     t.uuid "product_id", null: false
     t.integer "initial_price"
-    t.boolean "is_closed"
+    t.boolean "is_closed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_bids_on_product_id"

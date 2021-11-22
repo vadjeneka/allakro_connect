@@ -1,0 +1,23 @@
+<h2>LISTE DES ENCHERES</h2>
+<% @bids.each do |display|%>
+<div>
+  <div>
+    <%= display.product.name%>
+  </div>
+</div>
+  
+  <div>
+    <%= display.initial_price%>
+  </div>
+  <div>
+    Débbut <%= display.start_date%>
+  </div>
+  <div>
+    Fin <%= display.end_date%>
+  </div>
+  <div>
+   <%= link_to 'Rencherir' %>
+   <%= link_to 'Supprimer', data: {confirm: "Êtes-vous sûr ?"}, method: :delete %>
+   <%= link_to 'Plus d\'infos' %>
+  </div>
+<%end%>

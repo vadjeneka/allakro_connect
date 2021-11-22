@@ -1,0 +1,14 @@
+<h1>Products#index</h1>
+<% @products.each do |product|%>
+<div>
+  <%= product.name %>
+</div>
+<div>
+  <%= product.description %>
+</div>
+<div>
+  <%= product.price %>
+</div>
+
+ <%= link_to 'Ajouter aux enchères', new_product_bid_path(product.id) %>
+<%end%>
