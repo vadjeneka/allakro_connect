@@ -191,6 +191,15 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
+  create_table "tendances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_tendances_on_product_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -239,6 +248,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   add_foreign_key "searches", "users"
   add_foreign_key "stocks", "products"
   add_foreign_key "stores", "users"
+  add_foreign_key "tendances", "products"
   add_foreign_key "views", "products"
   add_foreign_key "views", "users"
 end

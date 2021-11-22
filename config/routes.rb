@@ -3,10 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # get '/search' => 'home#search', :as => 'search_home'
-  root to: "home#index"
   
-
   if Rails.env.development?
     mount Sidekiq::Web => '/sidekiq'
   else
@@ -14,6 +11,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
+  root to: "home#index"
+
   get 'products', to: 'products#products'
   get 'products/categories/:id', to: 'categories#show', as: 'category'
   

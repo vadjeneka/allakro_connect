@@ -5,14 +5,13 @@
         </div>
   <% end %>
 
+<h3>Search Result</h3>  
+<% @result.each do |result| %>  
+    <%= result.name %><br>  
+<% end %>
 
-  <% if @result %>
+<% end %>
 
-  <h3>Search Result</h3>  
-    <% @result.each do |result| %>  
-        <%= result.name %><br>  
-    <% end %>
-    <% end %>
 
 
    <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
