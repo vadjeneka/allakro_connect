@@ -18,8 +18,8 @@ class BidsController < ApplicationController
     if @bid.save
       #decrement the stock of this product
 
-      flash[:notice] = "Succes ! Ce produit est passé aux enchères"
-      redirect_to bids_path
+      flash[:notice] = "Succes ! #{@bid.product.name} est passé(e) aux enchères"
+      redirect_to product_bids_path(@bid.product)
     else
       flash[:error] = "Erreur ! Ce produit n'est pas aux enchères"
       render :new
@@ -29,7 +29,9 @@ class BidsController < ApplicationController
   def destroy
     @bid = Bid.find(params[:id])
     @bid.destroy
-    redirect_to bids_path
+    redirect_to product_bids_path(@bid.product)
+
+    #increment the stock of this product
   end
 
   

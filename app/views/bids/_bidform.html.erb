@@ -5,10 +5,13 @@
     <h2>Mise aux enchères de <%= @product.name%></h2>
   </div>
 </div>
-  
+  <div>
+    <span>Format de l'heure HH:30 ou HH:00 ex: 17:30, 5:00</span>x
+  </div>
   <div>
     <%= form.label :Debut %>
     <%=form.datetime_field :start_date%>
+    
     <% if @bid.errors[:start_date] %>
       <span style='color: red'><%= @bid.errors[:start_date][0] %></span>
     <% end %>

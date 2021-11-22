@@ -1,6 +1,7 @@
 class Bid < ApplicationRecord
   belongs_to :product
   has_many :bids_offers
+  has_one :active_bid, -> { where(bid_state: "active")}
 
   validate :right_start_date, :right_end_date
 
@@ -8,20 +9,22 @@ class Bid < ApplicationRecord
 
 
   def right_start_date
-    if start_date.present? && start_date < DateTime.current
-      errors.add(:start_date, "***Revoyez svp la date de debut !***")
-      errors.add(:start_date, "***L'heure doit être supérieure à l'heure actuelle !***")
+    
+    if start_date.present? == true && start_date < DateTime.current || (start_date.min != 0 && start_date.min != 30)
+      errors.add(:start_date, "***Revoyez svp la date ou l'heure de début !***")
+      # errors.add(:start_date, "***L'heure doit être supérieure à l'heure actuelle !***")
     elsif start_date.present? == false
       errors.add(:start_date, "***Entrez une date de début***")
     end
   end
 
   def right_end_date
-    if end_date.present? && end_date <= start_date
-      errors.add(:end_date, "***Revoyez la date de fin***")
+    if end_date.present? == true && end_date <= start_date || (end_date.min != 0 && end_date.min != 30)
+      errors.add(:end_date, "***Revoyez svp la date ou l'heure de début !***")
     elsif end_date.present? == false
       errors.add(:end_date, "***Entrez la date de fin***")
     end
   end
+
 
 end

@@ -1,23 +1,23 @@
 <h2>LISTE DES ENCHERES</h2>
-<% @bids.each do |display|%>
+<% @bids.each do |bid|%>
 <div>
   <div>
-    <%= display.product.name%>
+    <%= bid.product.name%>
   </div>
 </div>
   
   <div>
-    <%= display.initial_price%>
+    <%= bid.initial_price%>
   </div>
   <div>
-    Débbut <%= display.start_date%>
+    Débbut <%= bid.start_date%>
   </div>
   <div>
-    Fin <%= display.end_date%>
+    Fin <%= bid.end_date%>
   </div>
   <div>
    <%= link_to 'Rencherir' %>
-   <%= link_to 'Supprimer', data: {confirm: "Êtes-vous sûr ?"}, method: :delete %>
+   <%= link_to 'Supprimer', product_bid_path(bid.product, bid), data: {confirm: "Êtes-vous sûr ?"}, method: :delete %>
    <%= link_to 'Plus d\'infos' %>
   </div>
 <%end%>
