@@ -27,6 +27,9 @@ gem 'image_processing', '~> 1.2'
 
 gem 'hotwire-rails'
 
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
