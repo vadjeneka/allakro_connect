@@ -5,3 +5,17 @@
   <%#= link_to 'Add a Store', new_user_store_path(current_user)%>
   <%#= link_to 'Sign in', new_user_session()%>
 <%# </button> %>
+<%= form_with url:root_path do |form| %>
+  <div class=“flex”>
+    <%= form.text_field :search, placeholder:"Search...",class:"w-5/6 py-3 px-4 bg-gray-600 outline-none text-white" %>
+    <%= form.submit 'Search', class:"w-1/6 bg-gray-500 outline-none text-white"%>
+  </div>
+<% end %>
+<% if @result %>
+
+<h3>Search Result</h3>  
+<% @result.each do |result| %>  
+    <%= result.name %><br>  
+<% end %>
+
+<% end %>
