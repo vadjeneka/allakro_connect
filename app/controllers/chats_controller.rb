@@ -21,9 +21,9 @@ class ChatsController < ApplicationController
     @guest = User.find(params[:guest])
 
     exist_chat = nil
-    user_chat = current_user.chats
+    user_chat = Chat.where("user_id = ? OR receiver_id = ?", "#{current_user.id}","#{current_user.id}")
     user_chat.each do |chat|
-      if chat.receiver_id == @guest.id
+      if (chat.receiver_id == @guest.id && chat.user_id == current_user.id) || (chat.receiver_id == current_user.id && chat.user_id == @guest.id)
         exist_chat = chat
       end
     end
