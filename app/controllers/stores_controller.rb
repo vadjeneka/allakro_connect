@@ -12,6 +12,7 @@ class StoresController < ApplicationController
   def show
     id = params[:id]
     @store = Store.find(id)
+    @products = @store.products
   end
 
   def create

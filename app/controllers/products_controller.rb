@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   def index
-    @products = store.products
+    @products = Product.all.sample(5)
+    # @other_product = Product.all.sample(5) != @products
+
   end
 
   def products
-    @products = Product.includes(:store, :categories).available
   end
 
   def new
@@ -53,6 +54,13 @@ class ProductsController < ApplicationController
 
 
   private 
+
+  def product_by_price(first_price,last_price)
+    @all_product = Product.all
+    @products = @all_product.where("price BETWEEN ? AND ?",first_price,last_price)
+  end
+
+  
 
   def store
     @store ||= Store.find(params[:store_id])

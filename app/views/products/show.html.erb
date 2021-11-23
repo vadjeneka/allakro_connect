@@ -12,8 +12,11 @@
       <th>description</th>
       <th>price</th>
       <th>weight</th>
+      <% if @product.stock != nil%>
 
       <th>stock</th>
+      <% end%>
+
 
       <th>store</th>
       <th>seller</th>
@@ -27,7 +30,10 @@
       <td><%= @product.description %></td>
       <td><%= @product.price %></td>
       <td><%= @product.weight %></td>
+      <% if @product.stock != nil%>
       <td><%= @product.stock.quantity %></td>
+      <% end%>
+
 
 
       
