@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_145847) do
+ActiveRecord::Schema.define(version: 2021_11_22_092629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,34 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "bids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -47,12 +75,12 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
   end
 
   create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id", null: false
-    t.integer "quantity"
     t.uuid "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_carts_on_product_id"
+    t.uuid "store_id"
+    t.boolean "validated", default: false
+    t.index ["store_id"], name: "index_carts_on_store_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -60,6 +88,17 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.uuid "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id", unique: true
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -80,6 +119,16 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_comments_on_product_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.integer "quantity", default: 1
+    t.uuid "cart_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -108,19 +157,11 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
     t.text "description"
     t.integer "price"
     t.integer "weight"
+    t.boolean "is_available", default: true
     t.uuid "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["store_id"], name: "index_products_on_store_id"
-  end
-
-  create_table "products_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id", null: false
-    t.uuid "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_products_categories_on_category_id"
-    t.index ["product_id"], name: "index_products_categories_on_product_id"
   end
 
   create_table "ratings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -160,6 +201,15 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
+  create_table "tendances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_tendances_on_product_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -187,26 +237,31 @@ ActiveRecord::Schema.define(version: 2021_11_20_145847) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bids", "products"
   add_foreign_key "bids_offers", "products"
   add_foreign_key "bids_offers", "users"
-  add_foreign_key "carts", "products"
+  add_foreign_key "carts", "stores"
   add_foreign_key "carts", "users"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
   add_foreign_key "chats", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "products"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
-  add_foreign_key "products_categories", "categories"
-  add_foreign_key "products_categories", "products"
   add_foreign_key "ratings", "products"
   add_foreign_key "ratings", "users"
   add_foreign_key "searches", "users"
   add_foreign_key "stocks", "products"
   add_foreign_key "stores", "users"
+  add_foreign_key "tendances", "products"
   add_foreign_key "views", "products"
   add_foreign_key "views", "users"
 end

@@ -1,3 +1,23 @@
+    <%=  form_with url: root_path, method: 'GET'  do |form| %>
+        <div class=“flex”>
+          <%= form.text_field :search, placeholder:"Search...",class:"w-5/6 py-3 px-4 bg-gray-600 outline-none text-white" %>
+          <%= form.submit 'Search', class:"w-1/6 bg-gray-500 outline-none text-white"%>
+        </div>
+  <% end %>
 
-<h2 class="text-3xl">Bienvenue sur Jokou !</h2>
+<h3>Search Result</h3>  
 
+
+
+
+   <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
+
+   <% @products.each do |products| %>
+        <p>
+              <%= products.name %>
+              <%= image_tag products.product_background %> 
+              <%= products.description %> <br>
+              <%= products.price %> <br>
+              <%= products.all_categories %>
+        </p>
+<% end %>

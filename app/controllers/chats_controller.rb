@@ -14,11 +14,14 @@ class ChatsController < ApplicationController
     @chat = set_chat
     # @guest = User.find(chat.receiver_id)
     @messages = Message.new
+    @store = Store.find(params[:store_id])
+
   end
 
   def new
     @chat = Chat.new
     @guest = User.find(params[:guest])
+    @store = Store.find(params[:store_id])
 
     exist_chat = nil
     user_chat = Chat.where("user_id = ? OR receiver_id = ?", "#{current_user.id}","#{current_user.id}")
@@ -29,7 +32,7 @@ class ChatsController < ApplicationController
     end
 
     if exist_chat
-      redirect_to user_chat_path(current_user, exist_chat)
+      redirect_to user_store_chat_path(current_user, @store, exist_chat)
     end
   end
 

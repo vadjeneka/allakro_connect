@@ -3,5 +3,8 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
+import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import ToggleInputSearchController from "./toggle_input_search_controller.js"
+application.register("toggle-input-search", ToggleInputSearchController)
