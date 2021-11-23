@@ -3,3 +3,10 @@
 :queues:
   - jokou_development_default
   - jokou_development_mailers
+:schedule:  
+  active_to_inactive_bid:
+    class: StateChangeJob
+    every: "30m"
+    cron: '0 * * * * 1 Africa/Abidjan'
+    enable: true
+    description: "This job change waiting bids to active and active to closed bids"

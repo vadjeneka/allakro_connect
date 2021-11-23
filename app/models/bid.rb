@@ -7,6 +7,11 @@ class Bid < ApplicationRecord
 
   validates :initial_price, presence: true, numericality: {greater_than_or_equal_to: 5000}
 
+  scope :active, -> { where(bid_state: 'active')}
+  scope :finished, -> { where("end_date <= ?", DateTime.current) }
+  scope :waiting, -> {where(bid_state: 'waiting')}
+  scope :starting, -> {where("start_date <= ?", DateTime.current)}
+
 
   def right_start_date
     
@@ -25,6 +30,5 @@ class Bid < ApplicationRecord
       errors.add(:end_date, "***Entrez la date de fin***")
     end
   end
-
 
 end
