@@ -4,7 +4,6 @@
     <% if chat.errors[:content] %>
       <span style='color: red'><%= chat.errors[:content][0] %></span>
     <% end %>
-    <%= form.hidden_field :guest, value: guest.id %>
   </div>
     <%= form.submit "Add", class: "btn btn-outline-primary btn-block py-2 px-10" %>
 <%end%>

@@ -1,5 +1,2 @@
-<h3>Créer un chat avec les stores :</h3>
-<% @users.each do |user| %>
-  <a href="<%= new_user_store_chat_path(current_user, guest: user) %>"><%= user.email %></a> <br>
-<% end %>
+<%= render 'list_chats', chat: @chat %>
 

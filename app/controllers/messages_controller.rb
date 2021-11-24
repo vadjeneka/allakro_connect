@@ -6,9 +6,8 @@ class MessagesController < ApplicationController
     @store = Store.find(params[:store_id])
     message = chat.messages.build(message_params.merge(user: current_user))
       if message.save
-        redirect_to user_store_chat_path(current_user, @store, chat), notice:  'message was successfully created'
-      else
-        raise message.errors.inspect
+        redirect_to user_store_chat_path(current_user, @store, chat)
+        # raise message.errors.inspect
       end
   end
 

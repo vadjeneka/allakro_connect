@@ -10,12 +10,12 @@
 
 
 
-   <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
+  <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
 
-   <% @products.each do |products| %>
+  <% @products.each do |products| %>
         <p>
               <%= products.name %>
-              <%= image_tag products.product_background %> 
+              <%#= image_tag products.product_background %> 
               <%= products.description %> <br>
               <%= products.price %> <br>
               <%= products.all_categories %>

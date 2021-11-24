@@ -1,27 +1,41 @@
-<p>
-  <strong>Name:</strong>
-  <%= @chat.name %>
-</p>
+<style> 
+.h-90{
+  height: 85%;
+}
 
-<div class="h-full overflow-y-scroll">
-  <% @message.each do |message| %>
-    <p><%= message.content %></p>
-    <small><%= message.user.email %></small>
-    
-  <%end%>
+</style>
 
-</div>
+<div class="flex h-screen bg-white overflow-hidden">
+  <div class="w-1/5 overflow-hidden border-r border-black shadow h-full bg-black text-white ">
+    <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
+  </div>
+  <div class="w-4/5 h-full overflow-hidden relative px-2">
+    <p class="px-3 py-3 border-b shadow bg-red-500 w-full text-white">
+      <strong class="text-black font-medium">Chat width:</strong>
+      <%= @chat.name %>
+    </p>
 
-
-
-
-  <%= form_with model: [current_user ,@store,@chat, @messages] do |form| %>
-    <div style='width:48%; display:inline-block;margin:2% 0;'>
-      <%= form.text_field :content, style:'width:95%;padding:12px 5px;border:none;background:#f5f5f5;border-radius:3px', placeholder:'Enter your message here' %>
-      <% if @chat.errors[:content] %>
-        <span style='color: red'><%= @chat.errors[:content][0] %></span>
-      <% end %>
+    <div class="px-2 py-2 h-90 overflow-y-auto">
+      <% @message.each do |message| %>
+      <% if message.user != current_user%>
+        <div class="flex justify-end py-1">
+          <div class="bg-gray-200 p-5 rounded-2xl rounded-tl-none w-2/5">
+              <p><%= message.content %></p>
+              <small class="float-right"><%= message.user.email%> <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
+          </div>
+        </div>
+      <%else%>
+        <div class="flex justify-start py-1">
+            <div class="bg-blue-300 text-green-900 p-5 rounded-2xl rounded-tr-none w-2/5">
+              <p><%= message.content %></p>
+              <small class="float-right"><%= message.user.email %>  <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
+            </div>
+        </div>
+      <%end%>
+      <%end%>
     </div>
-    <!-- <%#= form.hidden_field :chat_id, value: @chat.id %> -->
-      <%= form.submit "Add", class: "btn btn-outline-primary btn-block py-2 px-10" %>
-  <%end%>
+    <div class="absolute bottom-2 w-full px-3">
+      <%= render 'input_message', chat: @chat %>
+    </div>
+  </div>
+</div>
