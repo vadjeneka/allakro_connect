@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  
   def index
     if params[:search]
       @products = Product.search(params[:search])
@@ -18,6 +19,11 @@ class ProductsController < ApplicationController
     id = params[:id]
     @product = Product.find(id)
     @store = @product.store
+
+    # @products_view = Product.find(params[:id])
+    # abc = @product.view += 1
+    # @product.update(view: abc)
+
   end
 
   def create

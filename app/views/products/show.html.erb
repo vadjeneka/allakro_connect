@@ -2,6 +2,27 @@
   .h-img{
     height: 35rem;
   }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
 </style>
 <div class="flex px-3 justify-between mt-3" data-controller="show-description">
   <div class="w-4/6 bg-gray-200 h-img overflow-hidden relative">
@@ -75,4 +96,13 @@
 
   <!--<li><%#= link_to 'Add new Product', new_user_store_product_path %></li>
   <li><%#= link_to 'edit',  edit_user_store_product_path %></li>
-  <li><%#= link_to 'All Product', user_store_products_path%></li>!-->
+  <li><%#= link_to 'All Product', user_store_products_path%></li>
+
+  <div class="swiper-container" >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+      !-->

@@ -20,8 +20,6 @@ class HomeController < ApplicationController
     
   end
 
-
-
   def tendances
     first_cat = []
     product = nil

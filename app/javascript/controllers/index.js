@@ -9,11 +9,16 @@ application.register("display-img-on-create", DisplayImgOnCreateController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+<<<<<<< HEAD
 import RangeEffectController from "./range_effect_controller.js"
 application.register("range-effect", RangeEffectController)
 
 import ShowDescriptionController from "./show_description_controller.js"
 application.register("show-description", ShowDescriptionController)
+=======
+import SwipeImgController from "./swipe_img_controller.js"
+application.register("swipe-img", SwipeImgController)
+>>>>>>> 5de2e669a4ec2b9c62f701e59b0805de556dd54a
 
 import ToggleInputSearchController from "./toggle_input_search_controller.js"
 application.register("toggle-input-search", ToggleInputSearchController)
