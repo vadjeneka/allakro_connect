@@ -1,5 +1,3 @@
-<% orders.each do |order|
-  # <%= render partial: "order", locals: { order: order }  %>
-<% end %> %>
-
-
+<% orders.each do |order| %>
+  <%= render partial: "shared/order", locals: { order: order } %>
+<% end %>
