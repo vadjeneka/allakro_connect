@@ -2,6 +2,7 @@ class StoresController < ApplicationController
 
   def index
     @store = user.store
+
   end
 
   def new

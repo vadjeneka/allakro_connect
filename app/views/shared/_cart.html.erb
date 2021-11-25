@@ -2,4 +2,6 @@
 <% cart.line_items.each do |item| %>
   <%= render partial: "shared/cart_item", locals: { item: item } %>
 <% end %>
-<%= link_to "Delete cart", user_cart_path(current_user, cart), method: :delete, data: { confirm: "Are you sure ?"}%> | <%= link_to "Validate your cart" %>
+<h2>Total price: <%= cart.total_price %></h2>
+<%= link_to "Delete cart", user_cart_path(current_user, cart), method: :delete, data: { confirm: "Are you sure ?"}%> |
+<%= link_to "Validate your cart", user_cart_orders_path(current_user, cart), method: :post, data: { confirm: "Valid your cart ?" } %>

@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   get 'products/categories/:id', to: 'categories#show', as: 'category'
   
   resources :users do
-    resources :carts, only: [:index, :destroy]
+    resources :orders, only: [:index]
+    resources :carts, only: [:index, :destroy] do
+      resources :orders, only: [:create, :destroy]
+    end
     resources :stores do
+      resources :orders, only: [:index]
       resources :chats do
         resources :messages
       end
