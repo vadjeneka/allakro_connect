@@ -16,7 +16,7 @@
     Fin <%= bid.end_date%>
   </div>
   <div>
-   <%= link_to 'Rencherir' %>
+   <%= link_to 'Rencherir', bid_path(bid)%>
    <%= link_to 'Supprimer', product_bid_path(bid.product, bid), data: {confirm: "Êtes-vous sûr ?"}, method: :delete %>
    <%= link_to 'Plus d\'infos' %>
   </div>
