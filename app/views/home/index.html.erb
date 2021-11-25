@@ -1,17 +1,43 @@
+<style>
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+</style>
     <%=  form_with url: root_path, method: 'GET'  do |form| %>
-        <div class=“flex”>
+        <div class='flex'>
           <%= form.text_field :search, placeholder:"Search...",class:"w-5/6 py-3 px-4 bg-gray-600 outline-none text-white" %>
           <%= form.submit 'Search', class:"w-1/6 bg-gray-500 outline-none text-white"%>
         </div>
   <% end %>
 
+<% if @result %>
 <h3>Search Result</h3>  
 <% @result.each do |result| %>  
     <%= result.name %><br>  
 <% end %>
-
 <% end %>
-
 
 
    <%= link_to 'Add a Store', new_user_store_path([:user_id ])%>
@@ -24,4 +50,30 @@
               <%= products.price %> <br>
               <%= products.all_categories %>
         </p>
+        <!-- Swiper -->
+  <%
+=begin%>
+ <div class="swiper-container" >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+      <div class="swiper-slide">Slide 10</div>
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div> 
+<%
+=end%>
+
+  
+  
 <% end %>
+

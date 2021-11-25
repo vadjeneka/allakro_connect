@@ -6,5 +6,8 @@ import { application } from "./application"
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import SwipeImgController from "./swipe_img_controller.js"
+application.register("swipe-img", SwipeImgController)
+
 import ToggleInputSearchController from "./toggle_input_search_controller.js"
 application.register("toggle-input-search", ToggleInputSearchController)

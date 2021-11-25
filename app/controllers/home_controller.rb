@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
   def index
       @result
-    if params[:search]
-      @result = Product.search(params[:search])
-    else
-    end
+      if params[:search]
+        @result = Product.search(params[:search])
+      else
+        @result
+      end
     @products = Product.all
     
   end

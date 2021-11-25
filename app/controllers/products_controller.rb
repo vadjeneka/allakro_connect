@@ -1,6 +1,13 @@
 class ProductsController < ApplicationController
+  
   def index
     @products = store.products
+    
+  end
+
+  def banner
+    @products = Product.all.sample(1)
+    
   end
 
   def products
@@ -16,6 +23,11 @@ class ProductsController < ApplicationController
   def show
     id = params[:id]
     @product = Product.find(id)
+
+    @products_view = Product.find(params[:id])
+    abc = @product.view += 1
+    @product.update(view: abc)
+
   end
 
   def create

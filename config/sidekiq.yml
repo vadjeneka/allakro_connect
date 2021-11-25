@@ -3,3 +3,9 @@
 :queues:
   - jokou_development_default
   - jokou_development_mailers
+
+:schedule:
+  banner:
+   cron: '0 * * * * * Africa/Abidjan'   
+    class: BannerJob
+    every: "24h"

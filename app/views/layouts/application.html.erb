@@ -3,6 +3,7 @@
   <head>
     <title>Jokou</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -24,5 +25,16 @@
     <%=render 'shared/banners'%>
     <%= yield %>
     <%=render 'shared/footer'%>
+   <!--abridgement-->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    </script>
   </body>
 </html>
