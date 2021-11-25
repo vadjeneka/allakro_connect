@@ -1,0 +1,5 @@
+<h1>Editing chat</h1>
+
+<%= render 'form', chat: @chat %>
+<%= link_to 'Show', @chat%> |
+<%= link_to 'Back', user_store_chats_path(@current_user, @store, @chat) %>

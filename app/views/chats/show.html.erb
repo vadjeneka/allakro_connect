@@ -1,0 +1,41 @@
+<style> 
+.h-90{
+  height: 85%;
+}
+
+</style>
+
+<div class="flex h-screen bg-white overflow-hidden">
+  <div class="w-1/5 overflow-hidden border-r border-black shadow h-full bg-black text-white ">
+    <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
+  </div>
+  <div class="w-4/5 h-full overflow-hidden relative px-2">
+    <p class="px-3 py-3 border-b shadow bg-red-500 w-full text-white">
+      <strong class="text-black font-medium">Chat width:</strong>
+      <%= @chat.name %>
+    </p>
+
+    <div class="px-2 py-2 h-90 overflow-y-auto">
+      <% @message.each do |message| %>
+      <% if message.user != current_user%>
+        <div class="flex justify-end py-1">
+          <div class="bg-gray-200 p-5 rounded-2xl rounded-tl-none w-2/5">
+              <p><%= message.content %></p>
+              <small class="float-right"><%= message.user.email%> <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
+          </div>
+        </div>
+      <%else%>
+        <div class="flex justify-start py-1">
+            <div class="bg-blue-300 text-green-900 p-5 rounded-2xl rounded-tr-none w-2/5">
+              <p><%= message.content %></p>
+              <small class="float-right"><%= message.user.email %>  <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
+            </div>
+        </div>
+      <%end%>
+      <%end%>
+    </div>
+    <div class="absolute bottom-2 w-full px-3">
+      <%= render 'input_message', chat: @chat %>
+    </div>
+  </div>
+</div>

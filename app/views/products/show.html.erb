@@ -71,8 +71,8 @@
     <div class='w-full max-h-32 overflow-y-auto border-b border-gray-400 py-3 transition duration-500 ease-in-out' data-show-description-target='descriptionText'>
       <p class=''><%=@product.description%></p>
     </div>
-    <div class='w-full'>
-      <a href='<%= user_store_path(@product.store.user, @product.store)%>'>Store : <%=@product.store.name%></a>
+    <div class='w-full py-2'>
+      <a href='<%= user_store_path(@product.store.user, @product.store)%>' class='font-medium text-red-600'><b>Store :</b> <%=@product.store.name%></a>
     </div>
     <% if policy(@product).create? %>
       <% if current_user != @product.store.user.id %>
