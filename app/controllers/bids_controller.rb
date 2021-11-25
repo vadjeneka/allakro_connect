@@ -1,6 +1,6 @@
 class BidsController < ApplicationController
   def index
-    @bids = Bid.all
+    @bids = Bid.is_visible
     # @bids = Bid.where(product_id: product.id)
     # @bids = product.bids
   end
@@ -28,7 +28,7 @@ class BidsController < ApplicationController
 
   def destroy
     @bid = Bid.find(params[:id])
-    @bid.destroy
+    @bid.update_attribute(:visible, false)
     redirect_to product_bids_path(@bid.product)
 
     #increment the stock of this product

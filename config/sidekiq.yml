@@ -4,7 +4,7 @@
   - jokou_development_default
   - jokou_development_mailers
 :schedule:  
-  active_to_inactive_bid:
+  active_to_closed_bid:
     class: StateChangeJob
     every: "30m"
     cron: '0 * * * * 1 Africa/Abidjan'

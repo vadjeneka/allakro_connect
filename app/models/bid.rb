@@ -7,6 +7,7 @@ class Bid < ApplicationRecord
 
   validates :initial_price, presence: true, numericality: {greater_than_or_equal_to: 5000}
 
+  scope :is_visible, -> { where(visible: true) }
   scope :active, -> { where(bid_state: 'active')}
   scope :finished, -> { where("end_date <= ?", DateTime.current) }
   scope :waiting, -> {where(bid_state: 'waiting')}
@@ -14,7 +15,6 @@ class Bid < ApplicationRecord
 
 
   def right_start_date
-    
     if start_date.present? == true && start_date < DateTime.current || (start_date.min != 0 && start_date.min != 30)
       errors.add(:start_date, "***Revoyez svp la date ou l'heure de début !***")
       # errors.add(:start_date, "***L'heure doit être supérieure à l'heure actuelle !***")
