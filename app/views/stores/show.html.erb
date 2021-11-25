@@ -12,9 +12,11 @@
     <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto overflow-y-auto'>
       <%=render partial:'product', collection: @store_products%>
     </div>
-    <div class='flex justify-center items-center'>
-      <%= link_to 'Ajouter un article', new_user_store_product_path(current_user, @store), class:'bg-red-600 text-white px-10 py-3 font-medium' %>
-    </div>
+    <% if current_user  == @store.user %>
+      <div class='flex justify-center items-center'>
+        <%= link_to 'Ajouter un article', new_user_store_product_path(current_user, @store), class:'bg-red-600 text-white px-10 py-3 font-medium' %>
+      </div>
+    <% end %>
   </div>
   <div class="w-1/5 overflow-hidden">
     <div></div>
@@ -30,4 +32,3 @@
 <%#= link_to 'edit', edit_user_store_path(current_user, @store)%>
 <%#= link_to 'delete', user_store_path(current_user, @store), method: :delete, data: {confirm: 'Are you sure?'}%>
 <%#= link_to 'My Products', user_store_products_path(current_user,@store, @products)%>
-

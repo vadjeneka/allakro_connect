@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
     end
   end
 
+  
   def new
     @store = Store.find(params[:store_id])
     @user = current_user  
@@ -16,6 +17,7 @@ class ProductsController < ApplicationController
   def show
     id = params[:id]
     @product = Product.find(id)
+    @store = @product.store
   end
 
   def create
@@ -52,6 +54,13 @@ class ProductsController < ApplicationController
 
 
   private 
+
+  def product_by_price(first_price,last_price)
+    @all_product = Product.all
+    @products = @all_product.where("price BETWEEN ? AND ?",first_price,last_price)
+  end
+
+  
 
   def store
     @store ||= Store.find(params[:store_id])

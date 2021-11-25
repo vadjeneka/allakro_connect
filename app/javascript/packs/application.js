@@ -10,6 +10,7 @@ import "channels"
 import  "../application.css"
 
 import '../controllers'
+
 import "@hotwired/turbo-rails"
 
 Rails.start()

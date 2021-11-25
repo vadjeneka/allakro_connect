@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :carts, only: [:index, :destroy]
     resources :stores do 
       resources :products do
+        resources :stocks
         resources :line_items, only: [:create]
       end
     end

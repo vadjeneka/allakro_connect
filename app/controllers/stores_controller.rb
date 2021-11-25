@@ -10,6 +10,7 @@ class StoresController < ApplicationController
   end
 
   def show
+    # raise params.inspect
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products
