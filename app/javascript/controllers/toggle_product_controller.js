@@ -4,10 +4,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['modal']
   connect() {
+    console.log('gotchaaa')
   }
 
   display() {
-    this.modalTarget.modal.remove("hidden")
-    this.modalTarget.modal.add("block")
+      this.modalTarget.classList.remove("hidden")
+
   }
 }

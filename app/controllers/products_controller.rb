@@ -1,8 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all.sample(5)
-    @other_products = Product.all
-
+    @other_products = Product.all.sample(5)
   end
 
   

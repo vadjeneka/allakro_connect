@@ -25,9 +25,17 @@
 
     </tr>
   <% end %>
+  
+  </tbody>
+</table>
+
+<table>
+ 
+  <tbody class="hidden modal " data-toggle-product-target="modal">
+  <% if Product.all != nil %>
   <% @other_products.each do |product| %>
 
-    <tr class="hidden modal " data-toggle-product-target="modal">
+    <tr >
 
         <td><%= product.name %></td>
         <td><%= product.description %></td>
@@ -37,6 +45,8 @@
         <td><%= product.store.name %></td>
     </tr>
   <% end %>
+  <% end %>
+
 
   </tbody>
 </table>
