@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = current_user.orders.includes(:cart)
+    @orders = current_user.orders.where(is_fulfilled: false)
+    if params[:store_id]
+      store = Store.find(params[:store_id])
+      @store_orders = store.orders
+    end
+    # raise @store_orders.inspect
   end
 
   def create

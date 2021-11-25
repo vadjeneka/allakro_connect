@@ -1,4 +1,1 @@
-<h2>Orders</h2>
-<% @orders.each do |order| %>
-  <%= order %>
-<% end %>
+<%= render "shared/orders", locals: { orders: @orders } %>

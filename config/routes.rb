@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :orders, only: [:create, :destroy]
     end
     resources :stores do 
+      resources :orders, only: [:index]
       resources :products do
         resources :line_items, only: [:create]
       end
