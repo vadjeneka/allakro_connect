@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   end
   root to: "home#index"
 
-  get 'products', to: 'products#products'
+  get 'products', to: 'products#index'
+  get 'products/:id', to: 'products#show', as: 'product'
   get 'products/categories/:id', to: 'categories#show', as: 'category'
   
   resources :users do

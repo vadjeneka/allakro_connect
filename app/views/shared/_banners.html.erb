@@ -1,18 +1,19 @@
 <nav class="w-full overflow-x-hidden top-0 p-3 flex justify-between items-start">
-  <span class="w-1/6">
-    <p>Logo</p>
+  <span class="w-1/6 px-2">
+    <a href='<%=root_path %>' class="w-full h-14 flex px-2 justify-center overflow-hidden">
+      <%=image_tag 'Group 3.png', class:'w-full h-12 '%>
+    </a>
   </span>
   <div class="w-4/6">
-    <%=render 'searchs'%>
+    <%=render 'home/searchs'%>
     <span class="w-full">
       <div class="flex items-center justify-evenly">
-        <a href='#' class='font-semibold text-xl'>Tous les produits</a>
-        <a href='#' class='font-semibold text-xl'>Catégories</a>
+        <a href='<%=products_path%>' class='font-semibold text-xl'>Tous les produits</a>
+        <a href='#' class='font-semibold text-xl'>Stores</a>
         <a href='#' class='font-semibold text-xl'>Tendances</a>
         <a href='#' class='font-semibold text-xl'>Enchères</a>
       </div>
     </span>
-  
   </div>
   <span class='w-1/6 flex items-center justify-evenly pt-2'>
     <a href='#'>
@@ -21,7 +22,10 @@
     <a href='#'>
       <i class="fal fa-heart text-2xl"></i>
     </a>
-    <a href='<%=new_user_session_path%>'>
+    <a href='#'>
+      <i class="fal fa-comment-alt text-2xl"></i>
+    </a>
+    <a href='<%= current_user == nil ? new_user_session_path : user_store_path(current_user, current_user.store.id) %>'>
       <i class="fal fa-user text-2xl"></i>
     </a>
   </span>

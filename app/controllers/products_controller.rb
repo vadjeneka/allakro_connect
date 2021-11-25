@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   def index
-    @products = store.products
-  end
-
-  def products
-    @products = Product.includes(:store, :categories).available
+    if params[:search]
+      @products = Product.search(params[:search])
+    else
+      @products = Product.includes(:store, :categories).where(is_available: true)
+    end
   end
 
   def new
@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   def create
     @product = store.products.build(product_params)
     if @product.save
-      redirect_to user_store_products_path(@product), notice: 'Product was successfully created'
+      redirect_to user_store_path(current_user, current_user.store.id), notice: 'Product was successfully created'
     else
       flash[:error] = "Product could not be created"
       render 'new'
@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      :product_background
+      product_backgrounds:[]
     )
   end
 end

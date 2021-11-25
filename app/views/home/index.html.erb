@@ -1,22 +1,70 @@
-<%#=render 'tendances'%>
+<%=render  partial: 'tendances', locals:{tendance: @tendance}%>
+
+<div class="px-10 pt-5">
+  <p class="text-3xl font-medium mt-16"> Produit les plus poulaires</p>
+  <div class="grid grid-cols-4 gap-3 mt-4">
+    <%=render partial: 'product', collection: @products%>
+  </div>
+</div>
+
+<div class="px-10 pt-5">
+  <p class="text-3xl font-medium mt-16"> Shoppez par store</p>
+  <div class="grid grid-cols-4 gap-3 mt-4">
+    <%=render partial: 'store', collection: @stores%>
+  </div>
+</div>
+
+<div class="px-10 pt-5">
+  <p class="text-3xl font-medium mt-16"> Shoppez par categorie</p>
+  <div class="grid grid-cols-4 gap-3 mt-4">
+    <%=render partial: 'product', collection: @product_tendances%>
+  </div>
+
+  <div>
+    <%=render 'pre_footer'%>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%#= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
 
-<% if @result %>
+<%# if @result %>
 
-<h3>Search Result</h3>  
-<% @result.each do |result| %>  
-    <%= result.name %><br>  
-<% end %>
+<%# <h3>Search Result</h3>   %>
+<%# @result.each do |result| %>  
+    <%#= result.name %><br>  
+<%# end %>
 
-<% end %>
+<%# end %>
 
 
 
 <%#=render 'product'%>
 <%# <h2>Bienvenue sur Jokou !</h2> %>
 <%# <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> %>
-  <% if current_user %>
-    <%= link_to 'Add a Store', new_user_store_path(current_user)%>
-  <% end %>
+  <%# if current_user %>
+    <%#= link_to 'Add a Store', new_user_store_path(current_user)%>
+  <%# end %>
   <%#= link_to 'Sign in', new_user_session()%>
 <%# </button> %>

@@ -3,8 +3,17 @@
 
 import { application } from "./application"
 
+import DisplayImgOnCreateController from "./display_img_on_create_controller.js"
+application.register("display-img-on-create", DisplayImgOnCreateController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import RangeEffectController from "./range_effect_controller.js"
+application.register("range-effect", RangeEffectController)
+
+import ShowDescriptionController from "./show_description_controller.js"
+application.register("show-description", ShowDescriptionController)
 
 import ToggleInputSearchController from "./toggle_input_search_controller.js"
 application.register("toggle-input-search", ToggleInputSearchController)

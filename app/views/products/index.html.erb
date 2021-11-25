@@ -1,53 +1,27 @@
-<div>
-  <button>
-<% if @store.user == current_user %>
+<style>
+.min-height {
+  min-height:35rem
+}
 
-    <%= link_to 'Add a Product', new_user_store_product_path%>
-  </button>
-<% end %>
+</style>
 
- 
+<div class="flex min-height mt-8">
+  <div class="w-1/5 px-3">
+    <span class="w-full font-normal text-xl mb-10">FILTRE</span>
+    <div class="py-6 border-b border-gray-300">
+      <span class="w-full font-medium">Categorie & Marque</span>
+      <%=render 'categorie'%>
+    </div>
+    <div class="py-6 border-b border-gray-300">
+      <span class="w-full font-medium">Ville or Commune</span>
+      <%=render 'city_town'%>
+    </div>
+    <div class="py-6 border-b border-gray-300 relative">
+      <span class="w-full font-medium">Tranche de prix</span>
+      <%=render 'range'%>
+    </div>
+  </div>
+  <div class="w-4/5 grid grid-cols-4 gap-2 px-2">
+    <%=render partial:'home/product', collection:@products%>
+  </div>
 </div>
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>description</th>
-      <th>price</th>
-      <th>weight</th>
-      <th>categories</th>
-
-
-    </tr>
-  </thead>
-  <tbody>
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= product.description %></td>
-      <td><%= product.price %></td>
-      <td><%= product.weight %></td>
-      <td><%= product.all_categories %></td>
-      <td>
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-          <%= link_to 'edit', edit_user_store_product_path(current_user,@store ,product)%>
-        </button>
-      </td>
-      <td>
-        <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-          <%= link_to 'delete', user_store_product_path(current_user,@store,product), method: :delete, data: {confirm: 'Are you sure?'}%>
-        </button>
-      </td>
-      <% if policy(product).create? %>
-        <td>
-          <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            <%= link_to 'add to cart', user_store_product_line_items_path(current_user, @store, product), method: :post %>
-          </button>
-        </td>
-      <% end %>
-
-      
-    </tr>
-  <% end %>
-  </tbody>
-</table>
