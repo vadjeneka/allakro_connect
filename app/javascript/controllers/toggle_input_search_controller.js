@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="toggle-input-search"
 export default class extends Controller {
   static targets = ['iconNavbar','inputSpan','btnSearch']
-  connect() {
+  connect() { 
     // console.log('connecting to data-controller="toggle-input-search"')
   }
 

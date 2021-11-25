@@ -8,3 +8,6 @@ application.register("hello", HelloController)
 
 import ToggleInputSearchController from "./toggle_input_search_controller.js"
 application.register("toggle-input-search", ToggleInputSearchController)
+
+import ToggleProductController from "./toggle_product_controller.js"
+application.register("toggle-product", ToggleProductController)

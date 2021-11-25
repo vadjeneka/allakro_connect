@@ -1,13 +1,11 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all.sample(5)
-    # @other_product = Product.all.sample(5) != @products
+    @other_products = Product.all
 
   end
 
-  def products
-  end
-
+  
   def new
     @store = Store.find(params[:store_id])
     @user = current_user  

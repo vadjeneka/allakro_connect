@@ -1,8 +1,6 @@
-<div>
-  <button>
+<div data-controller="toggle-product">
 
  
-</div>
 <table>
   <thead>
     <tr>
@@ -12,18 +10,39 @@
       <th>weight</th>
       <th>categories</th>
       <th>store</th>
+      
     </tr>
   </thead>
   <tbody>
   <% @products.each do |product| %>
-    <tr>
+    <tr class="text-red-800">
       <td><%= product.name %></td>
       <td><%= product.description %></td>
       <td><%= product.price %></td>
       <td><%= product.weight %></td>
       <td><%= product.all_categories %></td>
       <td><%= product.store.name %></td>
+
     </tr>
   <% end %>
+  <% @other_products.each do |product| %>
+
+    <tr class="hidden modal " data-toggle-product-target="modal">
+
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %></td>
+        <td><%= product.weight %></td>
+        <td><%= product.all_categories %></td>
+        <td><%= product.store.name %></td>
+    </tr>
+  <% end %>
+
   </tbody>
 </table>
+<button class="bg-blue-500 hover:bg-blue-700
+ text-white font-bold py-2 px-4 rounded" 
+ data-action="click->toggle-product#display">
+  see more
+</button>
+</div>
