@@ -1,8 +1,4 @@
 web: bundle exec rails server
 worker: bundle exec sidekiq -C config/sidekiq.yml
-<<<<<<< HEAD
-mailcatcher: mailcatcher --foreground --http-ip=0.0.0.0
-=======
 #mailcatcher: mailcatcher --foreground --http-ip=0.0.0.0
->>>>>>> feat/adding-products-to-cart-store
 front: ./bin/webpack-dev-server
