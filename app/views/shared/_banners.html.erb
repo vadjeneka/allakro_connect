@@ -23,7 +23,13 @@
       <i class="fal fa-heart text-2xl"></i>
     </a>
     <a href='#'>
-      <i class="fal fa-comment-alt text-2xl"></i>
+      <i class="fal fa-comment-alt text-2xl "></i> 
+      <% if user_signed_in? %>
+        <span class="w-4 h-4 bg-red-600 rounded-full text-white text-center font-normal text-xs">
+          <%= "#{Notification.unread_count(current_user)}" %>
+        </span>
+      <% end %>
+
     </a>
     <a href='<%= current_user == nil ? new_user_session_path : user_store_path(current_user, current_user.store.id) %>'>
       <i class="fal fa-user text-2xl"></i>

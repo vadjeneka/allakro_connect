@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_092629) do
+ActiveRecord::Schema.define(version: 2021_11_26_110143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -102,13 +102,13 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   end
 
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "sender_id", null: false
-    t.uuid "receiver_id", null: false
-    t.string "content"
+    t.text "name"
+    t.uuid "user_id", null: false
+    t.uuid "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["receiver_id"], name: "index_chats_on_receiver_id"
-    t.index ["sender_id"], name: "index_chats_on_sender_id"
+    t.index ["store_id"], name: "index_chats_on_store_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -139,6 +139,26 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "actor_id"
+    t.string "notify_type", null: false
+    t.string "target_type"
+    t.uuid "message_id", null: false
+    t.uuid "chat_id", null: false
+    t.string "second_target_type"
+    t.string "third_target_type"
+    t.bigint "third_target_id"
+    t.boolean "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["chat_id"], name: "index_notifications_on_chat_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -246,12 +266,17 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   add_foreign_key "carts", "users"
   add_foreign_key "categories_products", "categories"
   add_foreign_key "categories_products", "products"
+  add_foreign_key "chats", "stores"
+  add_foreign_key "chats", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "chats"
+  add_foreign_key "notifications", "messages"
+  add_foreign_key "notifications", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"

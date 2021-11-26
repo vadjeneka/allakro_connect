@@ -79,9 +79,14 @@
       <div class='flex items-center'> 
         <p class='text-lg font-light py-2'>Notez :</p>
       </div>
+
         <div class='py-1 w-full flex flex-wrap justify-end content-start'> 
-          <textarea name="" id="" rows="4" class="w-full px-3 py-2 rounded outline-none bg-gray-100" placeholder="Commentez l'article..."></textarea>
-          <button class="px-5 py-1 mt-3 bg-red-600 text-white rounded"> Commentez </button>
+          <%= form_with model: [current_user, @product.store, @product ,@comment] do |form| %>
+          <%= form.text_area :comment , placeholder:"Commentez l'article...", class: "w-full px-3 py-2 rounded outline-none bg-gray-100"%>
+          <%= form.submit "commentez", class:"px-5 py-1 mt-3 bg-red-600 text-white rounded" %>
+          <!-- <textarea name="" id="" rows="4" class="w-full px-3 py-2 rounded outline-none bg-gray-100" placeholder="Commentez l'article..."></textarea> -->
+          <!-- <button class="px-5 py-1 mt-3 bg-red-600 text-white rounded"> Commentez </button> -->
+          <% end %>
         </div>
         <div class="flex items-center mt-14 justify-center">
           <i class="fal fa-minus"></i>

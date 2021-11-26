@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  mount Notifications::Engine => "/notifications"
   devise_for :users 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
       resources :products do
         resources :stocks
         resources :line_items, only: [:create]
+        resources :comments
       end
     end
   end

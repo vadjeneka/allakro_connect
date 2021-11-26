@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     id = params[:id]
     @product = Product.find(id)
     @store = @product.store
+    @comment = Comment.new
 
     # @products_view = Product.find(params[:id])
     # abc = @product.view += 1

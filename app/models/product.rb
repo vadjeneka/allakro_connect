@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   has_one :stock
   has_and_belongs_to_many :categories
   has_many_attached :product_backgrounds
+  has_many :comments
 
   def all_categories=(names)
     self.categories = names.split(',').map do |name|
