@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       resources :products do
         resources :stocks
         resources :line_items, only: [:create]
+        resources :bids, except: [:edit, :update] do
+          resources :offers, only: [:new, :create, :edit, :update]
+        end
       end
     end
   end

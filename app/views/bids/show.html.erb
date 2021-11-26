@@ -1,0 +1,2 @@
+<%= @bid.product.name %>
+<%= render partial: "offers/form", locals: { user: current_user, store: @bid.product.store, product: @bid.product, bid: @bid } %>

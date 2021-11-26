@@ -1,0 +1,3 @@
+<% @bids.each do |bid| %>
+  <%= link_to "#{bid.product.name}", user_store_product_bid_path(current_user, bid.product.store, bid.product, bid) %>
+<% end %>
