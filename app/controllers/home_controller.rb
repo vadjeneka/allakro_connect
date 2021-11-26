@@ -4,7 +4,7 @@ class HomeController < ApplicationController
       redirect_to products_path(search: params[:search])
     end
     @products = Product.all.includes(:store).sort_by {rand}[0,8]
-    @tendance = tendances
+    @tendance = Tendance.last
     @stores = Store.all.includes(:user).sort_by {rand}[0,4]
     @product_tendances = Product.all.includes(:store).reject{|product| @products.include?(product)}.sort_by {rand}[0,4]
   end
@@ -20,18 +20,17 @@ class HomeController < ApplicationController
     
   end
 
-  def tendances
-    first_cat = []
-    product = nil
-    second_cat = Rating.includes(:product).where('rates > ?', 3).order(rates: :desc).take(10)
-    if second_cat.length >1
-      product = second_cat.sample.product
-    else
-      product = Product.all.sample
-    end
+  # def tendances
+  #   first_cat = []
+  #   product = nil
+  #   second_cat = Rating.includes(:product).where('rates > ?', 3).order(rates: :desc).take(10)
+  #   if second_cat.length >1
+  #     product = second_cat.sample.product
+  #   else
+  #     product = Product.all.sample
+  #   end
+  #   Tendance.create(id:product.id, start_time:Time.now, end_time:Time.now)
+  #   # third_cat = Order.all.where('rates')
 
-    # Tendance.create(product)
-    # third_cat = Order.all.where('rates')
-
-  end
+  # end
 end

@@ -9,6 +9,5 @@ export default class extends Controller {
 
   display() {
       this.modalTarget.classList.remove("hidden")
-
   }
 }

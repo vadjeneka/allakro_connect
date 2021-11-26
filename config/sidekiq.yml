@@ -9,3 +9,4 @@
     cron: '0 * * * * * Africa/Abidjan'   
     class: BannerJob
     every: "24h"
+    enable: true
