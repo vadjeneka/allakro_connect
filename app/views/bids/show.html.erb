@@ -1,17 +1,2 @@
-
-<h1>Enchère sur <%= @bid.product.name%></h1>
-<div>
-  <% @bid.bids_offers.each do |offer|%>
-    <%max_offer = offer.max_by {|offer| offer.amount}%>
-  L'offre la plus élevée : <span><%=@bid.max_offer.amount%></span>
-  <%end%>
-</div>
-<div>
-  Du <span><%=@bid.start_date%></span> au <span><%=@bid.end_date%></span>
-</div>
-<div>
-  Montant initial : <span><%=@bid.initial_price%></span>
-</div>
-
-<%= link_to 'Faire une offre', new_product_bid_bid_offer_path(@bid.product, @bid.id)%>
-
+<%= @bid.product.name %>
+<%= render partial: "offers/form", locals: { user: current_user, store: @bid.product.store, product: @bid.product, bid: @bid } %>

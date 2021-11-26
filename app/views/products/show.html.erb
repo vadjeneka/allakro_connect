@@ -58,9 +58,9 @@
   <div class="w-2/6 pt-8 pb-6 px-12 relative">
     <% unless policy(@product).create? %>
       <div class="flex absolute top-2 w-full">
-        <a href="<%= new_user_store_product_bid_path(current_user, @product.store, @product) %>" data-class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>créer une enchère</a>
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>edit</a>
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md'>supprimer</a>
+        <a href="<%= new_user_store_product_bid_path(current_user, @product.store, @product) %>" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>Créer une enchère</a>
+        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>Modifier</a>
+        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md'>Supprimer</a>
       </div>
     <% end %>
     <p class="py-5 text-gray-500 text-4xl font-medium"><%=@product.price%> Fcfa</p>

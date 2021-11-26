@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_151246) do
+ActiveRecord::Schema.define(version: 2021_11_26_160219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -53,26 +53,14 @@ ActiveRecord::Schema.define(version: 2021_11_25_151246) do
   end
 
   create_table "bids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.uuid "product_id", null: false
     t.integer "initial_price"
-    t.string "state", default: "waiting"
+    t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "visible", default: true
     t.index ["product_id"], name: "index_bids_on_product_id"
-  end
-
-  create_table "bids_offers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id", null: false
-    t.uuid "user_id", null: false
-    t.integer "amount"
-    t.boolean "is_accepted"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_bids_offers_on_product_id"
-    t.index ["user_id"], name: "index_bids_offers_on_user_id"
   end
 
   create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -140,6 +128,17 @@ ActiveRecord::Schema.define(version: 2021_11_25_151246) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "offers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bid_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "amount"
+    t.boolean "accepted", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bid_id"], name: "index_offers_on_bid_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -238,18 +237,26 @@ ActiveRecord::Schema.define(version: 2021_11_25_151246) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bids", "products"
-  add_foreign_key "bids_offers", "bids"
-  add_foreign_key "bids_offers", "users"
-  add_foreign_key "carts", "products"
+  add_foreign_key "carts", "stores"
   add_foreign_key "carts", "users"
+  add_foreign_key "categories_products", "categories"
+  add_foreign_key "categories_products", "products"
+  add_foreign_key "chats", "stores"
+  add_foreign_key "chats", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
+  add_foreign_key "offers", "bids"
+  add_foreign_key "offers", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
-  add_foreign_key "products_categories", "categories"
-  add_foreign_key "products_categories", "products"
   add_foreign_key "ratings", "products"
   add_foreign_key "ratings", "users"
   add_foreign_key "searches", "users"

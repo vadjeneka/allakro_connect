@@ -1,3 +1,1 @@
-<h1>Mettre aux enchères</h1>
-<%= render 'bidform', locals: {bid: @bid, product: @product, submit: 'create'}%>
-
+<%= render partial: "form", locals: { user: @product.store.user, store: @product.store, product: @product, bid: @bid } %>
