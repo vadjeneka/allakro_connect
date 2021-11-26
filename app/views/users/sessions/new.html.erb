@@ -1,5 +1,30 @@
-<h2>Log in</h2>
+<div class="overflow-hidden relative bg-red-600 h-screen flex justify-between" >
 
+<div class="overflow-hidden w-2/6 bg-red-600"> 
+    <div class="w-48 m-10">    
+      <%= image_tag ("logojokou.png") %>
+    </div>
+
+    <div class="text-white text-2xl m-10 mr-0"> 
+      <p>Vous pouvez vendre votre Art.</p>
+    </div>
+
+    <div class="text-white text-2xl m-10 mr-0">
+      <p>Vous pouvez acheter en ligne les oeuvres des Artisans Ivoiriens.</p>
+    </div>
+</div>
+
+<div class="overflow-hidden w-5/6 bg-white rounded-3xl rounded-tr-none rounded-br-none"> 
+
+<div>
+<h2>Log in</h2>
+</div>
+
+<div>
+<p>créer un compte</p>
+</div>
+
+<div class="overflow-hidden">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -24,3 +49,8 @@
 <% end %>
 
 <%= render "users/shared/links" %>
+
+</div>
+
+</div>
+</div>
