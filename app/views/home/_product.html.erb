@@ -13,7 +13,7 @@
         <p class=" font-normal text-sm py-1"><%=product.price%> FCFA</p>
       </div>
       <div class="w-2/5">
-        <a href="<%=user_store_product_line_items_path(current_user, product.store, product)%>" data-method="POST" class="px-5 py-2 bg-red-600 text-white">
+        <a href="<%= current_user != nil ? user_store_product_line_items_path(current_user, product.store, product) : new_user_session_path %>" data-method="POST" class="px-5 py-2 bg-red-600 text-white">
           Acheter
         </a>
       </div>

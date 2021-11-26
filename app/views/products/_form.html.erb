@@ -22,7 +22,7 @@
         <%#= form.hidden_field :user_id, value: current_user.id %>
         <%#= form.hidden_field :store_id, value: store.id %>
         <div>
-          <%= form.text_field :name, placeholder:'Name', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none' %>
+          <%= form.text_field :name, placeholder:'Nom du produit', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none' %>
           <% if product.errors[:name] %>
             <span style='color: red'><%= product.errors[:first_name][0] %></span>
           <% end %>
@@ -46,7 +46,7 @@
           <% end %>
         </div>
         <div>
-          <%= form.number_field  :weight, placeholder:'Weight', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none'%>
+          <%= form.number_field  :weight, placeholder:'Poids du produit', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none'%>
           <% if product.errors[:weight] %>
             <span style='color: red'><%= product.errors[:weight][0] %></span>
           <% end %>

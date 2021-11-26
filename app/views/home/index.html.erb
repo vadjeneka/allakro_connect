@@ -1,23 +1,31 @@
+<% if tendance %>
 <%=render  partial: 'tendances', locals:{tendance: @tendance}%>
+<% end %>
 
 <div class="px-10 pt-5">
   <p class="text-3xl font-medium mt-16"> Produit les plus poulaires</p>
   <div class="grid grid-cols-4 gap-3 mt-4">
-    <%=render partial: 'product', collection: @products%>
+    <% if @products %>
+      <%=render partial: 'product', collection: @products%>
+    <% end %>
   </div>
 </div>
 
 <div class="px-10 pt-5">
   <p class="text-3xl font-medium mt-16"> Shoppez par store</p>
   <div class="grid grid-cols-4 gap-3 mt-4">
-    <%=render partial: 'store', collection: @stores%>
+    <% if @stores %>
+      <%=render partial: 'stores', collection: @stores%>
+    <% end %>
   </div>
 </div>
 
 <div class="px-10 pt-5">
   <p class="text-3xl font-medium mt-16"> Shoppez par categorie</p>
   <div class="grid grid-cols-4 gap-3 mt-4">
-    <%=render partial: 'product', collection: @product_tendances%>
+    <% if @stores%>
+      <%=render partial: 'product', collection: @product_tendances%>
+    <% end %>
   </div>
 
   <div>
