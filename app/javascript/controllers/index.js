@@ -14,6 +14,7 @@ application.register("range-effect", RangeEffectController)
 
 import ShowDescriptionController from "./show_description_controller.js"
 application.register("show-description", ShowDescriptionController)
+
 import SwipeImgController from "./swipe_img_controller.js"
 application.register("swipe-img", SwipeImgController)
 

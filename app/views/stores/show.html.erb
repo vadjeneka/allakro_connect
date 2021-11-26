@@ -7,7 +7,9 @@
 <div class="min-h-screen flex overflow-hidden">
   <div class="w-4/5 overflow-hidden">
     <div class="flex py-10 justify-between items-center w-4/5 mx-auto pr-5">
-      <p class="text-4xl font-medium text-center">Ma Boutique</p>
+      <p class="text-4xl font-medium text-center">
+        <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
+      </p>
       <% if @store.user.id != current_user.id%>
         <a href="<%= new_user_store_chat_path(current_user, @store.id) %>" class="bg-green-600 text-white px-5 py-2 rounded">
           Ecrire

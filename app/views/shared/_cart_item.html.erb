@@ -16,16 +16,16 @@
   </tr>
 </table>
 
-<div class="ml-50 bg-gray-300 h-32 flex mx-10 justify-items-center">
-  <div>
+<div class="ml-60 bg-gray-300 h-32 flex mx-10 justify-items-center justify-between mr-80">
+  <div class="">
     <%# <% image_tag item.product. %>
   </div>
-  <div>
+  <div class="">
     <h2>Name: <%= item.product.name %></h2>
-    <h3>Description: <%= item.product.description %></h3>
-    <h3>Weight: <%= item.product.weight %></h3>
+    <h3 class="mt-5">Description: <%= item.product.description %></h3>
+    <h3 class="mt-5">Weight: <%= item.product.weight %>g</h3>
   </div>
-  <div>
+  <div class="mt-12 text-3xl mr-5"> 
     <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
       <i class="fas fa-minus"></i>
     </a>

@@ -27,7 +27,6 @@ export default class extends Controller {
     }
     this.minprice = Math.min(this.rangeFirstTarget.value, this.maxprice - 500)
     this.minthumb = Math.ceil(((this.minprice - this.min) / (this.max - this.min)) * 100)
-    console.log(this.minthumb)
     this.rangeBarColorTarget.style.left = ''+this.minthumb+'%'
     this.rangeLeftThumbTarget.style.left = ''+this.minthumb+'%'
     this.inputContainerLeftTarget.value = this.rangeFirstTarget.value
@@ -38,7 +37,6 @@ export default class extends Controller {
     }
     this.maxprice = Math.max(this.rangeLastTarget.value, this.minprice + 500);
     this.maxthumb = Math.floor(100 - (((this.maxprice - this.min) / (this.max - this.min)) * 100))
-    console.log(this.maxthumb)
     this.rangeBarColorTarget.style.right = ''+this.maxthumb+'%'
     this.rangeRightThumbTarget.style.right = ''+this.maxthumb+'%'
     this.inputContainerRightTarget.value = this.rangeLastTarget.value

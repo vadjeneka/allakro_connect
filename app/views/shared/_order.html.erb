@@ -1,1 +1,17 @@
-<h2><%= order %></h2>
+<div class="bg-gray-300 h-10 mx-10 mr-80 ml-56">
+  <% order.cart.line_items.each do |item| %>
+  <div class="flex items-stretch space-x-4 ">
+    <div>
+      <%= item.quantity %>
+    </div>
+    <div>
+      <%= item.product.name %>
+    </div>
+    <div>
+      <%= item.total_price %> XOF
+    </div>
+  <br>
+  </div>
+  <i class="fa-regular fa-circle-check"></i>
+  <% end %>
+</div>

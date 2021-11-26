@@ -6,6 +6,7 @@ var img_list = []
 export default class extends Controller {
   static targets =['imgGetter','divDisplaying']
   connect() {
+    img_list = []
   }
 
   displayImage(){

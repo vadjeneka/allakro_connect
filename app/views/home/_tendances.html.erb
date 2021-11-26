@@ -1,10 +1,10 @@
 <div class="flex overflow-hidden justify-evenly items-stretch px-16 py-10 h-96 bg-gray-100">
   <div class="w-3/5 flex flex-wrap content-center px-5 ">
-    <p class="text-6xl w-full"><%=tendance.name%></p>
+    <p class="text-6xl w-full"><%=tendance.product.name%></p>
     <p class="font-light w-full py-5 pr-5">
-      <%=tendance.description%></p>
+      <%=tendance.product.description%></p>
     </p>
-    <p class="text-4xl font-semibold w-full"><%=tendance.price%> FCFA</p>
+    <p class="text-4xl font-semibold w-full"><%=tendance.product.price%> FCFA</p>
     <div class="flex py-5">
       <a href="#" class='py-3 px-10 bg-red-600 text-white font-semibold text-lg'> 
         Ajouter au panier
@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="flex overflow-hidden justify-center items-center w-2/5">
-    <% if tendance.product_backgrounds.attached? %>
-      <%= image_tag tendance.product_backgrounds[0], class:'m-0 rounded-full h-72 w-72 '%>
+    <% if tendance.product.product_backgrounds.attached? %>
+      <%= image_tag tendance.product.product_backgrounds, class:'m-0 rounded-full h-72 w-72 '%>
     <%else%>
       <%= image_tag 'default_product_image.png', class:'m-0 rounded-full h-72 w-72 '%>
     <% end %>
