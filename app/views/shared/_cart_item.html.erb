@@ -15,3 +15,23 @@
     </td>
   </tr>
 </table>
+
+<div class="ml-50 bg-gray-300 h-32 flex mx-10 justify-items-center">
+  <div>
+    <%# <% image_tag item.product. %>
+  </div>
+  <div>
+    <h2>Name: <%= item.product.name %></h2>
+    <h3>Description: <%= item.product.description %></h3>
+    <h3>Weight: <%= item.product.weight %></h3>
+  </div>
+  <div>
+    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
+      <i class="fas fa-minus"></i>
+    </a>
+    <%= item.quantity %>
+    <a href="<%= line_item_add_path(item) %>" data-method="POST">
+      <i class="fas fa-plus"></i>
+    </a>
+  </div>
+</div>

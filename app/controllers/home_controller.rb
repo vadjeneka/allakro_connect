@@ -25,9 +25,9 @@ class HomeController < ApplicationController
     product = nil
     second_cat = Rating.includes(:product).where('rates > ?', 3).order(rates: :desc).take(10)
     if second_cat.length >1
-      product = second_cat.sample.product
+      second_cat.sample.product
     else
-      product = Product.all.sample
+      Product.all.sample
     end
 
     # Tendance.create(product)

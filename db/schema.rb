@@ -102,13 +102,13 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   end
 
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "sender_id", null: false
-    t.uuid "receiver_id", null: false
-    t.string "content"
+    t.text "name"
+    t.uuid "user_id", null: false
+    t.uuid "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["receiver_id"], name: "index_chats_on_receiver_id"
-    t.index ["sender_id"], name: "index_chats_on_sender_id"
+    t.index ["store_id"], name: "index_chats_on_store_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -246,6 +246,8 @@ ActiveRecord::Schema.define(version: 2021_11_22_092629) do
   add_foreign_key "carts", "users"
   add_foreign_key "categories_products", "categories"
   add_foreign_key "categories_products", "products"
+  add_foreign_key "chats", "stores"
+  add_foreign_key "chats", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "line_items", "carts"
