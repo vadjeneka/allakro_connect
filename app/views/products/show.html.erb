@@ -31,7 +31,7 @@
         <p class="text-4xl font-medium text-gray-800"><%= @product.name%></p>
         <i class="fal fa-heart text-2xl"></i>
       </div>
-      <%if @product.product_backgrounds.attached? %>
+      <% if @product.product_backgrounds.attached? %>
         <button class='px-3'>
           <i class="fa fa-chevron-left text-xl"></i>
         </button>
@@ -58,7 +58,7 @@
   <div class="w-2/6 pt-8 pb-6 px-12 relative">
     <% unless policy(@product).create? %>
       <div class="flex absolute top-2 w-full">
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>créer une enchère</a>
+        <a href="<%= new_user_store_product_bid_path(current_user, @product.store, @product) %>" data-class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>créer une enchère</a>
         <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>edit</a>
         <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md'>supprimer</a>
       </div>
@@ -93,16 +93,3 @@
     <% end %>
   </div>
 </div>
-
-  <!--<li><%#= link_to 'Add new Product', new_user_store_product_path %></li>
-  <li><%#= link_to 'edit',  edit_user_store_product_path %></li>
-  <li><%#= link_to 'All Product', user_store_products_path%></li>
-
-  <div class="swiper-container" >
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-      !-->

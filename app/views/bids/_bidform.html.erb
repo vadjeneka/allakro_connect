@@ -1,0 +1,37 @@
+<div>
+  
+  <div>
+    <h2>Mise aux enchères de <%= @product.name%></h2>
+  </div>
+</div>
+  <div>
+    <span>Format de l'heure HH:30 ou HH:00 ex: 17:30, 5:00</span>x
+  </div>
+  <div>
+<%= form_with model: [current_user, @product.store, @product, @bid] do |form|%>
+    <%= form.label :Debut %>
+    <%=form.datetime_field :start_date%>
+    
+    <% if @bid.errors[:start_date] %>
+      <span style='color: red'><%= @bid.errors[:start_date][0] %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :Fin %>
+    <%=form.datetime_field :end_date%>
+    <% if @bid.errors[:end_date] %>
+      <span style='color: red'><%= @bid.errors[:end_date][0] %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :Montant %>
+    <%=form.number_field :initial_price%><span>XOF</span>
+    
+    <% if @bid.errors[:initial_price] %>
+      <span style='color: red'><%= @bid.errors[:initial_price][0] %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<%end%>

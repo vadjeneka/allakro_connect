@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       resources :products do
         resources :stocks
         resources :line_items, only: [:create]
+        resources :bids, only: [:index, :show, :new, :create, :destroy] do
+          resources :bid_offers, only: [:new,:create,:edit,:update]
+        end
       end
     end
   end
@@ -38,4 +41,12 @@ Rails.application.routes.draw do
   post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
 
+  #resources :users do
+  resources :products, only: [:index] do
+    resources :bids, only: [:index, :show, :new, :create, :destroy] do
+        resources :bid_offers, only: [:new,:create,:edit,:update]
+    end
+  end
+
+  # resources :bids, only: [:index,:destroy]
 end

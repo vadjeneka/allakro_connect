@@ -70,3 +70,4 @@ gem 'sidekiq'
 gem 'devise'
 
 gem "pundit"
+gem 'sidekiq-scheduler'
