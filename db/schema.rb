@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_160219) do
+ActiveRecord::Schema.define(version: 2021_11_27_123414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -110,6 +110,16 @@ ActiveRecord::Schema.define(version: 2021_11_26_160219) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "product_id", null: false
+    t.boolean "still_favorites?", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "line_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "product_id", null: false
     t.integer "quantity", default: 1
@@ -134,7 +144,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_160219) do
     t.uuid "bid_id", null: false
     t.uuid "user_id", null: false
     t.integer "amount"
-    t.boolean "accepted", default: false
+    t.boolean "accepted", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bid_id"], name: "index_offers_on_bid_id"
@@ -255,6 +265,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_160219) do
   add_foreign_key "chats", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "products"
+  add_foreign_key "favorites", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
   add_foreign_key "messages", "chats"

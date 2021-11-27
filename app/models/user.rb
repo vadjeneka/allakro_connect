@@ -7,10 +7,11 @@ class User < ApplicationRecord
   has_many :orders
   has_many :chats
   has_many :searches
+  has_many :favorites
 
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, 
-          :omniauthable, omniauth_providers: [:google_oauth2]
+          :omniauthable, omniauth_providers: [:google_oauth2, :facebook ]
 
     scope :all_expect, -> (user){ where.not(id: user.id)}
     # Ex:- scope :active, -> {where(:active => true)}
@@ -29,6 +30,14 @@ class User < ApplicationRecord
       # uncomment the line below to skip the confirmation emails.
       user.skip_confirmation!
       user.save!
+    end
+  end
+  
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["info"]
+        user.email = data["email"] if user.email.blank?
+      end
     end
   end
 end
