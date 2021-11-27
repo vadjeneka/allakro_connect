@@ -9,3 +9,11 @@
     cron: '0 0 0 * * * Africa/Abidjan'   
     class: BannerJob
     enable: true
+    
+:schedule:  
+  active_to_closed_bid:
+    class: StateChangeJob
+    every: "30m"
+    cron: '0 * * * * 1 Africa/Abidjan'
+    enable: true
+    description: "This job change waiting bids to active and active to closed bids"

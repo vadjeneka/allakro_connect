@@ -3,5 +3,5 @@
   <%= render partial: "shared/cart_item", locals: { item: item } %>
 <% end %>
 <h2>Total price: <%= cart.total_price %></h2>
-<%= link_to "Delete cart", user_cart_path(current_user, cart), method: :delete, data: { confirm: "Are you sure ?"}%> |
-<%= link_to "Validate your cart", user_cart_orders_path(current_user, cart), method: :post, data: { confirm: "Valid your cart ?" } %>
+<%= link_to "Delete cart", user_cart_path(current_user, cart), method: :delete, data: { confirm: "Are you sure ?"}, class:"bg-red-600 pt-1 ml-2 pb-2 rounded-lg text-white mt-2 pr-2"%> |
+<%= link_to "Validate your cart", user_cart_orders_path(current_user, cart), method: :post, data: { confirm: "Valid your cart ?" }, class:"bg-red-600 pt-1 ml-2 pb-2 rounded-lg text-white mt-5 pr-2" %>

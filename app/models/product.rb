@@ -2,6 +2,9 @@ class Product < ApplicationRecord
   
   belongs_to :store 
   has_one :stock
+
+  has_many :bids
+
   has_and_belongs_to_many :categories
   has_many_attached :product_backgrounds
 
@@ -31,4 +34,5 @@ class Product < ApplicationRecord
 
     end
   end
+
 end
