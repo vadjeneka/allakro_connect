@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_160219) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "initial_price"
-    t.string "state"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_bids_on_product_id"

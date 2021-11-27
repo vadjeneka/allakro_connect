@@ -1,2 +1,8 @@
 <%= @bid.product.name %>
-<%= render partial: "offers/form", locals: { user: current_user, store: @bid.product.store, product: @bid.product, bid: @bid } %>
+<% if @bid.state == "actived" %>
+  <%# TODO: Create comps for top offer %>
+  <% @top_offer.each do |offer| %>
+    <%= offer.user %>
+  <% end %>
+  <%= render partial: "offers/form", locals: { user: current_user, store: @bid.product.store, product: @bid.product, bid: @bid } %>
+<% end %>
