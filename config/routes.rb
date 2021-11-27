@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "users/signin", to: "users/sessions#new", as: :new_user_session_path
   end
   mount Notifications::Engine => "/notifications"
+  get 'profiles/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   if Rails.env.development?
@@ -34,13 +35,10 @@ Rails.application.routes.draw do
       resources :products do
         resources :stocks
         resources :line_items, only: [:create]
-<<<<<<< HEAD
         resources :bids, except: [:edit, :update] do
           resources :offers, only: [:new, :create, :edit, :update]
         end
-=======
         resources :comments
->>>>>>> b3de9e3f81f4f8a88037485abfcbf4946d6f24c7
       end
     end
   end
@@ -48,5 +46,7 @@ Rails.application.routes.draw do
   post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
   post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
+  resources :profiles
 
 end
+
