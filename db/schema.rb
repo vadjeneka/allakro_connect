@@ -149,6 +149,24 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bid_id"], name: "index_offers_on_bid_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "actor_id"
+    t.string "notify_type", null: false
+    t.string "target_type"
+    t.uuid "message_id", null: false
+    t.uuid "chat_id", null: false
+    t.string "second_target_type"
+    t.string "third_target_type"
+    t.bigint "third_target_id"
+    t.boolean "read_at", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["chat_id"], name: "index_notifications_on_chat_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -273,6 +291,9 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
   add_foreign_key "messages", "users"
   add_foreign_key "offers", "bids"
   add_foreign_key "offers", "users"
+  add_foreign_key "notifications", "chats"
+  add_foreign_key "notifications", "messages"
+  add_foreign_key "notifications", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"

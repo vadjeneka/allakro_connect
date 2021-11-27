@@ -15,24 +15,10 @@
       <%= @chat.name %>
     </p>
 
-    <div class="px-2 py-2 h-90 overflow-y-auto">
-      <% @message.each do |message| %>
-      <% if message.user != current_user%>
-        <div class="flex justify-end py-1">
-          <div class="bg-gray-200 p-5 rounded-2xl rounded-tl-none w-2/5">
-              <p><%= message.content %></p>
-              <small class="float-right"><%= message.user.email%> <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
-          </div>
-        </div>
-      <%else%>
-        <div class="flex justify-start py-1">
-            <div class="bg-blue-300 text-green-900 p-5 rounded-2xl rounded-tr-none w-2/5">
-              <p><%= message.content %></p>
-              <small class="float-right"><%= message.user.email %>  <strong><%= message.created_at&.strftime("%I: %M %p") %></strong></small>
-            </div>
-        </div>
-      <%end%>
-      <%end%>
+    <div class="px-2 py-2 h-90 overflow-y-auto" id="messages">
+      <%=turbo_stream_from @chat.id %>
+        <span id="current-user" data-current-user="<%=current_user.id%>"></span>
+        <%=render partial: 'messages/message', collection: @message, locals:{user:current_user}%>
     </div>
     <div class="absolute bottom-2 w-full px-3">
       <%= render 'input_message', chat: @chat %>

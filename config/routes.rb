@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/signin", to: "users/sessions#new", as: :new_user_session_path
   end
+  mount Notifications::Engine => "/notifications"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   if Rails.env.development?
@@ -33,9 +34,13 @@ Rails.application.routes.draw do
       resources :products do
         resources :stocks
         resources :line_items, only: [:create]
+<<<<<<< HEAD
         resources :bids, except: [:edit, :update] do
           resources :offers, only: [:new, :create, :edit, :update]
         end
+=======
+        resources :comments
+>>>>>>> b3de9e3f81f4f8a88037485abfcbf4946d6f24c7
       end
     end
   end

@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :chats
   has_many :searches
   has_many :favorites
+  has_many :chats
+  has_many :comments
+  has_one :account
 
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, 

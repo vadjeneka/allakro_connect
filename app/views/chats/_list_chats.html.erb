@@ -1,17 +1,21 @@
 <h3 class="bg-red-500 w-full"> <strong>Receipt from store : </strong> </h3>
 <div class="mt-3">
 
-  <% if @chat_from_store %>
-    <% @chat_from_store.each do |chat| %>
-      <a href="<%= user_store_chat_path(current_user, chat.store.id, chat.id) %>"><%= chat.user.email %></a> <br>
-    <% end %>
+  <% if @chat.persisted? %>
+    <% if @chat_from_store %>
+      <% @chat_from_store.each do |chat| %>
+        <a href="<%= user_store_chat_path(current_user, chat.store.id, chat.id) %>"><%= chat.user.email %></a> <br>
+      <% end %>
+    <% end%>
   <% end%>
   
 </div>
 <h3 class="bg-red-500 w-full mt-3"> <strong> Send : </strong> </h3>
 <div class="m-3">
-  <% @chat_from_me.each do |chat| %>
-    <a  href="<%= user_store_chat_path(current_user, chat.store.id, chat.id) %>"><%= chat.store.name %></a> <br>
+  <% if @chat.persisted? %>
+    <% @chat_from_me.each do |chat| %>
+      <a  href="<%= user_store_chat_path(current_user, chat.store.id, chat.id) %>"><%= chat.store.name %></a> <br>
+    <% end %>
   <% end %>
   
 </div>

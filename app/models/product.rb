@@ -7,6 +7,7 @@ class Product < ApplicationRecord
 
   has_and_belongs_to_many :categories
   has_many_attached :product_backgrounds
+  has_many :comments
 
 
   scope :filter_by_name, ->(name) {where('lower(name) LIKE ?', "%#{name}%")}
