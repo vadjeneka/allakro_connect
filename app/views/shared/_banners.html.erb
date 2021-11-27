@@ -31,7 +31,7 @@
         <% end %>
       <% end %>
     </a>
-    <a href='<%= current_user == nil ? new_user_session_path : user_store_path(current_user, current_user.store.id) %>'>
+    <a href='<%= current_user == nil ? new_user_session_path : current_user.store == nil ? '': user_store_path(current_user, current_user.store.id) %>'>
       <i class="fal fa-user text-2xl"></i>
     </a>
   </span>
