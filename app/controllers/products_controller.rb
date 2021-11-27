@@ -1,11 +1,15 @@
 class ProductsController < ApplicationController
   
   def index
-    if params[:search]
-      @products = Product.search(params[:search])
+    if params[:name]
+      Search.create!(user_id:current_user.id,content:params[:name])
+      @products = Product.search(params[:name])
     else
       @products = Product.includes(:store, :categories).where(is_available: true)
     end
+
+    @categories = category_returns
+    @cities = cities_return
   end
 
   
@@ -66,6 +70,36 @@ class ProductsController < ApplicationController
     @products = @all_product.where("price BETWEEN ? AND ?",first_price,last_price)
   end
 
+  def category_returns
+    # category = Category.where('name like ?', "%#{current_user.searches['content']}%").uniq
+    category = []
+    if category.length > 1
+      if category.length > 7
+        category
+      else
+        category = category + Category.all.sort_by {rand}[0,8]
+        category = category.sort_by {rand}[0,7]
+      end
+    else
+      Category.all.sort_by {rand}[0,7]
+    end
+  end
+
+  def cities_return
+    # city = Store.select(['city like ? ot town like ?',"%#{current_user.searches['content']}%","%#{current_user.searches.content}%"]).uniq
+    city = []
+    if city.length > 1
+      if city.length > 7
+        city
+      else
+        city = city + Store.all.sort_by {rand}[0,8]
+        city = city.sort_by {rand}[0,7]
+      end
+    else
+      Store.all.sort_by {rand}[0,5]
+    end
+  end
+  
   
 
   def store

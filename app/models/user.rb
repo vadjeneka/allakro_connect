@@ -11,4 +11,5 @@ class User < ApplicationRecord
     # Ex:- scope :active, -> {where(:active => true)}
 
     has_many :chats
+    has_many :searches
 end

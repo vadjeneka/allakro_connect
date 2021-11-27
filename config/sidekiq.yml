@@ -6,7 +6,6 @@
 
 :schedule:
   banner:
-    cron: '0 * * * * * Africa/Abidjan'   
+    cron: '0 0 0 * * * Africa/Abidjan'   
     class: BannerJob
-    every: "24h"
     enable: true

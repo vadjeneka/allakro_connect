@@ -10,6 +10,6 @@ class BannerJob < ApplicationJob
     else
       product = Product.all.sample
     end
-    Tendance.create!(product_id:product.id, start_time:Time.now, end_time:Time.now)
+    Tendance.create!(product_id:product.id, start_time:Time.now, end_time:Time.now+1.day)
   end
 end
