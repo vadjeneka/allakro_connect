@@ -9,11 +9,15 @@ application.register("display-img-on-create", DisplayImgOnCreateController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import MessageController from "./message_controller.js"
+application.register("message", MessageController)
+
 import RangeEffectController from "./range_effect_controller.js"
 application.register("range-effect", RangeEffectController)
 
 import ShowDescriptionController from "./show_description_controller.js"
 application.register("show-description", ShowDescriptionController)
+
 import SwipeImgController from "./swipe_img_controller.js"
 application.register("swipe-img", SwipeImgController)
 

@@ -18,6 +18,11 @@ class ChatsController < ApplicationController
     @messages = Message.new
     @store = Store.find(params[:store_id])
 
+    notifs = Notification.where(user_id: current_user.id, chat_id:@chat.id)
+    if notifs.where(read_at: false)
+      notifs.update(read_at: true)
+    end
+
   end
 
   def new

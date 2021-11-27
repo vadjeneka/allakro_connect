@@ -12,4 +12,5 @@ class User < ApplicationRecord
 
     has_many :chats
     has_many :comments
+    has_one :account
 end

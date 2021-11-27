@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_110143) do
     t.string "second_target_type"
     t.string "third_target_type"
     t.bigint "third_target_id"
-    t.boolean "read_at"
+    t.boolean "read_at", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_notifications_on_actor_id"

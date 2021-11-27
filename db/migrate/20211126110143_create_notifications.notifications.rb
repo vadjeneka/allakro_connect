@@ -14,7 +14,7 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       # t.bigint :second_target_id
       t.string :third_target_type
       t.bigint :third_target_id, type: :uuid
-      t.boolean :read_at
+      t.boolean :read_at, default: false
 
       t.timestamps null: false
     end
