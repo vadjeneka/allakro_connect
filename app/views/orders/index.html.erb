@@ -1,4 +1,8 @@
-<%= render partial: "shared/orders", locals: { orders: @orders } %>
+<% if @orders %>
+  <%= render partial: "shared/orders", locals: { orders: @orders } %>
+<% end %>
 
-<%# TODO: Comps store orders  %>
-<%= render partial: "shared/store_orders", locals: { orders: @store_orders } %>
+<% if @store_orders %>
+  <%= render partial: "shared/store_orders", locals: { orders: @store_orders } %>
+<% end %>
+

@@ -1,4 +1,6 @@
 <% if orders %>
+  <h2 class="text-3xl font-bold mb-5 ml-5">Mes commandes</h2>
+  <hr>
   <% orders.each do |order| %>
     <%= render partial: "shared/order", locals: { order: order } %>
   <% end %>
