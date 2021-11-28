@@ -1,12 +1,19 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = current_user.orders.where(is_fulfilled: false)
+    if current_user && current_user.orders
+      @orders = current_user.orders
+    end
     if params[:store_id]
-      store = Store.find(params[:store_id])
+      store = Store.includes(:orders).find(params[:store_id])
       @store_orders = store.orders
+      # raise store.orders.inspect
     end
     # raise @store_orders.inspect
+  end
+
+  def show
+    @order = Order.find(params[:id])
   end
 
   def create

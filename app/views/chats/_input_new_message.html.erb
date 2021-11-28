@@ -1,9 +1,9 @@
-<%= form_with model: [current_user, store ,chat] do |form| %>
+<%= form_with model: [store ,chat] do |form| %>
 <div class="w-full flex rounded overflow-hidden">
-  <%= form.text_field :content, placeholder:'Enter your message here', class:'w-5/6 px-4 py-2 border-none bg-gray-100 ' %>
+  <%= form.text_field :content, placeholder:'Enter your message here', class:'outline-none w-5/6 px-4 py-2 border-none bg-gray-100 ' %>
   <% if @chat.errors[:content] %>
     <span style='color: red'><%= @chat.errors[:content][0] %></span>
   <% end %>
-  <%= form.submit "Envoyer", class: "btn btn-outline-primary btn-block py-2 px-10 bg-red-500" %>
+  <%= form.submit "Envoyer", class: "rounded rounded-tl-none rounded-bl-none py-2 px-10 bg-red-500 text-white" %>
 </div>
 <%end%>

@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = @product.comments.create(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to user_store_product_path(current_user, @product.store, @product), notice:'Votre avis à bien été envoyé'
+      redirect_to store_product_path(@product.store, @product), notice:'Votre avis à bien été envoyé'
     end
   end
 

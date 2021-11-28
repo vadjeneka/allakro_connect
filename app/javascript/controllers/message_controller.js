@@ -13,13 +13,13 @@ export default class extends Controller {
   addClass(currentUser, messageUser) {
     console.log('current_user :',currentUser)
     if (currentUser == messageUser) {
-      this.containerTarget.classList.add('rounded-tl-none')
+      this.containerTarget.classList.add('rounded-br-none')
       this.containerTarget.classList.add('bg-gray-200')
       this.containerTarget.parentElement.classList.add('justify-end')
     } else {
       this.containerTarget.classList.add('bg-blue-300')
       this.containerTarget.classList.add('text-green-900')
-      this.containerTarget.classList.add('rounded-tr-none')
+      this.containerTarget.classList.add('rounded-tl-none')
       this.containerTarget.parentElement.classList.add('justify-start')
     }
     let messageDiv = document.getElementById('messages')

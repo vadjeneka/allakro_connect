@@ -1,1 +1,14 @@
 <%= render partial: "shared/orders", locals: { orders: @orders } %>
+
+<%# TODO: Comps store orders  %>
+<%= render partial: "shared/store_orders", locals: { orders: @store_orders } %>
+
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

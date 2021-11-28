@@ -8,21 +8,23 @@
     <%=yield :search_bar%>
     <span class="w-full">
       <div class="flex items-center justify-evenly">
-        <a href='<%=products_path%>' class='font-semibold text-xl'>Tous les produits</a>
+        <a href='<%= products_path %>' class='font-semibold text-xl'>Tous les produits</a>
         <a href='#' class='font-semibold text-xl'>Stores</a>
         <a href='#' class='font-semibold text-xl'>Tendances</a>
-        <a href='#' class='font-semibold text-xl'>Enchères</a>
+        <a href='<%= bids_path %>' class='font-semibold text-xl'>Enchères</a>
       </div>
     </span>
   </div>
   <span class='w-1/6 flex items-center justify-evenly pt-2'>
-    <a href='#'>
-      <i class="fal fa-shopping-cart text-2xl"></i>
-    </a>
+    <% if current_user %>
+      <a href='<%= user_carts_path(current_user) %>'>
+        <i class="fal fa-shopping-cart text-2xl"></i>
+      </a>
+    <% end %>
     <a href='#'>
       <i class="fal fa-heart text-2xl"></i>
     </a>
-    <a href='#' class="relative flex items-stretch">
+    <a href='<%= user_chats_path(current_user)%>' class="relative flex items-stretch">
       <i class="fal fa-comment-alt text-2xl"></i> 
       <% if current_user %>
         <% if Notification.all_unread_user(current_user.id).length >0 %>
@@ -31,7 +33,7 @@
         <% end %>
       <% end %>
     </a>
-    <a href="<%= current_user == nil ? new_user_session_path : profiles_index_path(user:current_user) %>" >
+    <a href="<%= current_user == nil ? new_user_session_path : profile_path(current_user) %>" >
       <i class="fal fa-user text-2xl"></i>
     </a>
   </span>

@@ -1,20 +1,23 @@
 <style> 
-.h-90{
-  height: 85%;
-}
-
+  .width-20{
+    width: 25%;
+  }
+  .width-80{
+    width: 75%;
+  }
+  .h-90{
+    height: 85%;
+  }
 </style>
 
 <div class="flex h-screen bg-white overflow-hidden">
-  <div class="w-1/5 overflow-hidden border-r border-black shadow h-full bg-black text-white ">
-    <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
-  </div>
-  <div class="w-4/5 h-full overflow-hidden relative px-2">
-    <p class="px-3 py-3 border-b shadow bg-red-500 w-full text-white">
-      <strong class="text-black font-medium">Chat width:</strong>
-      <%= @chat.name %>
+    <div class="width-20 pr-2 border-r border-gray-100">
+      <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
+    </div>
+  <div class="width-80 h-full overflow-hidden relative px-2 pt-20">
+    <p class="px-3 py-3 border-b w-full">
+      <strong class="text-black font-medium"><%=@store.name%></strong>
     </p>
-
     <div class="px-2 py-2 h-90 overflow-y-auto" id="messages">
       <%=turbo_stream_from @chat.id %>
         <span id="current-user" data-current-user="<%=current_user.id%>"></span>
@@ -25,3 +28,9 @@
     </div>
   </div>
 </div>
+
+<% content_for :banners do %>
+  <div class="w-full fixed bg-white border-b z-20 border-gray-100">
+      <%=render 'shared/banners'%>
+  </div>
+<% end %>

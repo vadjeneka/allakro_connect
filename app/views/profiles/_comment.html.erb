@@ -1,0 +1,14 @@
+<div class="w-full flex bg-gray-100 rounded items-start">
+  <div class="w-20 h-20">
+    <% if comment.product.product_backgrounds.attached? %>
+      <%= image_tag favorite.product.product_backgrounds[0], class:'m-0 rounded-full h-full w-full '%>
+    <%else%>
+      <%=image_tag 'default_product_image.png', class:'h-full w-full object-cover'%>
+    <% end %>
+  </div>
+
+  <div class="ml-2">
+    <p class="text-lg">Comment from: <%= comment.user.email%></p>
+    <p class="text-sm"><%= comment.content%></p>
+  </div>
+</div>

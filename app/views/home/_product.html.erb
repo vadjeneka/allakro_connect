@@ -1,5 +1,5 @@
 <div class="mb-16">
-  <a href='<%=product_path(product)%>' class="w-full h-full">
+  <a href='<%= store_product_path(product.store, product) %>' class="w-full h-full">
     <div class="h-64 w-full overflow-hidden">
       <% if product.product_backgrounds.attached? %>
         <%=image_tag product.product_backgrounds[0], class:'h-64 w-full object-cover'%>
@@ -12,13 +12,11 @@
         <p class=" font-medium text-lg"><%=product.name%></p>
         <p class=" font-normal text-sm py-1"><%=product.price%> FCFA</p>
       </div>
-      <% if policy(product).create?%>
-        <div class="w-2/5">
-          <a href="<%= current_user != nil ? user_store_product_line_items_path(current_user, product.store, product) : new_user_session_path %>" data-method="POST" class="px-5 py-2 bg-red-600 text-white">
-            Acheter
-          </a>
-        </div>
-      <% end %>
+      <div class="w-2/5">
+        <a href="<%= current_user != nil ? store_product_line_items_path(product.store, product) : new_user_session_path %>" data-method="POST" class="px-5 py-2 bg-red-600 text-white">
+          Acheter
+        </a>
+      </div>
     </div>
   </a>
 </div>

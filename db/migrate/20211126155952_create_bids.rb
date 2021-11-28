@@ -5,7 +5,7 @@ class CreateBids < ActiveRecord::Migration[6.1]
       t.datetime :start_date
       t.datetime :end_date
       t.integer :initial_price
-      t.string :state
+      t.string :state, default: "waiting"
 
       t.timestamps
     end
