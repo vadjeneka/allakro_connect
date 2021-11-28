@@ -11,6 +11,11 @@
   </div>
 
   <div>
+    <h2 class="text-3xl font-bold my-7 ml-5">Enchères à venir</h2>
+    <hr>
+  </div>
+
+  <div>
     <% @coming_bids.each do |bid| %>
       <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
     <% end %>

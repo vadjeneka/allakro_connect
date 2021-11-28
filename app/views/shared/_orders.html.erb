@@ -1,5 +1,5 @@
-<div class="mx-auto ml-10">
+<% if orders %>
   <% orders.each do |order| %>
     <%= render partial: "shared/order", locals: { order: order } %>
   <% end %>
-</div>
+<% end %>

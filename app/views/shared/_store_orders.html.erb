@@ -1,0 +1,16 @@
+<div class="flex flex-col text-2xl font-bold mt-10 items-center">
+  <% orders.each do |order| %>
+    <div class="flex bg-gray-200 rounded p-5 items-center w-1/2 justify-around">
+      <h2>
+        <%= link_to "Order N° #{order.id[0,7]}", store_order_path(order.cart.store, order) %>
+      </h2>
+      <h2>
+        <%= order.cart.total_price %> XOF
+      </h2>
+      <div>
+        <i class="fad fa-times-circle text-3xl text-red-500"></i>
+        <i class="fad fa-check-circle text-3xl text-green-500"></i>
+      </div>
+    </div><br>
+  <% end %>
+</div>
