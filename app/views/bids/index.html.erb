@@ -6,13 +6,13 @@
 
   <div>
     <% @bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", user_store_product_bid_path(current_user, bid.product.store, bid.product, bid) %>
+      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
     <% end %>
   </div>
 
   <div>
     <% @coming_bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", user_store_product_bid_path(current_user, bid.product.store, bid.product, bid) %>
+      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
     <% end %>
   </div>
 

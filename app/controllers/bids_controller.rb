@@ -18,7 +18,7 @@ class BidsController < ApplicationController
     @product = Product.find(params[:product_id])
     @bid = @product.bids.build(params_bid)
     if @bid.save
-      redirect_to user_store_product_bids_path(current_user, @product.store, @product)
+      redirect_to store_product_bids_path(@product.store, @product)
     end
   end
 

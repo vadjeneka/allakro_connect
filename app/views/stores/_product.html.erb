@@ -1,4 +1,4 @@
-<a href='<%=product_path(product)%>' class="mb-2">
+<a href='<%= products_path %>' class="mb-2">
   <% if product.product_backgrounds.attached? %>
     <%= image_tag product.product_backgrounds[0], class:'m-0 rounded-full h-44 w-44 '%>
   <%else%>

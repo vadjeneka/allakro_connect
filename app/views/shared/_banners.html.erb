@@ -16,9 +16,11 @@
     </span>
   </div>
   <span class='w-1/6 flex items-center justify-evenly pt-2'>
-    <a href='#'>
-      <i class="fal fa-shopping-cart text-2xl"></i>
-    </a>
+    <% if current_user %>
+      <a href='<%= user_carts_path(current_user) %>'>
+        <i class="fal fa-shopping-cart text-2xl"></i>
+      </a>
+    <% end %>
     <a href='#'>
       <i class="fal fa-heart text-2xl"></i>
     </a>

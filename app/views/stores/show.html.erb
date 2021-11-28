@@ -11,7 +11,7 @@
         <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
       </p>
       <% if @store.user.id != current_user.id%>
-        <a href="<%= new_user_store_chat_path(current_user, @store.id) %>" class="bg-green-600 text-white px-5 py-2 rounded">
+        <a href="<%= new_store_chat_path(@store) %>" class="bg-green-600 text-white px-5 py-2 rounded">
           Ecrire
           <i class="fad fa-paper-plane"></i>
         </a>
@@ -22,7 +22,7 @@
     </div>
     <% if current_user  == @store.user %>
       <div class='flex justify-center items-center'>
-        <%= link_to 'Ajouter un article', new_user_store_product_path(current_user, @store), class:'bg-red-600 text-white px-10 py-3 font-medium' %>
+        <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-red-600 text-white px-10 py-3 font-medium' %>
       </div>
     <% end %>
   </div>

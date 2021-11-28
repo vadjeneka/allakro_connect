@@ -4,5 +4,5 @@
   <% @top_offer.each do |offer| %>
     <%= offer.user %>
   <% end %>
-  <%= render partial: "offers/form", locals: { user: current_user, store: @bid.product.store, product: @bid.product, bid: @bid } %>
+  <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
 <% end %>
