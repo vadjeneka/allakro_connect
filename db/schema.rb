@@ -140,15 +140,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "offers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "bid_id", null: false
-    t.uuid "user_id", null: false
-    t.integer "amount"
-    t.boolean "accepted", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["bid_id"], name: "index_offers_on_bid_id"
-    t.index ["user_id"], name: "index_offers_on_user_id"
   create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "actor_id"
@@ -167,6 +158,17 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.index ["message_id"], name: "index_notifications_on_message_id"
     t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "offers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bid_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "amount"
+    t.boolean "accepted", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bid_id"], name: "index_offers_on_bid_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -289,11 +291,11 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
   add_foreign_key "line_items", "products"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
-  add_foreign_key "offers", "bids"
-  add_foreign_key "offers", "users"
   add_foreign_key "notifications", "chats"
   add_foreign_key "notifications", "messages"
   add_foreign_key "notifications", "users"
+  add_foreign_key "offers", "bids"
+  add_foreign_key "offers", "users"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
