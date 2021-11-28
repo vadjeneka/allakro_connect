@@ -8,8 +8,13 @@
         <%= order.cart.total_price %> XOF
       </h2>
       <div>
-        <i class="fad fa-times-circle text-3xl text-red-500"></i>
-        <i class="fad fa-check-circle text-3xl text-green-500"></i>
+        <a href="<%= store_order_path(order.cart.store, order) %>" data-method="DELETE", data-confirm="Réjeter la commande ?">
+          <i class="fad fa-times-circle text-3xl text-red-500"></i>
+        </a>
+
+        <a href="<%= store_order_path(order.cart.store, order) %>" data-method="PUT", data-confirm="Valider la commande ?">
+          <i class="fad fa-check-circle text-3xl text-green-500"></i>
+        </a>
       </div>
     </div><br>
   <% end %>

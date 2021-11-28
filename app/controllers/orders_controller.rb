@@ -13,7 +13,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @user_order = Order.includes(:user, :cart).find(params[:id]) # TODO: and default accepted: false
+    if params[:store_id]
+      @order = Order.includes(:user, :cart).find(params[:id])
+    end
   end
 
   def create
@@ -30,6 +33,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+    # raise order.inspect
+    order.update(is_fulfilled: true) # TODO: Set is_fulfilled to string with some state
+    redirect_to store_orders_path(order.cart.store)
+  end
+
   def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to user_carts_path(current_user), notice: "Order was successfully destroyed"
   end
 end

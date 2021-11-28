@@ -1,41 +1,24 @@
-<div>
-  <%# if item.product.product_backgrounds.persisted? %>
-    <%#= image_tag item.product.product_backgrounds[0], class: 'h-48 w-52 w-full' %>
-  <%# end %>
-  <div>
-    <%= item.product.name %>
-    <%= item.product.description %>
-    <%= item.product.weight %> g
-  </div>
-  <div class=""> 
-    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
-      <i class="fas fa-minus"></i>
-    </a>
-    <span class="text-2xl border h-10 w-12">
-      <%= item.quantity %>
-    </span>
-    <a href="<%= line_item_add_path(item) %>" data-method="POST">
-      <i class="fas fa-plus"></i>
-    </a>
-  </div>
-</div>
-
-<div class="ml-60 bg-gray-300 h-32 flex mx-10 justify-items-center justify-between mr-80">
-  <div class="">
-    <%# <% image_tag item.product. %>
+<div class="ml-60 bg-gray-200 h-32 flex m-2 rounded justify-items-center justify-between mr-80">
+  <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
+    <i class="fad fa-times-circle text-2xl text-red-400"></i>
+  </a>
+  <div class="h-50 bg-red-200">
   </div>
   <div class="">
-    <h2>Name: <%= item.product.name %></h2>
-    <h3 class="mt-5">Description: <%= item.product.description %></h3>
-    <h3 class="mt-5">Weight: <%= item.product.weight %>g</h3>
+    <h2 class="font-bold">Produit : <%= item.product.name %></h2>
+    <p><%= item.product.description %></p>
+    <p><%= item.product.weight %> g</p>
+    <p><%= item.total_price %> xof</p>
   </div>
   <div class="mt-12 text-3xl mr-5"> 
     <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
-      <i class="fas fa-minus"></i>
+      <i class="fad fa-minus-circle text-3xl"></i>
     </a>
-    <%= item.quantity %>
+    <span class="font-bold">
+      <%= item.quantity %>
+    </span>
     <a href="<%= line_item_add_path(item) %>" data-method="POST">
-      <i class="fas fa-plus"></i>
+      <i class="fad fa-plus-circle text-3xl"></i>
     </a>
   </div>
 </div>

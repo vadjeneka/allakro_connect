@@ -32,12 +32,13 @@ Rails.application.routes.draw do
     resources :chats do
       resources :messages
     end
+    resources :orders, only: [:index, :show, :destroy]
     resources :carts, only: [:index, :destroy] do
       resources :orders, only: [:create, :destroy]
     end
   end
   resources :stores do
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update, :destroy]
     resources :chats do
       resources :messages
     end
