@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     if params[:search]
       @products = Product.search(params[:search])
     else
-      @products = Product.includes(:store, :categories).where(is_available: true)
+      @products = Product.includes(:store, :categories).where(is_available: true).sample(10)
     end
   end
 
