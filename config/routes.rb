@@ -63,8 +63,3 @@ Rails.application.routes.draw do
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
   resources :profiles
 end
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 651d29efcd9f8868c457c55332c2aa2cbcd77229
