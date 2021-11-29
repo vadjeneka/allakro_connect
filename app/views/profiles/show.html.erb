@@ -5,7 +5,12 @@
 .h-36r{
   h:36rem
 }
-
+.width-30{
+    width: 25%;
+}
+.width-70{
+    width: 75%;
+  }
 </style>
 
 
@@ -13,7 +18,7 @@
 <div class="flex justify-between min-h">
   <div class="w-4/6 flex px-5">
     <div class="w-2/5">
-      <p class="py-10 text-4xl">Mon profile</p>
+      <p class="py-10 text-4xl">Mon profil</p>
       <div class='block'>
         <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
         <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
@@ -21,7 +26,7 @@
         <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
       </div>
     </div>
-    <div class="w-3/5">
+    <div class="width-70">
       <div class="w-full py-5 flex justify-between">
         <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
         <%if current_user.store%>
@@ -58,18 +63,18 @@
       </div>
     </div>
   </div>
-  <div class="w-2/6 px-5 border-l border-gray-100">
+  <div class="width-30 px-5 border-l border-gray-100">
     <%if current_user.store%>
       <div class="h-72 overflow-y-auto">
         <p class="text-2xl">Mes commentaires</p>
-        <%current_user.store.products do |product| %>
-          <%= render partial: 'comment', collection: product.comments%>
-        <%end%>
+        <%if @comments.length>0 %>
+          <%= render partial: 'comment', collection: @comments%>
+        <% end %>
       </div>
     <% end %>
     <div class='overflow-y-auto'>
       <p class="text-2xl">Mes favoris</p>
-      <div class='<%= current_user ? 'h-72 grid grid-cols-3 gap-1 overflow-y-auto': 'h-36r grid grid-cols-3 gap-1 overflow-y-auto'%>'>
+      <div class='<%= current_user ? 'h-72 grid grid-cols-2 gap-1 overflow-y-auto': 'h-36r grid grid-cols-3 gap-1 overflow-y-auto'%>'>
         <%if @favorites.length>0 %>
           <%= render partial: 'favorite', collection: @favorites%>
         <%end%>

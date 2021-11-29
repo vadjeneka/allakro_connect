@@ -1,5 +1,5 @@
 class ViewsController < ApplicationController
-
+  
   def show
     @products_view = Product.find(params[:id])
     abc = @product.view += 1

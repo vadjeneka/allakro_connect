@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     @product = Product.find(id)
     @store = @product.store
     @comment = Comment.new
-
+    @favorite = Favorite.find_user_favorite(current_user, @product) if current_user
     # @products_view = Product.find(params[:id])
     # abc = @product.view += 1
     # @product.update(view: abc)
@@ -61,6 +61,26 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to user_stores_path(), notice: 'Product deleted successfully'
+  end
+
+  def like
+    @already_like = Favorite.find_by(user_id: params[:user], product_id: params[:id])
+    # raise @already_like.inspect
+    if @already_like
+      @already_like.update(still_favorites?: !@already_like.still_favorites?)
+      if params[:source] == 'product'
+        redirect_to product_path(params[:id])
+      else
+        redirect_to user_favorites_path(current_user)
+      end
+    else
+      Favorite.create!(user_id:params[:user], product_id:params[:id], still_favorites?:true)
+      if params[:source] == 'product'
+        redirect_to product_path(params[:id])
+      else
+        redirect_to user_favorites_path(current_user)
+      end
+    end
   end
 
 

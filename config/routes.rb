@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   get 'products', to: 'products#index'
+  get 'products/:id', to: 'products#show', as: 'product'
+  get 'products/:id/like', to: 'products#like', as: 'like'
   # get '/stores/:store_id/products/:id', to: 'products#show', as: 'product'
   get 'products/categories/:id', to: 'categories#show', as: 'category'
 
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:index, :destroy]
 
   resources :users do
+    resources :favorites
     resources :orders, only: [:index]
     resources :chats do
       resources :messages

@@ -3,7 +3,7 @@ class Favorites < ActiveRecord::Migration[6.1]
     create_table :favorites, id: :uuid do |t|
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.references :product, null: false, foreign_key: true, type: :uuid
-      t.boolean :still_favorites?, default: false
+      t.boolean :still_favorites?, default: true
       
       t.timestamps
     end
