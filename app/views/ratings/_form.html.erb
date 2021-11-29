@@ -1,0 +1,7 @@
+<%= form_with model: [user, store, product, product.ratings.build] do |form| %>
+  <div>
+    <%= form.label :rates %><br>
+    <%= form.select :rates,  [['1', 1],['2', 2],['3', 3],['4', 4],['5', 5]]%>
+  </div>
+  <%= form.submit submit %>
+<% end %> 

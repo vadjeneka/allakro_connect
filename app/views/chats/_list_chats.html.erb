@@ -1,0 +1,29 @@
+<style>
+  .h_10{  
+    height:10%
+  }
+  .h_45{
+    height:45%
+  }
+  .h_90{
+    height:90%
+  }
+</style>
+
+<div class="px-2 h-screen overflow-y-auto pt-20">
+  <p class="text-3xl h_10">Discussions</p>
+  <% if current_user.store %>
+    <div class="w-full h_45 overflow-y-auto">
+      <p class="text-lg mb-2 w-full py-1 rounded bg-red-500 text-white px-3">Conversation du store</p>
+      <div>
+        <%=render partial: 'chat', collection:@chat_from_store%>
+      </div>
+    </div>
+  <% end %>
+  <div class="<%= current_user.store ? 'w-full h_45 overflow-y-auto' : 'w-full h_90 overflow-y-auto'%>">
+    <p class='text-lg mb-2 py-1 rounded bg-red-500 text-white px-3'>Mes conversations</p>
+    <div>
+      <%=render partial: 'chat', collection:@chat_from_me%>
+    </div>
+  </div>
+</div>

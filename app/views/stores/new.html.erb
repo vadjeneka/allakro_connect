@@ -1,0 +1,10 @@
+<h1>Create a Store</h1>
+<%= render partial: 'form', locals: {user: @user, store: @store, submit: 'create'}%>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

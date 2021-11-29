@@ -1,0 +1,16 @@
+<%= @bid.product.name %>
+<% if @bid.state == "actived" %>
+  <%# TODO: Create comps for top offer %>
+  <% @top_offer.each do |offer| %>
+    <%= offer.user %>
+  <% end %>
+  <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
+<% end %>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

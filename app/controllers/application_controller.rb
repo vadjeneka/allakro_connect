@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
- protect_from_forgery with: :exception
- before_action :configure_permitted_parameters, if: :devise_controller?
+  include Pundit
+  protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
  protected 
   def configure_permitted_parameters
@@ -13,4 +14,15 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path, alert: "You don't have access to this page"
     end
   end
+
+  def user_store_cart(user, store)
+    @user_store_cart ||= find_or_create_cart(user, store)
+  end
+
+  private
+  def find_or_create_cart(user, store)
+    cart = Cart.find_by(user_id: user.id, store_id: store.id, validated: false)
+    cart.nil? ? Cart.create(user_id: user.id, store_id: store.id) : cart
+  end
+  protect_from_forgery with: :exception
 end

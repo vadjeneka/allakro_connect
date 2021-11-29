@@ -1,0 +1,27 @@
+<style> 
+  .width-20{
+    width: 25%;
+  }
+  .width-80{
+    width: 75%;
+  }
+  </style>
+  
+  <div class="flex justify-between bg-white overflow-hidden">
+    <div class="width-20 pr-2 border-r border-gray-100">
+      <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
+    </div>
+    <div class="width-80 h-screen overflow-hidden pt-20 relative ">
+      <p class="px-3 py-3 border-b w-full">
+        <strong class="text-black font-medium">Debutez une conversation avec : <%=@store.name%></strong>
+      </p>
+      <div class="absolute bottom-6 w-full px-3">
+        <%= render partial: "input_new_message", locals: {chat: @chat, store: @store, guest: @guest}%>
+      </div>
+    </div>
+  </div>
+<% content_for :banners do %>
+  <div class="w-full fixed bg-white border-b z-20 border-gray-100">
+      <%=render 'shared/banners'%>
+  </div>
+<% end %>

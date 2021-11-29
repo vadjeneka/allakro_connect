@@ -1,0 +1,19 @@
+<style>
+.w-95{
+  width: 92%;
+}
+.w-5s{
+  width: 8%;
+}
+</style>
+
+<div class="block mb-5">
+  <%= form_with url:root_path, method: 'GET' do |form| %>
+    <div class='flex w-full justify-between bg-gray-200 rounded overflow-hidden'>
+      <%= form.text_field :name, placeholder:"Search...",class:"w-95 py-2 px-4 bg-transparent outline-none text-black" %>
+      <button type="submit" class=" bg-red-600 w-5s outline-none text-white">
+        <i class="fal fa-search"></i>
+      </button>
+    </div>
+  <% end %>
+</div>

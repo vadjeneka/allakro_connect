@@ -1,0 +1,32 @@
+<div class="p-5 pl-10">
+  <div>
+    <h2 class="text-3xl font-bold mb-5 ml-5">Enchères</h2>
+    <hr>
+  </div>
+
+  <div>
+    <% @bids.each do |bid| %>
+      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+    <% end %>
+  </div>
+
+  <div>
+    <h2 class="text-3xl font-bold my-7 ml-5">Enchères à venir</h2>
+    <hr>
+  </div>
+
+  <div>
+    <% @coming_bids.each do |bid| %>
+      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+    <% end %>
+  </div>
+
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
