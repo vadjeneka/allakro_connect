@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :create_account
   has_many :bids_offers
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -43,4 +44,11 @@ class User < ApplicationRecord
       end
     end
   end
+end
+def create_account
+  @user = User.last
+  @account = Account.new
+  @user.account = @account
+  @user.save
+  @account.save
 end
