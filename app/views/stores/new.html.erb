@@ -1,0 +1,12 @@
+<div>
+  <h1 class="text-4xl font-medium text-gray-700 px-3 py-5">Créer un Store</h1>
+  <%= render partial: 'form', locals: {user: @user, store: @store, submit: 'Créer votre store'}%>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

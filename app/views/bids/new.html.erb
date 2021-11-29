@@ -1,0 +1,9 @@
+<%= render partial: "form", locals: { store: @product.store, product: @product, bid: @bid } %>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

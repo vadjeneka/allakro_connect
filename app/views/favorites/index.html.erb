@@ -1,0 +1,21 @@
+<style>
+  .min-height{
+    min-height:35rem
+  }
+</style>
+<div class="py-5 min-height px-5">
+  <div class=" py-3 px-3 border-b border-gray-200">
+    <p class="text-4xl">Mes favoris</p>
+  </div>
+  <div class="py-3 px-3 grid grid-cols-5 gap-2">
+    <%=render partial: 'favorite', collection:@favorites%>
+  </div>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
