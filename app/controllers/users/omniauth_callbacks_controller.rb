@@ -4,7 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 #skip_before_action :verify_authenticity_token
 
   def google_oauth2
-    #raise request.env['omniauth.auth'][:info].email.inspect
+    #raise request.env['omniauth.auth'][:extra][:raw_info][:name].split(' ')[1].inspect
     user = User.from_omniauth(from_google_params)
 
     if user.present?

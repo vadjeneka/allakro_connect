@@ -4,6 +4,16 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -13,22 +23,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <%= f.label :phone %><br />
+    <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :city %><br />
+    <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.label :town %><br />
+    <%= f.text_field :town, autofocus: true, autocomplete: "town" %>
   </div>
 
   <div class="actions">
