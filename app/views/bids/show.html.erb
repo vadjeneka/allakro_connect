@@ -5,7 +5,7 @@
   <% end %>
 </h2>
 <%# TODO: Ajouter l'image %>
-<%# <% if @bid.state == "actived" %> %>
+<% if @bid.state == "actived" %>
   <%# TODO: Create comps for top offer %>
   <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
   <%= render partial: "shared/top_offer", locals: { top_offer: @top_offer } %>
