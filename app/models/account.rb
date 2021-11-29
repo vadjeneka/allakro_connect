@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   
   def deposit(amount)
     @balance += amount if amount > 0

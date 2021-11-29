@@ -1,8 +1,8 @@
 class StoresController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
 
   def index
-    @store = user.store
-
+    @store = Store.all
   end
 
   def new
@@ -15,13 +15,17 @@ class StoresController < ApplicationController
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products
+    @comments = Comment.joins(:product).where('products.store_id = ?', current_user.store.id)
   end
 
   def create
-    @store = Store.new(store_params)
+    # raise store_params[:background].inspect
+    @store = current_user.build_store(store_params)
     if @store.save
-      redirect_to user_store_path(current_user,@store), notice: 'Store was successfully created'
+      # raise "You here"
+      redirect_to store_path(@store), notice: 'Store was successfully created'
     else
+      raise "You got errors here"
       flash[:error] = "Store could not be created"
       render 'new'
     end
@@ -60,7 +64,6 @@ class StoresController < ApplicationController
       :description,
       :city,
       :town,
-      :user_id,
       :background
     )
   end

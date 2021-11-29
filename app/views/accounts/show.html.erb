@@ -1,0 +1,51 @@
+<style>
+  .min-h{
+    min-height:35rem;
+  }
+  .h-36r{
+    height:36rem
+  }
+  .width-30{
+      width: 25%;
+  }
+  .width-70{
+      width: 75%;
+    }
+  </style>
+  
+  
+  
+  <div class="flex justify-between min-h">
+    <div class="w-4/6 flex px-5">
+      <div class="w-2/5">
+        <p class="py-10 text-4xl">Mon compte</p>
+        <div class='block'>
+          <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+        </div>
+      </div>
+      <div class="width-70">
+        <div class="w-full py-5 flex justify-between">
+          <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
+            <a href="<%=%>" class="px-3 py-2 bg-gray-600 text-white rounded"> créditer mon compte</a>
+        </div>
+        <h3 class="text-base font-semibold text-gray-600"> Mon portefeuille</h3>
+        <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden bg-blue-400 shadow-lg">
+          
+        </div> <br>
+        <h3 class="text-base font-semibold text-gray-600"> Transactions effectuées</h3>
+        <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden bg-gray-400 shadow-lg">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <% content_for :banners do %>
+    <%=render 'shared/banners'%>
+  <% end %>
+  <% content_for :footer do %>
+    <%=render 'shared/footer'%>
+  <% end %>

@@ -2,6 +2,9 @@
 .h-100 {
   min-height: 28rem/* 384px */;
 }
+.h-36r{
+  height:36rem
+}
 </style>
 
 <div class="min-h-screen flex overflow-hidden">
@@ -27,17 +30,11 @@
   </div>
   <%if current_user == @store.user%>
     <div class="w-1/5 overflow-hidden">
-      <div class="h-72 overflow-y-auto">
+      <div class="h-36r overflow-y-auto">
         <p class="text-2xl">Mes commentaires</p>
-        <% @store.products do |product| %>
-          <%= render partial: 'comment', collection: product.comments%>
+        <% if !@comments.empty? %>
+          <%= render partial: 'comment', collection: @comments%>
         <%end%>
-      </div>
-      <div class='block'>
-        <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl'%>
-        <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl'%>
-        <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl'%>
-        <%= link_to 'Se deconnecter',destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl'%>
       </div>
     </div>
   <% end %>
@@ -51,6 +48,3 @@
 <% content_for :footer do %>
   <%=render 'shared/footer'%>
 <% end %>
-<%#= link_to 'edit', edit_user_store_path(current_user, @store)%>
-<%#= link_to 'delete', user_store_path(current_user, @store), method: :delete, data: {confirm: 'Are you sure?'}%>
-<%#= link_to 'My Products', user_store_products_path(current_user,@store, @products)%>
