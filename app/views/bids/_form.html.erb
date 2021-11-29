@@ -1,0 +1,45 @@
+<%= form_with model: [store, product, bid] do |form|%>
+<div class="flex items-center justify-center w-screen h-screen">
+  <div class="shadow space-y-7 p-20 bg-gray-50 rounded-lg">
+    <div class="flex items-center justify-center">
+      <div>
+        <h3>MISE AUX ENCHERES DE <%= product.name.upcase %></h3>
+      </div>
+    </div>
+      <div class="flex items-center justify-center">
+        <span class="text-sm italic text-gray-400">**Format de l'heure HH:30 ou HH:00 ex: 17:30, 5:00**</span>
+      </div>
+      <div class="inline-flex space-x-7">
+        <div>
+          <div>
+            <%= form.label :Debut %>
+          </div>
+          <div>
+            <%=form.datetime_field :start_date, :required => true, class:"border-2 rounded-lg p-2 "%>
+            <% if @bid.errors[:start_date] %>
+              <span style='color: red'><%= @bid.errors[:start_date][0] %></span>
+            <% end %>
+          </div>
+        </div>
+        <div>
+          <div>
+            <%= form.label :Fin %>
+          </div>
+          <div>
+            <%=form.datetime_field :end_date, :required => true, class:"border-2 rounded-lg p-2"%>
+            <% if @bid.errors[:end_date] %>
+              <span style='color: red'><%= @bid.errors[:end_date][0] %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%= form.number_field :initial_price, :required => true, placeholder: "Prix initial: 50000 XOF", class:"border-2 rounded-lg p-2 w-3/4"%>
+        
+        <% if @bid.errors[:initial_price] %>
+          <span style='color: red'><%= @bid.errors[:initial_price][0] %></span>
+        <% end %>
+        <%= form.submit %>
+    <% end %>
+  </div>
+</div>

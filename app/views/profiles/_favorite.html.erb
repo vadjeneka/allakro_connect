@@ -1,0 +1,13 @@
+<a href='<%= store_product_path(favorite.product.store, favorite.product) %>' class="mb-2">
+  <% if favorite.product.product_backgrounds.attached? %>
+    <%= image_tag favorite.product.product_backgrounds[0], class:'m-0 rounded-full h-32 w-32 '%>
+  <%else%>
+    <%=image_tag 'default_product_image.png', class:'h-28 w-full object-cover'%>
+  <% end %>
+  <div class="py-1 flex items-center justify-center">
+    <div class="w-full">
+      <p class=" font-medium text-md"><%=favorite.product.name%></p>
+      <p class=" font-normal text-xs py-1"><%=favorite.product.price%> FCFA</p>
+    </div>
+  </div>
+</a>

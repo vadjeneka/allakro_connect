@@ -1,0 +1,25 @@
+<div class="max-w-xs rounded-xl shadow-lg">
+   <div class="w-full h-48 bg-black">
+    <% if product.product_background.persisted? %>
+      <%= image_tag product.product_background, class: 'h-48 w-full' %>
+    <% end %>
+  </div>
+    <div class="px-6 py-4">
+      <h4 class="mb-3 text-xl font-semibold tracking-tight text-gray-800">
+        <%= product.name %>
+        <% if current_user == product.user %>
+          <span class="btn-elementary bg-green-500"><%= link_to 'Edit', edit_user_product_path(current_user, product) %></span>
+        <% end %>
+      </h4>
+      <h4 class="mb-3 text-md font-semibold tracking-tight text-gray-800">
+        <%= product.price %> FCFA
+      </h4>
+      <p class="leading-normal text-gray-700"><%= product.description %></p>
+      <% product.categories.each do |category| %>
+    <span class="btn-elementary"><%= link_to "#{category.name}", category_path(category) %></span>
+  <% end %>
+  <p class="mt-3">
+    <%= link_to 'Details', user_product_path(product.user, product), class: 'btn-primary' %>
+  </p>
+    </div>
+</div>

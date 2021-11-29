@@ -1,0 +1,56 @@
+<style>
+.h-100 {
+  min-height: 28rem/* 384px */;
+}
+</style>
+
+<div class="min-h-screen flex overflow-hidden">
+  <div class="<%=current_user == @store.user ? 'w-4/5 overflow-hidden' : 'w-full overflow-hidden'%>">
+    <div class="flex py-10 justify-between items-center w-4/5 mx-auto pr-5">
+      <p class="text-4xl font-medium text-center">
+        <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
+      </p>
+      <% if @store.user.id != current_user.id%>
+        <a href="<%= new_store_chat_path(@store) %>" class="bg-green-600 text-white px-5 py-2 rounded">
+          Ecrire
+          <i class="fad fa-paper-plane"></i>
+        </a>
+      <%else%>
+        <div class='flex justify-center items-center'>
+          <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
+        </div>
+      <% end %>
+    </div>
+    <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto'>
+      <%=render partial:'product', collection: @store_products%>
+    </div>
+  </div>
+  <%if current_user == @store.user%>
+    <div class="w-1/5 overflow-hidden">
+      <div class="h-72 overflow-y-auto">
+        <p class="text-2xl">Mes commentaires</p>
+        <% @store.products do |product| %>
+          <%= render partial: 'comment', collection: product.comments%>
+        <%end%>
+      </div>
+      <div class='block'>
+        <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl'%>
+        <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl'%>
+        <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl'%>
+        <%= link_to 'Se deconnecter',destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl'%>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
+<%#= link_to 'edit', edit_user_store_path(current_user, @store)%>
+<%#= link_to 'delete', user_store_path(current_user, @store), method: :delete, data: {confirm: 'Are you sure?'}%>
+<%#= link_to 'My Products', user_store_products_path(current_user,@store, @products)%>

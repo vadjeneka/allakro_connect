@@ -1,0 +1,5 @@
+<div class="grid grid-cols-4 gap-4">
+  <% @products.each do |product| %>
+    <%= render partial: "shared/product", locals: { product: product } %>
+  <% end %>
+</div>

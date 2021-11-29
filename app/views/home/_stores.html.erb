@@ -1,0 +1,11 @@
+<a href="<%= store_path(stores)%>" class="mx-2 w-64 m-2">
+  <% if stores.background.attached? %>
+    <%= image_tag stores.background, class:'m-0 rounded-full h-72 w-72 '%>
+  <%else%>
+    <%=image_tag 'im_qirxk_116738413_901506843705991_4282210016526218676_n.jpg', class:'h-64 w-full object-cover'%>
+  <% end %>
+  <div class="py-2">
+    <p class=" font-medium text-md">owner: <%=stores.user.email%></p>
+    <p class=" font-semibold text-xl py-2"><%=stores.name%></p>
+  </div>
+</a>
