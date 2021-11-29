@@ -12,6 +12,9 @@ application.register("display-img-on-create", DisplayImgOnCreateController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import ImgDisplayOnCreateStoreController from "./img_display_on_create_store_controller.js"
+application.register("img-display-on-create-store", ImgDisplayOnCreateStoreController)
+
 import MessageController from "./message_controller.js"
 application.register("message", MessageController)
 
