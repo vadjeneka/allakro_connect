@@ -1,0 +1,30 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @stock.quantity %></td>
+
+      <td>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          <%= link_to 'edit', edit_user_store_product_stock_path(current_user, @stock)%>
+        </button>
+      </td>
+      <td>
+        <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          <%= link_to 'delete', user_store_product_stock_path(current_user, @stock), method: :delete, data: {confirm: 'Are you sure?'}%>
+        </button>
+      </td>
+         <td>
+        <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <%= link_to 'Show', user_store_product_stock_path(current_user, @stock)%>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>

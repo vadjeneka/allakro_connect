@@ -1,0 +1,15 @@
+<%= form_with model: [user, store,product, stock] do |form|%>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :store_id, value: store.id %>
+  <%= form.hidden_field :product_id, value: product.id %>
+
+  <div>
+    <%= form.label :quantity, 'Quantity' %>
+    <%= form.number_field :quantity %>
+    <% if stock.errors[:quantity] %>
+      <span style='color: red'><%= stock.errors[:quantity][0] %></span>
+    <% end %>
+  </div>  
+  
+    <%= form.submit submit, class:"bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded"%>
+<% end %>

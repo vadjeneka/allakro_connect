@@ -1,0 +1,41 @@
+<style>
+  .type-alert {
+    background:#F8503A;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+  .type-success {
+    background:#579E60;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+  .type-notice{
+    background:#4190C8;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+</style>
+
+
+<div class="absolute flex w-screen justify-center top-0 mt-10 z-10 ">
+  <% flash.each do |type, msg|%>
+    <div class="type-<%=type%>">
+      <%= msg %>
+    </div>
+  <% end %>
+</div>

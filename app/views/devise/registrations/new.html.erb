@@ -1,0 +1,46 @@
+<div class="overflow-hidden relative bg-red-600 h-screen flex justify-between" >
+  <div class="overflow-hidden w-2/6 bg-red-600"> 
+    <div class="w-full flex py-14 px-10">    
+      <%= image_tag "logojokou.png", class:'w-3/5' %>
+    </div>
+    <div class="pl-10"> 
+      <p class="text-white text-2xl ">Vous pouvez vendre votre Art.</p>
+    </div>
+    <div class="pl-10 pt-10">
+      <p class="text-white text-2xl">Vous pouvez acheter en ligne les oeuvres des Artisans Ivoiriens.</p>
+    </div>
+  </div>
+  <div class="overflow-hidden w-4/6 bg-white rounded-3xl rounded-tr-none rounded-br-none shadow-md pl-24 pt-24 pr-14"> 
+    <div class="w-full flex py-10">
+      <h2 class="text-3xl font-normal">Sign up</h2>
+    </div>
+    <div class="overflow-hidden w-4/5 pt-5">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field, flex">
+          <%= f.text_field :first_name, autofocus: true, placeholder:' First name', autocomplete: "first_name", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5 mr-5'  %>
+          <%= f.text_field :last_name, autofocus: true, placeholder:'Last name', autocomplete: "last_name", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5 '  %>
+        </div>
+        <div class="field, flex">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:'email',class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5 mr-5' %>
+          <%= f.telephone_field :phone, autofocus: true, placeholder:'Phone', autocomplete: "phone", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5' %>
+        </div>
+        <div class="field flex">
+          <%= f.text_field :city, autofocus: true,placeholder:'City', autocomplete: "city", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5 mr-5'%>
+          <%= f.text_field :town, autofocus: true, autocomplete: "town", placeholder:'Town', class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5'  %>
+        </div>
+        <div class="field, flex">
+          <% if @minimum_password_length %>
+          <% @minimum_password_length %>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder:"Password, minimum #{@minimum_password_length} caractères", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5 mr-5' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:"Password confirmation", class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2 mb-5'  %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Sign up", class:'px-3 py-2 w-4/6 rounded bg-red-600 text-white'  %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

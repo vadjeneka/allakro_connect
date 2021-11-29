@@ -1,0 +1,89 @@
+<style>
+.min-h{
+  min-height:35rem;
+}
+.h-36r{
+  height:36rem
+}
+.width-30{
+    width: 25%;
+}
+.width-70{
+    width: 75%;
+  }
+</style>
+
+
+
+<div class="flex justify-between min-h">
+  <div class="w-4/6 flex px-5">
+    <div class="w-2/5">
+      <p class="py-10 text-4xl">Mon profil</p>
+      <div class='block'>
+        <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+      </div>
+    </div>
+    <div class="width-70">
+      <div class="w-full py-5 flex justify-between">
+        <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
+        <%if current_user.store%>
+          <a href="<%=store_path(current_user.store)%>" class="px-3 py-2 bg-red-600 text-white rounded">Ma boutique</a>
+        <% else %>
+          <a href="<%=new_store_path%>" class="px-3 py-2 bg-red-600 text-white rounded">Devenir un vendeur</a>
+        <% end %>
+      </div>
+      <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden">
+        <%if current_user.avatar.attached?%>
+          <%= image_tag current_user.avatar,class:'h-full object-cover' %>
+        <% else %>
+          <%= image_tag 'Wavy Buddies - Avatar.png',class:'h-full object-cover' %>
+        <% end %>
+      </div>
+      <div class="w-full py-10"> 
+        <p class="text-3xl">Mes commandes</p>
+        <div class="w-full flex justify-evenly items-center py-5">
+          <a href="" class="text-center px-3">
+            <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
+            <p class="py-8 text-lg">En cour de traitement</p>
+          </a>
+          <%if current_user.store%>
+            <a href="" class="text-center px-3">
+              <%=image_tag 'icons8-checked-user-male-100.png', class:'w-16 h-16'%>
+              <p class="py-8 text-lg">Expedié</p>
+            </a>
+          <% end %>
+          <a href="" class="text-center px-3">
+            <%=image_tag 'icons8-judge-60 (1).png', class:'w-16 h-16'%>
+            <p class="py-8 text-lg">Enchères</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="width-30 px-5 border-l border-gray-100">
+    <%if current_user.store%>
+      <div class="h-72 overflow-y-auto">
+        <p class="text-2xl">Mes commandes</p>
+
+      </div>
+    <% end %>
+    <div class='overflow-y-auto'>
+      <p class="text-2xl">Mes favoris</p>
+      <div class='<%= current_user ? 'h-72 grid grid-cols-2 gap-1 overflow-y-auto': 'h-36r grid grid-cols-3 gap-1 overflow-y-auto'%>'>
+        <%if @favorites.length>0 %>
+          <%= render partial: 'favorite', collection: @favorites%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

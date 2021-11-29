@@ -1,0 +1,50 @@
+<style>
+.h-100 {
+  min-height: 28rem/* 384px */;
+}
+.h-36r{
+  height:36rem
+}
+</style>
+
+<div class="min-h-screen flex overflow-hidden">
+  <div class="<%=current_user == @store.user ? 'w-4/5 overflow-hidden' : 'w-full overflow-hidden'%>">
+    <div class="flex py-10 justify-between items-center w-4/5 mx-auto pr-5">
+      <p class="text-4xl font-medium text-center">
+        <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
+      </p>
+      <% if @store.user.id != current_user.id%>
+        <a href="<%= new_store_chat_path(@store) %>" class="bg-green-600 text-white px-5 py-2 rounded">
+          Ecrire
+          <i class="fad fa-paper-plane"></i>
+        </a>
+      <%else%>
+        <div class='flex justify-center items-center'>
+          <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
+        </div>
+      <% end %>
+    </div>
+    <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto'>
+      <%=render partial:'product', collection: @store_products%>
+    </div>
+  </div>
+  <%if current_user == @store.user%>
+    <div class="w-1/5 overflow-hidden">
+      <div class="h-36r overflow-y-auto">
+        <p class="text-2xl">Mes commentaires</p>
+        <% if !@comments.empty? %>
+          <%= render partial: 'comment', collection: @comments%>
+        <%end%>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
