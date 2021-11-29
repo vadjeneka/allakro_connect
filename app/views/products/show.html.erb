@@ -29,9 +29,15 @@
     <div class="h-4/5 flex justify-between items-center relative overflow-hidden">
       <div class="flex absolute py-2 top-3 px-7 justify-between items-center w-full">
         <p class="text-4xl font-medium text-gray-800"><%= @product.name%></p>
-        <i class="fal fa-heart text-2xl"></i>
+        <a href="<%=current_user ? like_path(@product, user:current_user, source: 'product') : new_user_session_path %>">
+          <%if !@favorite.empty?%>
+            <i class="fas fa-heart text-2xl text-red-500"></i>
+          <% else %>
+            <i class="fal fa-heart text-2xl"></i>
+          <% end %>
+        </a>
       </div>
-      <%if @product.product_backgrounds.attached? %>
+      <% if @product.product_backgrounds.attached? %>
         <button class='px-3'>
           <i class="fa fa-chevron-left text-xl"></i>
         </button>
@@ -58,9 +64,9 @@
   <div class="w-2/6 pt-8 pb-6 px-12 relative">
     <% unless policy(@product).create? %>
       <div class="flex absolute top-2 w-full">
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>créer une enchère</a>
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>edit</a>
-        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md'>supprimer</a>
+        <a href="<%= new_store_product_bid_path(@product.store, @product) %>" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>Créer une enchère</a>
+        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md mr-2'>Modifier</a>
+        <a href="#" class='px-4 py-1 bg-gray-200 text-gray-600 rounded-md'>Supprimer</a>
       </div>
     <% end %>
     <p class="py-5 text-gray-500 text-4xl font-medium"><%=@product.price%> Fcfa</p>
@@ -72,37 +78,38 @@
       <p class=''><%=@product.description%></p>
     </div>
     <div class='w-full py-2'>
-      <a href='<%= user_store_path(@product.store.user, @product.store)%>' class='font-medium text-red-600'><b>Store :</b> <%=@product.store.name%></a>
+      <a href='<%= store_path(@product.store)%>' class='font-medium text-red-600'><b>Store :</b> <%=@product.store.name%></a>
     </div>
     <% if policy(@product).create? %>
-      <% if current_user != @product.store.user.id %>
-      <div class='flex items-center'> 
-        <p class='text-lg font-light py-2'>Notez :</p>
-      </div>
-        <div class='py-1 w-full flex flex-wrap justify-end content-start'> 
-          <textarea name="" id="" rows="4" class="w-full px-3 py-2 rounded outline-none bg-gray-100" placeholder="Commentez l'article..."></textarea>
-          <button class="px-5 py-1 mt-3 bg-red-600 text-white rounded"> Commentez </button>
-        </div>
-        <div class="flex items-center mt-14 justify-center">
-          <i class="fal fa-minus"></i>
-          <input type="number" min="0" max="5" class="w-12 h-12 text-center mx-2 bg-gray-100 text-xs rounded outline-none">
-          <i class="fal fa-plus"></i>
-          <a href="<%= user_store_product_line_items_path(current_user, @product.store, @product)%>" data-method="POST" class="px-5 py-1 ml-3 bg-red-600 text-white rounded">Ajouter au panier</a>
-        </div>
+      <% if current_user %>
+        <% if current_user != @product.store.user.id %>
+          <div class='flex items-center'> 
+            <p class='text-lg font-light py-2'>Notez :</p>
+          </div>
+          <div class='py-1 w-full flex flex-wrap justify-end content-start'> 
+            <%= form_with model: [@product.store, @product ,@comment] do |form| %>
+            <%= form.text_area :comment , placeholder:"Commentez l'article...", class: "w-full px-3 py-2 rounded outline-none bg-gray-100"%>
+            <%= form.submit "commentez", class:"px-5 py-1 mt-3 bg-red-600 text-white rounded" %>
+            <!-- <textarea name="" id="" rows="4" class="w-full px-3 py-2 rounded outline-none bg-gray-100" placeholder="Commentez l'article..."></textarea> -->
+            <!-- <button class="px-5 py-1 mt-3 bg-red-600 text-white rounded"> Commentez </button> -->
+            <% end %>
+          </div>
+          <div class="flex items-center mt-14 justify-center">
+            <a href="<%= store_product_line_items_path(@product.store, @product) %>" data-method="POST" class="px-5 py-2 w-full bg-red-600 text-white text-center rounded">Ajouter au panier</a>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>
 </div>
 
-  <!--<li><%#= link_to 'Add new Product', new_user_store_product_path %></li>
-  <li><%#= link_to 'edit',  edit_user_store_product_path %></li>
-  <li><%#= link_to 'All Product', user_store_products_path%></li>
+<% content_for :banners do %>
+  <% content_for :search_bar do %>
+    <%=render partial: 'home/searchs'%>
+  <% end %>
+  <%=render 'shared/banners'%>
+<% end %>
 
-  <div class="swiper-container" >
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-      !-->
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

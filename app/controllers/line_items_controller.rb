@@ -1,4 +1,5 @@
-class LineItemsController < ApplicationController
+class LineItemsController < ApplicationController 
+  before_action :set_user, only: [:create]
 
   def create
     product = Product.includes(:store).find(params[:product_id])
@@ -9,7 +10,7 @@ class LineItemsController < ApplicationController
     else
       authorize product
       cart.add_product(product)
-      redirect_to user_store_products_path(current_user, product.store), notice: "Product successfully added to cart" # TODO: Redirect to Cart
+      redirect_to store_product_path(product.store, product), notice: "Product successfully added to cart" # TODO: Redirect to Cart
     end
   end
 
@@ -33,5 +34,12 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
     redirect_to user_carts_path(current_user) # TODO: Redirect to cart path
+  end
+
+  private
+  def set_user
+    if current_user.nil?
+      redirect_to new_user_session_path
+    end
   end
 end

@@ -1,5 +1,5 @@
-<% if tendance %>
-<%=render  partial: 'tendances', locals:{tendance: @tendance}%>
+<% if @tendance %>
+  <%=render  partial: 'tendances', locals:{tendance: @tendance}%>
 <% end %>
 
 <div class="px-10 pt-5">
@@ -33,6 +33,16 @@
   </div>
 </div>
 
+<% content_for :banners do %>
+  <% content_for :search_bar do %>
+    <%=render partial: 'searchs'%>
+  <% end %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
 
 
 

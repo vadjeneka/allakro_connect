@@ -1,17 +1,24 @@
-<table>
-  <tr>
-    <td>Name: <%= item.product.name %></td>
-    <td>Description: <%= item.product.description %></td>
-    <td>Weight: <%= item.product.weight %></td>
-    <td>
-      Quantity:
-      <%= link_to 'Moins (-1)', line_item_reduce_path(item), method: :post %>
+<div class="ml-60 bg-gray-200 h-32 flex m-2 rounded justify-items-center justify-between mr-80">
+  <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
+    <i class="fad fa-times-circle text-2xl text-red-400"></i>
+  </a>
+  <div class="h-50 bg-red-200">
+  </div>
+  <div class="">
+    <h2 class="font-bold">Produit : <%= item.product.name %></h2>
+    <p><%= item.product.description %></p>
+    <p><%= item.product.weight %> g</p>
+    <p><%= item.total_price %> xof</p>
+  </div>
+  <div class="mt-12 text-3xl mr-5"> 
+    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
+      <i class="fad fa-minus-circle text-3xl"></i>
+    </a>
+    <span class="font-bold">
       <%= item.quantity %>
-      <%= link_to 'Plus (+1)', line_item_add_path(item), method: :post %>
-    </td>
-    <td>Price: <%= item.total_price %></td>
-    <td>
-      | <%= link_to 'Delete', line_item_delete_path(item), method: :delete %>
-    </td>
-  </tr>
-</table>
+    </span>
+    <a href="<%= line_item_add_path(item) %>" data-method="POST">
+      <i class="fad fa-plus-circle text-3xl"></i>
+    </a>
+  </div>
+</div>

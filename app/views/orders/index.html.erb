@@ -1,1 +1,15 @@
-<%= render partial: "shared/orders", locals: { orders: @orders } %>
+<% if @orders %>
+  <%= render partial: "shared/orders", locals: { orders: @orders } %>
+<% end %>
+
+<% if @store_orders %>
+  <%= render partial: "shared/store_orders", locals: { orders: @store_orders } %>
+<% end %>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

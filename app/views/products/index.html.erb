@@ -4,24 +4,35 @@
 }
 
 </style>
+<%=form_with url: products_path, method: :get do |f| %>
+  <% content_for :search_bar do %>
+    <%=render partial: 'home/searchs', locals:{f: f}%>
+  <% end %>
+  <div class="flex min-height mt-8">
+    <div class="w-1/5 px-3">
+      <span class="w-full font-normal text-xl mb-10">FILTRE</span>
+      <div class="py-6 border-b border-gray-300">
+        <span class="w-full font-medium">Categorie & Marque</span>
+        <%=render partial: 'categories', collection:@categories%>
+      </div>
+      <div class="py-6 border-b border-gray-300">
+        <span class="w-full font-medium">Ville or Commune</span>
+        <%=render partial: 'cities', collection:@cities%>
+      </div>
+      <div class="py-6 border-b border-gray-300 relative">
+        <span class="w-full font-medium">Tranche de prix</span>
+        <%=render 'range'%>
+      </div>
+    </div>
+    <div class="w-4/5 grid grid-cols-4 gap-2 px-2">
+      <%=render partial:'home/product', collection:@products%>
+    </div>
+  </div>
+<% end %>
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
 
-<div class="flex min-height mt-8">
-  <div class="w-1/5 px-3">
-    <span class="w-full font-normal text-xl mb-10">FILTRE</span>
-    <div class="py-6 border-b border-gray-300">
-      <span class="w-full font-medium">Categorie & Marque</span>
-      <%=render 'categorie'%>
-    </div>
-    <div class="py-6 border-b border-gray-300">
-      <span class="w-full font-medium">Ville or Commune</span>
-      <%=render 'city_town'%>
-    </div>
-    <div class="py-6 border-b border-gray-300 relative">
-      <span class="w-full font-medium">Tranche de prix</span>
-      <%=render 'range'%>
-    </div>
-  </div>
-  <div class="w-4/5 grid grid-cols-4 gap-2 px-2">
-    <%=render partial:'home/product', collection:@products%>
-  </div>
-</div>
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

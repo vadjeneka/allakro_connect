@@ -5,27 +5,33 @@
     </a>
   </span>
   <div class="w-4/6">
-    <%=render 'home/searchs'%>
+    <%=yield :search_bar%>
     <span class="w-full">
       <div class="flex items-center justify-evenly">
-        <a href='<%=products_path%>' class='font-semibold text-xl'>Tous les produits</a>
+        <a href='<%= products_path %>' class='font-semibold text-xl'>Tous les produits</a>
         <a href='#' class='font-semibold text-xl'>Stores</a>
         <a href='#' class='font-semibold text-xl'>Tendances</a>
-        <a href='#' class='font-semibold text-xl'>Enchères</a>
+        <a href='<%= bids_path %>' class='font-semibold text-xl'>Enchères</a>
       </div>
     </span>
   </div>
   <span class='w-1/6 flex items-center justify-evenly pt-2'>
-    <a href='#'>
-      <i class="fal fa-shopping-cart text-2xl"></i>
-    </a>
-    <a href='#'>
-      <i class="fal fa-heart text-2xl"></i>
-    </a>
-    <a href='#'>
-      <i class="fal fa-comment-alt text-2xl"></i>
-    </a>
-    <a href='<%= current_user == nil ? new_user_session_path : current_user.store == nil ? '': user_store_path(current_user, current_user.store.id) %>'>
+    <% if current_user %>
+      <a href='<%= user_carts_path(current_user) %>'>
+        <i class="fal fa-shopping-cart text-2xl"></i>
+      </a>
+      <a href='<%=user_favorites_path(current_user) %>'>
+        <i class="fal fa-heart text-2xl"></i>
+      </a>
+      <a href='<%= user_chats_path(current_user)%>' class="relative flex items-stretch">
+        <i class="fal fa-comment-alt text-2xl"></i> 
+        <% if Notification.all_unread_user(current_user.id).length >0 %>
+          <span class="w-3 h-3 bg-red-600 rounded-full absolute -top-1 -right-1">
+          </span>
+        <% end %>
+      </a>
+    <% end %>
+    <a href="<%= current_user == nil ? new_user_session_path : profile_path(current_user) %>" >
       <i class="fal fa-user text-2xl"></i>
     </a>
   </span>

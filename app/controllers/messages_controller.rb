@@ -6,7 +6,14 @@ class MessagesController < ApplicationController
     @store = Store.find(params[:store_id])
     message = chat.messages.build(message_params.merge(user: current_user))
       if message.save
-        redirect_to user_store_chat_path(current_user, @store, chat)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.append(:messages, partial: "messages/message",
+              locals: { message: message, user: current_user})
+          end
+          format.html { user_store_chat_path(current_user, @store, chat) }
+        end
+        # redirect_to user_store_chat_path(current_user, @store, chat)
         # raise message.errors.inspect
       end
   end

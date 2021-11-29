@@ -18,6 +18,11 @@ class ChatsController < ApplicationController
     @messages = Message.new
     @store = Store.find(params[:store_id])
 
+    notifs = Notification.where(user_id: current_user.id, chat_id:@chat.id)
+    if notifs.where(read_at: false)
+      notifs.update(read_at: true)
+    end
+
   end
 
   def new
@@ -25,15 +30,15 @@ class ChatsController < ApplicationController
     @store = Store.find(params[:store_id])
 
     exist_chat = nil
-    user_chat = Chat.where("user_id = ? OR store_id = ?", "#{current_user.id}","#{current_user.id}")
+    user_chat = Chat.where(store_id: @store.id)
     user_chat.each do |chat|
-      if (chat.store_id == @store.id && chat.user_id == current_user.id) || (chat.store_id == current_user.id && chat.user_id == @store.id)
+      if (chat.store_id == @store.id && chat.user_id == current_user.id)
         exist_chat = chat
       end
     end
 
     if exist_chat
-      redirect_to user_store_chat_path(current_user, @store, exist_chat)
+      redirect_to store_chat_path(@store, exist_chat)
     end
   end
 
@@ -49,7 +54,7 @@ class ChatsController < ApplicationController
     if @chat.save
       message = @chat.messages.build(chat_params.merge(user: current_user))
       if message.save
-        redirect_to user_store_chat_path(current_user,@store, @chat), notice:  'Chat was successfully created'
+        redirect_to store_chat_path(@store, @chat), notice:  'Chat was successfully created'
       else
         raise message.errors.inspect
       end

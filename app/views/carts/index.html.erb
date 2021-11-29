@@ -1,4 +1,20 @@
-<% @carts.each do |cart| %>
-  <%= render partial: "shared/cart", locals: { cart: cart } %>
+<div class="p-5 pl-10">
+  <div>
+    <h2 class="text-3xl font-bold mb-5 ml-5">Mon panier</h2>
+    <hr>
+  </div>
+  <div>
+    <% @carts.each do |cart| %>
+      <%= render partial: "shared/cart", locals: { cart: cart } %>
+    <% end %>
+  </div>
+
+</div>
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
 <% end %>
 

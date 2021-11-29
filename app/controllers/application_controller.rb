@@ -10,4 +10,5 @@ class ApplicationController < ActionController::Base
     cart = Cart.find_by(user_id: user.id, store_id: store.id, validated: false)
     cart.nil? ? Cart.create(user_id: user.id, store_id: store.id) : cart
   end
+  protect_from_forgery with: :exception
 end

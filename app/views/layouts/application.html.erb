@@ -20,11 +20,13 @@
 
   <body>
     <%=render 'shared/flashes'%>
-    <%=render 'shared/banners'%>
+    <%#=render 'shared/banners'%>
+    <%=yield :banners%>
     <div class=" overflow-x-hidden">
       <%= yield %>
     </div>
-    <%=render 'shared/footer'%>
+    <%#=render 'shared/footer'%>
+    <%=yield :footer%>
     
    <!--abridgement-->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
