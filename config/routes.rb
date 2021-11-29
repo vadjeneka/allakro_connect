@@ -1,12 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
   devise_scope :user do
     get "users/signin", to: "users/sessions#new", as: :new_user_session_path
   end
   mount Notifications::Engine => "/notifications"
-
   get 'profile/:id', to: 'profiles#show', as: 'profile'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
@@ -64,4 +63,3 @@ Rails.application.routes.draw do
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
   resources :profiles
 end
-

@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_user_registration_path(current_user)
+      end 
+    end
     if params[:name]
       redirect_to products_path(name: params[:name])
     end
