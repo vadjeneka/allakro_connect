@@ -1,42 +1,46 @@
-<%= form_with model: [user, store] do |form|%>
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  <div>
-    <%= form.label :name, 'Name' %>
-    <%= form.text_field :name %>
-    <% if store.errors[:name] %>
-      <span style='color: red'><%= store.errors[:first_name][0] %></span>
-    <% end %>
-  </div>  
-  <div>
-    <%= form.label :description, 'Description' %>
-    <%= form.text_field :description %>
-  </div>
-  <% if store.errors[:description] %>
-    <span style='color: red'><%= store.errors[:description][0] %></span>
-  <% end %>
-  <div>
-    <%= form.label :background, 'Store Image' %>
-    <%= form.file_field :background %>
-  </div>
-  <% if store.errors[:description] %>
-    <span style='color: red'><%= store.errors[:description][0] %></span>
-  <% end %>
-   <div>
-    <%= form.label :city, 'City' %>
-    <%= form.text_field  :city %>
-  </div>
-  <% if store.errors[:city] %>
-    <span style='color: red'><%= store.errors[:city][0] %></span>
-  <% end %>
-  <div>
-    <%= form.label :town, 'Town' %>
-    <%= form.text_field  :town %>
-  </div>
-  <% if store.errors[:town] %>
-    <span style='color: red'><%= store.errors[:town][0] %></span>
-  <% end %>
+<style>
+  .h-99{
+    height:35rem
+  }
+</style>
 
-  <button class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded">
-    <%= form.submit submit %>
-  </button>
+<%= form_with model: [store], data:{controller: 'img-display-on-create-store'} do |form|%>
+  <div class="flex justify-between">
+    <div class="w-3/5 px-3">
+      <div class="">
+        <label class="flex justify-center py-1 items-center ease-linear transition-all duration-150 bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 w-2/5  rounded-md mx-auto mb-3">
+          Choisir une image
+          <%= form.file_field :background,accept:'.png, .jpeg, .fpg, .svg',class:'hidden',data: {'img-display-on-create-store-target': 'imgGetter', action:'change->img-display-on-create-store#displayImage'} %>
+        </label>
+        <div class="flex justify-center mx-auto items-center h-96 w-full overflow-hidden mt-5" data-img-display-on-create-store-target='divDisplaying'></div>
+      </div>
+    </div>
+    <div class="w-2/5 px-5 border-l border-gray-100 py-10">
+      <div>
+        <%= form.text_field :name,placeholder:'Nom',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none' %>
+        <% if store.errors[:name] %>
+          <span style='color: red'><%= store.errors[:first_name][0] %></span>
+        <% end %>
+      </div>  
+      <div>
+        <%= form.text_area :description,placeholder:'Description',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none' %>
+      </div>
+      <% if store.errors[:description] %>
+        <span style='color: red'><%= store.errors[:description][0] %></span>
+      <% end %>
+      <div>
+        <%= form.text_field :city,placeholder:'Ville',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none'  %>
+      </div>
+      <% if store.errors[:city] %>
+        <span style='color: red'><%= store.errors[:city][0] %></span>
+      <% end %>
+      <div>
+        <%= form.text_field  :town,placeholder:'Commune ou Quartier',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none'  %>
+      </div>
+      <% if store.errors[:town] %>
+        <span style='color: red'><%= store.errors[:town][0] %></span>
+      <% end %>
+      <%= form.submit submit, class:"bg-red-600 text-white hover:bg-red-700 font-bold py-2 px-4 rounded w-4/5" %>
+    </div>
+  </div>
 <% end %>

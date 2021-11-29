@@ -3,7 +3,7 @@
   min-height:35rem;
 }
 .h-36r{
-  h:36rem
+  height:36rem
 }
 .width-30{
     width: 25%;
@@ -66,10 +66,8 @@
   <div class="width-30 px-5 border-l border-gray-100">
     <%if current_user.store%>
       <div class="h-72 overflow-y-auto">
-        <p class="text-2xl">Mes commentaires</p>
-        <%if @comments.length>0 %>
-          <%= render partial: 'comment', collection: @comments%>
-        <% end %>
+        <p class="text-2xl">Mes commandes</p>
+
       </div>
     <% end %>
     <div class='overflow-y-auto'>
