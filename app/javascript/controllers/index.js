@@ -6,6 +6,9 @@ import { application } from "./application"
 import ActionOnSubmitController from "./action_on_submit_controller.js"
 application.register("action-on-submit", ActionOnSubmitController)
 
+import DisplayEditUserImgController from "./display_edit_user_img_controller.js"
+application.register("display-edit-user-img", DisplayEditUserImgController)
+
 import DisplayImgOnCreateController from "./display_img_on_create_controller.js"
 application.register("display-img-on-create", DisplayImgOnCreateController)
 
