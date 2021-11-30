@@ -4,8 +4,10 @@ class Bid < ApplicationRecord
   
   has_one :active_bid, -> { where(state: 'actived') } 
 
-  # validates :initial_price, :start_date, :end_date,presence: true, numericality: { greater_than_or_equal_to: 5000 }
-  # validate :right_start_date, :right_end_date
+  validates :initial_price, numericality: { greater_than_or_equal_to: 50000 }
+  validates :start_date, 
+            :end_date, presence: true
+  validate :right_start_date, :right_end_date
 
   scope :starting, -> { where("start_date <= ?", DateTime.current) }
   
@@ -14,21 +16,24 @@ class Bid < ApplicationRecord
   
   scope :finished, -> { where("end_date <= ?", DateTime.current) }
   
+
   def right_start_date
-    if start_date.present? == true && start_date < DateTime.current || (start_date.min != 0 && start_date.min != 30)
+    if self.start_date < DateTime.current || (self.start_date.min != 0 && self.start_date.min != 30)
       errors.add(:start_date, "***Revoyez svp la date ou l'heure de début !***")
-      # errors.add(:start_date, "***L'heure doit être supérieure à l'heure actuelle !***")
-    elsif start_date.present? == false
-      errors.add(:start_date, "***Entrez une date de début***")
     end
   end
 
   def right_end_date
-    if end_date.present? == true && end_date <= start_date || (end_date.min != 0 && end_date.min != 30)
+    if self.end_date <= start_date || (self.end_date.min != 0 && self.end_date.min != 30)
       errors.add(:end_date, "***Revoyez svp la date ou l'heure de début !***")
-    elsif end_date.present? == false
-      errors.add(:end_date, "***Entrez la date de fin***")
     end
+  end
+
+  def winner
+    if self.finished
+      return self.offers.top
+    end
+    raise self.offers.top.inspect
   end
 
 end

@@ -2,6 +2,7 @@ class BidsController < ApplicationController
   def index
     @bids = Bid.includes(:offers).active
     @coming_bids = Bid.waiting
+    
   end
 
   def show
@@ -27,6 +28,15 @@ class BidsController < ApplicationController
     @bid.update(state: "cancelled")
     redirect_to bids_path, notice: "Your bid was cancelled"
   end
+
+  # def reservation
+  #   if @bid.finished
+  #     winner_offer = @bid.offer.top
+  #     @winnerOrder = Order.new(user_id: winner_offer.user_id, amount: winner_offer.amount, is_fulfilled: false )
+  #     @winnerOrder.save
+  #     #TODO: substract the bid offer amount from account
+  #   end
+  # end
 
   private
   def params_bid
