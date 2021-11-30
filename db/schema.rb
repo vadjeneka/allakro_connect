@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
   create_table "favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "product_id", null: false
-    t.boolean "still_favorites?", default: false
+    t.boolean "still_favorites?", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_favorites_on_product_id"
