@@ -5,11 +5,9 @@ class CreateStores < ActiveRecord::Migration[6.1]
       t.text :description
       t.string :city
       t.string :town
-      t.references :user, null: false, foreign_key: true, type: :uuid
+      t.references :user, null: false, foreign_key: true, type: :uuid, unique: true
 
       t.timestamps
-
     end
-    add_index :stores, [:user_id, :store_id], unique: true
   end
 end
