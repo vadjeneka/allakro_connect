@@ -1,7 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
+  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
     get "users/signin", to: "users/sessions#new", as: :new_user_session_path
   end
@@ -16,18 +17,17 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
   end
-  root to: "home#index"
-
+  
   get 'products', to: 'products#index'
   get 'products/:id', to: 'products#show', as: 'product'
   get 'products/:id/like', to: 'products#like', as: 'like'
   # get '/stores/:store_id/products/:id', to: 'products#show', as: 'product'
   get 'products/categories/:id', to: 'categories#show', as: 'category'
-
+  
   get 'orders', to: 'orders#index'
   
   resources :carts, only: [:index, :destroy]
-
+  
   resources :users do
     resources :accounts
     resources :favorites
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
-
+  
   # get '/stores/:store_id/products/:id', to: 'products#show'
   get 'bids', to: 'bids#index'
   
@@ -63,4 +63,6 @@ Rails.application.routes.draw do
   post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
   resources :profiles
+
+  root to: "home#index"
 end

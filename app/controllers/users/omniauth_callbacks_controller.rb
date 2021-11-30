@@ -45,6 +45,12 @@ skip_before_action :verify_authenticity_token, only: :facebook
     stored_location_for(resource_or_scope) || root_path
   end
 
+  # def after_sign_up_path_for(resource_or_scope)
+  #   stored_location_for(resource_or_scope) || root_path
+  # end
+
+  # after_inactive_sign_up_path_for
+
   private
 
   def from_google_params

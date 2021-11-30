@@ -7,22 +7,20 @@ class ApplicationController < ActionController::Base
     @user_store_cart ||= find_or_create_cart(user, store)
   end
 
+  # def after_sign_in_path_for(resource)
+  #   # raise resource.inspect
+  #   redirect_to root_path
+  # end
+  
+
   protected
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :phone, :town , :city, :password, :password_confirmation)}
-      devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :phone, :town , :city, :password, :password_confirmation)}
-    end
-    
-  private
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :phone, :town , :city, :password, :password_confirmation)}
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :email, :phone, :town , :city, :password, :password_confirmation)}
+  end
+  
   def find_or_create_cart(user, store)
     cart = Cart.find_by(user_id: user.id, store_id: store.id, validated: false)
     cart.nil? ? Cart.create(user_id: user.id, store_id: store.id) : cart
-  end
-  protect_from_forgery with: :exception
-
-  def authenticate_user
-    unless current_user
-      redirect_to new_user_session_path, alert: "You don't have access to this page"
-    end
   end
 end
