@@ -1,20 +1,45 @@
-<div class="flex flex-col text-2xl font-bold mt-10 items-center">
-    <% order.cart.line_items.each do |item| %>
-    <div class="flex bg-gray-200 rounded p-5 items-center w-3/4 justify-around">
-      <h2>
-        <%= link_to "Commande N° #{order.id[0,7]}", user_order_path(current_user, order) %>
-      </h2>
-      <h2>
-        Prix : <%= order.cart.total_price %> XOF
-      </h2>
-      <h2>
-        Nombre de produits (<%= order.cart.line_items.count %>)
-      </h2>
-      <div>
-        <a href="<%= user_order_path(current_user, order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
-          <i class="fad fa-times-circle text-3xl text-red-500"></i>
-        </a>
+<% order.cart.line_items.each do |item| %>
+<div class="min-h-screen bg-gray-300">
+  <div class="container mx-auto p-10 max-w-screen-lg">
+    <div class="bg-white rounded shadow p-8">
+      <div class="w-full bg-orange-200 text-yellow-900 px-4 py-2 flex items-center">
+        <img src="https://svgsilh.com/svg/151889.svg" class="w-10 block pr-2">
+        <div class="text-sm">Félicitations, vous avez droit à un <b>code coupon</b> pour cette commande</div>
       </div>
-    </div><br>
-  <% end %>
+    </div>
+    <div class="flex justify-between mt-8 flex-wrap lg:justify-center">
+      <div class="bg-white rounded shadow p-2 w-full lg:w-2/4">
+        <div class="w-full bg-orange-200 px-8 py-6">
+          <div class="flex justify-between mt-3">
+            <div class="text-xl text-orange-900 font-bold">Commande</div>
+            <div class='text-xl text-right font-bold '>
+                 <%= link_to "N° #{order.id[0,7]}", user_order_path(current_user, order) %>
+            </div>
+          </div>
+          <div class="flex justify-between mt-3">
+            <div class="text-xl text-orange-900 font-bold">Prix</div>
+            <div class='text-xl text-right font-bold'><%= order.cart.total_price %></div>
+          </div>
+          <div class="bg-orange-300 h-1 w-full mt-3"></div>
+          <div class="flex justify-between mt-3">
+            <div class="text-xl text-orange-900 font-bold">Nombre de produit</div>
+            <div class="text-2xl text-orange-900 font-bold"><%= order.cart.line_items.count %></div>
+          </div>
+          <button class="px-4 py-4 bg-red-300 text-white w-full mt-3 rounded shadow font-bold hover:bg-purple- 900">
+            <a href="<%= user_order_path(current_user, order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
+             <i class="fad fa-times-circle text-3xl text-red-500"></i>
+            </a>
+        </button>
+        </div>
+      </div>
+      <div class="bg-white rounded shadow px-10 py-6 w-full mt-4 flex flex-wrap justify-center lg:w-2/4 lg:ml-3">
+        <div class="pr-8">
+        <h3 class="text-xl mt-4 font-bold black"> vous être connecté en tant que <%= order.cart.user.email %> </h3>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
+
+<% end %>
