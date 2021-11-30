@@ -1,9 +1,5 @@
-# app/controllers/registrations_controller.rb
 class RegistrationsController < Devise::RegistrationsController
-
   protected
-
-  
 
   def update_resource(resource, user_params)
     #raise resource.inspect
@@ -22,6 +18,3 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :email, :phone, :city, :town)
   end
 end
-
-
-
