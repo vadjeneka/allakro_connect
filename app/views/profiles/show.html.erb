@@ -43,7 +43,9 @@
         <% end %>
       </div>
       <div class="w-full py-10"> 
-        <p class="text-3xl">Mes commandes</p>
+        <a href="<%= user_orders_path(current_user) %>">
+          <p class="text-3xl">Mes commandes</p>
+        </a>
         <div class="w-full flex justify-evenly items-center py-5">
           <a href="" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>

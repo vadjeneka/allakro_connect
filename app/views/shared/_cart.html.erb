@@ -1,6 +1,6 @@
 <hr>
 <div class="mt-5 mb-20">
-  <h2 class="font-bold text-2xl mt-3 mb-5 text-center">Cart from <%= cart.store.name %></h2>
+  <h2 class="font-bold text-2xl mt-3 mb-5 text-center">Cart from "<%= cart.store.name %>"</h2>
   <% cart.line_items.each do |item| %>
     <%= render partial: "shared/cart_item", locals: { item: item } %>
   <% end %>

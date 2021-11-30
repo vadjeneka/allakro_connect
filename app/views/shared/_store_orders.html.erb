@@ -8,14 +8,70 @@
         <%= order.cart.total_price %> XOF
       </h2>
       <div>
-        <a href="<%= store_order_path(order.cart.store, order) %>" data-method="DELETE", data-confirm="Réjeter la commande ?">
+        <a href="<%= reject_order_path(order.cart.store, order) %>" data-method="PUT", data-confirm="Réjeter la commande ?">
           <i class="fad fa-times-circle text-3xl text-red-500"></i>
         </a>
 
-        <a href="<%= store_order_path(order.cart.store, order) %>" data-method="PUT", data-confirm="Valider la commande ?">
+        <a href="<%= validate_order_path(order.cart.store, order) %>" data-method="PUT", data-confirm="Valider la commande ?">
           <i class="fad fa-check-circle text-3xl text-green-500"></i>
         </a>
       </div>
     </div><br>
   <% end %>
+</div>
+
+<div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+  <table class="min-w-full">
+    <thead>
+      <tr>
+        <th class="th">ID Commandes</th>
+        <th class="th">Clients</th>
+        <th class="th">Nombres d'articles</th>
+        <th class="th">Prix de la commande</th>
+        <th class="th">Status</th>
+        <th class="th">Créé le </th>
+        <th class=""></th>
+      </tr>
+    </thead>
+      <tbody class="bg-white">
+        <% orders.each do |order| %>
+        <tr>
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+            <div class="flex items-center">
+              <div>
+                <div class="text-sm leading-5 text-gray-800">
+                  <%= link_to "##{order.id[0,7].upcase}", store_order_path(order.cart.store, order) %>
+                </div>
+              </div>
+            </div>
+          </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+              <div class="text-sm leading-5 text-red-900">
+                <%= order.cart.user.email %>
+              </div>
+            </td>
+            <td class="td">
+              <%= order.cart.line_items.size %>
+            </td>
+            <td class="td">
+              <%= order.cart.total_price %> FCFA
+            </td>
+            <td class="td">
+              <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+              <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+              <span class="relative text-xs">
+                <%= order.state %>
+              </span>
+            </span>
+            </td>
+          <td class="td">
+            <%= order.created_at.strftime("%d/%m/%Y") + " à " + order.created_at.strftime("%H:%M") %>
+          </td>
+        <td>
+          <button class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">View Details</button>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

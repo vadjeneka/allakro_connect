@@ -1,5 +1,5 @@
 <% if @order %>
-  <div class="flex flex-col text-2xl font-bold mt-10 items-center">
+  <div class="flex flex-col text-2xl font-bold mt-5 items-center">
     <% @order.cart.line_items.each do |item| %>
       <div>
         Produit: <%= item.product.name %>.
@@ -8,8 +8,12 @@
     <% end %>
     Prix total de la commande : <%= @order.cart.total_price %> XOF
     <div>
-      <i class="fad fa-times-circle text-3xl text-red-500"></i>
-      <i class="fad fa-check-circle text-3xl text-green-500"></i>
+      <a href="<%= reject_order_path(@order.cart.store, @order) %>" data-method="PUT">
+        <i class="fad fa-times-circle text-3xl text-red-500"></i>
+      </a>
+      <a href="<%= validate_order_path(@order.cart.store, @order) %>" data-method="PUT">
+        <i class="fad fa-check-circle text-3xl text-green-500"></i>
+      </a>
     </div>
   </div>
 <% end %>
