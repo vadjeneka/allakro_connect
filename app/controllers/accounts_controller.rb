@@ -1,9 +1,8 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account
-  def index 
-  end
-  def destroy
+  def show
+    @account = set_account
   end
 
   private
