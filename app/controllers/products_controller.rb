@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
       Search.create!(user_id:current_user.id,content:params[:name])
       @products = Product.search(params[:name])
     else
-      @products = Product.includes(:store, :categories).where(is_available: true)
+      @products = Product.includes(:store, :categories).where(is_available: true).page(params[:page]).per(8)
     end
 
     @categories = category_returns
@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   def new
     @store = Store.find(params[:store_id])
     @user = current_user  
-    @product = @store.products.build
+    @product = @store.products.build      
   end
 
   def show

@@ -32,7 +32,7 @@
 <% content_for :banners do %>
   <%=render 'shared/banners'%>
 <% end %>
-
+<%= paginate @products %>
 <% content_for :footer do %>
   <%=render 'shared/footer'%>
 <% end %>
