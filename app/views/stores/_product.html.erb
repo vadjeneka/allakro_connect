@@ -7,7 +7,7 @@
   <div class="py-1 flex items-center justify-center">
     <div class="w-full">
       <p class=" font-medium text-md"><%=product.name%></p>
-      <p class=" font-normal text-xs py-1"><%=product.price%> FCFA</p>
+      <p class=" font-normal text-xs py-1"><%= number_with_delimiter(product.price, :delimiter => '.')%> FCFA</p>
     </div>
   </div>
 </a>

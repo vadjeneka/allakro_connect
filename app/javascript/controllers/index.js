@@ -24,6 +24,9 @@ application.register("message", MessageController)
 import RangeEffectController from "./range_effect_controller.js"
 application.register("range-effect", RangeEffectController)
 
+import SearchController from "./search_controller.js"
+application.register("search", SearchController)
+
 import ShowDescriptionController from "./show_description_controller.js"
 application.register("show-description", ShowDescriptionController)
 
