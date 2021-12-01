@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.uuid "user_id", null: false
     t.uuid "cart_id", null: false
     t.integer "amount"
-    t.boolean "is_fulfilled"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
