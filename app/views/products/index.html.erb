@@ -23,6 +23,9 @@
         <span class="w-full font-medium">Tranche de prix</span>
         <%=render 'range'%>
       </div>
+      <div class="bg-red-600 col-12 rounded mt-3 align-middle justify-content-center flex " >
+				<button type="button" class="btn btn-light mr-10 shadow-sm" data-action="click->search#performSearch">Filters <i class="fa fa-filter"></i></button>
+			</div>
     </div>
     <div class="w-4/5 grid grid-cols-4 gap-2 px-2">
       <%=render partial:'home/product', collection:@products%>

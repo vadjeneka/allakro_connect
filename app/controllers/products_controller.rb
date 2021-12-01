@@ -5,7 +5,11 @@ class ProductsController < ApplicationController
       Search.create!(user_id:current_user.id,content:params[:name])
       @products = Product.search(params[:name])
     else
-      @products = Product.includes(:store, :categories).where(is_available: true).sample(10)
+      # raise params.inspect
+      @products = Product.includes(:store, :categories).filter_by_availability
+      @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]).filter_by_availability if params[:price][:min].present? && params[:price][:max].present?
+      @products = @products.filter_by_category(params[:categories]).filter_by_availability if params[:categories].present?
+      @products = @products.filter_by_location(params[:locations]).filter_by_availability if params[:locations].present?
     end
 
     @categories = category_returns
@@ -102,7 +106,9 @@ class ProductsController < ApplicationController
         category = category.sort_by {rand}[0,7]
       end
     else
-      Category.all.sort_by {rand}[0,7]
+      res = ActiveRecord::Base.connection.execute('select count(product_id) as count, category_id from categories_products group by category_id order by count desc limit 10;')
+      category = res.map{|r| r['category_id']}
+      Category.where(id:category)
     end
   end
 
