@@ -45,6 +45,7 @@ class User < ApplicationRecord
     end
   end
 end
+
 def create_account
   @user = User.last
   @account = Account.new

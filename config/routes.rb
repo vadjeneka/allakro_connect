@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   resources :carts, only: [:index, :destroy]
 
   resources :users do
-    resources :accounts
+    resources :accounts do
+      resources :transactions
+    end
     resources :favorites
     resources :orders, only: [:index]
     resources :chats do

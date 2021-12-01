@@ -14,10 +14,12 @@ class Account < ApplicationRecord
     return 0
   end
 
-  def purchase #TODO: effectuer un achat c'est comme retrait 
+  def purchase(product_price) #TODO: effectuer un achat c'est comme retrait 
+    withdraw(product_price)
   end
 
-  def sale #TODO: effectuer une vente c'ets comme un depot
+  def sale(product_price) #TODO: effectuer une vente c'ets comme un depot
+    deposit(product_price)
   end
 
   def hold #TODO: bloquer l'argent
