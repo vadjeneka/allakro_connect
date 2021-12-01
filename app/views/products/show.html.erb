@@ -9,7 +9,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
+    background: transparent;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -37,19 +37,27 @@
           <% end %>
         </a>
       </div>
-      <% if @product.product_backgrounds.attached? %>
-        <button class='px-3'>
-          <i class="fa fa-chevron-left text-xl"></i>
-        </button>
-          <%=image_tag @product.product_backgrounds[0], class:'h-80 w-80 object-cover'%>
-        <button class='px-3'>
-          <i class="fa fa-chevron-right text-xl"></i>
-        </button>
-      <% else %>
-        <div class='h-full w-full overflow-hidden flex justify-center items-center'>
-          <%=image_tag 'default_product_image.png', class:'h-80 w-80 object-cover'%>
+      <div class='w-full swiper mySwiper'>
+        <div class="swiper-wrapper">
+          <% if @product.product_backgrounds.attached? %>
+            <%@product.product_backgrounds.each do |file|%>
+              <div class='swiper-slide'>
+                <%=image_tag file, class:'h-80 w-80 object-cover'%>
+              </div>
+            <% end %>
+          <% else %>
+            <div class='h-full w-full overflow-hidden flex justify-center items-center'>
+              <%=image_tag 'default_product_image.png', class:'h-80 w-80 object-cover'%>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+        <% if @product.product_backgrounds.attached? %>
+          <% if @product.product_backgrounds.length > 1 %>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <div class="h-1/5 flex px-3 justify-center items-center overflow-hidden">
       <%if @product.product_backgrounds.attached? %>
@@ -111,3 +119,15 @@
 <% content_for :footer do %>
   <%=render 'shared/footer'%>
 <% end %>
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>

@@ -27,30 +27,16 @@
         </div>
       </div>
       <div class="width-70">
-        <div class="w-full py-3 flex justify-between">
-          <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
-            <a href="<%= new_user_account_transaction_path(current_user, current_user.account)%>" class="px-3 py-2 bg-green-500 text-black rounded text-sm">
-              <i class="fas fa-plus-circle "></i>
-              Nouvelle transaction
-            </a>
-        </div>
-        <h3 class="text-base font-semibold text-gray-600"> Mon portefeuille <i class="fas fa-hand-holding-usd"></i></h3>
+      
+        <h3 class="text-base font-semibold text-gray-600"> Opérations <i class="fas fa-hand-holding-usd"></i></h3>
         <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden bg-white shadow-lg overflow-x-auto">
           <table class="table-auto w-full">
-            <tbody class="text-sm divide-y divide-gray-300">
+            <tbody class="text-sm divide-y divide-gray-300 space-x-3">
                 <tr>
                     <td class="p-2 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="font-medium text-gray-800">
-                              <i class="fas fa-credit-card text-4xl"></i>
-                            </div>
+                        <div class="text-left font-medium text-black-500 text-base">
+                          <%=render partial: 'form', locals: {transaction: @transaction }%>
                         </div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left"><%=current_user.email%></div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-green-500 text-4xl"><%= @account.balance %> FCFA</div>
                     </td>
                 </tr>
             </tbody>
@@ -74,13 +60,13 @@
           </thead>
         </table>
         <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
-          <table class="table w-full mt-5">
+          <table class="table w-full mt-4">
             <% current_user.account.transactions.each do |transaction| %>
                 <tbody class="text-sm divide-y divide-gray-100 py-4">
-                    <tr class="bg-gray-100">
-                      <td class="p-2 whitespace-nowrap ">
+                    <tr>
+                      <td class="p-2 whitespace-nowrap">
                           <div class="text-left">
-                            <%= transaction.created_at&.strftime("%a %D")%>
+                            <%= transaction.created_at&.strftime("%I: %M %p")%>
                           </div>
                       </td>
                         <td class="p-2 whitespace-nowrap">
@@ -91,11 +77,7 @@
                             </div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                          <% if transaction.type_transaction == 'Dépôt'%>
-                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                            <%else%>
-                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
-                            <% end%>
+                            <div class="text-left font-medium text-green-500"><%= transaction.amount%></div>
                         </td>
                     </tr>
                     
