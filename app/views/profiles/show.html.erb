@@ -23,6 +23,7 @@
         <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
         <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
         <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Mon compte', user_account_path(current_user, @account),class:'w-full block m-1 font-light text-xl py-1'%>
         <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
       </div>
     </div>
