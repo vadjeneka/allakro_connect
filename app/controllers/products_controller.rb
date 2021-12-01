@@ -43,14 +43,14 @@ class ProductsController < ApplicationController
 
   def edit
     @store = Store.find(params[:store_id])
-    @user = current_user  
     @product = store.products.find(params[:id])
   end
 
   def update
+    raise product_params.inspect
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to user_stores_path(), notice: 'Product updated successfully'
+      redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
       flash[:error] = 'Cannot update Product'
       render 'edit'
@@ -59,8 +59,9 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
+    @store = @product.store
     @product.destroy
-    redirect_to user_stores_path(), notice: 'Product deleted successfully'
+    redirect_to store_path(@store), notice: 'Product deleted successfully'
   end
 
   def like

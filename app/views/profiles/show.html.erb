@@ -24,7 +24,7 @@
           <%= link_to 'Editer ma boutique',edit_store_path(current_user.store), class:'w-full block m-1 font-light text-xl py-1'%>
         <% end %>
         <%= link_to 'Editer mon profile',edit_profile_path(current_user),class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Operation sur mon compte','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Operation sur mon compte',user_account_path(current_user, current_user.account),class:'w-full block m-1 font-light text-xl py-1'%>
         <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full text-red-600 block m-1 font-medium text-xl py-1'%>
       </div>
     </div>
