@@ -20,6 +20,10 @@ class BidsController < ApplicationController
     @bid = @product.bids.build(params_bid)
     if @bid.save
       redirect_to store_product_bids_path(@product.store, @product)
+    else
+      # raise @bid.errors.messages_for(:start_date).join(',').inspect
+      flash[:error] = "Enchère non enregistrée"
+      render 'new'
     end
   end
 

@@ -15,17 +15,19 @@ class Bid < ApplicationRecord
   scope :active, -> { where(state: 'actived') }
   
   scope :finished, -> { where("end_date <= ?", DateTime.current) }
+
+  scope :closed, -> {where("state == ?",'closed')}
   
 
   def right_start_date
     if self.start_date < DateTime.current || (self.start_date.min != 0 && self.start_date.min != 30)
-      errors.add(:start_date, "***Revoyez svp la date ou l'heure de début !***")
+      errors.add(:start_date, :invalid, message: "***Revoyez svp la date ou l'heure de début !***")
     end
   end
 
   def right_end_date
     if self.end_date <= start_date || (self.end_date.min != 0 && self.end_date.min != 30)
-      errors.add(:end_date, "***Revoyez svp la date ou l'heure de début !***")
+      errors.add(:end_date, :invalid, message: "***Revoyez svp la date ou l'heure de fin !***")
     end
   end
 
