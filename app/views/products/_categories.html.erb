@@ -1,4 +1,4 @@
 <div class="my-1 flex items-center pl-3"> 
-  <input type="checkbox" name="categorie">
+  <input type="checkbox" name="categorie" value="<%=categories.name%>" data-search-target='category' data-action='change->search#performSearch'>
   <label for="categorie" class="text-lg ml-2"><%=categories.name%></label>
 </div>
