@@ -3,12 +3,12 @@ class OrdersController < ApplicationController
   def index
     if params[:user_id]
       if current_user && current_user.orders
-        @orders = current_user.orders.in_progress
+        @orders = current_user.orders
       end
     end
     if params[:store_id]
       store = Store.includes(:orders).find(params[:store_id])
-      @store_orders = store.orders.in_progress
+      @store_orders = store.orders
     end
   end
 
@@ -54,7 +54,6 @@ class OrdersController < ApplicationController
   def reject_order
     @order = Order.find(params[:id])
     @order.update(state: "cancelled")
-    raise @order.inspect
     redirect_to store_orders_path(@order.cart.store), notice: "La commande ##{@order.id[0,7].upcase} a été réjeté"
   end
 

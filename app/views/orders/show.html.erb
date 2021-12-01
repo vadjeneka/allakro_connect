@@ -1,77 +1,36 @@
-<% if @order %>
-  <div class="flex flex-col text-2xl font-bold mt-5 items-center">
-    <% @order.cart.line_items.each do |item| %>
-      <div>
-        Produit: <%= item.product.name %>.
-        Qty: <%= item.quantity %>
-      </div>
-    <% end %>
-    Prix total de la commande : <%= @order.cart.total_price %> XOF
-    <div>
-      <a href="<%= reject_order_path(@order.cart.store, @order) %>" data-method="PUT">
-        <i class="fad fa-times-circle text-3xl text-red-500"></i>
-      </a>
-      <a href="<%= validate_order_path(@order.cart.store, @order) %>" data-method="PUT">
-        <i class="fad fa-check-circle text-3xl text-green-500"></i>
+<%# User Order %>
+<% if @user_order %>
+  <%= render partial: "shared/order_page", locals: { order: @user_order }%>
+  <% if @user_order.state == "waiting" %>
+    <div class="text-center">
+      <a href="<%= reject_order_path(@user_order.cart.store, @user_order) %>" data-method="PUT">
+        <button class="px-4 py-4 bg-red-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
+          <i class="fad fa-times-circle text-3xl text-red-500"></i>
+        </button>
       </a>
     </div>
-  </div>
-<% end %>
-
-<% if @user_order %>
-  <div class="flex flex-col text-2xl font-bold mt-10 items-center">
-    <h2>
-      Depuis "<%= @user_order.cart.store.name %>"
-      <a href="<%= user_order_path(@user_order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
-          <i class="fad fa-times-circle text-3xl text-red-500"></i> 
-      </a>
-    </h2>
-    <% @user_order.cart.line_items.each do |item| %>
-      <div>
-        Produit : <%= item.product.name %>.
-      </div>
-      <div>
-        Quantité: <%= item.quantity %>.
-        Prix total: <%= item.total_price %> XOF
-      </div>
-    <% end %>
-  </div>
-<% end %>
-
-<% if @user_order %>
-  <% @user_order.cart.line_items.each do |item| %>
-  <div class="min-h-screen bg-gray-200">
-    <div class="container mx-auto p-10 max-w-screen-lg">
-      <div class="flex justify-between mt-8 flex-wrap lg:justify-center">
-        <div class="bg-white rounded shadow p-2 w-full lg:w-2/4">
-          <div class="w-full bg-orange-200 px-8 py-6">
-            <div class="flex justify-between mt-3">
-              <div class="text-xl text-orange-900 font-bold">Commande</div>
-              <div class='text-xl text-right font-bold '>
-                
-              </div>
-            </div>
-            <div class="flex justify-between mt-3">
-              <div class="text-xl text-orange-900 font-bold">Prix</div>
-              <div class='text-xl text-right font-bold'>LLL</div>
-            </div>
-            <div class="bg-orange-300 h-1 w-full mt-3"></div>
-            <div class="flex justify-between mt-3">
-              <div class="text-xl text-orange-900 font-bold">Nombre de produit</div>
-              <div class="text-2xl text-orange-900 font-bold">COUNT</div>
-            </div>
-            <button class="px-4 py-4 bg-red-300 text-white w-full mt-3 rounded shadow font-bold hover:bg-purple- 900">
-              <a href="" >
-              <i class="fad fa-times-circle text-3xl text-red-500"></i>
-              </a>
-          </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <% end %>
 <% end %>
+
+<%# Store Order %>
+<% if @order %>
+  <%= render partial: "shared/order_page", locals: { order: @order }%>
+  <% if @order.state == "waiting" %>
+    <div class="text-center">
+      <a href="<%= reject_order_path(@order.cart.store, @order) %>" data-method="PUT">
+        <button class="px-4 py-4 bg-red-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
+          <i class="fad fa-times-circle text-3xl text-red-500"></i>
+        </button>
+      </a>
+      <a href="<%= validate_order_path(@order.cart.store, @order) %>" data-method="PUT">
+        <button class="px-4 py-4 bg-green-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
+          <i class="fad fa-check-circle text-3xl text-green-500"></i>
+        </button>
+      </a>
+    </div>
+  <% end %>
+<% end %>
+
 
 
 
