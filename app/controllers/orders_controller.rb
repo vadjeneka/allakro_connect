@@ -26,17 +26,20 @@ class OrdersController < ApplicationController
     if @order.save
       # TODO: Set cart to validated: true
       cart.update(validated: true)
+      OrderMailer.with(order: @order).new_order_email.deliver_later
       redirect_to user_orders_path(current_user), notice: 'Order was successfully created'
     else
       flash[:error] = "Couldn't create order"
       redirect_to user_carts_path(current_user)
     end
   end
+  
 
   def update
     order = Order.find(params[:id])
     # raise order.inspect
     order.update(is_fulfilled: true) # TODO: Set is_fulfilled to string with some state
+    OrderMailer.with(order: order).confirm_order_email.deliver_later
     redirect_to store_orders_path(order.cart.store)
   end
 

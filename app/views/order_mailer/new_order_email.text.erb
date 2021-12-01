@@ -1,0 +1,12 @@
+Vous avez reçu une commande de : <%= @order.cart.user.email%>
+
+Détails de la commande
+<% @order.cart.line_items.each do |item| %>
+---------------------------------------------------
+Produit : <%= item.product.name %>
+Quantité: <%= item.quantity %>x | Prix: <%= item.total_price %> XOF
+
+<%end%>
+
+---------------------------------------------------
+Prix total de la commande : <%= @order.cart.total_price %> XOF
