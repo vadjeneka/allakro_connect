@@ -20,10 +20,12 @@
     <div class="w-2/5">
       <p class="py-10 text-4xl">Mon profil</p>
       <div class='block'>
-        <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Editer mon profile',edit_user_registration_path(current_user),class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+        <%if current_user.store%>
+          <%= link_to 'Editer ma boutique',edit_store_path(current_user.store), class:'w-full block m-1 font-light text-xl py-1'%>
+        <% end %>
+        <%= link_to 'Editer mon profile',edit_profile_path(current_user),class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Operation sur mon compte','',class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full text-red-600 block m-1 font-medium text-xl py-1'%>
       </div>
     </div>
     <div class="width-70">
