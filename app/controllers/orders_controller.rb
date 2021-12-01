@@ -3,12 +3,12 @@ class OrdersController < ApplicationController
   def index
     if params[:user_id]
       if current_user && current_user.orders
-        @orders = current_user.orders
+        @user_orders = current_user.orders.order("created_at DESC")
       end
     end
     if params[:store_id]
       store = Store.includes(:orders).find(params[:store_id])
-      @store_orders = store.orders
+      @store_orders = store.orders.order("created_at DESC")
     end
   end
 
@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
       @user_order = Order.includes(:user, :cart).find(params[:id])
     end
     if params[:store_id]
-      @order = Order.includes(:user, :cart).find(params[:id])
+      @store_order = Order.includes(:user, :cart).find(params[:id])
     end
   end
 
