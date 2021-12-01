@@ -1,0 +1,43 @@
+<hr>
+<h2 class="text-center font-bold text-3xl my-5">
+  Commande  #<%= "#{@order.id[0,7].upcase}" %>
+</h2>
+<% order.cart.line_items.each do |item| %>
+<div class="">
+  <div class="container mx-auto p-10 max-w-screen-lg">
+    <div class="flex justify-between flex-wrap lg:justify-center">
+      <div class="bg-gray-200 rounded shadow p-2 w-full lg:w-2/4">
+        <div class="w-full bg-orange-200 px-8 py-6">
+          <div class="flex justify-between">
+            <div class="text-xl text-orange-900 font-bold">
+              Produit
+            </div>
+            <div class='text-xl text-right font-bold '>
+              <%= item.product.name %>
+            </div>
+          </div>
+          <div class="flex justify-between mt-3">
+            <div class="text-xl text-orange-900 font-bold">
+              Quantité
+            </div>
+            <div class='text-xl text-right font-bold'>
+              x<%= item.quantity %>
+            </div>
+          </div>
+          <div class="flex justify-between mt-3">
+            <div class="text-xl text-orange-900 font-bold">
+              Prix
+            </div>
+            <div class='text-xl text-right font-bold'>
+              <%= item.total_price %> FCFA
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<h2 class="text-center font-bold text-3xl m-5">
+  Prix total : <%= order.cart.total_price %> FCFA
+</h2>

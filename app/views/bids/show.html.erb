@@ -1,10 +1,14 @@
-<%= @bid.product.name %>
+<h2 class="text-3xl font-bold text-center my-5">
+  Enchère sur "<%= @bid.product.name %>" 
+  <% if !@bid.offers %>
+    <% @bid.initial_price %>
+  <% end %>
+</h2>
+<%# TODO: Ajouter l'image %>
 <% if @bid.state == "actived" %>
   <%# TODO: Create comps for top offer %>
-  <% @top_offer.each do |offer| %>
-    <%= offer.user %>
-  <% end %>
   <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
+  <%= render partial: "shared/top_offer", locals: { top_offer: @top_offer } %>
 <% end %>
 
 <% content_for :banners do %>
