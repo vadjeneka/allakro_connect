@@ -1,0 +1,14 @@
+<%if @bid_order.product.store.user == current_user%>
+  
+  <% @bid_order.each do |notvalidated|%>
+    <div>
+      <%= notvalidated.end_date%>
+    </div>
+    <div>
+      <%= notvalidated.initial_price%>
+    </div>
+    <div>
+      <%= notvalidated.user%>
+    </div>
+  <%end%>
+<%end%>

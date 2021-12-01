@@ -2,12 +2,14 @@ class BidsController < ApplicationController
   def index
     @bids = Bid.includes(:offers).active
     @coming_bids = Bid.waiting
-    
+    # @unvalidated_bids = Bid.closed.not_validated
   end
 
   def show
     @bid = Bid.find(params[:id])
     @top_offer = @bid.offers.top
+    # @unvalidated_bid = @unvalidated_bids.find(params[:id])
+    # @bid_order
   end
 
   def new

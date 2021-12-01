@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_123414) do
+ActiveRecord::Schema.define(version: 2021_12_01_145744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_validated", default: false
     t.index ["product_id"], name: "index_bids_on_product_id"
   end
 
@@ -177,7 +178,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_123414) do
     t.uuid "user_id", null: false
     t.uuid "cart_id", null: false
     t.integer "amount"
-    t.string "state", default: "waiting"
+    t.boolean "is_fulfilled"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
