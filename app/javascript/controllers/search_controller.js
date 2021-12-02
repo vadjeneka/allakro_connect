@@ -6,6 +6,7 @@ export default class extends Controller {
 
   initialize() {
     this.formData = new FormData();
+  
   }
 
   connect() {
@@ -31,15 +32,19 @@ export default class extends Controller {
     this.formData.append("price[min]", minPrice)
     this.formData.append("price[max]", maxPrice)
     if (categories.length > 0) {
-      this.formData.append('categories', JSON.stringify(categories))
+      categories.forEach((category) => {
+        this.formData.append('categories[]',category)
+      })
     } else {
-      this.formData.delete('categories')
+      this.formData.delete('categories[]')
     }
 
     if (locations.length > 0) {
-      this.formData.append('locations', JSON.stringify(locations))
+      locations.forEach((location) => {
+        this.formData.append('locations[]',location)
+      })
     } else {
-      this.formData.delete('locations')
+      this.formData.delete('locations[]')
     }
 
     const submitUrl = new URLSearchParams(this.formData).toString();

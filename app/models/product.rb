@@ -27,13 +27,27 @@ class Product < ApplicationRecord
     categories.map(&:name).join(', ')
   end
 
+  def self.filter_by_categories(categories)
+    query = self
+    count = 0
+    categories.each do |category|
+      if count == 0
+        query = query.filter_by_category(category)
+      else
+        query = query.or(self.filter_by_category(category))
+      end
+      count += 1
+    end
+    query
+  end
+
   
   def self.search(search)
-    if search
-      Product.joins(:categories).where(["lower(products.name) LIKE ? or lower(categories.name) LIKE ?", "%#{search.downcase}%","%#{search.downcase}%"]).where(is_available: true).uniq
-    else
+    # if search
+    #   Product.joins(:categories).where(["lower(products.name) LIKE ? or lower(categories.name) LIKE ?", "%#{search.downcase}%","%#{search.downcase}%"]).where(is_available: true).uniq
+    # else
 
-    end
+    # end
   end
 
 end

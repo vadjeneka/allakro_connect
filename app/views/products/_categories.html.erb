@@ -2,3 +2,10 @@
   <input type="checkbox" name="categorie" value="<%=categories.name%>" data-search-target='category' >
   <label for="categorie" class="text-lg ml-2"><%=categories.name%></label>
 </div>
+<script type = "text/javascript">
+var elements = document.getElementsByTagName("INPUT");
+        for (var inp of elements) {
+          if (inp.type === "checkbox")
+              inp.checked = true;
+        } 
+</script>
