@@ -4,12 +4,6 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Hello dear <%= @order.user.name %>, Your order has been confirmed !</p>
-    <p>
-    Order details<br>
-    --------------------------
-    </p>
-    <p>Name: <%=item.product.name %></p>
-    <p>Price: <%= @order.cart.total_price %> FCFA</p>
+    <p>Hello dear <%= @order.cart.user.email %>, Your order has been confirmed !</p>
   </body>
 </html>

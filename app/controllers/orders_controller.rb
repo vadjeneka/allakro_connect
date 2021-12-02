@@ -41,13 +41,14 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     # raise order.inspect
     order.update(is_fulfilled: true) # TODO: Set is_fulfilled to string with some state
-    OrderMailer.with(order: order).confirm_order_email.deliver_later
     redirect_to store_orders_path(order.cart.store)
   end
 
   def validate_order
     @order = Order.find(params[:id])
     @order.update(state: "validated")
+    OrderMailer.with(order: @order).confirm_order_email.deliver_later
+
     # TODO: Si la commande est confirmé, redirect de l'argent de l'argent depuis le compte de l'acheteur
     # TODO: Payer le vendeur
     # TODO: Diminuer les stocks des produits
