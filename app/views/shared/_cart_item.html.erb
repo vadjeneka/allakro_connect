@@ -1,24 +1,54 @@
-<div class="ml-60 bg-gray-200 h-32 flex m-2 rounded justify-items-center justify-between mr-80">
-  <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
-    <i class="fad fa-times-circle text-2xl text-red-400"></i>
-  </a>
-  <div class="h-50 bg-red-200">
-  </div>
-  <div class="">
-    <h2 class="font-bold text-2xl"><%= link_to "#{item.product.name}", store_product_path(item.product.store, item.product) %></h2>
-    <p><%= item.product.description %></p>
-    <p>Poids: <%= item.product.weight %> g</p>
-    <p>Prix: <%= item.total_price %> XOF</p>
-  </div>
-  <div class="mt-12 text-3xl mr-5"> 
-    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
-      <i class="fad fa-minus-circle text-3xl"></i>
-    </a>
-    <span class="font-bold">
-      <%= item.quantity %>
-    </span>
-    <a href="<%= line_item_add_path(item) %>" data-method="POST">
-      <i class="fad fa-plus-circle text-3xl"></i>
-    </a>
-  </div>
+<div class="w-3/4 mx-auto">
+  <li class="py-3 flex justify-center">
+    <div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
+      <% if item.product.product_backgrounds.attached? %>
+        <%= image_tag item.product.product_backgrounds[0], class:'object-cover' %>
+      <% else %>
+        <%= image_tag 'default_product_image.png', class:'object-cover' %>
+      <% end %>
+    </div>
+    <div class="ml-4 flex-1 flex flex-col">
+      <div>
+        <div class="flex justify-between text-base font-medium text-gray-900">
+          <h3>
+            <a href="#">
+              <%= link_to "#{item.product.name}", store_product_path(item.product.store, item.product) %>
+            </a>
+          </h3>
+          <p class="ml-4">
+            <%= item.total_price %> FCFA
+          </p>
+        </div>
+        <p class="mt-1 text-sm text-gray-500">
+          <%= item.product.description %>
+        </p>
+      </div>
+        <div class="flex justify-between items-center">
+          <div class="flex flex-row h-10 w-2/3 rounded-lg relative bg-transparent mt-1">
+            <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
+              <button data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                <span class="m-auto text-2xl font-thin">−</span>
+              </button>
+            </a>
+
+          <div class="flex w-12 justify-center items-center"><%= item.quantity %></div>
+            <a href="<%= line_item_add_path(item) %>" data-method="POST">
+              <button data-action="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                <span class="m-auto text-2xl font-thin">+</span>
+              </button>
+            </a>
+          </div>
+
+          <div class="">
+            <button type="button" class="font-medium text-red-600 hover:text-red-500">
+              <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
+              Supprimer 
+              </a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <hr>
 </div>

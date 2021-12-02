@@ -4,8 +4,8 @@
   <% cart.line_items.each do |item| %>
     <%= render partial: "shared/cart_item", locals: { item: item } %>
   <% end %>
-  <div class="flex w-1/2 mx-auto justify-between text-center justify-items-center align-center">
-    <h2 class="font-bold text-2xl">Prix total: <%= cart.total_price %> XOF</h2>
+  <div class="flex w-1/2 mx-auto justify-between text-center justify-items-center items-center">
+    <h2 class="font-bold text-2xl">Prix total: <%= cart.total_price %> FCFA</h2>
     <div class="mt-5">
       <a href="<%= user_cart_path(current_user, cart) %>", data-method="DELETE", data-confirm="Are you sure ?">
         <i class="fas fa-trash text-xl"></i>
