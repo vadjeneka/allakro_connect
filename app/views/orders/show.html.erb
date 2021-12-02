@@ -3,7 +3,7 @@
   <%= render partial: "shared/order_page", locals: { order: @user_order }%>
   <% if @user_order.state == "waiting" %>
     <div class="text-center">
-      <a href="<%= reject_order_path(@user_order.cart.store, @user_order) %>" data-method="PUT">
+      <a href="<%= reject_order_path(@user_order.cart.user, @user_order) %>" data-method="PUT">
         <button class="px-4 py-4 bg-red-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
           <i class="fad fa-times-circle text-3xl text-red-500"></i>
         </button>
@@ -13,16 +13,16 @@
 <% end %>
 
 <%# Store Order %>
-<% if @order %>
-  <%= render partial: "shared/order_page", locals: { order: @order }%>
-  <% if @order.state == "waiting" %>
+<% if @store_order %>
+  <%= render partial: "shared/order_page", locals: { order: @store_order }%>
+  <% if @store_order.state == "waiting" %>
     <div class="text-center">
-      <a href="<%= reject_order_path(@order.cart.store, @order) %>" data-method="PUT">
+      <a href="<%= reject_order_path(@store_order.cart.store, @store_order) %>" data-method="PUT">
         <button class="px-4 py-4 bg-red-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
           <i class="fad fa-times-circle text-3xl text-red-500"></i>
         </button>
       </a>
-      <a href="<%= validate_order_path(@order.cart.store, @order) %>" data-method="PUT">
+      <a href="<%= validate_order_path(@store_order.cart.store, @store_order) %>" data-method="PUT">
         <button class="px-4 py-4 bg-green-300 text-white w-1/3 mt-3 rounded shadow font-bold hover:bg-purple- 900">
           <i class="fad fa-check-circle text-3xl text-green-500"></i>
         </button>

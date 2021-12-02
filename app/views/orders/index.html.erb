@@ -1,5 +1,8 @@
-<% if @orders %>
-  <%= render partial: "shared/orders", locals: { orders: @orders } %>
+<hr>
+<h2 class="text-center font-bold text-3xl my-5">Mes commandes</h2>
+
+<% if @user_orders %>
+  <%= render partial: "shared/user_orders", locals: { orders: @user_orders } %>
 <% end %>
 
 <% if @store_orders %>
