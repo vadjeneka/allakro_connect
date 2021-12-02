@@ -28,12 +28,14 @@ class OrdersController < ApplicationController
     if @order.save
       # TODO: Set cart to validated: true
       cart.update(validated: true)
+      OrderMailer.with(order: @order).new_order_email.deliver_later
       redirect_to user_orders_path(current_user), notice: 'Order was successfully created'
     else
       flash[:error] = "Couldn't create order"
       redirect_to user_carts_path(current_user)
     end
   end
+  
 
   def update
     order = Order.find(params[:id])
@@ -45,6 +47,8 @@ class OrdersController < ApplicationController
   def validate_order
     @order = Order.find(params[:id])
     @order.update(state: "validated")
+    OrderMailer.with(order: @order).confirm_order_email.deliver_later
+
     # TODO: Si la commande est confirmé, redirect de l'argent de l'argent depuis le compte de l'acheteur
     # TODO: Payer le vendeur
     # TODO: Diminuer les stocks des produits
