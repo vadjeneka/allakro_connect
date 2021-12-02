@@ -2,14 +2,15 @@ class BidsController < ApplicationController
   def index
     @bids = Bid.includes(:offers).active
     @coming_bids = Bid.waiting
-    # @unvalidated_bids = Bid.closed.not_validated
+    @unvalidated = Bid.includes(:offers).closed
+    
   end
 
   def show
     @bid = Bid.find(params[:id])
     @top_offer = @bid.offers.top
-    # @unvalidated_bid = @unvalidated_bids.find(params[:id])
-    # @bid_order
+    # @unvalidated_bid = @unvalidated.find(params[:id])
+    # @winner = @unvalidated_bid.offers.top
   end
 
   def new
@@ -35,14 +36,11 @@ class BidsController < ApplicationController
     redirect_to bids_path, notice: "Your bid was cancelled"
   end
 
-  # def reservation
-  #   if @bid.finished
-  #     winner_offer = @bid.offer.top
-  #     @winnerOrder = Order.new(user_id: winner_offer.user_id, amount: winner_offer.amount, is_fulfilled: false )
-  #     @winnerOrder.save
-  #     #TODO: substract the bid offer amount from account
-  #   end
-  # end
+  def edit
+    @bid.find(params[:id])
+    @bid.update(is_validated: true)
+    redirect_to bids_path, notice: "Bid validated"
+  end
 
   private
   def params_bid
