@@ -17,8 +17,8 @@
       crossorigin="anonymous"
     />
   </head>
-
-  <body>
+  <% stimulus_controller = controller.controller_name == 'products' ? 'search': ''%>
+  <body data-controller="<%= stimulus_controller%>">
     <%=render 'shared/flashes'%>
     <%#=render 'devise/shared/error_messages'%>
     <%#=render 'shared/banners'%>

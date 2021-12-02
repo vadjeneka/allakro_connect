@@ -1,12 +1,18 @@
 class ProductsController < ApplicationController
   
   def index
-    if params[:name]
-      Search.create!(user_id:current_user.id,content:params[:name])
-      @products = Product.search(params[:name])
-    else
-      @products = Product.includes(:store, :categories).where(is_available: true).page(params[:page]).per(8)
-    end
+    # if params[:name]
+    #   @products = Product.search(params[:name])
+    # else
+    # raise params.inspect
+    # @products = Product.all
+    @products = Product.includes(:store, :categories).filter_by_availability.page(params[:page]).per(12)
+    @products = @products.filter_by_name(params[:name]) if params[:name].present?
+    @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]) if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
+    @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
+    @products = @products.filter_by_locations(params[:locations]) if params[:locations].present?
+    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present?
+    # end
 
     @categories = category_returns
     @cities = cities_return
@@ -103,7 +109,9 @@ class ProductsController < ApplicationController
         category = category.sort_by {rand}[0,7]
       end
     else
-      Category.all.sort_by {rand}[0,7]
+      res = ActiveRecord::Base.connection.execute('select count(categories_products.product_id) as count, categories_products.category_id from categories_products join products on products.id = categories_products.product_id where products.is_available = true group by categories_products.category_id order by count desc limit 10;')
+      category = res.map{|r| r['category_id']}
+      Category.where(id:category)
     end
   end
 
