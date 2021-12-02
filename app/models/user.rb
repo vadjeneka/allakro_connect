@@ -44,6 +44,7 @@ class User < ApplicationRecord
       end
     end
   end
+
 end
 
 def create_account

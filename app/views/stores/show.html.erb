@@ -31,7 +31,9 @@
   <%if current_user == @store.user%>
     <div class="w-1/5 overflow-hidden">
       <div class="h-36r overflow-y-auto">
-        <p class="text-2xl">Mes commentaires</p>
+        <a href="<%= store_orders_path(@store) %>">
+          <p class="text-2xl">Mes commandes</p>
+        </a>
         <% if !@comments.empty? %>
           <%= render partial: 'comment', collection: @comments%>
         <%end%>

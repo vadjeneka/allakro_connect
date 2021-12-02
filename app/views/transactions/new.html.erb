@@ -79,7 +79,8 @@
                         <td class="p-2 whitespace-nowrap">
                           <% if transaction.type_transaction == 'Dépôt'%>
                           <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                          <%else%>
+                          <%end%>
+                          <%if transaction.type_transaction == 'Rétrait' %>
                           <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
                           <% end%>
                         </td>

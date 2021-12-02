@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_094027) do
     t.uuid "bid_id", null: false
     t.uuid "user_id", null: false
     t.integer "amount"
-    t.boolean "accepted", default: true
+    t.boolean "accepted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bid_id"], name: "index_offers_on_bid_id"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_094027) do
     t.uuid "user_id", null: false
     t.uuid "cart_id", null: false
     t.integer "amount"
-    t.boolean "is_fulfilled"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"

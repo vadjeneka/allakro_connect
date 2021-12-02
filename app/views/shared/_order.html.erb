@@ -1,20 +1,19 @@
-<div class="flex flex-col text-2xl font-bold mt-10 items-center">
-    <% order.cart.line_items.each do |item| %>
-    <div class="flex bg-gray-200 rounded p-5 items-center w-3/4 justify-around">
-      <h2>
-        <%= link_to "Commande N° #{order.id[0,7]}", user_order_path(current_user, order) %>
-      </h2>
-      <h2>
-        Prix : <%= order.cart.total_price %> XOF
-      </h2>
-      <h2>
-        Nombre de produits (<%= order.cart.line_items.count %>)
-      </h2>
-      <div>
-        <a href="<%= user_order_path(current_user, order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
-          <i class="fad fa-times-circle text-3xl text-red-500"></i>
-        </a>
-      </div>
-    </div><br>
-  <% end %>
+<div class="flex flex-col text-2xl font-bold mt-5 items-center">
+  <div class="flex bg-gray-200 rounded p-5 items-center w-3/4 justify-around">
+    <h2>
+      <%= link_to "Commande ##{order.id[0,7].upcase}", store_order_path(order.cart.store, order) %>
+    </h2>
+    <h2>
+      Prix : <%= order.cart.total_price %> XOF
+    </h2>
+    <h2>
+      Nombre de produits (<%= order.cart.line_items.count %>)
+    </h2>
+    <div>
+      <a href="<%= reject_order_path(order.cart.store, order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
+        <i class="fad fa-times-circle text-3xl text-red-500"></i>
+      </a>
+    </div>
+  </div><br>
 </div>
+
