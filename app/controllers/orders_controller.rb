@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
   def validate_order
     @order = Order.find(params[:id])
     @order.update(state: "validated")
-    
+    Transaction.purchase(@order)
 
     # TODO: Si la commande est confirmé, retirer de l'argent de l'argent depuis le compte de l'acheteur
     # TODO: Payer le vendeur

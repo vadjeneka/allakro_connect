@@ -15,11 +15,6 @@ class Account < ApplicationRecord
     raise ::Errors::UnsufficientFunds
   end
 
-  
-
-  def sale(order) #TODO: effectuer une vente c'ets comme un depot
-    order_price = order.cart.total_price
-  end
 
   def hold #TODO: bloquer l'argent
   end

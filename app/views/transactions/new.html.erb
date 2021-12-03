@@ -63,6 +63,7 @@
           <table class="table w-full mt-4">
             <% current_user.account.transactions.each do |transaction| %>
                 <tbody class="text-sm divide-y divide-gray-100 py-4">
+                  <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Dépôt' %>
                     <tr>
                       <td class="p-2 whitespace-nowrap">
                           <div class="text-left">
@@ -72,20 +73,20 @@
                         <td class="p-2 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="font-medium text-gray-800">
-                                  <%= transaction.type_transaction%>
+                                  <%= transaction.type_transaction %>
                                 </div>
                             </div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
                           <% if transaction.type_transaction == 'Dépôt'%>
-                          <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                          <%end%>
-                          <%if transaction.type_transaction == 'Rétrait' %>
-                          <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
+                          <%elsif transaction.type_transaction == 'Rétrait' %>
+                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+                          <% else%>
                           <% end%>
                         </td>
                     </tr>
-                    
+                    <% end%>
                   
                 </tbody>
                 <% end %>
