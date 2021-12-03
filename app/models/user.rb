@@ -47,4 +47,13 @@ class User < ApplicationRecord
   def account_creation
     self.create_account!
   end
+
+end
+
+def create_account
+  @user = User.last
+  @account = Account.new
+  @user.account = @account
+  @user.save
+  @account.save
 end
