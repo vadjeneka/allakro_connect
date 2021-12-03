@@ -8,11 +8,25 @@
 </style>
 <div class="block" data-controller="display-img-on-create">
   <%= form_with model: [store, product] do |form|%>
-    <%= form.hidden_field, value:"<%= current_user.product_background.attached? ? current_user.product_background : '' %>"%>
+    <%= form.hidden_field :hidden_item, data:{'display-img-on-create-target': 'hiddenField'}%>
     <div class="flex w-full mt-3">
       <div class="w-3/5">
         <div class="w-full h-99 bg-gray-100 h-52 relative flex flex-wrap content-between">
-          <div class="w-full grid grid-cols-3 gap-2 h-103 overflow-y-auto" data-display-img-on-create-target='divDisplaying'></div>
+          <div class="w-full grid grid-cols-3 gap-2 h-103 overflow-y-auto" data-display-img-on-create-target='divDisplaying'>
+            <% if @product.product_backgrounds %>
+              <% @product.product_backgrounds.each_with_index do |item, index| %>
+                <span class='relative mx-1 bg-black' data-display-img-on-create-target='ImgDatabase' id="<%=index%>"> 
+                  <span class='cursor-pointer absolute top-1 left-2 z-10' 
+                        data-display-img-on-create-target='hideImage' 
+                        data-action='click->display-img-on-create#hideFiles' 
+                        data-display-img-on-create-id-param="<%=index%>"> 
+                    <i class='fal fa-times text-xl text-white'></i> 
+                  </span> 
+                  <%= image_tag item, class:'h-52 w-full rounded-sm object-cover border opacity-80 border-gray-300' %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
           <label class="flex justify-center py-1 items-center ease-linear transition-all duration-150 bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 h-14 w-14  rounded-full mx-auto mb-3">
             <i class="fad fa-plus text-xl"></i>
             <%= form.file_field :product_backgrounds, multiple:true, direct_upload: true, accept:'.png, .jpeg, .fpg, .svg, .jpg',class:'hidden',data: {'display-img-on-create-target': 'imgGetter', action:'change->display-img-on-create#displayImage'} %>

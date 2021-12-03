@@ -42,7 +42,7 @@
                     <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">
                             <div class="font-medium text-gray-800">
-                              <i class="fas fa-credit-card text-4xl"></i>
+                              <i class="fas fa-credit-card text-6xl"></i>
                             </div>
                         </div>
                     </td>
@@ -62,7 +62,7 @@
           <thead class="text-xs font-semibold uppercase text-white bg-red-600">
             <tr>
               <th class="p-2 whitespace-nowrap">
-                <div class="font-semibold text-left">Date</div>
+                <div class="font-semibold text-left">Date opération</div>
               </th>
               <th class="p-2 whitespace-nowrap">
                 <div class="font-semibold text-left">Type d'opération</div>
@@ -91,11 +91,13 @@
                             </div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                          <% if transaction.type_transaction == 'Dépôt'%>
+                          <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Vente' %>
                             <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                            <%else%>
-                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
-                            <% end%>
+                          <% end %>
+                          
+                          <%if transaction.type_transaction == 'Rétrait' || transaction.type_transaction == 'Achat' %>
+                              <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+                          <%end %>
                         </td>
                     </tr>
                     
