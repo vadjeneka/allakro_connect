@@ -4,6 +4,8 @@ class TransactionsController < ApplicationController
 
   def new 
     @transaction = current_user.account.transactions.build
+    @transactions = current_user.account.transactions.all
+    # raise @transactions.length.inspect
   end
 
   def create

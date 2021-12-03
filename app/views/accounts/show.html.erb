@@ -91,15 +91,13 @@
                             </div>
                         </td>
                         <td class="p-2 whitespace-nowrap">
-                          <% if transaction.type_transaction == 'Dépôt'%>
+                          <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Vente' %>
                             <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                            <%elsif transaction.type_transaction == 'Rétrait' %>
+                          <% end %>
+                          
+                          <%if transaction.type_transaction == 'Rétrait' || transaction.type_transaction == 'Achat' %>
                               <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
-                            <%elsif transaction.type_transaction == 'Vente'%>
-                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                            <% else %>
-                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
-                          <% end%>
+                          <%end %>
                         </td>
                     </tr>
                     
