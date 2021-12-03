@@ -14,10 +14,10 @@
     </td>
     <td class="p-2 whitespace-nowrap">
       <% if transaction.type_transaction == 'Dépôt'%>
-        <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
+        <div class="text-left font-medium text-green-500">+<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
         <%end%>
       <%if transaction.type_transaction == 'Rétrait' %>
-        <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+        <div class="text-left font-medium text-red-600">-<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
       <% end%>
     </td>
 </tr>
