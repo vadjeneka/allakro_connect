@@ -7,7 +7,7 @@ class Bid < ApplicationRecord
   validates :initial_price, numericality: { greater_than_or_equal_to: 50000 }
   validates :start_date, 
             :end_date, presence: true
-  validate :right_start_date, :right_end_date
+  #validate :right_start_date, :right_end_date
 
   scope :starting, -> { where("start_date <= ?", DateTime.current) }
   
@@ -17,7 +17,7 @@ class Bid < ApplicationRecord
   scope :finished, -> { where("end_date <= ?", DateTime.current) }
 
   scope :closed, -> {where(state:'closed').order(end_date: :desc)}
-  scope :not_validated, -> {where(is_validated: false)}
+  scope :not_validated, -> {where(validated: false)}
 
   def right_start_date
     if self.start_date < DateTime.current || (self.start_date.min != 0 && self.start_date.min != 30)

@@ -1,0 +1,65 @@
+<div>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Début</th>
+            <th class="px-4 py-3">Fin</th>
+            <th class="px-4 py-3">Prix initial</th>
+            <th class="px-4 py-3">Produit</th>
+            <th class="px-4 py-3">Statut</th>
+            <th class="px-4 py-3">Validée</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% @bids.each do |bid| %>
+          <%if bid.product.store == current_user.store%>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms font-semibold border">
+              <%= bid.id[0, 7].upcase %>
+            </td>
+            
+            <td class="px-4 py-3 text-xs border">
+              <%= bid.start_date.strftime("%d/%m/%Y") + " à " + bid.start_date.strftime("%H:%M") %>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= bid.end_date.strftime("%d/%m/%Y") + " à " + bid.end_date.strftime("%H:%M") %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= bid.initial_price %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                  <%= bid.product.name%>
+                </span>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                  <%= bid.state%>
+                </span>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                  <%= bid.validated%>
+                </span>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
+                  <%= link_to 'Details', store_bids_bid_details_path(bid.product.store,bid.id)%>
+                </span>
+            </td>
+          </tr>          
+        <% end %>
+        <% end %>
+        </tbody>
+      </table>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

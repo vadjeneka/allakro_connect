@@ -36,9 +36,17 @@ class BidsController < ApplicationController
     redirect_to bids_path, notice: "Your bid was cancelled"
   end
 
+  def historic
+    @bids = Bid.all
+  end
+
+  def details
+    @bid = Bid.find(params[:id])
+  end
+
   def edit
     @bid.find(params[:id])
-    @bid.update(is_validated: true)
+    @bid.update(validated: true)
     redirect_to bids_path, notice: "Bid validated"
   end
 

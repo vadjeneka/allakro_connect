@@ -55,6 +55,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # For historic of bids
+  get '/stores/:store_id/bids/' => "bids#historic", as: "store_bids_historic"
+  # For historic of bid details
+  get '/stores/:store_id/bids/:id' => "bids#details", as: "store_bids_bid_details"
+
   # get '/stores/:store_id/products/:id', to: 'products#show'
   get 'bids', to: 'bids#index'
 
