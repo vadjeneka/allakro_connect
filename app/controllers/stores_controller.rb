@@ -32,13 +32,13 @@ class StoresController < ApplicationController
   end
 
   def edit
-    @store = user.store
+    @store = current_user.store
   end
 
   def update
     @store = Store.find(params[:id])
     if @store.update(store_params)
-      redirect_to user_store_path(current_user,@store), notice: 'Store updated successfully'
+      redirect_to profile_path(current_user), notice: 'Information de la boutique mis a jour'
     else
       flash[:error] = 'Cannot update Store'
       render 'edit'
@@ -48,7 +48,7 @@ class StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
-    redirect_to user_stores_path(), notice: 'Store deleted successfully'
+    redirect_to profile_path(current_user), notice: 'Boutique supprime'
   end
 
 
