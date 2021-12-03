@@ -34,7 +34,8 @@ class ProductsController < ApplicationController
   def create
     @product = store.products.build(product_params)
     if @product.save
-      redirect_to store_path(@product.store), notice: 'Product was successfully created'
+      @store = @product.store
+      redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
     else
       flash[:error] = "Product could not be created"
       render 'new'

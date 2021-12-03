@@ -1,8 +1,8 @@
 class Bid < ApplicationRecord
   belongs_to :product
-  has_many :offers
-  
+  has_many :offers  
   has_one :active_bid, -> { where(state: 'actived') } 
+  has_one :inventory
 
   validates :initial_price, numericality: { greater_than_or_equal_to: 50000 }
   validates :start_date, 

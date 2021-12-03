@@ -136,15 +136,22 @@
                 ><%=winner.user.email%></span>
             </div>
             <%end%>
-            <%if @bid.state == 'actived' || @bid.state != 'waiting' %>
-              <div class='flex justify-center items-center'>
-                <%= link_to 'Supprimer', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :delete, data: {confirm: 'Êtes-vous sûr?'}, class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
-              </div>
-            <%end%>
-            <%if @bid.validated == false && @bid.state == 'closed'%>
-              <div class='flex justify-center items-center'>
-                <%= link_to 'Valider', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :patch, class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
-              </div>
+            <%case @bid.state
+              when 'waiting'%>
+                <div class='flex justify-center items-center'>
+                  <%= link_to 'Supprimer', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :delete, data: {confirm: 'Êtes-vous sûr?'}, class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
+                </div>
+              <%when 'actived'%>
+                <div class='flex justify-center items-center'>
+                  <%= link_to 'Supprimer', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :delete, data: {confirm: 'Êtes-vous sûr?'}, class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
+                </div>
+              <%when 'cancelled'%>
+              <%when 'closed'%>
+                <%if @bid.validated == false%>
+                  <div class='flex justify-center items-center'>
+                    <%= link_to 'Valider', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :patch, class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
+                  </div>
+                <%end%>
             <%end%>
           </div>
         </div>
