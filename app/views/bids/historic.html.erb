@@ -30,19 +30,48 @@
               <%= bid.initial_price %>
             </td>
             <td class="px-4 py-3 text-sm border">
-                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                <span class="px-2 py-1 font-semibold leading-tight text-white-700 rounded-sm">
                   <%= bid.product.name%>
                 </span>
             </td>
             <td class="px-4 py-3 text-sm border">
-                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                  <%= bid.state%>
-                </span>
+                <%case bid.state
+                  when 'wainting'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-yellow-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'actived'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'closed'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-blue-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'cancelled'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                <%end%>
             </td>
             <td class="px-4 py-3 text-sm border">
-                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                  <%= bid.validated%>
+                <%if bid.state == 'waiting' || bid.state == 'actived' || bid.state == 'cancelled'%>
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 rounded-sm">
+                  ***
                 </span>
+                <%else%>
+                    <%case bid.validated
+                    when true%>
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
+                        <%= bid.validated%>
+                      </span>
+                    <%when false%>
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                        <%= bid.validated%>
+                      </span>
+                    <%end%>
+
+                <%end%>
             </td>
             <td class="px-4 py-3 text-sm border">
                 <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">

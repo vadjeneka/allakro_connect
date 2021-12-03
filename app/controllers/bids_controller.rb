@@ -2,15 +2,11 @@ class BidsController < ApplicationController
   def index
     @bids = Bid.includes(:offers).active
     @coming_bids = Bid.waiting
-    @unvalidated = Bid.includes(:offers).closed
-    
   end
 
   def show
     @bid = Bid.find(params[:id])
     @top_offer = @bid.offers.top
-    # @unvalidated_bid = @unvalidated.find(params[:id])
-    # @winner = @unvalidated_bid.offers.top
   end
 
   def new
@@ -37,17 +33,18 @@ class BidsController < ApplicationController
   end
 
   def historic
-    @bids = Bid.all
+    @bids = Bid.all.order(created_at: :desc)
   end
 
   def details
     @bid = Bid.find(params[:id])
+    @winner = @bid.offers.top
   end
 
-  def edit
-    @bid.find(params[:id])
+  def update
+    @bid = Bid.find(params[:id])
     @bid.update(validated: true)
-    redirect_to bids_path, notice: "Bid validated"
+    redirect_to store_bids_historic_path(@bid.product.store), notice: "Enchère validée, produit vendu !"
   end
 
   private
