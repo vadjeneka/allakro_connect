@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
       # @products = Product.all
       @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]).filter_by_availability if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
       @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
-      # @products = @products.filter_by_location(params[:locations]).filter_by_availability if params[:locations].present?
+      @products = @products.filter_by_location(params[:locations]).filter_by_availability if params[:locations].present?
     # end
 
     @categories = category_returns

@@ -43,11 +43,11 @@ class Product < ApplicationRecord
 
   
   def self.search(search)
-    # if search
-    #   Product.joins(:categories).where(["lower(products.name) LIKE ? or lower(categories.name) LIKE ?", "%#{search.downcase}%","%#{search.downcase}%"]).where(is_available: true).uniq
-    # else
+    if search
+      Product.joins(:categories).where(["lower(products.name) LIKE ? or lower(categories.name) LIKE ?", "%#{search.downcase}%","%#{search.downcase}%"]).where(is_available: true).uniq
+    else
 
-    # end
+    end
   end
 
 end

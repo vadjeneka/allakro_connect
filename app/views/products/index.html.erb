@@ -4,6 +4,7 @@
 }
 
 </style>
+
 <%=form_with url: products_path, method: :get do |f| %>
   <% content_for :search_bar do %>
     <%=render partial: 'home/searchs', locals:{f: f}%>
