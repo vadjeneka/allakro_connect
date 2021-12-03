@@ -1,10 +1,11 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-
+# See https://github.com/omniauth/omniauth/wiki/FAQ#rails-session-is-clobbered-after-callback-on-developer-strategy
+skip_before_action :verify_authenticity_token, only: :facebook
 #skip_before_action :verify_authenticity_token
 
   def google_oauth2
-    #raise request.env['omniauth.auth'][:info].email.inspect
+    #raise request.env['omniauth.auth'][:extra][:raw_info][:name].split(' ')[1].inspect
     user = User.from_omniauth(from_google_params)
 
     if user.present?
@@ -17,6 +18,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+    def facebook
+      # You need to implement the method below in your model (e.g. app/models/user.rb)
+      @user = User.from_omniauth(request.env["omniauth.auth"])
+  
+      if @user.persisted?
+        sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+        set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+      else
+        session["devise.facebook_data"] = request.env["omniauth.auth"].except(:extra) # Removing extra as it can overflow some session stores
+        redirect_to new_user_registration_url
+      end
+    end
+  
+    def failure
+      redirect_to root_path
+    end
+
   protected
 
   def after_omniauth_failure_path_for(_scope)
@@ -26,6 +44,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || root_path
   end
+
+  # def after_sign_up_path_for(resource_or_scope)
+  #   stored_location_for(resource_or_scope) || root_path
+  # end
+
+  # after_inactive_sign_up_path_for
 
   private
 
@@ -39,25 +63,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth
     @auth ||= request.env['omniauth.auth']
-  end
-  # See https://github.com/omniauth/omniauth/wiki/FAQ#rails-session-is-clobbered-after-callback-on-developer-strategy
-  skip_before_action :verify_authenticity_token, only: :facebook
-
-  def facebook
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-
-    if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
-      set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
-    else
-      session["devise.facebook_data"] = request.env["omniauth.auth"].except(:extra) # Removing extra as it can overflow some session stores
-      redirect_to new_user_registration_url
-    end
-  end
-
-  def failure
-    redirect_to root_path
   end
   
 end

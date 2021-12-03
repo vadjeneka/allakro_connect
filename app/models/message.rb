@@ -17,7 +17,7 @@ class Message < ApplicationRecord
       else
         notification.user_id = self.chat.user.id
       end
-     
+    
     end
   end
 end

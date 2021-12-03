@@ -20,7 +20,8 @@
         </a>
       <%else%>
         <div class='flex justify-center items-center'>
-          <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-red-600 text-white px-5 py-2 font-medium rounded' %>
+          <%= link_to 'Supprimer mon store', store_path(@store), data:{confirm: 'Etes vous sur de vouloir supprimer votre compte? '} ,methode: :delete, class:'bg-red-600 text-white px-5 py-2 mr-2 font-medium rounded' %>
+          <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
         </div>
       <% end %>
     </div>

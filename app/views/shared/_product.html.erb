@@ -12,7 +12,7 @@
         <% end %>
       </h4>
       <h4 class="mb-3 text-md font-semibold tracking-tight text-gray-800">
-        <%= product.price %> FCFA
+        <%= number_with_delimiter(product.price, :delimiter => '.') %> FCFA
       </h4>
       <p class="leading-normal text-gray-700"><%= product.description %></p>
       <% product.categories.each do |category| %>

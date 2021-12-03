@@ -1,5 +1,40 @@
+<style>
+  .type-alert {
+    background:#F8503A;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+  .type-success {
+    background:#579E60;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+  .type-notice{
+    background:#4190C8;
+    width:25%;
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-opacity:0.8;
+    color:#fff
+  }
+</style>
+
+
+
 <% if resource.errors.any? %>
-  <div id="error_explanation">
+  <div id="error_explanation" class="absolute flex w-screen justify-center top-5 mt-10 z-10 ">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
@@ -8,7 +43,7 @@
     </h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="type-<%=type%>"><%= message %></li>
       <% end %>
     </ul>
   </div>
