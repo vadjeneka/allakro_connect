@@ -1,3 +1,16 @@
 @import "tailwindcss/base";
 @import "tailwindcss/utilities";
+
+.th {
+  @apply px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider;
+}
+
+.td {
+  @apply px-6 py-4 border-b text-blue-900 border-gray-500 text-sm leading-5;
+}
+
+.st-style {
+  @apply inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2;
+}
+
 @import "tailwindcss/components";

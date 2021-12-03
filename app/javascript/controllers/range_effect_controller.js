@@ -48,6 +48,9 @@ export default class extends Controller {
       this.mintrigger()
     }else{
       this.inputContainerLeftTarget.value = 500
+      this.validationLeft()
+      this.rangeFirstTarget.value = this.inputContainerLeftTarget.value
+      this.mintrigger()
     }
   }
   changeRangeLastValue() {
@@ -56,7 +59,10 @@ export default class extends Controller {
       this.rangeLastTarget.value = this.inputContainerRightTarget.value
       this.maxtrigger()
     }else{
-      this.inputContainerRightTarget.value = 500
+      this.inputContainerRightTarget.value = 1000000
+      this.validationRight()
+      this.rangeLastTarget.value = this.inputContainerRightTarget.value
+      this.maxtrigger()
     }
   }
   validationRight() {

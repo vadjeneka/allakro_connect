@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '2.7.2'
 # for using js with rails
 gem 'hotwire-rails'
 #radom image during times
@@ -31,6 +31,7 @@ gem 'redis', '~> 4.0'
 gem 'image_processing', '~> 1.2'
 
 gem 'hotwire-rails'
+gem 'kaminari'
 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 

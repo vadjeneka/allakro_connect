@@ -20,15 +20,17 @@
     <div class="w-2/5">
       <p class="py-10 text-4xl">Mon profil</p>
       <div class='block'>
-        <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
-        <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+        <%if current_user.store%>
+          <%= link_to 'Editer ma boutique',edit_store_path(current_user.store), class:'w-full block m-1 font-light text-xl py-1'%>
+        <% end %>
+        <%= link_to 'Editer mon profile',edit_profile_path(current_user),class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Operation sur mon compte',user_account_path(current_user, current_user.account),class:'w-full block m-1 font-light text-xl py-1'%>
+        <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full text-red-600 block m-1 font-medium text-xl py-1'%>
       </div>
     </div>
     <div class="width-70">
       <div class="w-full py-5 flex justify-between">
-        <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
+        <p class="text-2xl font-normal text-gray-700"><%="#{current_user.first_name} #{current_user.last_name}"%></p>
         <%if current_user.store%>
           <a href="<%=store_path(current_user.store)%>" class="px-3 py-2 bg-red-600 text-white rounded">Ma boutique</a>
         <% else %>
@@ -43,7 +45,9 @@
         <% end %>
       </div>
       <div class="w-full py-10"> 
-        <p class="text-3xl">Mes commandes</p>
+        <a href="<%= user_orders_path(current_user) %>">
+          <p class="text-3xl">Mes commandes</p>
+        </a>
         <div class="w-full flex justify-evenly items-center py-5">
           <a href="" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
@@ -67,7 +71,6 @@
     <%if current_user.store%>
       <div class="h-72 overflow-y-auto">
         <p class="text-2xl">Mes commandes</p>
-
       </div>
     <% end %>
     <div class='overflow-y-auto'>

@@ -16,7 +16,9 @@
     </div>
   <div class="width-80 h-full overflow-hidden relative px-2 pt-20">
     <p class="px-3 py-3 border-b w-full">
-      <strong class="text-black font-medium"><%=@store.name%></strong>
+      <strong class="text-black font-medium">
+        <%=!current_user.store ? "#{@store.name}" : current_user.store.id == @store.id ? "#{@chat.user.first_name} #{@chat.user.last_name}" : "#{@store.name}"%>
+      </strong>
     </p>
     <div class="px-2 py-2 h-90 overflow-y-auto" id="messages">
       <%=turbo_stream_from @chat.id %>
