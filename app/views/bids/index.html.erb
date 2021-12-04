@@ -1,5 +1,5 @@
 <style>
-
+  
 </style>
 <div class="p-5 pl-10">
   <div>
@@ -9,7 +9,7 @@
 
   <div class="">
     <% @bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+      <%= render partial: "shared/bid_cart", locals: { bid: bid } %>  
     <% end %>
   </div>
 
@@ -20,7 +20,7 @@
 
   <div>
     <% @coming_bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+      <%= render partial: "shared/bid_cart", locals: { bid: bid } %>
     <% end %>
   </div>
 
