@@ -6,6 +6,16 @@ export default class extends Controller {
 
   initialize() {
     this.formData = new FormData();
+    document.addEventListener("turbolinks:load", ()=>{
+      const query = window.location.search
+      const parameters = new URLSearchParams(query)
+      console.log("turbolinks",parameters.get("price[min]"))
+      console.log("turbolinks",parameters.getAll("categories[]"))
+      this.minPriceTarget.value = parseInt(parameters.get("price[min]"))
+
+      
+     })
+
   
   }
 
@@ -51,8 +61,7 @@ export default class extends Controller {
     const path = `/products?${submitUrl}`
 
     // console.log('path', path);
-
-    window.location.href = path
+    Turbolinks.visit(path)
   }
 
 }
