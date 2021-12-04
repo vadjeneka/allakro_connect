@@ -42,7 +42,7 @@
                     <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">
                             <div class="font-medium text-gray-800">
-                              <i class="fas fa-credit-card text-4xl"></i>
+                              <i class="fas fa-credit-card text-6xl"></i>
                             </div>
                         </div>
                     </td>
@@ -50,61 +50,84 @@
                         <div class="text-left"><%=current_user.email%></div>
                     </td>
                     <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-green-500 text-4xl"><%= @account.balance %> FCFA</div>
+                        <div class="text-left font-medium text-green-500 text-4xl"><%= number_with_delimiter(@account.balance, :delimiter => '.') %> FCFA</div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        </div> <br>
+        </div>
 
         <h3 class="text-base font-semibold text-gray-600"> Transactions effectuées <i class="fas fa-file-invoice-dollar"></i></h3>
-        <table class=" table w-full mb-2 ">
-          <thead class="text-xs font-semibold uppercase text-white bg-red-600">
-            <tr>
-              <th class="p-2 whitespace-nowrap">
-                <div class="font-semibold text-left">Date</div>
-              </th>
-              <th class="p-2 whitespace-nowrap">
-                <div class="font-semibold text-left">Type d'opération</div>
-              </th>
-              <th class="p-2 whitespace-nowrap">
-                <div class="font-semibold text-left">Montant</div>
-              </th>
-            </tr>
-          </thead>
-        </table>
+        <%= render 'thead' %>
         <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
           <table class="table w-full mt-5">
-            <% current_user.account.transactions.each do |transaction| %>
                 <tbody class="text-sm divide-y divide-gray-100 py-4">
-                    <tr class="bg-gray-100">
-                      <td class="p-2 whitespace-nowrap ">
-                          <div class="text-left">
-                            <%= transaction.created_at&.strftime("%a %D")%>
-                          </div>
-                      </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="font-medium text-gray-800">
-                                  <%= transaction.type_transaction%>
-                                </div>
+                  <% current_user.account.transactions.except_auctions.each do |transaction|%>
+                      <tr class="bg-gray-100">
+                        <td class="p-2 whitespace-nowrap ">
+                            <div class="text-left">
+                              <%= transaction.created_at&.strftime("%a %D")%>
                             </div>
                         </td>
-                        <td class="p-2 whitespace-nowrap">
-                          <% if transaction.type_transaction == 'Dépôt'%>
-                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
-                            <%else%>
-                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
-                            <% end%>
-                        </td>
-                    </tr>
+                          <td class="p-2 whitespace-nowrap">
+                              <div class="flex items-center">
+                                  <div class="font-medium text-gray-800">
+                                    <%= transaction.type_transaction%>
+                                  </div>
+                              </div>
+                          </td>
+                          <td class="p-2 whitespace-nowrap">
+                            <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Vente' %>
+                              <div class="text-left font-medium text-green-500">+<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
+                            <% end %>
+                            
+                            <%if transaction.type_transaction == 'Rétrait' || transaction.type_transaction == 'Achat' %>
+                                <div class="text-left font-medium text-red-600">-<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
+                            <%end %>
+                          </td>
+                      </tr>
                     
-                  
+                  <% end%>
                 </tbody>
-                <% end %>
             </table>
         </div>
       </div>
+    </div>
+
+    <div class="w-2/6 h-96 mt-52 bg-white overflow-scroll shadow-lg"> 
+      <h3 class="text-base font-semibold text-gray-600"> Transactions liées aux Enchères <i class="fas fa-hand-holding-usd"></i></h3>
+      <%= render 'thead'%>
+      <table class="table w-full mt-5">
+        <tbody class="text-sm divide-y divide-gray-100 py-2">
+          <% current_user.account.transactions.each do |transaction|%>
+              <% if transaction.type_transaction == 'Blocage' || transaction.type_transaction == 'Déblocage'%>
+                <tr class="bg-gray-100">
+                  <td class="p-2 whitespace-nowrap ">
+                      <div class="text-left">
+                        <%= transaction.created_at&.strftime("%a %D %I: %M %p")%>
+                      </div>
+                  </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="font-medium text-gray-800">
+                              <%= transaction.type_transaction%>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                      <% if transaction.type_transaction == 'Blocage' %>
+                        <div class="text-left font-medium text-green-500">-<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
+                      <% end %>
+                      
+                      <%if transaction.type_transaction == 'Déblocage' %>
+                          <div class="text-left font-medium text-red-600">+<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
+                      <%end %>
+                    </td>
+                </tr>
+              <%end%>
+          <% end%>
+              </tbody>
+            </table>
     </div>
   </div> <br>
   

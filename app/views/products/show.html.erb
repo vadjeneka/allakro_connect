@@ -30,8 +30,12 @@
       <div class="flex absolute py-2 top-3 px-7 justify-between items-center w-full">
         <p class="text-4xl font-medium text-gray-800"><%= @product.name%></p>
         <a href="<%=current_user ? like_path(@product, user:current_user, source: 'product') : new_user_session_path %>">
-          <%if !@favorite.empty?%>
-            <i class="fas fa-heart text-2xl text-red-500"></i>
+          <% if current_user %>
+            <%if !@favorite.empty?%>
+              <i class="fas fa-heart text-2xl text-red-500"></i>
+            <% else %>
+              <i class="fal fa-heart text-2xl"></i>
+            <% end %>
           <% else %>
             <i class="fal fa-heart text-2xl"></i>
           <% end %>
@@ -119,15 +123,3 @@
 <% content_for :footer do %>
   <%=render 'shared/footer'%>
 <% end %>
-
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<!-- Initialize Swiper -->
-<script>
-  var swiper = new Swiper('.swiper-container', {
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
-</script>

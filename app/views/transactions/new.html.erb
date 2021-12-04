@@ -43,7 +43,7 @@
         </table>
         </div> <br>
 
-        <h3 class="text-base font-semibold text-gray-600"> Transactions effectuées <i class="fas fa-file-invoice-dollar"></i></h3>
+        <h3 class=   "text-base font-semibold text-gray-600"> Transactions effectuées <i class="fas fa-file-invoice-dollar"></i></h3>
         <table class=" table w-full mb-2 ">
           <thead class="text-xs font-semibold uppercase text-white bg-red-600">
             <tr>
@@ -61,29 +61,9 @@
         </table>
         <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
           <table class="table w-full mt-4">
-            <% current_user.account.transactions.each do |transaction| %>
                 <tbody class="text-sm divide-y divide-gray-100 py-4">
-                    <tr>
-                      <td class="p-2 whitespace-nowrap">
-                          <div class="text-left">
-                            <%= transaction.created_at&.strftime("%I: %M %p")%>
-                          </div>
-                      </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="font-medium text-gray-800">
-                                  <%= transaction.type_transaction%>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="p-2 whitespace-nowrap">
-                            <div class="text-left font-medium text-green-500"><%= transaction.amount%></div>
-                        </td>
-                    </tr>
-                    
-                  
+                    <%= render partial: 'transaction', collection: @transactions%>                  
                 </tbody>
-                <% end %>
             </table>
         </div>
       </div>

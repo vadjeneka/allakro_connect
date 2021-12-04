@@ -3,7 +3,8 @@ class Account < ApplicationRecord
   has_many :transactions, dependent: :destroy
 
   def deposit(amount) #TODO: methode pour faire un depot effectué par le user
-    update(balance: self.balance + amount) if amount > 0
+    raise ::Errors::InvalidAmount if amount < 0
+    update(balance: self.balance + amount)
   end
 
   def withdraw(amount) #TODO: methode pour faire un retrait effectué par le user
@@ -11,16 +12,9 @@ class Account < ApplicationRecord
       update(balance: self.balance - amount)
       return amount
     end
-    return 0
+    raise ::Errors::UnsufficientFunds
   end
 
-  def purchase(product_price) #TODO: effectuer un achat c'est comme retrait 
-    withdraw(product_price)
-  end
-
-  def sale(product_price) #TODO: effectuer une vente c'ets comme un depot
-    deposit(product_price)
-  end
 
   def hold #TODO: bloquer l'argent
   end

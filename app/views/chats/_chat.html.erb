@@ -1,3 +1,29 @@
-<a href="<%= store_chat_path(chat.store, chat.id) %>" class='w-full px-5'>
-  <%="#{chat.user.first_name} #{chat.user.last_name}"%>
-</a> 
+
+<div class='mt-2 border-b border-gray-200 rounded py-1'>
+  <a href="<%= store_chat_path(chat.store, chat.id) %>" class='w-full px-1 flex items-center'>
+    <%if current_user.store %>
+      <% if current_user.store == chat.store %>
+        <%if chat.user.avatar.attached?%>
+          <%= image_tag chat.user.avatar, class:'object-cover h-10 w-10 rounded-full mr-2'%>
+        <% else %>
+          <%=image_tag 'Wavy Buddies - Avatar.png.jpg', class:'object-cover h-10 w-10 rounded-full mr-2'%>
+        <% end %>
+      <% else %>
+        <%if chat.store.background.attached?%>
+          <%= image_tag chat.store.background, class:'object-cover h-10 w-10 rounded-full mr-2'%>
+        <% else %>
+          <%=image_tag 'App-Store.jpg', class:'object-cover h-10 w-10 rounded-full mr-2'%>
+        <% end %>
+      <% end %>
+    <%else%>
+      <%if chat.store.background.attached?%>
+        <%= image_tag chat.store.background, class:'object-cover h-10 w-10 rounded-full mr-2'%>
+      <% else %>
+        <%=image_tag 'App-Store.jpg', class:'object-cover h-10 w-10 rounded-full mr-2'%>
+      <% end %> 
+    <% end %>
+    <p>
+      <%= !current_user.store ? "#{chat.store.name}" : current_user.store == chat.store ? "#{chat.user.first_name} #{chat.user.last_name}" : "#{chat.store.name}"%>
+    </p>
+  </a> 
+</div>
