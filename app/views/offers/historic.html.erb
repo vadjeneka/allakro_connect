@@ -1,0 +1,64 @@
+<div>
+  <h2 class="text-center font-bold text-3xl my-5">Mes offres</h2>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Montant</th>
+            <th class="px-4 py-3">Statut montant</th>
+            <th class="px-4 py-3">Article</th>
+            <th class="px-4 py-3">Fin enchère</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% @offers.each do |offer| %>
+          <%if offer.user == current_user%>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms font-semibold border">
+              <%= offer.id[0, 7].upcase %>
+            </td>
+            
+            <td class="px-4 py-3 text-xs border">
+              <%= offer.amount%>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <%case offer.accepted
+                  when true%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-green-100 rounded-sm">
+                      <%= offer.accepted%>
+                    </span>
+                  <%when false%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-red-100 rounded-sm">
+                      <%= offer.accepted%>
+                    </span>
+                <%end%>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-white-700 rounded-sm">
+                  <%= offer.bid.product.name%>
+                </span>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= offer.bid.end_date.strftime("%d/%m/%Y") + " à " + offer.bid.end_date.strftime("%H:%M") %>
+            </td>
+            
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
+                  <%= link_to 'Details', user_offers_offer_historic_details_path(offer.user,offer)%>
+                </span>
+            </td>
+          </tr>          
+        <% end %>
+        <% end %>
+        </tbody>
+      </table>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

@@ -56,11 +56,14 @@ Rails.application.routes.draw do
   end
 
   #Historic of offers by user
-  get 'profile/:user_id/offers' => "offers#historic", as "user_offers_historic"
+  get 'profile/:user_id/offers' => "offers#historic", as: "user_offers_historic"
+  #Details of offers by user
+  get 'profile/:user_id/offers/:id' => "offers#details", as: "user_offers_offer_historic_details"
+  
   # For historic of bids
   get '/stores/:store_id/bids/' => "bids#historic", as: "store_bids_historic"
   # For historic of bid details
-  get '/stores/:store_id/bids/:id' => "bids#details", as: "store_bids_bid_details"
+  get '/stores/:store_id/bids/:id' => "bids#details", as: "store_bids_bid_historic_details"
 
   # get '/stores/:store_id/products/:id', to: 'products#show'
   get 'bids', to: 'bids#index'
