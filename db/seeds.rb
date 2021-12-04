@@ -24,6 +24,17 @@ require 'faker'
   )
 end
 
+User.create!(
+  first_name: 'admin', 
+  last_name: 'admin', 
+  email: 'admin@techshelter.fr', 
+  password: '000000', 
+  password_confirmation: '000000',
+  town: 'Cocody',
+  city: 'Abidjan',
+  phone: '0102030405'
+)
+
 User.all.each do |user|
   Store.create!(name: Faker::Company.name, description: Faker::Lorem.paragraph, city: Faker::Demographic.demonym, town: Faker::Nation.capital_city, user_id: user.id).tap do |store|
     50.times do |x|

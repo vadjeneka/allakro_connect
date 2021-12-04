@@ -21,6 +21,9 @@ class User < ApplicationRecord
     # Ex:- scope :active, -> {where(:active => true)}
 
     
+  def admin?
+    email = "admin@techshelter.fr"
+  end
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
       user.provider = auth[:provider]

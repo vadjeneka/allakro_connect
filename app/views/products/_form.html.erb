@@ -29,7 +29,7 @@
           </div>
           <label class="flex justify-center py-1 items-center ease-linear transition-all duration-150 bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 h-14 w-14  rounded-full mx-auto mb-3">
             <i class="fad fa-plus text-xl"></i>
-            <%= form.file_field :product_backgrounds, multiple:true, direct_upload: true, accept:'.png, .jpeg, .fpg, .svg, .jpg',class:'hidden',data: {'display-img-on-create-target': 'imgGetter', action:'change->display-img-on-create#displayImage'} %>
+            <%= form.file_field 'product_backgrounds[]', accept:'.png, .jpeg, .fpg, .svg, .jpg',class:'hidden',data: {'display-img-on-create-target': 'imgGetter', action:'change->display-img-on-create#displayImage'} %>
           </label>
         </div>
       </div>

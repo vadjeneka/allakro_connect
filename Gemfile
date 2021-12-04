@@ -71,7 +71,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'redis', '~> 4.0'
 gem 'sidekiq'
 gem 'devise'
 
@@ -81,3 +80,4 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 gem 'notifications'
+gem 'aws-sdk-s3', require: false
