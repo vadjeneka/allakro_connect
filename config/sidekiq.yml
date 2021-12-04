@@ -1,8 +1,8 @@
 ---
 :concurrency: 2
 :queues:
-  - jokou_development_default
-  - jokou_development_mailers
+  - jokou_default
+  - jokou_mailers
 
 :schedule:
   banner:
