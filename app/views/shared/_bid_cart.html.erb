@@ -1,0 +1,18 @@
+<div class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mt-3">
+  <a href="<%= store_product_bid_path(bid.product.store, bid.product, bid) %>">
+    <% if bid.product.product_backgrounds.attached? %>
+      <%= image_tag bid.product.product_backgrounds[0], class:'object-cover' %>
+    <% else %>
+      <%= image_tag 'default_product_image.png', class:'object-cover' %>
+    <% end %>
+  </a>
+  <div class="p-5">
+    <a href="#">
+      <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2"><%= bid.product.name %></h5>
+    </a>
+    <p class="font-normal text-gray-700 mb-3"><%= bid.product.description %></p>
+    <a class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center" href="<%= store_product_bid_path(bid.product.store, bid.product, bid) %>">
+      Détails de l'enchère
+    </a>
+  </div>
+</div>

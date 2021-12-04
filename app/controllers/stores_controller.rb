@@ -1,8 +1,13 @@
 class StoresController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @store = user.store
-
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
+    @stores = Store.all
   end
 
   def new
@@ -15,26 +20,30 @@ class StoresController < ApplicationController
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products
+    @comments = Comment.joins(:product).where('products.store_id = ?', current_user.store.id) if current_user && current_user.store
   end
 
   def create
-    @store = Store.new(store_params)
+    # raise store_params[:background].inspect
+    @store = current_user.build_store(store_params)
     if @store.save
-      redirect_to user_store_path(current_user,@store), notice: 'Store was successfully created'
+      # raise "You here"
+      redirect_to store_path(@store), notice: 'Store was successfully created'
     else
+      raise "You got errors here"
       flash[:error] = "Store could not be created"
       render 'new'
     end
   end
 
   def edit
-    @store = user.store
+    @store = current_user.store
   end
 
   def update
     @store = Store.find(params[:id])
     if @store.update(store_params)
-      redirect_to user_store_path(current_user,@store), notice: 'Store updated successfully'
+      redirect_to profile_path(current_user), notice: 'Information de la boutique mis a jour'
     else
       flash[:error] = 'Cannot update Store'
       render 'edit'
@@ -44,7 +53,7 @@ class StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
-    redirect_to user_stores_path(), notice: 'Store deleted successfully'
+    redirect_to profile_path(current_user), notice: 'Boutique supprime'
   end
 
 
@@ -60,7 +69,6 @@ class StoresController < ApplicationController
       :description,
       :city,
       :town,
-      :user_id,
       :background
     )
   end

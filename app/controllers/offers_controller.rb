@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  
   def index
   end
 
@@ -13,11 +14,43 @@ class OffersController < ApplicationController
   def create
     @bid = Bid.find(params[:bid_id])
     @offer = @bid.offers.build(params_offer)
-    if @offer.save
-      redirect_to user_store_product_bid_offers_path(@bid.product.store.user, @bid.product.store, @bid.product, @bid), notice: "Your offer successfully saved"
-    else
-      flash[:error] = "Your offer was not saved"
-      render "new"
+    top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
+    @offer.with_lock do
+      if @offer.amount > top
+        Transaction.hold(@offer)
+        if @offer.save
+          redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
+        else
+          flash[:error] = "Your offer was not saved"
+          render "new"
+        end
+      else
+        redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
+      end
+    end
+  end
+
+
+  def historic
+    @offers = Offer.all.order(created_at: :desc)
+  end
+
+  def details
+    @offer = Offer.find(params[:id])
+    @offer = @bid.offers.build(params_offer)
+    top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
+    @offer.with_lock do
+      if @offer.amount > top
+        Transaction.hold(@offer)
+        if @offer.save
+          redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
+        else
+          flash[:error] = "Your offer was not saved"
+          render "new"
+        end
+      else
+        redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
+      end
     end
   end
 

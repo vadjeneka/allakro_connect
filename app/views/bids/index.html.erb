@@ -1,12 +1,20 @@
+<style>
+  .min-h-s{
+    min-height: 10rem;
+  }
+</style>
 <div class="p-5 pl-10">
   <div>
-    <h2 class="text-3xl font-bold mb-5 ml-5">Enchères</h2>
+    <h2 class="text-3xl font-bold my-7 ml-5">Enchères en cours</h2>
     <hr>
   </div>
 
-  <div>
+  <div class="min-h-s flex flew-wrap content-start mr-3">
     <% @bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+      <%= render partial: "shared/bid_cart", locals: { bid: bid } %>  
+    <% end %>
+    <%if @bids.length == 0%>
+      <p class="w-full h-full py-10 text-gray-400 text-3xl text-center">Aucune enchères en cours...</p>
     <% end %>
   </div>
 
@@ -15,9 +23,12 @@
     <hr>
   </div>
 
-  <div>
+  <div class='min-h-s'>
     <% @coming_bids.each do |bid| %>
-      <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
+      <%= render partial: "shared/bid_cart", locals: { bid: bid } %>
+    <% end %>
+    <%if @coming_bids.length == 0%>
+      <p class="w-full h-full py-10 text-gray-400 text-3xl text-center">Aucune enchères à venir...</p>
     <% end %>
   </div>
 

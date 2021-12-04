@@ -1,5 +1,7 @@
-<h1>Stores Modification</h1>
-<%= render partial: 'form', locals: {user: @user, store: @store, submit: 'update'}%>
+<div>
+  <h1 class="text-4xl font-medium text-gray-700 px-3 py-5">Stores Modification</h1>
+  <%= render partial: 'form', locals: {user: @user, store: @store, submit: 'Mettre a jour'}%>
+</div>
 
 <% content_for :banners do %>
   <%=render 'shared/banners'%>
