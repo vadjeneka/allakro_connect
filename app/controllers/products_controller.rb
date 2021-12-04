@@ -73,6 +73,9 @@ class ProductsController < ApplicationController
     # raise product_params.inspect
     # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
+    list_img.each do |img|
+      @product.product_backgrounds[img].destroy
+    end
     if @product.update(product_params)
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
@@ -154,7 +157,8 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      product_backgrounds:[]
+      :hidden_items,
+      product_backgrounds:[],
     )
   end
 end
