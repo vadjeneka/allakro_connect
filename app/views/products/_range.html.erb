@@ -10,8 +10,8 @@ input[type=range]::-webkit-slider-thumb {
 <div class="flex justify-center items-center mt-6" data-controller="range-effect">
   <div class="relative max-w-xl w-full">
     <div>
-      <input type="range" step="5" data-action='input->range-effect#mintrigger  '  class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer" data-range-effect-target="rangeFirst" data-search-target='minPrice' data-range-effect-min-price-value="1000">
-      <input type="range" step="5" data-action='input->range-effect#maxtrigger ' class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer" data-range-effect-target="rangeLast" data-search-target='maxPrice' data-range-effect-max-price-value ="100000">
+      <input type="range" step="5" data-action='input->range-effect#mintrigger  '  class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer" data-range-effect-target="rangeFirst" data-search-target='minPrice' data-value="<%= @search_infos[:min_price] %>">
+      <input type="range" step="5" data-action='input->range-effect#maxtrigger ' class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer" data-range-effect-target="rangeLast" data-search-target='maxPrice' data-value ="<%= @search_infos[:max_price] %>">
       <div class="relative z-10 h-1">
         <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
         <div class="absolute z-20 top-0 bottom-0 rounded-md bg-red-700" data-range-effect-target="rangeBarColor"></div>

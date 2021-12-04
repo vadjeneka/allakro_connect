@@ -1,8 +1,5 @@
 <div class="my-1 flex items-center pl-3"> 
-  <input id="checkBox" type="checkbox" name="categorie"  value="<%=categories.name%>" data-search-target='category' >
+  <input id="checkBox" type="checkbox" name="categorie"  value="<%=categories.name%>" data-search-target='category' <%= @search_infos[:categories].include?(categories.name) ? 'checked' : ''%>>
   <label for="categorie" class="text-lg ml-2"><%=categories.name%></label>
 </div>
-   <script> 
-
-</script> 
 

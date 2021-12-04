@@ -3,25 +3,24 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="range-effect"
 export default class extends Controller {
   static targets = ['rangeLeftThumb','rangeRightThumb','rangeBarColor','rangeFirst','rangeLast', 'inputContainerLeft','inputContainerRight']
-  static values = {
-    minPrice : Number,
-    maxPrice : Number
-  }
+
   initialize(){
-    this.minprice = this.minPriceValue || 500
-    this.maxprice = this.maxPriceValue || 1000000
+    this.minprice = 500
+    this.maxprice = 1000000
     this.min = 500
     this.max = 1000000
     this.minthumb = 0
     this.maxthumb = 0
   }
   connect() {
+    const defaultMinPrice = this.rangeFirstTarget.getAttribute('data-value')
+    const defaultMaxPrice = this.rangeLastTarget.getAttribute('data-value')
     this.rangeFirstTarget.max = this.max
     this.rangeFirstTarget.min = this.min
     this.rangeLastTarget.max = this.max
     this.rangeLastTarget.min = this.min
-    this.rangeFirstTarget.value =  this.min
-    this.rangeLastTarget.value =  this.max
+    this.rangeFirstTarget.value =  defaultMinPrice || this.min
+    this.rangeLastTarget.value =  defaultMaxPrice || this.max
     this.mintrigger()
     this.maxtrigger()
   }

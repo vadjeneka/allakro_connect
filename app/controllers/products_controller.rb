@@ -16,6 +16,14 @@ class ProductsController < ApplicationController
 
     @categories = category_returns
     @cities = cities_return
+
+    @search_infos = { 
+      min_price: params.dig(:price, :min),
+      max_price: params.dig(:price, :max),
+      categories: (params.dig(:categories) || []) ,
+      locations: (params.dig(:locations) || [])
+    }
+
   end
 
   
