@@ -2,6 +2,7 @@ class Account < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_many :transactions, dependent: :destroy
 
+
   def deposit(amount) #TODO: methode pour faire un depot effectué par le user
     raise ::Errors::InvalidAmount if amount < 0
     update(balance: self.balance + amount)
