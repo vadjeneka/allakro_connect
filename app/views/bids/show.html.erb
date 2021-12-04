@@ -1,13 +1,18 @@
 <h2 class="text-3xl font-bold text-center my-5">
   Enchère sur "<%= @bid.product.name %>" 
+  <p class="text-xl mt-5">
+    Fin le <%= @bid.created_at.strftime("%d/%m/%Y") + " à " + @bid.created_at.strftime("%H:%M")  %> 
+  </p>
   <% if !@bid.offers %>
-    <% @bid.initial_price %>
+    <% @bid.initial_price %> 
   <% end %>
 </h2>
 <%# TODO: Ajouter l'image %>
 <% if @bid.state == "actived" %>
   <%# TODO: Create comps for top offer %>
-  <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
+  <% if @bid.product.store.user != current_user %>
+    <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
+  <% end %>
   <%= render partial: "shared/top_offer", locals: { top_offer: @top_offer } %>
 <% end %>
 
