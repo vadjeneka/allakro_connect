@@ -13,16 +13,23 @@
       <p class="text-4xl font-medium text-center">
         <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
       </p>
-      <% if @store.user.id != current_user.id%>
-        <a href="<%= new_store_chat_path(@store) %>" class="bg-green-600 text-white px-5 py-2 rounded">
+      <%if current_user %>
+        <% if current_user && @store.user.id != current_user.id %>
+          <a href="<%= current_user ? new_store_chat_path(@store): new_user_session_path %>" class="bg-green-600 text-white px-5 py-2 rounded">
+            Ecrire
+            <i class="fad fa-paper-plane"></i>
+          </a>
+        <%else%>
+          <div class='flex justify-center items-center'>
+            <%= link_to 'Supprimer mon store', store_path(@store), data:{confirm: 'Etes vous sur de vouloir supprimer votre compte? '} ,methode: :delete, class:'bg-red-600 text-white px-5 py-2 mr-2 font-medium rounded' %>
+            <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
+          </div>
+        <% end %>
+      <% else %>
+        <a href="<%= new_user_session_path %>" class="bg-green-600 text-white px-5 py-2 rounded">
           Ecrire
           <i class="fad fa-paper-plane"></i>
         </a>
-      <%else%>
-        <div class='flex justify-center items-center'>
-          <%= link_to 'Supprimer mon store', store_path(@store), data:{confirm: 'Etes vous sur de vouloir supprimer votre compte? '} ,methode: :delete, class:'bg-red-600 text-white px-5 py-2 mr-2 font-medium rounded' %>
-          <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
-        </div>
       <% end %>
     </div>
     <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto'>

@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
   
   def index
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
     # if params[:name]
     #   @products = Product.search(params[:name])
     # else

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       redirect_to products_path(name: params[:name])
     end
     @products = Product.all.includes(:store).sort_by {rand}[0,8]
-    @tendance = Tendance.last
+    @tendance = Tendance.order(created_at: :desc).first
     @stores = Store.all.includes(:user).sort_by {rand}[0,4]
     @product_tendances = Product.all.includes(:store).reject{|product| @products.include?(product)}.sort_by {rand}[0,4]
   end

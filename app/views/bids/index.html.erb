@@ -1,10 +1,13 @@
+<style>
+
+</style>
 <div class="p-5 pl-10">
   <div>
     <h2 class="text-3xl font-bold mb-5 ml-5">Enchères</h2>
     <hr>
   </div>
 
-  <div>
+  <div class="">
     <% @bids.each do |bid| %>
       <%= link_to "#{bid.product.name}", store_product_bid_path(bid.product.store, bid.product, bid) %>
     <% end %>
