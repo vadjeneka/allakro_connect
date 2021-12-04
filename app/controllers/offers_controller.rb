@@ -14,8 +14,9 @@ class OffersController < ApplicationController
   def create
     @bid = Bid.find(params[:bid_id])
     @offer = @bid.offers.build(params_offer)
+    top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
     @offer.with_lock do
-      if @offer.amount > @bid.offers.top.first.amount
+      if @offer.amount > top
         Transaction.hold(@offer)
         if @offer.save
           redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
