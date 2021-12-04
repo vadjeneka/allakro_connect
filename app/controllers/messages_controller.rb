@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
       if message.save
         respond_to do |format|
           format.turbo_stream do
+            MessageMailer.with(message:message).confirm_message_email.deliver_later
             render turbo_stream: turbo_stream.append(:messages, partial: "messages/message",
               locals: { message: message, user: current_user})
           end

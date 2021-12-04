@@ -6,7 +6,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
   config.action_mailer.delivery_method = :smtp # or :sendmail
   config.action_mailer.perform_deliveries = true
-  config.active_job.queue_name_prefix = "jokou_development"
+  config.active_job.queue_name_prefix = "jokou"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

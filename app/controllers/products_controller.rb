@@ -51,8 +51,11 @@ class ProductsController < ApplicationController
   end
 
   def create
+    raise params[:product][:product_backgrounds].inspect
     @product = store.products.build(product_params)
     if @product.save
+      @store = @product.store
+      redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
       if (params[:product][:quantity]).to_i >= 0
         stock = @product.build_stock(quantity: (params[:product][:quantity]).to_i)        
       else
@@ -82,6 +85,7 @@ class ProductsController < ApplicationController
       @product.product_backgrounds[img].destroy
     end
     if @product.update(product_params)
+      # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
       flash[:error] = 'Cannot update Product'

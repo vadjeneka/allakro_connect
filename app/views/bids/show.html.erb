@@ -1,11 +1,11 @@
 <h2 class="text-3xl font-bold text-center my-5">
   Enchère sur "<%= @bid.product.name %>" 
   <p class="text-xl mt-5">
-    Fin le <%= @bid.created_at.strftime("%d/%m/%Y") + " à " + @bid.created_at.strftime("%H:%M")  %> 
+    Fin le <%= @bid.end_date.strftime("%d/%m/%Y") + " à " + @bid.end_date.strftime("%H:%M")  %>
+    <% if @bid.offers.size == 0 %>
+      ,Montant initial : <span class="text-red-500"><%= @bid.initial_price %> FCFA </span>
+    <% end %>
   </p>
-  <% if !@bid.offers %>
-    <% @bid.initial_price %> 
-  <% end %>
 </h2>
 <%# TODO: Ajouter l'image %>
 <% if @bid.state == "actived" %>

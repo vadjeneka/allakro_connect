@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
     @comment = @product.comments.create(comment_params)
     @comment.user = current_user
     if @comment.save
+      CommentMailer.with(comment:@comment).confirm_comment_email.deliver_later
       redirect_to store_product_path(@product.store, @product), notice:'Votre avis à bien été envoyé'
     end
   end

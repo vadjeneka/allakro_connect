@@ -5,11 +5,11 @@
 </style>
 <div class="p-5 pl-10">
   <div>
-    <h2 class="text-3xl font-bold mb-5 ml-5">Enchères</h2>
+    <h2 class="text-3xl font-bold my-7 ml-5">Enchères en cours</h2>
     <hr>
   </div>
 
-  <div class="min-h-s">
+  <div class="min-h-s flex flew-wrap content-start mr-3">
     <% @bids.each do |bid| %>
       <%= render partial: "shared/bid_cart", locals: { bid: bid } %>  
     <% end %>
