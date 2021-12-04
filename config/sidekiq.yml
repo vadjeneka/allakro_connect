@@ -11,6 +11,6 @@
     enable: true
   
   bid_active:
-    cron: '*/30 * * * * Africa/Abidjan'
+    cron: '*/1 * * * * Africa/Abidjan'
     class: SetBidStateJob
     enable: true
