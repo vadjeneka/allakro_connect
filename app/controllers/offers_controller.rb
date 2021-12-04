@@ -14,6 +14,9 @@ class OffersController < ApplicationController
   def create
     @bid = Bid.find(params[:bid_id])
     @offers = Offer.find_by(bid_id: params[:bid_id])
+    users = Offer.includes(:user).where(bid_id:params[:bid_id])
+
+   
     # First offer
     
     # if params_offer[:amount].to_i <= @bid.initial_price
@@ -43,6 +46,9 @@ class OffersController < ApplicationController
         @offer = @bid.offers.build(params_offer)
         if @offer.amount > @bid.offers.top.first&.amount
           @offer.save
+          users.each do |offer|
+            OfferMailer.with(@offers: offer).new_offer_email.deliver_later
+          end
           redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
         else
           flash[:error] = "Offre non enregistrée: inferieure à l'offre gagnante"
