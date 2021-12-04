@@ -10,7 +10,7 @@
     <div class="py-2 flex items-center justify-between ">
       <div class="w-32">
         <p class=" font-medium text-lg"><%=product.name%></p>
-        <p class=" font-normal text-sm py-1"><%=product.price%> FCFA</p>
+        <p class=" font-normal text-sm py-1"><%=number_with_delimiter(product.price, :delimiter => '.')%> FCFA</p>
       </div>
       <%if product.store.user != current_user%>
         <div class="w-2/5">

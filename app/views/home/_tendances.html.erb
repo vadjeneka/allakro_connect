@@ -4,7 +4,7 @@
     <p class="font-light w-full py-5 pr-5">
       <%=tendance.product.description%></p>
     </p>
-    <p class="text-4xl font-semibold w-full"><%=tendance.product.price%> FCFA</p>
+    <p class="text-4xl font-semibold w-full"><%=number_with_delimiter(tendance.product.price, :delimiter => '.')%> FCFA</p>
     <div class="flex py-5">
       <a href="#" class='py-3 px-10 bg-red-600 text-white font-semibold text-lg'> 
         Ajouter au panier

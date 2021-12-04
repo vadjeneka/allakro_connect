@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     get "users/signin", to: "users/sessions#new", as: :new_user_session_path
   end
   mount Notifications::Engine => "/notifications"
-  get 'profile/:id', to: 'profiles#show', as: 'profile'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   if Rails.env.development?
@@ -29,7 +28,9 @@ Rails.application.routes.draw do
   resources :carts, only: [:index, :destroy]
   
   resources :users do
-    resources :accounts
+    resources :accounts do
+      resources :transactions
+    end
     resources :favorites
     resources :orders, only: [:index]
     resources :chats do
@@ -57,12 +58,16 @@ Rails.application.routes.draw do
   
   # get '/stores/:store_id/products/:id', to: 'products#show'
   get 'bids', to: 'bids#index'
+
+  # Validate/Reject order
+  put 'stores/:store_id/orders/:id/validated' => "orders#validate_order", as: "validate_order"
+  put 'stores/:store_id/orders/:id/rejected' => "orders#reject_order", as: "reject_order"
   
   resources :line_items, only: [:create]
   post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
   post 'line_items/:id/reduce' => "line_items#reduce_quantity", as: "line_item_reduce"
   delete 'line_items/:id' => "line_items#destroy", as: "line_item_delete"
-  resources :profiles
+  resources :profiles, only: %i[show edit update]
 
   root to: "home#index"
 end
