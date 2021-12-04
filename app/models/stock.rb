@@ -1,5 +1,5 @@
 class Stock < ApplicationRecord
-  belongs_to :
+  belongs_to :product
   
   def decrement_quantity(line_items)
     @product = Product.find(params[:product_id])
