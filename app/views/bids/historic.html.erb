@@ -1,0 +1,95 @@
+<div>
+  <h2 class="text-center font-bold text-3xl my-5">Mes enchères</h2>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Début</th>
+            <th class="px-4 py-3">Fin</th>
+            <th class="px-4 py-3">Prix initial</th>
+            <th class="px-4 py-3">Produit</th>
+            <th class="px-4 py-3">Statut</th>
+            <th class="px-4 py-3">Validée</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% @bids.each do |bid| %>
+          <%if bid.product.store == current_user.store%>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms font-semibold border">
+              <%= bid.id[0, 7].upcase %>
+            </td>
+            
+            <td class="px-4 py-3 text-xs border">
+              <%= bid.start_date.strftime("%d/%m/%Y") + " à " + bid.start_date.strftime("%H:%M") %>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= bid.end_date.strftime("%d/%m/%Y") + " à " + bid.end_date.strftime("%H:%M") %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= bid.initial_price %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-white-700 rounded-sm">
+                  <%= bid.product.name%>
+                </span>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <%case bid.state
+                  when 'wainting'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-yellow-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'actived'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'closed'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-blue-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                  <%when 'cancelled'%>
+                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                      <%= bid.state%>
+                    </span>
+                <%end%>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <%if bid.state == 'waiting' || bid.state == 'actived' || bid.state == 'cancelled'%>
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 rounded-sm">
+                  ***
+                </span>
+                <%else%>
+                    <%case bid.validated
+                    when true%>
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
+                        <%= bid.validated%>
+                      </span>
+                    <%when false%>
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                        <%= bid.validated%>
+                      </span>
+                    <%end%>
+
+                <%end%>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
+                  <%= link_to 'Details', store_bids_bid_details_path(bid.product.store,bid.id)%>
+                </span>
+            </td>
+          </tr>          
+        <% end %>
+        <% end %>
+        </tbody>
+      </table>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
