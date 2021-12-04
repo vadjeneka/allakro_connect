@@ -1,24 +1,48 @@
-<div class="ml-60 bg-gray-200 h-32 flex m-2 rounded justify-items-center justify-between mr-80">
-  <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
-    <i class="fad fa-times-circle text-2xl text-red-400"></i>
-  </a>
-  <div class="h-50 bg-red-200">
-  </div>
-  <div class="">
-    <h2 class="font-bold">Produit : <%= item.product.name %></h2>
-    <p><%= item.product.description %></p>
-    <p><%= item.product.weight %> g</p>
-    <p><%= item.total_price %> xof</p>
-  </div>
-  <div class="mt-12 text-3xl mr-5"> 
-    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
-      <i class="fad fa-minus-circle text-3xl"></i>
-    </a>
-    <span class="font-bold">
-      <%= item.quantity %>
-    </span>
-    <a href="<%= line_item_add_path(item) %>" data-method="POST">
-      <i class="fad fa-plus-circle text-3xl"></i>
-    </a>
-  </div>
+  <div class="container mx-auto mt-10 ">
+    <div class="flex shadow-md my-10">
+      <div class="w-3/4 bg-white px-10 py-10">
+        <div class="flex mt-10 mb-5">
+          <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Quantité</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Prix</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Supprimer</h3>
+        </div>
+        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+          <div class="flex w-2/5"> <!-- product -->
+            <div class="w-30">
+              <% if item.product.product_backgrounds.attached? %>
+                <%=image_tag product.product_backgrounds[0], class:'h-40 w-full object-cover'%>
+              <%else%>
+                <%=image_tag 'default_product_image.png', class:'h-40 w-full object-cover'%>
+              <% end %>
+            </div>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="font-bold text-sm"><%= item.product.name %></span>
+              <span class="font-semibold text-gray-500 text-xs"><%= item.product.description %></span>
+              <span class="font-semibold text-gray-500 text-xs"><%= item.product.weight %> Kg</span>
+            </div>
+          </div>
+          <div class="flex justify-center w-1/5">
+              <a href="<%= line_item_reduce_path(item) %>" data-method="POST" data-remote="true">
+                  <svg class="fill-current text-gray-600 w-3 mr-2" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                  </svg>  
+              </a>
+                <%= item.quantity %>
+              <a href="<%= line_item_add_path(item) %>" data-method="POST">
+                <svg class="fill-current text-gray-600 w-3 ml-2" viewBox="0 0 448 512">
+                  <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                </svg>
+              </a>
+              
+          </div>
+          
+          <span class="text-center w-1/5 font-semibold text-sm"><%= item.product.price %> XOF</span>
+          <span class="text-center w-1/5 font-semibold text-sm"><%= item.total_price %> XOF</span>
+          <span class="text-center w-1/5 font-semibold text-sm"><a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" > <i class="fas fa-trash text-xl"></i>
+          </a></span>
+        </div>
+      </div>
+
+    </div>
 </div>

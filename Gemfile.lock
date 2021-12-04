@@ -369,6 +369,7 @@ DEPENDENCIES
   hotwire-rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.3)
   notifications
   omniauth

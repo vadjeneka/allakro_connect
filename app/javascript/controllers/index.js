@@ -6,11 +6,17 @@ import { application } from "./application"
 import ActionOnSubmitController from "./action_on_submit_controller.js"
 application.register("action-on-submit", ActionOnSubmitController)
 
+import DisplayEditUserImgController from "./display_edit_user_img_controller.js"
+application.register("display-edit-user-img", DisplayEditUserImgController)
+
 import DisplayImgOnCreateController from "./display_img_on_create_controller.js"
 application.register("display-img-on-create", DisplayImgOnCreateController)
 
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import ImgDisplayOnCreateStoreController from "./img_display_on_create_store_controller.js"
+application.register("img-display-on-create-store", ImgDisplayOnCreateStoreController)
 
 import MessageController from "./message_controller.js"
 application.register("message", MessageController)

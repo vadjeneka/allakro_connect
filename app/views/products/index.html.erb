@@ -3,6 +3,33 @@
   min-height:35rem
 }
 
+.pagination{
+  background: #fff !important;
+  padding:10px 20px !important;  
+  box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.46) !important;
+  border-radius:5px !important;
+}
+.page{
+  padding:3px 10px 3px 13px !important;
+  margin:0 3px !important;
+  text-align:center !important;
+  border-radius:2px !important;
+  height: 10px !important;
+  font-weight:600 !important;
+}
+.current{
+  color:white !important;
+  background:#CE4027 !important;
+}
+.next, .last, .prev, .first{
+  color:white !important;
+  background:#CE4027 !important;
+  border-radius:2px !important;
+  padding:3px 10px 3px 13px !important;
+  margin:1px;
+
+}
+
 </style>
 
 <%=form_with url: products_path, method: :get do |f| %>
@@ -24,19 +51,23 @@
         <span class="w-full font-medium">Tranche de prix</span>
         <%=render 'range'%>
       </div>
-      <div class="bg-red-600 col-12 rounded mt-3 align-middle justify-content-center flex " >
-				<button type="button" class="btn btn-light mr-10 shadow-sm" data-action="click->search#performSearch">Filters <i class="fa fa-filter"></i></button>
+      <div class="py-3 justify-center align-items flex " >
+				<button type="button" class="text-white bg-red-500 px-10 rounded py-1" data-action="click->search#performSearch">Filters <i class="fa fa-filter"></i></button>
 			</div>
     </div>
-    <div class="w-4/5 grid grid-cols-4 gap-2 px-2">
-      <%=render partial:'home/product', collection:@products%>
+    <div class='w-4/5 px-2'>
+      <div class="w-full grid grid-cols-4 gap-2">
+        <%=render partial:'home/product', collection:@products%>
+      </div>
+      <div class='w-full py-2 flex justify-center items-center'>
+        <%= paginate @products %>
+      </div>
     </div>
   </div>
 <% end %>
 <% content_for :banners do %>
   <%=render 'shared/banners'%>
 <% end %>
-
 <% content_for :footer do %>
   <%=render 'shared/footer'%>
 <% end %>

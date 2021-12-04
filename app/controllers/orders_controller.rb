@@ -7,9 +7,7 @@ class OrdersController < ApplicationController
     if params[:store_id]
       store = Store.includes(:orders).find(params[:store_id])
       @store_orders = store.orders
-      # raise store.orders.inspect
     end
-    # raise @store_orders.inspect
   end
 
   def show

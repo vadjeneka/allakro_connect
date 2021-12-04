@@ -1,0 +1,8 @@
+<% top_offer.each do |offer| %>
+    <h2 class="text-2xl font-bold text-center my-5">Dernière offre gagnante : 
+      <% if offer.user == current_user %>
+        <%= offer.user.email %> 
+      <% end %>
+      <span class="text-red-600"><%= offer.amount %> XOF</span>
+    </h2>
+  <% end %>

@@ -17,14 +17,14 @@
 <% if @user_order %>
   <div class="flex flex-col text-2xl font-bold mt-10 items-center">
     <h2>
-      Store : <%= @user_order.cart.store.name %>
+      Depuis "<%= @user_order.cart.store.name %>"
+      <a href="<%= user_order_path(@user_order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
+          <i class="fad fa-times-circle text-3xl text-red-500"></i> 
+      </a>
     </h2>
     <% @user_order.cart.line_items.each do |item| %>
       <div>
         Produit : <%= item.product.name %>.
-        <a href="<%= user_order_path(@user_order) %>" data-method="DELETE", data-confirm="Supprimer la commande ?">
-          <i class="fad fa-times-circle text-3xl text-red-500"></i>
-        </a>
       </div>
       <div>
         Quantité: <%= item.quantity %>.

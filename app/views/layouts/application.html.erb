@@ -20,6 +20,7 @@
   <% stimulus_controller = controller.controller_name == 'products' ? 'search': ''%>
   <body data-controller="<%= stimulus_controller%>">
     <%=render 'shared/flashes'%>
+    <%#=render 'devise/shared/error_messages'%>
     <%#=render 'shared/banners'%>
     <%=yield :banners%>
     <div class=" overflow-x-hidden">
@@ -27,15 +28,26 @@
     </div>
     <%#=render 'shared/footer'%>
     <%=yield :footer%>
-    
-   <!--abridgement-->
+
+
+    <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!-- Initialize Swiper -->
     <script>
-      var swiper = new Swiper('.swiper-container', {
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        keyboard: {
+          enabled: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         },
       });
     </script>

@@ -50,28 +50,6 @@ export default class extends Controller {
     const submitUrl = new URLSearchParams(this.formData).toString();
     const path = `/products?${submitUrl}`
 
-    $(function () {
-      if (localStorage && localStorage["checked"]) {
-          var localStoredData = JSON.parse(localStorage["checked"]);
-          var checkboxes = $("input[name='categorie']");
-          for (var i = 0; i < checkboxes.length; i++) {
-              for (var j = 0; j < localStoredData.length; j++) {
-                  if (checkboxes[i].value == localStoredData[j]) {
-                      checkboxes[i].checked = true;
-                  }
-              }
-          }
-          localStorage.removeItem('checked');
-      }
-      $("input[type=checkbox]").click(function () {
-          var data = $("input[name='categorie']:checked").map(function () {
-              return this.value;
-          }).get();
-          localStorage['checked'] = JSON.stringify(data);
-          window.location.reload();
-      });
-  });   
-
     // console.log('path', path);
 
     window.location.href = path

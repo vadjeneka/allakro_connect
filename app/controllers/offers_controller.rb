@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  
   def index
   end
 
@@ -14,7 +15,7 @@ class OffersController < ApplicationController
     @bid = Bid.find(params[:bid_id])
     @offer = @bid.offers.build(params_offer)
     if @offer.save
-      redirect_to user_store_product_bid_offers_path(@bid.product.store.user, @bid.product.store, @bid.product, @bid), notice: "Your offer successfully saved"
+      redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Your offer successfully saved"
     else
       flash[:error] = "Your offer was not saved"
       render "new"
