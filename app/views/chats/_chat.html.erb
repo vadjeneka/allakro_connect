@@ -6,7 +6,7 @@
         <%if chat.user.avatar.attached?%>
           <%= image_tag chat.user.avatar, class:'object-cover h-10 w-10 rounded-full mr-2'%>
         <% else %>
-          <%=image_tag 'Wavy Buddies - Avatar.png.jpg', class:'object-cover h-10 w-10 rounded-full mr-2'%>
+          <%=image_tag 'Wavy Buddies - Avatar.png', class:'object-cover h-10 w-10 rounded-full mr-2'%>
         <% end %>
       <% else %>
         <%if chat.store.background.attached?%>

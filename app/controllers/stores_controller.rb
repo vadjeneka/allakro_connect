@@ -1,8 +1,13 @@
 class StoresController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @store = Store.all
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
+    @stores = Store.all
   end
 
   def new
@@ -15,7 +20,7 @@ class StoresController < ApplicationController
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products
-    @comments = Comment.joins(:product).where('products.store_id = ?', current_user.store.id)
+    @comments = Comment.joins(:product).where('products.store_id = ?', current_user.store.id) if current_user && current_user.store
   end
 
   def create
