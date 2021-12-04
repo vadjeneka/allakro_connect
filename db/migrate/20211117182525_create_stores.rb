@@ -8,7 +8,6 @@ class CreateStores < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true, type: :uuid, unique: true
 
       t.timestamps
-
     end
   end
 end

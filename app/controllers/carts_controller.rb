@@ -1,5 +1,10 @@
 class CartsController < ApplicationController
   def index
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
     @carts = current_user.carts.includes(:line_items, :products).where(validated: false)
     # raise @carts.inspect
   end
