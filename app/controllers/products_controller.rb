@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
       Search.create!(user_id:current_user.id,content:params[:name])
       @products = Product.search(params[:name])
     else
-      @products = Product.includes(:store, :categories).where(is_available: true)
+      @products = Product.includes(:store, :categories).where(is_available: true).page(params[:page]).per(8)
     end
 
     @categories = category_returns
@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   def new
     @store = Store.find(params[:store_id])
     @user = current_user  
-    @product = @store.products.build
+    @product = @store.products.build      
   end
 
   def show
@@ -34,7 +34,8 @@ class ProductsController < ApplicationController
   def create
     @product = store.products.build(product_params)
     if @product.save
-      redirect_to store_path(@product.store), notice: 'Product was successfully created'
+      @store = @product.store
+      redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
     else
       flash[:error] = "Product could not be created"
       render 'new'
