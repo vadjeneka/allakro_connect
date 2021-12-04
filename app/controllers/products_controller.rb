@@ -146,11 +146,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-<<<<<<< Updated upstream
-      product_backgrounds:[]
-=======
       # product_backgrounds:[],
->>>>>>> Stashed changes
     )
   end
 end
