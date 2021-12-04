@@ -38,6 +38,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    raise params[:product][:product_backgrounds].inspect
     @product = store.products.build(product_params)
     if @product.save
       redirect_to store_path(@product.store), notice: 'Product was successfully created'
@@ -53,9 +54,9 @@ class ProductsController < ApplicationController
   end
 
   def update
-    raise product_params.inspect
     @product = Product.find(params[:id])
     if @product.update(product_params)
+      # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
       flash[:error] = 'Cannot update Product'
@@ -145,7 +146,11 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
+<<<<<<< Updated upstream
       product_backgrounds:[]
+=======
+      # product_backgrounds:[],
+>>>>>>> Stashed changes
     )
   end
 end

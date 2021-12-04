@@ -36,10 +36,15 @@ export default class extends Controller {
     this.imgGetterTarget.files = ele.files
   }
   filledInputFile(){
-    var ele = new DataTransfer()
+    // var ele = new DataTransfer()
     for (let i = 0; i < img_list.length; i++) {
-      ele.items.add(img_list[i])
+      // ele.addElement(img_list[i])
+      this.imgGetterTarget.files[i] = img_list[i]
     }
-    this.imgGetterTarget.files = ele.files
+
+    // console.log('dta', ele)
+    console.log('dta', img_list)
+    // this.imgGetterTarget.files = img_list;
+    console.log('target', this.imgGetterTarget.files)
   }
 }
