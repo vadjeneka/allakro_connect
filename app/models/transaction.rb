@@ -2,6 +2,9 @@ class Transaction < ApplicationRecord
   belongs_to :account
   default_scope { order('created_at DESC') }
 
+  scope :deposit_and_withdraw, -> { where(type_transaction: "Dépôt").or(where(type_transaction: "Rétrait")) }
+  scope :except_auctions, -> { where.not(['type_transaction = ? or type_transaction = ?', 'Blocage', 'Déblocage']) }
+
   def self.purchase(order) #TODO: effectuer un achat c'est débiter un buyer pour créditer un seller
     ActiveRecord::Base.transaction do
       order_amount = order.amount

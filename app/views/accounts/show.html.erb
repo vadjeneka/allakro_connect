@@ -62,8 +62,7 @@
         <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
           <table class="table w-full mt-5">
                 <tbody class="text-sm divide-y divide-gray-100 py-4">
-                  <% current_user.account.transactions.each do |transaction|%>
-                    <% if transaction.type_transaction != 'Blocage' && transaction.type_transaction != 'Déblocage'%>
+                  <% current_user.account.transactions.except_auctions.each do |transaction|%>
                       <tr class="bg-gray-100">
                         <td class="p-2 whitespace-nowrap ">
                             <div class="text-left">
@@ -87,7 +86,7 @@
                             <%end %>
                           </td>
                       </tr>
-                    <% end%>
+                    
                   <% end%>
                 </tbody>
             </table>
