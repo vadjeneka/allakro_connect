@@ -40,7 +40,16 @@ class ProductsController < ApplicationController
   def create
     @product = store.products.build(product_params)
     if @product.save
-      redirect_to store_path(@product.store), notice: 'Product was successfully created'
+      if (params[:product][:quantity]).to_i >= 0
+        stock = @product.build_stock(quantity: (params[:product][:quantity]).to_i)        
+      else
+        stock = @product.build_stock(quantity:0)
+      end
+      if stock.save
+        redirect_to store_path(@product.store), notice: 'Product was successfully created'
+      else
+        raise stock.errors.inspect
+      end
     else
       flash[:error] = "Product could not be created"
       render 'new'
@@ -54,11 +63,8 @@ class ProductsController < ApplicationController
 
   def update
     # raise product_params.inspect
-    list_img = product_params[:hidden_items].split(',').map(&:to_i)
+    # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
-    list_img.each do |img|
-      @product.product_backgrounds[img].destroy
-    end
     if @product.update(product_params)
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
@@ -105,18 +111,9 @@ class ProductsController < ApplicationController
   def category_returns
     # category = Category.where('name like ?', "%#{current_user.searches['content']}%").uniq
     category = []
-    if category.length > 1
-      if category.length > 7
-        category
-      else
-        category = category + Category.all.sort_by {rand}[0,8]
-        category = category.sort_by {rand}[0,7]
-      end
-    else
-      res = ActiveRecord::Base.connection.execute('select count(categories_products.product_id) as count, categories_products.category_id from categories_products join products on products.id = categories_products.product_id where products.is_available = true group by categories_products.category_id order by count desc limit 10;')
-      category = res.map{|r| r['category_id']}
-      Category.where(id:category)
-    end
+    res = ActiveRecord::Base.connection.execute('select count(categories_products.product_id) as count, categories_products.category_id from categories_products join products on products.id = categories_products.product_id where products.is_available = true group by categories_products.category_id order by count desc limit 10;')
+    category = res.map{|r| r['category_id']}
+    Category.where(id:category)
   end
 
   def cities_return
@@ -130,7 +127,7 @@ class ProductsController < ApplicationController
         city = city.sort_by {rand}[0,7]
       end
     else
-      Store.all.sort_by {rand}[0,5]
+      Store.all.take(5)
     end
   end
   
@@ -149,8 +146,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      :hidden_items,
-      product_backgrounds:[],
+      product_backgrounds:[]
     )
   end
 end

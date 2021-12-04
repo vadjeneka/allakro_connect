@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_094027) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.uuid "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_094027) do
     t.uuid "user_id", null: false
     t.uuid "cart_id", null: false
     t.integer "amount"
-    t.boolean "is_fulfilled"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
