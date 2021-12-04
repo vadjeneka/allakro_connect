@@ -6,12 +6,13 @@
 
 :schedule:
   banner:
-    cron: '0 0 0 * * * Africa/Abidjan'   
+    cron: '0 * * * * * Africa/Abidjan'   
     class: BannerJob
+    every: "30m" # Set 30 min
     enable: true
   
   bid_active:
     cron: '0 * * * * * Africa/Abidjan'
     class: SetBidStateJob
-    every: "5m" # Set 30 min
+    every: "30m" # Set 30 min
     enable: true

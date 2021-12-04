@@ -1,0 +1,120 @@
+<style>
+  .min-h{
+    min-height:35rem;
+  }
+  .h-36r{
+    height:36rem
+  }
+  .width-30{
+      width: 25%;
+  }
+  .width-70{
+      width: 75%;
+    }
+  </style>
+  
+  
+  
+  <div class="flex justify-between min-h bg-gray-100 mb-2">
+    <div class="w-4/6 flex px-5">
+      <div class="w-2/5">
+        <p class="py-10 text-4xl">Mon compte</p>
+        <div class='block'>
+          <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
+          <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+        </div>
+      </div>
+      <div class="width-70">
+        <div class="w-full py-3 flex justify-between">
+          <p class="text-2xl font-normal text-gray-700"><%=current_user.email%></p>
+            <a href="<%= new_user_account_transaction_path(current_user, current_user.account)%>" class="px-3 py-2 bg-green-500 text-black rounded text-sm">
+              <i class="fas fa-plus-circle "></i>
+              Nouvelle transaction
+            </a>
+        </div>
+        <h3 class="text-base font-semibold text-gray-600"> Mon portefeuille <i class="fas fa-hand-holding-usd"></i></h3>
+        <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden bg-white shadow-lg overflow-x-auto">
+          <table class="table-auto w-full">
+            <tbody class="text-sm divide-y divide-gray-300">
+                <tr>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="font-medium text-gray-800">
+                              <i class="fas fa-credit-card text-6xl"></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left"><%=current_user.email%></div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left font-medium text-green-500 text-4xl"><%= @account.balance %> FCFA</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div> <br>
+
+        <h3 class="text-base font-semibold text-gray-600"> Transactions effectuées <i class="fas fa-file-invoice-dollar"></i></h3>
+        <table class=" table w-full mb-2 ">
+          <thead class="text-xs font-semibold uppercase text-white bg-red-600">
+            <tr>
+              <th class="p-2 whitespace-nowrap">
+                <div class="font-semibold text-left">Date opération</div>
+              </th>
+              <th class="p-2 whitespace-nowrap">
+                <div class="font-semibold text-left">Type d'opération</div>
+              </th>
+              <th class="p-2 whitespace-nowrap">
+                <div class="font-semibold text-left">Montant</div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+        <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
+          <table class="table w-full mt-5">
+            <% current_user.account.transactions.each do |transaction| %>
+                <tbody class="text-sm divide-y divide-gray-100 py-4">
+                    <tr class="bg-gray-100">
+                      <td class="p-2 whitespace-nowrap ">
+                          <div class="text-left">
+                            <%= transaction.created_at&.strftime("%a %D")%>
+                          </div>
+                      </td>
+                        <td class="p-2 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="font-medium text-gray-800">
+                                  <%= transaction.type_transaction%>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2 whitespace-nowrap">
+                          <% if transaction.type_transaction == 'Dépôt'%>
+                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
+                            <%elsif transaction.type_transaction == 'Rétrait' %>
+                              <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+                            <%elsif transaction.type_transaction == 'Vente'%>
+                            <div class="text-left font-medium text-green-500">+<%= transaction.amount%> FCFA</div>
+                            <% else %>
+                            <div class="text-left font-medium text-red-600">-<%= transaction.amount%> FCFA</div>
+                          <% end%>
+                        </td>
+                    </tr>
+                    
+                  
+                </tbody>
+                <% end %>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div> <br>
+  
+  <% content_for :banners do %>
+    <%=render 'shared/banners'%>
+  <% end %>
+  <% content_for :footer do %>
+    <%=render 'shared/footer'%>
+  <% end %>

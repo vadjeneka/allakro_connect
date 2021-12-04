@@ -3,8 +3,6 @@ class StocksController < ApplicationController
     @stock = product.stock
   end
 
-  
-
   def new
     @user = current_user
     @store = Store.find(params[:store_id])

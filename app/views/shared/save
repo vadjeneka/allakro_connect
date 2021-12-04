@@ -1,0 +1,18 @@
+  <div class="">
+    <h2 class="font-bold text-2xl"><%= link_to "#{item.product.name}", store_product_path(item.product.store, item.product) %></h2>
+    <p><%= item.product.description %></p>
+    <p><%= item.product.weight %> g</p>
+    <p><%= item.total_price %> xof</p>
+  </div>
+  <div class="mt-12 text-3xl mr-5"> 
+    <a href="<%= line_item_reduce_path(item) %>" data-method="POST">
+      <i class="fad fa-minus-circle text-3xl"></i>
+    </a>
+    <span class="font-bold">
+      <%= item.quantity %>
+    </span>
+    <a href="<%= line_item_add_path(item) %>" data-method="POST">
+      <i class="fad fa-plus-circle text-3xl"></i>
+    </a>
+  </div>
+</div>
