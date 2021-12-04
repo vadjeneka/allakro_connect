@@ -37,15 +37,15 @@ class BidsController < ApplicationController
   end
 
   def destroy
-    @bid.find(params[:id])
+    @bid = Bid.find(params[:id])
+    #TODO: decrement inventory of product
+    quantity = Inventory.find_by(bid_id: @bid.id)
+    quantity.update(quantity: 0)
     @bid.update(state: "cancelled")
     
-    #TODO: decrement inventory of product
-    quantity = Inventory.find(bid_id: @bid.id)
-    quantity.update(quantity: 0)
     #TODO: increment stock of product from inventory
 
-    redirect_to bids_path, notice: "Your bid was cancelled"
+    redirect_to bids_path, notice: "Enchère annulée !"
   end
 
   def historic
@@ -62,12 +62,12 @@ class BidsController < ApplicationController
     quantity = Inventory.find_by(bid_id: @bid.id)
     
     if quantity
-      quantity.update(quantity: 0)
       winner = Offer
       @bid.update(validated: true)
+      #TODO: increment stock of product from inventory
+      quantity.update(quantity: 0)
       redirect_to store_bids_historic_path(@bid.product.store)
       flash[:notice] = "Enchère validée, produit vendu !"
-      #TODO: empty inventory of this product
     else
       redirect_to store_bids_historic_path(@bid.product.store)
       flash[:error] = "L'opération a échoué, ressayez svp !"

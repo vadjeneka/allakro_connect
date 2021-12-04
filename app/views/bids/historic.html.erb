@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody class="bg-white">
-          <% @bids.each do |bid| %>
+        <% @bids.each do |bid| %>
           <%if bid.product.store == current_user.store%>
           <tr class="text-gray-700">
             <td class="px-4 py-3 text-ms font-semibold border">
@@ -71,16 +71,15 @@
                         <%= bid.validated%>
                       </span>
                     <%end%>
-
                 <%end%>
             </td>
             <td class="px-4 py-3 text-sm border">
                 <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
-                  <%= link_to 'Details', store_bids_bid_details_path(bid.product.store,bid.id)%>
+                  <%= link_to 'Details', store_bids_bid_historic_details_path(bid.product.store,bid.id)%>
                 </span>
             </td>
-          </tr>          
-        <% end %>
+          </tr>
+          <% end %>
         <% end %>
         </tbody>
       </table>
