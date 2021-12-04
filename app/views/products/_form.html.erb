@@ -49,31 +49,37 @@
           <% end %>
         </div>
         <div>
-          <%= form.text_field :all_categories, class: 'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none', placeholder: "Categories (Separated by comma)" %>
+          <%= form.text_field :all_categories, class: 'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none', placeholder: "Categories (Separé par des virgules)" %>
           <% if product.errors[:all_categories] %>
             <span style='color: red'><%= product.errors[:all_categories][0] %></span>
           <% end %>
         </div>
         <div>
-          <%= form.number_field  :price, placeholder:'e.g. 15000',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none' %>
+          <%= form.number_field  :price, placeholder:'e.g. 15000',class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none', min:0 %>
           <% if product.errors[:price] %>
             <span style='color: red'><%= product.errors[:price][0] %></span>
           <% end %>
         </div>
         <div>
-          <%= form.number_field  :weight, placeholder:'Poids du produit', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none'%>
+          <%= form.number_field  :weight, placeholder:'Poids du produit', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none', min:0%>
           <% if product.errors[:weight] %>
             <span style='color: red'><%= product.errors[:weight][0] %></span>
           <% end %>
         </div>
+        <div>
+          <%= form.number_field  :quantity, placeholder:'Quantité du produit', class:'bg-gray-100 px-2 w-4/5 py-2 rounded mb-4 outline-none', min:0%>
+          <% if product.errors[:quantity] %>
+            <span style='color: red'><%= product.errors[:quantity][0] %></span>
+          <% end %>
+        </div>
         <div class="mx-auto my-3 w-4/5 text-left">
           <%= form.check_box :is_available, class: 'input-checkbox' %>
-          <%= form.label :is_available, 'Is Available' %>
+          <%= form.label :is_available, 'Disponibe' %>
           <% if product.errors[:is_available] %>
             <span style='color: red'><%= product.errors[:is_available][0] %></span>
           <% end %>
         </div>
-          <%= form.submit submit, class:"bg-red-600 text-white hover:bg-red-700 font-bold py-2 px-4 rounded w-4/5", data:{action:'ajax:beforeSend->display-img-on-create#filledInputFile'} %>
+          <%= form.submit submit, class:"bg-red-600 text-white hover:bg-red-700 font-bold py-2 px-4 rounded w-4/5" %>
         </div>
     </div>
   <% end %>

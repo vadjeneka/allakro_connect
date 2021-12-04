@@ -37,7 +37,6 @@ class OffersController < ApplicationController
 
   def details
     @offer = Offer.find(params[:id])
-=======
     @offer = @bid.offers.build(params_offer)
     top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
     @offer.with_lock do
@@ -53,7 +52,6 @@ class OffersController < ApplicationController
         redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
       end
     end
->>>>>>> 466c892006b92cdafd9a1d8b69e7dce371adbc85
   end
 
   def edit

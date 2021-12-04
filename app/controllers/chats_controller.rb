@@ -3,6 +3,11 @@ class ChatsController < ApplicationController
   before_action :set_chat, only:[:show, :edit, :update, :destroy]
   before_action :chats_list, only: [:index, :show, :new]
   def index
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
     # @chats = Chat.all
     # @users = User.all_expect(current_user)
     @chat_from_store = current_user.store.chats if current_user.store

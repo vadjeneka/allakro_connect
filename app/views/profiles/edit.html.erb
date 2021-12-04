@@ -26,7 +26,13 @@
       <%= link_to "Annuler", :back, class:"w-5/6 block py-2 font-semibold text-red-600"  %>
 
 
-      <%#=link_to 'Cancel my account',registration_path(resource_name)%>
     </div>
   </div>
+<% end %>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
 <% end %>
