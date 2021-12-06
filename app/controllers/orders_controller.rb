@@ -26,7 +26,6 @@ class OrdersController < ApplicationController
     @order = Order.new(user_id: current_user.id, cart_id: cart.id, amount: cart.total_price)
 
     if @order.save
-      # TODO: Set cart to validated: true
       cart.update(validated: true)
       OrderMailer.with(order: @order).new_order_email.deliver_later
       redirect_to user_orders_path(current_user), notice: 'Order was successfully created'
@@ -36,11 +35,8 @@ class OrdersController < ApplicationController
     end
   end
   
-
   def update
     order = Order.find(params[:id])
-    # raise order.inspect
-    order.update(is_fulfilled: true) # TODO: Set is_fulfilled to string with some state
     redirect_to store_orders_path(order.cart.store)
   end
 
@@ -50,6 +46,9 @@ class OrdersController < ApplicationController
     OrderMailer.with(order: @order).confirm_order_email.deliver_later
 
     # TODO: Si la commande est confirmé, redirect de l'argent de l'argent depuis le compte de l'acheteur
+    Transaction.purchase(@order)
+
+    # TODO: Si la commande est confirmé, retirer de l'argent de l'argent depuis le compte de l'acheteur
     # TODO: Payer le vendeur
     # TODO: Diminuer les stocks des produits
     redirect_to store_orders_path(@order.cart.store), notice: "La commande ##{@order.id[0,7].upcase} a été validée"

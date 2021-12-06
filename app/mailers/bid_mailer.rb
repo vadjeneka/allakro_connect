@@ -6,7 +6,6 @@ class BidMailer < ApplicationMailer
 
   def new_offer_email
     @offer = params[:offer]
-    
     mail(to: @offer.user.email, subject: "You got a new offer!")
   end
 

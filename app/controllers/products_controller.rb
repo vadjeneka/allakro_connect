@@ -1,15 +1,34 @@
 class ProductsController < ApplicationController
   
   def index
-    if params[:name]
-      Search.create!(user_id:current_user.id,content:params[:name])
-      @products = Product.search(params[:name])
-    else
-      @products = Product.includes(:store, :categories).where(is_available: true).page(params[:page]).per(8)
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
     end
+    # if params[:name]
+    #   @products = Product.search(params[:name])
+    # else
+    # raise params.inspect
+    # @products = Product.all
+    @products = Product.includes(:store, :categories).filter_by_availability.page(params[:page]).per(12)
+    @products = @products.filter_by_name(params[:name]) if params[:name].present?
+    @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]) if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
+    @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
+    @products = @products.filter_by_locations(params[:locations]) if params[:locations].present?
+    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present?
+    # end
 
     @categories = category_returns
     @cities = cities_return
+
+    @search_infos = { 
+      min_price: params.dig(:price, :min),
+      max_price: params.dig(:price, :max),
+      categories: (params.dig(:categories) || []) ,
+      locations: (params.dig(:locations) || [])
+    }
+
   end
 
   
@@ -32,10 +51,21 @@ class ProductsController < ApplicationController
   end
 
   def create
+    raise params[:product][:product_backgrounds].inspect
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
       redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
+      if (params[:product][:quantity]).to_i >= 0
+        stock = @product.build_stock(quantity: (params[:product][:quantity]).to_i)        
+      else
+        stock = @product.build_stock(quantity:0)
+      end
+      if stock.save
+        redirect_to store_path(@product.store), notice: 'Product was successfully created'
+      else
+        raise stock.errors.inspect
+      end
     else
       flash[:error] = "Product could not be created"
       render 'new'
@@ -44,14 +74,19 @@ class ProductsController < ApplicationController
 
   def edit
     @store = Store.find(params[:store_id])
-    @user = current_user  
     @product = store.products.find(params[:id])
   end
 
   def update
+    # raise product_params.inspect
+    # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
+    list_img.each do |img|
+      @product.product_backgrounds[img].destroy
+    end
     if @product.update(product_params)
-      redirect_to user_stores_path(), notice: 'Product updated successfully'
+      # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
+      redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
     else
       flash[:error] = 'Cannot update Product'
       render 'edit'
@@ -60,8 +95,9 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
+    @store = @product.store
     @product.destroy
-    redirect_to user_stores_path(), notice: 'Product deleted successfully'
+    redirect_to store_path(@store), notice: 'Product deleted successfully'
   end
 
   def like
@@ -95,16 +131,9 @@ class ProductsController < ApplicationController
   def category_returns
     # category = Category.where('name like ?', "%#{current_user.searches['content']}%").uniq
     category = []
-    if category.length > 1
-      if category.length > 7
-        category
-      else
-        category = category + Category.all.sort_by {rand}[0,8]
-        category = category.sort_by {rand}[0,7]
-      end
-    else
-      Category.all.sort_by {rand}[0,7]
-    end
+    res = ActiveRecord::Base.connection.execute('select count(categories_products.product_id) as count, categories_products.category_id from categories_products join products on products.id = categories_products.product_id where products.is_available = true group by categories_products.category_id order by count desc limit 10;')
+    category = res.map{|r| r['category_id']}
+    Category.where(id:category)
   end
 
   def cities_return
@@ -118,7 +147,7 @@ class ProductsController < ApplicationController
         city = city.sort_by {rand}[0,7]
       end
     else
-      Store.all.sort_by {rand}[0,5]
+      Store.all.take(5)
     end
   end
   
@@ -137,7 +166,8 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      product_backgrounds:[]
+      :hidden_items,
+      product_backgrounds:[],
     )
   end
 end
