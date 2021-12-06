@@ -26,7 +26,7 @@ class Transaction < ApplicationRecord
     account_offer = user_offer.account
     lock_money = account_offer.withdraw(offer_amount)
     Transaction.create!(type_transaction: "Blocage", amount: -lock_money, account_id: account_offer.id)
-    Transaction.release(offer)
+    # Transaction.release(offer)
   end
 
   def self.release(offer) #TODO: remttre l argent bloqué dans le compte concerné

@@ -40,22 +40,16 @@
     </div>
     <div class="w-full py-10"> 
         <a href="<%= bids_path %>">
-          <p class="text-3xl">Mes enchères</p>
+          <p class="text-3xl ml-20">Mes actions</p>
         </a>
         <div class="w-full flex justify-evenly items-center py-5">
-          <a href="<%= bids_path %>" class="text-center px-3">
+          <a href="<%= store_orders_path(@store) %>" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
-            <p class="py-8 text-lg">En cours</p>
+            <p class="py-8 text-lg">Commandes</p>
           </a>
-          <%if current_user.store%>
-            <a href="<%= bids_path %>" class="text-center px-3">
-              <%=image_tag 'icons8-checked-user-male-100.png', class:'w-16 h-16'%>
-              <p class="py-8 text-lg">A venir</p>
-            </a>
-          <% end %>
           <a href="<%=store_bids_historic_path(@store)%>" class="text-center px-3">
             <%=image_tag 'icons8-judge-60 (1).png', class:'w-16 h-16'%>
-            <p class="py-8 text-lg">Terminées</p>
+            <p class="py-8 text-lg">Historiques des enchères</p>
           </a>
         </div>
       </div>

@@ -19,9 +19,10 @@ class OffersController < ApplicationController
     if @offer.amount > @bid.initial_price &&  @offer.amount > top
       if @offer.user.account.balance >= @offer.amount    
         @offer.with_lock do
+          Transaction.release(@offer)
           if @offer.save
             Transaction.hold(@offer)
-            redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
+            redirect_to store_product_bid_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
           else
             flash[:error] = "Votre offre n'a pas été enregistré"
             redirect_to store_product_bid_path(@bid.product.store,@bid.product,@bid)
