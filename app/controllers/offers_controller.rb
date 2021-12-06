@@ -19,13 +19,13 @@ class OffersController < ApplicationController
       if @offer.amount > top
         Transaction.hold(@offer)
         if @offer.save
-          redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
+          redirect_to store_product_bid_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
         else
           flash[:error] = "Your offer was not saved"
           render "new"
         end
       else
-        redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
+        redirect_to store_product_bid_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
       end
     end
   end
