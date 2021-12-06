@@ -68,6 +68,8 @@ class BidsController < ApplicationController
       @bid.update(validated: true)
       #TODO: increment stock of product from inventory
       quantity.update(quantity: 0)
+      @accepted_offer = @bid.offers.top.first
+      @accepted_offer.update(accepted: true)
       redirect_to store_bids_historic_path(@bid.product.store)
       flash[:notice] = "Enchère validée, produit vendu !"
     else
