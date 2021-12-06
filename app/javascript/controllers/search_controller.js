@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = ['minPrice', 'maxPrice', 'category', 'location']
+  static targets = ['minPrice', 'maxPrice', 'category', 'location','name']
 
   initialize() {
     this.formData = new FormData();
@@ -20,7 +20,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log('my name', this.nameValue)
+    // console.log('my name', th?is.nameValue)
   }
 
   performSearch() {
@@ -28,12 +28,17 @@ export default class extends Controller {
     const maxPrice = this.maxPriceTarget.value
     const categories = this.categoryTargets.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
     const locations = this.locationTargets.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
+    const name = this.nameTarget.value
 
     // console.log('categories', categories)
     console.log('locations', locations)
 
     this.formData.append("price[min]", minPrice)
     this.formData.append("price[max]", maxPrice)
+    // console.log('name',name)
+    if (name !=''){
+      this.formData.append("name", name)
+    }
     if (categories.length > 0) {
       categories.forEach((category) => {
         this.formData.append('categories[]',category)

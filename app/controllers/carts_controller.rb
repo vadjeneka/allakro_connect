@@ -11,6 +11,6 @@ class CartsController < ApplicationController
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
-    redirect_to user_carts_path(current_user), notice: 'Your cart was successfully deleted' # TODO: Redirect to cart path
+    redirect_to user_carts_path(current_user), success: 'Your cart was successfully deleted' # TODO: Redirect to cart path
   end
 end

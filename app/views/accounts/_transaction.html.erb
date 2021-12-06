@@ -1,0 +1,18 @@
+<div class='w-full flex justify-between px-5 py-2'>
+  <div class='w-1/5 flex justify-start'>
+    <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Vente' || transaction.type_transaction == 'Déblocage' %>
+      <p class='text-white bg-green-500 rounded font-semibold px-5 py-1 w-1/2 text-center'>
+        <%=transaction.type_transaction.first%>
+      </p>
+    <% end %>
+    <% if transaction.type_transaction == 'Rétrait' || transaction.type_transaction == 'Achat' || transaction.type_transaction == 'Blocage' %>
+      <p class='text-white bg-red-600 font-semibold rounded px-5 py-1 w-1/2 text-center'>
+        <%=transaction.type_transaction.first%>
+      </p>
+    <% end %>
+  </div>
+  <p class=' text-gray-500 text-md text-left w-1/4'><%= transaction.created_at&.strftime("%a %D")%></p>
+  <p class=' text-gray-700 text-lg text-left w-1/4'><%= transaction.type_transaction%></p>
+  <p class='text-gray-700 text-md text-left w-1/4'><%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</p>
+
+</div>
