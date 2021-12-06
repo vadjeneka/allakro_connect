@@ -2,6 +2,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product
 
+  def index
+    @comments = Comment.all
+  end
+  
   def show 
     @comment = @product.comments
   end
