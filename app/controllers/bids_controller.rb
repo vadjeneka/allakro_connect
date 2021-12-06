@@ -12,6 +12,7 @@ class BidsController < ApplicationController
   def show
     @bid = Bid.find(params[:id])
     @top_offer = @bid.offers.top
+    @offer = @bid.offers.build
   end
 
   def new

@@ -46,6 +46,8 @@
 # raise transaction_params.inspect
 #   raise self.offers.top.inspect
 #raise auth[:email].inspect
+# raise @transactions.length.inspect
+# raise transaction_params.inspect
 
 
 

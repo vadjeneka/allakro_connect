@@ -15,7 +15,7 @@
 <% if @bid.state == "actived" %>
   <%# TODO: Create comps for top offer %>
   <% if @bid.product.store.user != current_user %>
-    <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid } %>
+    <%= render partial: "offers/form", locals: { store: @bid.product.store, product: @bid.product, bid: @bid, offer: @offer } %>
   <% end %>
   <%= render partial: "shared/top_offer", locals: { top_offer: @top_offer } %>
 <% end %>

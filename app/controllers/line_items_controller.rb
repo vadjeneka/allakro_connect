@@ -35,6 +35,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
+    @line_item.cart.destroy if @line_item.cart.line_items.count <= 0
     redirect_to user_carts_path(current_user) # TODO: Redirect to cart path
   end
 
