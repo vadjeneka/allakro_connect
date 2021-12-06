@@ -1,0 +1,139 @@
+<div class="bg-white w-screen h-screen rounded-lg shadow-xl lg:flex">
+  <%if @bid.product.product_backgrounds.attached?%>
+      <%= image_tag @bid.product.product_backgrounds[0], class:"w-1/1 lg:w-1/2 rounded-l-2xl"%>
+  <%else%>
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80"
+      class="w-1/1 lg:w-1/2 rounded-l-2xl">
+  <%end%>
+  <div class="p-10 space-y-10">
+      <h2 class="mb-2 text-2xl text-center font-bold text-red-900"><%= @bid.product.name.upcase %></h2>
+      <p class="text-gray-600 pl-3 pr-3 text-xs"><%= @bid.product.description%></p>
+        <div class="flex space-x-16 m-10">
+          <div class="col-span-2">
+            <i class="fas fa-stopwatch w-5"></i> Début :
+            <span
+              class="
+                inline-flex
+                items-center
+                justify-center
+                px-2
+                py-1
+                text-xl
+                font-bold
+                leading-none
+                text-white
+                bg-green-400
+                rounded-full
+              "
+              ><%=@bid.start_date.strftime("%d/%m/%Y") + " à " + @bid.start_date.strftime("%H:%M")%></span
+            >
+          </div>
+          <div>
+            <i class="fas fa-stopwatch w-5"></i> Fin :
+            <span
+              class="
+                inline-flex
+                items-center
+                justify-center
+                px-2
+                py-1
+                text-xl
+                font-bold
+                leading-none
+                text-white
+                bg-green-400
+                rounded-full
+              "
+              ><%=@bid.end_date.strftime("%d/%m/%Y") + " à " + @bid.end_date.strftime("%H:%M") %></span>
+          </div>
+        </div>
+        <div class='flex space-x-16 m-10'>
+          <div>
+            <i class="fas fa-wallet w-5"></i> Prix initial :
+              <span
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-2
+                  py-1
+                  text-xl
+                  font-bold
+                  leading-none
+                  text-white
+                  bg-blue-400
+                  rounded-full
+                "
+                ><%=@bid.initial_price%></span>
+          </div>
+          <%@winner.each do |winner|%>
+          <div>
+            <i class="fas fa-wallet w-5"></i> Offre gagnante :
+              <span
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-2
+                  py-1
+                  text-xl
+                  font-bold
+                  leading-none
+                  text-white
+                  bg-blue-400
+                  rounded-full
+                "
+                ><%=winner.amount%></span>
+          </div>
+        </div>
+        <div class='flex space-x-16 m-10'>
+          <div>
+            <i class="fas fa-wallet w-5"></i> L'offre gagnante :
+              <span
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-2
+                  py-1
+                  text-xl
+                  font-bold
+                  leading-none
+                  text-white
+                  bg-blue-400
+                  rounded-full
+                "
+                ><%=winner.user.email%></span>
+          </div>
+          <%end%>
+        </div>
+          <div class="items-center">
+            <%case @bid.state
+              when 'waiting'%>
+                <div class='flex justify-center items-center'>
+                  <%= link_to 'Annuler', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :delete, data: {confirm: 'Êtes-vous sûr?'}, class:'bg-red-600 text-white text-xl px-5 py-2 font-medium rounded' %>
+                </div>
+              <%when 'actived'%>
+                <div class='flex justify-center items-center'>
+                  <%= link_to 'Annuler', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :delete, data: {confirm: 'Êtes-vous sûr?'}, class:'bg-red-600 text-white text-xl px-5 py-2 font-medium rounded' %>
+                </div>
+              <%when 'cancelled'%>
+              <%when 'closed'%>
+                <%if @bid.validated == false%>
+                  <div class='flex justify-center items-center'>
+                    <%= link_to 'Valider', store_product_bid_path(@bid.product.store,@bid.product, @bid), method: :patch, class:'bg-green-600 text-white text-xl px-5 py-2 font-medium rounded' %>
+                  </div>
+                <%end%>
+            <%end%>
+          </div>
+    </div>
+</div>
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

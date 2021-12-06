@@ -2,6 +2,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product
 
+  def index
+    @comments = Comment.all
+  end
+  
   def show 
     @comment = @product.comments
   end
@@ -10,6 +14,7 @@ class CommentsController < ApplicationController
     @comment = @product.comments.create(comment_params)
     @comment.user = current_user
     if @comment.save
+      CommentMailer.with(comment:@comment).confirm_comment_email.deliver_later
       redirect_to store_product_path(@product.store, @product), notice:'Votre avis à bien été envoyé'
     end
   end

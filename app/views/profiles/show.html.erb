@@ -45,11 +45,9 @@
         <% end %>
       </div>
       <div class="w-full py-10"> 
-        <a href="<%= user_orders_path(current_user) %>">
           <p class="text-3xl">Mes commandes</p>
-        </a>
         <div class="w-full flex justify-evenly items-center py-5">
-          <a href="" class="text-center px-3">
+          <a href="<%= user_orders_path(current_user) %>" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
             <p class="py-8 text-lg">En cour de traitement</p>
           </a>
@@ -59,7 +57,7 @@
               <p class="py-8 text-lg">Expedié</p>
             </a>
           <% end %>
-          <a href="" class="text-center px-3">
+          <a href="<%=user_offers_historic_path(current_user)%>" class="text-center px-3">
             <%=image_tag 'icons8-judge-60 (1).png', class:'w-16 h-16'%>
             <p class="py-8 text-lg">Enchères</p>
           </a>

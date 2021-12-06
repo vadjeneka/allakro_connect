@@ -1,5 +1,5 @@
 <div class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mt-3">
-  <a href="#">
+  <a href="<%= store_product_bid_path(bid.product.store, bid.product, bid) %>">
     <% if bid.product.product_backgrounds.attached? %>
       <%= image_tag bid.product.product_backgrounds[0], class:'object-cover' %>
     <% else %>

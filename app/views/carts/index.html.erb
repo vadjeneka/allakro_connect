@@ -4,8 +4,14 @@
     <hr>
   </div>
   <div>
-    <% @carts.each do |cart| %>
-      <%= render partial: "shared/cart", locals: { cart: cart } %>
+    <% if @carts.count < 1 %>
+      <span class="flex w-full justify-center">
+        <%= image_tag 'undraw_empty_cart_co.svg', class:'h-80 opacity-60 m-10'%>
+      </span>
+    <% else %>
+      <% @carts.each do |cart| %>
+        <%= render partial: "shared/cart", locals: { cart: cart } %>
+      <% end %>
     <% end %>
   </div>
 

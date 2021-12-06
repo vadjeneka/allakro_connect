@@ -34,7 +34,7 @@
 
 <%=form_with url: products_path, method: :get do |f| %>
   <% content_for :search_bar do %>
-    <%=render partial: 'home/searchs', locals:{f: f}%>
+    <%=render partial: 'home/searchs'%>
   <% end %>
   <div class="flex min-height mt-8">
     <div class="w-1/5 px-3">
