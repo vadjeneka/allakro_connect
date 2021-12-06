@@ -4,7 +4,8 @@ class Account < ApplicationRecord
 
 
   def deposit(amount) #TODO: methode pour faire un depot effectué par le user
-    raise ::Errors::InvalidAmount if amount < 0
+    #raise ::Errors::InvalidAmount if amount < 0
+    
     update(balance: self.balance + amount)
   end
 
