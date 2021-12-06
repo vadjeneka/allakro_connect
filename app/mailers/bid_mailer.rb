@@ -5,8 +5,10 @@ class BidMailer < ApplicationMailer
   #  offer.user.email
 
   def new_offer_email
-    @offer = params[:offer]
-    mail(to: @offer.user.email, subject: "You got a new offer!")
+    @offers = params[:offers]
+    @offers.includes(:user).each do |offer|
+      mail(to: offer.user.email, subject: "You got a new offer!")
+    end
   end
 
   def closed_bid_email

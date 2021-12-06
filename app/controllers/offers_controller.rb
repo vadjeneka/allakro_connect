@@ -19,6 +19,7 @@ class OffersController < ApplicationController
       if @offer.amount > top
         Transaction.hold(@offer)
         if @offer.save
+          OrderMailer.with(offer: @offer).confirm_order_email.deliver_later
           redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
         else
           flash[:error] = "Your offer was not saved"
