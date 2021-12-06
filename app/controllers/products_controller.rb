@@ -51,7 +51,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    raise params[:product][:product_backgrounds].inspect
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
