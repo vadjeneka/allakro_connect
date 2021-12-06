@@ -1,0 +1,24 @@
+<style>
+  .h-min{
+    min-height: 25rem;
+
+  }
+</style>
+
+<div class="h-min overflow-auto ">
+  <div class="flex py-5 mx-auto pr-5">
+    <p class="text-3xl font-medium text-center ml-3">
+      Les avis sur mes produits 
+    </p>
+  </div>
+  <div class="w-full py-10 bg-gray-100 grid grid-cols-4 gap-4">
+    <%= render partial: 'comment', collection: @comments%>
+  </div>
+</div>
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

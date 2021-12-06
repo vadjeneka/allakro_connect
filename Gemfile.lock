@@ -195,10 +195,6 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-linux)
-      racc (~> 1.4)
     notifications (1.1.0)
       kaminari (>= 0.15)
       rails (>= 5.2)
@@ -377,10 +373,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86_64-darwin-18
-  x86_64-darwin-20
-  x86_64-darwin-21
-  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
@@ -421,7 +413,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.1.4

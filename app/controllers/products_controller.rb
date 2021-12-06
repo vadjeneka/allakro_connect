@@ -162,7 +162,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      :hidden_items,
+      # :hidden_items,
       product_backgrounds:[],
     )
   end
