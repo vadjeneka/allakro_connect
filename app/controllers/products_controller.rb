@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
     # if params[:name]
     #   @products = Product.search(params[:name])
     # else
-    # raise params.inspect
     # @products = Product.all
     @products = Product.includes(:store, :categories).filter_by_availability.page(params[:page]).per(12)
     @products = @products.filter_by_name(params[:name]) if params[:name].present?
@@ -77,7 +76,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # raise product_params.inspect
     # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
     list_img.each do |img|
@@ -101,7 +99,6 @@ class ProductsController < ApplicationController
 
   def like
     @already_like = Favorite.find_by(user_id: params[:user], product_id: params[:id])
-    # raise @already_like.inspect
     if @already_like
       @already_like.update(still_favorites?: !@already_like.still_favorites?)
       if params[:source] == 'product'

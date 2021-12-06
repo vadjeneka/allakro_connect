@@ -5,11 +5,9 @@ class TransactionsController < ApplicationController
   def new 
     @transaction = current_user.account.transactions.build
     @transactions = current_user.account.transactions.all
-    # raise @transactions.length.inspect
   end
 
   def create
-    # raise transaction_params.inspect
     @transaction = current_user.account.transactions.build(transaction_params)
     if @transaction.save
       if @transaction.type_transaction == 'Dépôt'

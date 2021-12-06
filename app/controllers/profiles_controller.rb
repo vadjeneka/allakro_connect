@@ -10,7 +10,6 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    # raise params.inspect
     if current_user.update(profile_params)
       redirect_to profile_path(current_user), notice: 'Profile updated successfully'
     else
