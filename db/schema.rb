@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_142902) do
+ActiveRecord::Schema.define(version: 2021_12_04_170358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_142902) do
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.integer "balance"
+    t.integer "balance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_142902) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.uuid "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
@@ -252,6 +252,15 @@ ActiveRecord::Schema.define(version: 2021_12_03_142902) do
     t.index ["product_id"], name: "index_tendances_on_product_id"
   end
 
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type_transaction"
+    t.integer "amount"
+    t.uuid "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -318,6 +327,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_142902) do
   add_foreign_key "stocks", "products"
   add_foreign_key "stores", "users"
   add_foreign_key "tendances", "products"
+  add_foreign_key "transactions", "accounts"
   add_foreign_key "views", "products"
   add_foreign_key "views", "users"
 end

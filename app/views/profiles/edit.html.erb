@@ -1,0 +1,38 @@
+<style>
+  .min-height{
+    min-height:20rem;
+  }
+</style>
+<%= form_with model: current_user, url: profile_path(current_user), data:{controller: 'display-edit-user-img'}, method: :put  do |f| %>
+  <div class='flex min-height justify-between px-10 py-5'>
+    <div class='w-3/5 px-10'>
+      <div>
+        <label class="flex justify-center py-1 items-center ease-linear transition-all duration-150 bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700 w-2/5  rounded-md mx-auto mb-3">
+          Choisir une image
+          <%= f.file_field :avatar,accept:'.png, .jpeg, .fpg, .svg, .jpg',class:'hidden',data: {'display-edit-user-img-target': 'imgGetter', action:'change->display-edit-user-img#displayImage'} %>
+        </label>
+      </div>
+      <div  class="flex justify-center mx-auto items-center h-96 w-96 overflow-hidden mt-5" data-display-edit-user-img-target='divDisplaying'></div>
+    </div>
+    <div class='w-2/5 px-5'>
+      <h2 class="text-3xl font-medium text-gray-700 py-5">Editer votre profile</h2>
+      <%= f.text_field :first_name,placeholder:'Prenom(s)', autofocus: true, autocomplete: "first_name",class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none' %>
+      <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none', placeholder:'Nom' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none', placeholder:'e-mail' %>
+      <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone",class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none', placeholder:'Telephone' %>
+      <%= f.text_field :city, autofocus: true, autocomplete: "city",class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none', placeholder:'Ville' %>
+      <%= f.text_field :town, autofocus: true, autocomplete: "town",class:'bg-gray-100 px-2 w-5/6 py-2 rounded mb-4 outline-none', placeholder:'Commune / Quartier' %>
+      <%= f.submit "Mettre a jour", class:"bg-green-600 text-white hover:bg-green-700 font-bold py-2 px-4 rounded w-5/6"  %>            
+      <%= link_to "Annuler", :back, class:"w-5/6 block py-2 font-semibold text-red-600"  %>
+
+
+    </div>
+  </div>
+<% end %>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

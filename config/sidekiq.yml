@@ -1,13 +1,14 @@
 ---
 :concurrency: 2
 :queues:
-  - jokou_development_default
-  - jokou_development_mailers
+  - jokou_default
+  - jokou_mailers
 
 :schedule:
   banner:
-    cron: '0 0 * * * * Africa/Abidjan'   
+    # cron: '0 0 * * * * Africa/Abidjan'   
     class: BannerJob
+    every: '24h'
     enable: true
   
   bid_active:

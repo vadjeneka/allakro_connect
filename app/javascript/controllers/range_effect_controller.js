@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="range-effect"
 export default class extends Controller {
   static targets = ['rangeLeftThumb','rangeRightThumb','rangeBarColor','rangeFirst','rangeLast', 'inputContainerLeft','inputContainerRight']
+
   initialize(){
     this.minprice = 500
     this.maxprice = 1000000
@@ -12,12 +13,14 @@ export default class extends Controller {
     this.maxthumb = 0
   }
   connect() {
+    const defaultMinPrice = this.rangeFirstTarget.getAttribute('data-value')
+    const defaultMaxPrice = this.rangeLastTarget.getAttribute('data-value')
     this.rangeFirstTarget.max = this.max
     this.rangeFirstTarget.min = this.min
     this.rangeLastTarget.max = this.max
     this.rangeLastTarget.min = this.min
-    this.rangeFirstTarget.value =  this.min
-    this.rangeLastTarget.value =  this.max
+    this.rangeFirstTarget.value =  defaultMinPrice || this.min
+    this.rangeLastTarget.value =  defaultMaxPrice || this.max
     this.mintrigger()
     this.maxtrigger()
   }
@@ -48,6 +51,9 @@ export default class extends Controller {
       this.mintrigger()
     }else{
       this.inputContainerLeftTarget.value = 500
+      this.validationLeft()
+      this.rangeFirstTarget.value = this.inputContainerLeftTarget.value
+      this.mintrigger()
     }
   }
   changeRangeLastValue() {
@@ -56,7 +62,10 @@ export default class extends Controller {
       this.rangeLastTarget.value = this.inputContainerRightTarget.value
       this.maxtrigger()
     }else{
-      this.inputContainerRightTarget.value = 500
+      this.inputContainerRightTarget.value = 1000000
+      this.validationRight()
+      this.rangeLastTarget.value = this.inputContainerRightTarget.value
+      this.maxtrigger()
     }
   }
   validationRight() {

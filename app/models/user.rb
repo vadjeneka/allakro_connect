@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :bids_offers
+  after_create :account_creation
+  has_many :offers
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one :store
@@ -10,7 +11,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :chats
   has_many :comments
-  has_one :account
+  has_one :account 
   has_one_attached :avatar
   devise  :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, 
@@ -20,6 +21,9 @@ class User < ApplicationRecord
     # Ex:- scope :active, -> {where(:active => true)}
 
     
+  def admin?
+    email = "admin@techshelter.fr"
+  end
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
       user.provider = auth[:provider]
@@ -31,7 +35,7 @@ class User < ApplicationRecord
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails, 
       # uncomment the line below to skip the confirmation emails.
-      user.skip_confirmation!
+      #user.skip_confirmation!
       user.save!
     end
   end
@@ -42,5 +46,8 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+  def account_creation
+    self.create_account!
   end
 end
