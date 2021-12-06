@@ -32,10 +32,16 @@
 </style>
 
 
-<div class="absolute flex w-screen justify-center top-0 mt-10 z-10 ">
+<div class="absolute flex w-full justify-center top-5 mt-10 z-10 " id='flash'>
   <% flash.each do |type, msg|%>
     <div class="type-<%=type%>">
       <%= msg %>
     </div>
   <% end %>
 </div>
+
+<script>
+  setTimeout(function(){
+    document.getElementById('flash').remove()
+  }, 6000)
+</script>
