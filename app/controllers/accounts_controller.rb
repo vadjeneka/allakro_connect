@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
+    @transactions = current_user.account.transactions
   end
   private
   def set_account

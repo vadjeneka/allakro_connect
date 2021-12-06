@@ -13,6 +13,8 @@
       <p class="text-4xl font-medium text-center">
         <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
       </p>
+      <p class="text-4xl font-medium text-center ml-16">
+      </p>
       <%if current_user %>
         <% if current_user && @store.user.id != current_user.id %>
           <a href="<%= current_user ? new_store_chat_path(@store): new_user_session_path %>" class="bg-green-600 text-white px-5 py-2 rounded">
@@ -23,6 +25,7 @@
           <div class='flex justify-center items-center'>
             <%= link_to 'Supprimer mon store', store_path(@store), data:{confirm: 'Etes vous sur de vouloir supprimer votre compte? '} ,methode: :delete, class:'bg-red-600 text-white px-5 py-2 mr-2 font-medium rounded' %>
             <%= link_to 'Ajouter un article', new_store_product_path(@store), class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
+            <%= link_to 'Voir les avis', store_comments_path(@store), class:'bg-green-600 text-white px-5 py-2 font-medium rounded ml-2' %>
           </div>
         <% end %>
       <% else %>
@@ -37,38 +40,20 @@
     </div>
     <div class="w-full py-10"> 
         <a href="<%= bids_path %>">
-          <p class="text-3xl">Mes enchères</p>
+          <p class="text-3xl ml-20">Mes actions</p>
         </a>
         <div class="w-full flex justify-evenly items-center py-5">
-          <a href="<%= bids_path %>" class="text-center px-3">
+          <a href="<%= store_orders_path(@store) %>" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
-            <p class="py-8 text-lg">En cours</p>
+            <p class="py-8 text-lg">Commandes</p>
           </a>
-          <%if current_user.store%>
-            <a href="<%= bids_path %>" class="text-center px-3">
-              <%=image_tag 'icons8-checked-user-male-100.png', class:'w-16 h-16'%>
-              <p class="py-8 text-lg">A venir</p>
-            </a>
-          <% end %>
           <a href="<%=store_bids_historic_path(@store)%>" class="text-center px-3">
             <%=image_tag 'icons8-judge-60 (1).png', class:'w-16 h-16'%>
-            <p class="py-8 text-lg">Terminées</p>
+            <p class="py-8 text-lg">Historiques des enchères</p>
           </a>
         </div>
       </div>
   </div>
-  <%if current_user == @store.user%>
-    <div class="w-1/5 overflow-hidden">
-      <div class="h-36r overflow-y-auto">
-        <a href="<%#= store_orders_path(@store) %>">
-          <p class="text-2xl">Les avis sur mes produits</p>
-        </a>
-        <% if !@comments.empty? %>
-          <%= render partial: 'comment', collection: @comments%>
-        <%end%>
-      </div>
-    </div>
-  <% end %>
 </div>
 
 

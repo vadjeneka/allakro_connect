@@ -5,13 +5,13 @@
   }
 </style>
 
-<div class="overflow-hidden h-min">
+<div class="h-min overflow-auto ">
   <div class="flex py-5 mx-auto pr-5">
-    <p class="text-3xl font-medium text-center">
+    <p class="text-3xl font-medium text-center ml-3">
       Les avis sur mes produits 
     </p>
   </div>
-  <div class="w-full py-10 bg-red-100 grid grid-cols-1">
+  <div class="w-full py-10 bg-gray-100 grid grid-cols-4 gap-4">
     <%= render partial: 'comment', collection: @comments%>
   </div>
 </div>
