@@ -35,15 +35,19 @@
     <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto'>
       <%=render partial:'product', collection: @store_products%>
     </div>
-    <%if current_user && current_user.store == @store%>
-      <div class="w-4/5 py-10 mx-auto"> 
-          <a href="">
-            <p class="text-3xl">Mes enchères</p>
+    <div class="w-full py-10"> 
+        <a href="<%= bids_path %>">
+          <p class="text-3xl">Mes enchères</p>
+        </a>
+        <div class="w-full flex justify-evenly items-center py-5">
+          <a href="<%= bids_path %>" class="text-center px-3">
+            <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
+            <p class="py-8 text-lg">En cours</p>
           </a>
-          <div class="w-full flex justify-evenly items-center py-5">
-            <a href="" class="text-center px-3">
-              <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
-              <p class="py-8 text-lg">En cours</p>
+          <%if current_user.store%>
+            <a href="<%= bids_path %>" class="text-center px-3">
+              <%=image_tag 'icons8-checked-user-male-100.png', class:'w-16 h-16'%>
+              <p class="py-8 text-lg">A venir</p>
             </a>
             <%if current_user && current_user.store%>
               <a href="" class="text-center px-3">
@@ -63,8 +67,8 @@
   <%if current_user == @store.user%>
     <div class="w-1/5 overflow-hidden">
       <div class="h-36r overflow-y-auto">
-        <a href="<%= store_orders_path(@store) %>">
-          <p class="text-2xl">Mes commandes</p>
+        <a href="<%#= store_orders_path(@store) %>">
+          <p class="text-2xl">Les avis sur mes produits</p>
         </a>
         <% if !@comments.empty? %>
           <%= render partial: 'comment', collection: @comments%>

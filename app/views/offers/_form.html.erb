@@ -1,4 +1,4 @@
-<%= form_with model: [store, product, bid, bid.offers.build] do |form|%>
+<%= form_with model: [store, product, bid, offer] do |form|%>
   <div class="flex justify-center">
     <%= form.number_field :amount, placeholder: "Votre offre: 50000 XOF", class:"block border border-grey-light w-1/3 p-3 rounded mb-4 mr-4" %>
     <%if current_user%>  
