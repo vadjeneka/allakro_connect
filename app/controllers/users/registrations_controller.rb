@@ -3,10 +3,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # def update_resource(resource, user_params)
-  #   #raise resource.inspect
-  #   #raise user_params.inspect
-  #   #raise params[:user].inspect
-  #   #raise resource.first_name.inspect 
   #   resource.first_name = params[:user][:first_name]
   #   resource.last_name = params[:user][:last_name]
   #   resource.email = params[:user][:email]
