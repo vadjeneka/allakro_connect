@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'orders', to: 'orders#index'
   
   resources :carts, only: [:index, :destroy]
-  
+  resources :tendances
   resources :users do
     resources :accounts do
       resources :transactions
@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   end
   resources :stores do
     resources :orders, only: [:index, :show, :update, :destroy]
+    resources :comments
     resources :chats do
       resources :messages
     end

@@ -55,7 +55,7 @@ class ChatsController < ApplicationController
     if @chat.save
       message = @chat.messages.build(chat_params.merge(user: current_user))
       if message.save
-        redirect_to store_chat_path(@store, @chat), notice:  'Chat was successfully created'
+        redirect_to store_chat_path(@store, @chat)
       else
         raise message.errors.inspect
       end
