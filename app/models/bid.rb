@@ -35,7 +35,6 @@ class Bid < ApplicationRecord
   #   if self.finished
   #     return self.offers.top
   #   end
-  #   raise self.offers.top.inspect
   # end
 
 end

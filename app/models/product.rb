@@ -55,4 +55,5 @@ class Product < ApplicationRecord
     query
   end
 
+
 end
