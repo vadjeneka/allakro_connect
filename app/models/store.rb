@@ -8,6 +8,8 @@ class Store < ApplicationRecord
 
   has_many :orders, through: :carts
   has_many :products, :dependent => :destroy
+
+  has_many :comments, through: :products
   
   has_one_attached :background
   has_many :chats, :dependent => :destroy
