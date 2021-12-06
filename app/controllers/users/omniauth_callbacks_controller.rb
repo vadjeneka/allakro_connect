@@ -17,7 +17,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    #raise request.env['omniauth.auth'][:extra][:raw_info][:name].split(' ')[1].inspect
     user = User.from_omniauth(from_google_params)
 
     if user.present?

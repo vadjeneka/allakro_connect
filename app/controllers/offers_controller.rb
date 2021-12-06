@@ -1,5 +1,6 @@
 class OffersController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -14,20 +15,27 @@ class OffersController < ApplicationController
   def create
     @bid = Bid.find(params[:bid_id])
     @offer = @bid.offers.build(params_offer)
-    top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
-    @offer.with_lock do
-      if @offer.amount > top
-        Transaction.hold(@offer)
-        if @offer.save
-          redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
-        else
-          flash[:error] = "Your offer was not saved"
-          render "new"
+    top = @bid.offers.top.first&.amount.nil? ? top = 0 : top = @bid.offers.top.first&.amount
+    if @offer.amount > @bid.initial_price &&  @offer.amount > top
+      if @offer.user.account.balance >= @offer.amount    
+        @offer.with_lock do
+          Transaction.release(@offer)
+          if @offer.save
+            Transaction.hold(@offer)
+            redirect_to store_product_bid_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
+          else
+            flash[:error] = "Votre offre n'a pas été enregistré"
+            redirect_to store_product_bid_path(@bid.product.store,@bid.product,@bid)
+          end
         end
       else
-        redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
+        flash[:error] = "Solde insuffisant"
+        redirect_to store_product_bid_path(@bid.product.store,@bid.product,@bid)
       end
-    end
+    else
+      flash[:alert] = "L'offre est inférieure prix initial ou à la meilleure offre !"
+      redirect_to store_product_bid_path(@bid.product.store,@bid.product,@bid)
+    end 
   end
 
 
@@ -37,21 +45,6 @@ class OffersController < ApplicationController
 
   def details
     @offer = Offer.find(params[:id])
-    @offer = @bid.offers.build(params_offer)
-    top = @bid.offers.top.first&.amount.nil? ? 0 : @bid.offers.top.first&.amount
-    @offer.with_lock do
-      if @offer.amount > top
-        Transaction.hold(@offer)
-        if @offer.save
-          redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
-        else
-          flash[:error] = "Your offer was not saved"
-          render "new"
-        end
-      else
-        redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre est inférieure à l'offre gagnante, faites une nouvelle offre !"
-      end
-    end
   end
 
   def edit

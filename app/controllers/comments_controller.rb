@@ -1,12 +1,19 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product
+  # before_action :set_product
+
+  def index
+    @store = Store.find(params[:store_id])
+    @comments = Comment.all
+    
+  end
 
   def show 
     @comment = @product.comments
   end
 
   def create
+    @product = Product.find(params[:product_id])
     @comment = @product.comments.create(comment_params)
     @comment.user = current_user
     if @comment.save
@@ -36,7 +43,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:comment)
   end
 
-  def set_product
-    @product = Product.find(params[:product_id])
-  end
+  # def set_product
+  #   @product = Product.find(params[:product_id])
+  # end
 end

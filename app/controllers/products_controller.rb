@@ -9,14 +9,13 @@ class ProductsController < ApplicationController
     # if params[:name]
     #   @products = Product.search(params[:name])
     # else
-    # raise params.inspect
     # @products = Product.all
     @products = Product.includes(:store, :categories).filter_by_availability.page(params[:page]).per(12)
     @products = @products.filter_by_name(params[:name]) if params[:name].present?
     @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]) if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
     @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
     @products = @products.filter_by_locations(params[:locations]) if params[:locations].present?
-    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present?
+    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present? && current_user
     # end
 
     @categories = category_returns
@@ -51,7 +50,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    raise params[:product][:product_backgrounds].inspect
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
@@ -78,7 +76,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # raise product_params.inspect
     # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
     list_img.each do |img|
@@ -102,7 +99,6 @@ class ProductsController < ApplicationController
 
   def like
     @already_like = Favorite.find_by(user_id: params[:user], product_id: params[:id])
-    # raise @already_like.inspect
     if @already_like
       @already_like.update(still_favorites?: !@already_like.still_favorites?)
       if params[:source] == 'product'
@@ -166,8 +162,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      :hidden_items,
-      product_backgrounds:[],
+      product_backgrounds:[]
     )
   end
 end

@@ -1,0 +1,15 @@
+<div class="w-full flex bg-gray-200 rounded items-start mx-10 shadow-lg">
+  <div class="w-20 h-20">
+    <% if comment.product.product_backgrounds.attached? %>
+      <%= image_tag comment.product.product_backgrounds[0], class:'m-0 rounded-full h-full w-full '%>
+    <%else%>
+      <%=image_tag 'default_product_image.png', class:'h-full w-full object-cover'%>
+    <% end %>
+  </div>
+
+  <div class="ml-2">
+    <p class="text-sm"><strong>Produit : </strong><%= comment.product.name%>, <%= comment.product.price%> Fcfa</p>
+    <p class="text-sm"> <strong> De : </strong> <%= comment.user.first_name%></p>
+    <p class="text-sm"> <strong> Avis : </strong> <%= comment.comment%></p> 
+  </div> 
+</div> <br>

@@ -34,7 +34,7 @@
 
 <%=form_with url: products_path, method: :get do |f| %>
   <% content_for :search_bar do %>
-    <%=render partial: 'home/searchs', locals:{f: f}%>
+    <%=render partial: 'home/searchs'%>
   <% end %>
   <div class="flex min-height mt-8">
     <div class="w-1/5 px-3">
@@ -55,6 +55,8 @@
 				<button type="button" class="text-white bg-red-500 px-10 rounded py-1" data-action="click->search#performSearch">Filters <i class="fa fa-filter"></i></button>
 			</div>
     </div>
+    
+    
     <div class='w-4/5 px-2'>
       <div class="w-full grid grid-cols-4 gap-2">
         <%=render partial:'home/product', collection:@products%>
@@ -62,6 +64,10 @@
       <div class='w-full py-2 flex justify-center items-center'>
         <%= paginate @products %>
       </div>
+      
+      <% if @products == [] %>
+          <h1 class="text-center">Not product found</h1>
+      <% end %>
     </div>
   </div>
 <% end %>

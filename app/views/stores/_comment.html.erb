@@ -1,4 +1,4 @@
-<div class="w-full flex bg-gray-100 rounded items-start">
+<div class="w-full flex bg-gray-100 rounded items-start overflow-scroll">
   <div class="w-20 h-20">
     <% if comment.product.product_backgrounds.attached? %>
       <%= image_tag comment.product.product_backgrounds[0], class:'m-0 rounded-full h-full w-full '%>
@@ -8,7 +8,8 @@
   </div>
 
   <div class="ml-2">
-    <p class="text-lg">Comment from: <%= comment.user.email%></p>
-    <p class="text-sm"><%= comment.comment%></p>
-  </div>
-</div>
+    <p class="text-sm"><strong>Produit : </strong><%= comment.product.name%>, <%= comment.product.price%> Fcfa</p>
+    <p class="text-sm"> <strong> De : </strong> <%= comment.user.first_name%></p>
+    <p class="text-sm"> <strong> Avis : </strong> <%= comment.comment%></p> 
+  </div> 
+</div> <br>
