@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   end
   resources :stores do
     resources :orders, only: [:index, :show, :update, :destroy]
+    resources :comments
     resources :chats do
       resources :messages
     end

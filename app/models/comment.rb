@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :product
 
   scope :comment_by_product, ->(product) {where(product_id: product.id) }
+  default_scope { order("created_at DESC") }
 
   # after_commit :create_notifications, on: :create
   # after_create_commit { broadcast_append_to self.comment.id, locals:{user: self.user} }
