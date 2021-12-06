@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]) if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
     @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
     @products = @products.filter_by_locations(params[:locations]) if params[:locations].present?
-    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present?
+    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present? && current_user
     # end
 
     @categories = category_returns
@@ -166,7 +166,6 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      :hidden_items,
       product_backgrounds:[],
     )
   end
