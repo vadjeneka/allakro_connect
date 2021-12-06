@@ -44,6 +44,8 @@ class BidsController < ApplicationController
     quantity = Inventory.find_by(bid_id: @bid.id)
     quantity.update(quantity: 0)
     @bid.update(state: "cancelled")
+    top = @bid.offers.top.first
+    Transaction.release(top)
     
     #TODO: increment stock of product from inventory
 

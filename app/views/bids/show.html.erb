@@ -1,7 +1,11 @@
 <h2 class="text-3xl font-bold text-center my-5">
   Enchère sur "<%= @bid.product.name %>" 
   <p class="text-xl mt-5">
-    Fin le <%= @bid.end_date.strftime("%d/%m/%Y") + " à " + @bid.end_date.strftime("%H:%M")  %>
+    <% if @bid.state == 'actived' %>
+      Fin le <%= @bid.end_date.strftime("%d/%m/%Y") + " à " + @bid.end_date.strftime("%H:%M")  %>
+    <% else %>
+      Débute le <%= @bid.start_date.strftime("%d/%m/%Y") + " à " + @bid.start_date.strftime("%H:%M")  %>
+    <% end %>
     <% if @bid.offers.size == 0 %>
       ,Montant initial : <span class="text-red-500"><%= @bid.initial_price %> FCFA </span>
     <% end %>
