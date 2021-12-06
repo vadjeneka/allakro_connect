@@ -14,18 +14,18 @@
     <div class="width-20 pr-2 border-r border-gray-100">
       <%= render partial: 'list_chats', locals:{chat_from_store: @chat_from_store, chat_from_me: @chat_from_me}  %>
     </div>
-  <div class="width-80 h-full overflow-hidden relative px-2 pt-20">
+  <div class="width-80 h-full overflow-hidden relative px-2 pt-20 ">
     <p class="px-3 py-3 border-b w-full">
       <strong class="text-black font-medium">
         <%=!current_user.store ? "#{@store.name}" : current_user.store.id == @store.id ? "#{@chat.user.first_name} #{@chat.user.last_name}" : "#{@store.name}"%>
       </strong>
     </p>
-    <div class="px-2 py-2 h-90 overflow-y-auto" id="messages">
+    <div class="px-2 py-2 h-90 overflow-y-auto " id="messages">
       <%=turbo_stream_from @chat.id %>
         <span id="current-user" data-current-user="<%=current_user.id%>"></span>
         <%=render partial: 'messages/message', collection: @message, locals:{user:current_user}%>
     </div>
-    <div class="absolute bottom-2 w-full px-3">
+    <div class="absolute bottom-2 w-full px-3 bg-white pt-1">
       <%= render 'input_message', chat: @chat %>
     </div>
   </div>
@@ -36,3 +36,4 @@
       <%=render 'shared/banners'%>
   </div>
 <% end %>
+
