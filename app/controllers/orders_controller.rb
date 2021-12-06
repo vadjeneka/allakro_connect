@@ -42,12 +42,7 @@ class OrdersController < ApplicationController
 
   def validate_order
     @order = Order.find(params[:id])
-    @order.update(state: "validated")
-    OrderMailer.with(order: @order).confirm_order_email.deliver_later
-
-    # TODO: Si la commande est confirmé, redirect de l'argent de l'argent depuis le compte de l'acheteur
-    Transaction.purchase(@order)
-
+    validate_user_order(@order)
     # TODO: Si la commande est confirmé, retirer de l'argent de l'argent depuis le compte de l'acheteur
     # TODO: Payer le vendeur
     # TODO: Diminuer les stocks des produits
@@ -64,5 +59,17 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.destroy
     redirect_to user_carts_path(current_user), notice: "Order was successfully destroyed"
+  end
+
+  private
+  def validate_user_order(order)
+    user_balance = order.user.account.balance
+    if user_balance < order.amount
+      raise "Hahahaha".inspect
+    else
+      Transaction.purchase(order)
+      @order.update(state: "validated")
+      OrderMailer.with(order: @order).confirm_order_email.deliver_later
+    end
   end
 end
