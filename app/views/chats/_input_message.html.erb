@@ -1,9 +1,10 @@
 <%= form_with model: [@store, @chat, @messages], data:{remote: false, controller: 'action-on-submit', action: 'ajax:success->action-on-submit#emptyField', 'action-on-submit-target': 'form'} do |form| %>
 <div class="w-full flex rounded overflow-hidden">
-  <%= form.text_field :content, placeholder:'Ecrivez un message', class:'w-5/6 px-4 py-2 border-none bg-gray-100 outline-none',data:{'action-on-submit-target': 'field', action:'keyup->action-on-submit#enableField'} %>
+  <%= form.text_field :content, placeholder:'Ecrivez un message', class:'flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 mr-2',data:{'action-on-submit-target': 'field', action:'keyup->action-on-submit#enableField'} %>
   <% if @chat.errors[:content] %>
     <span style='color: red'><%= @chat.errors[:content][0] %></span>
-  <% end %>
-  <%= form.submit "Envoyer", class: "rounded rounded-tl-none rounded-bl-none py-2 px-10 bg-red-500 text-white",data: {'action-on-submit-target': 'submitBtn'} %>
+  <% end %>   
+    <%= form.submit "Envoyer", class: "rounded py-2 px-10 bg-red-500 text-white ",data: {'action-on-submit-target': 'submitBtn'} %>
 </div>
 <%end%>
+   
