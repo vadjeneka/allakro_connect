@@ -23,15 +23,9 @@ class BidsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     @bid = @product.bids.build(params_bid)
-    #TODO: If stock is available however he cannot create a bid
     if @product.stock.quantity > 0
       if @bid.save
-        #TODO: increment inventory of product
-        Inventory.create(bid_id: @bid.id, quantity: 1)
-      
-        # @bid.inventory.bid = @bid.id
-        # @bid.inventory.quantity = 1
-        
+        Inventory.create(bid_id: @bid.id, quantity: 1)    
         redirect_to store_product_bids_path(@product.store, @product)
       else
         flash[:error] = "Enchère non enregistrée"
