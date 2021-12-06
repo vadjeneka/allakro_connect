@@ -77,9 +77,9 @@ class ProductsController < ApplicationController
   def update
     # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
-    list_img.each do |img|
-      @product.product_backgrounds[img].destroy
-    end
+    # list_img.each do |img|
+    #   @product.product_backgrounds[img].destroy
+    # end
     if @product.update(product_params)
       # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
