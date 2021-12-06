@@ -16,7 +16,7 @@
 
 
 <div class="flex justify-between min-h">
-  <div class="w-4/6 flex px-5">
+  <div class="w-5/6 flex px-5">
     <div class="w-2/5">
       <p class="py-10 text-4xl">Mon profil</p>
       <div class='block'>
@@ -49,14 +49,8 @@
         <div class="w-full flex justify-evenly items-center py-5">
           <a href="<%= user_orders_path(current_user) %>" class="text-center px-3">
             <%=image_tag 'icons8-deliver-food-100 (1).png', class:'w-16 h-16 mx-auto'%>
-            <p class="py-8 text-lg">En cour de traitement</p>
+            <p class="py-8 text-lg">Historiques des commandes</p>
           </a>
-          <%if current_user.store%>
-            <a href="" class="text-center px-3">
-              <%=image_tag 'icons8-checked-user-male-100.png', class:'w-16 h-16'%>
-              <p class="py-8 text-lg">Expedié</p>
-            </a>
-          <% end %>
           <a href="<%=user_offers_historic_path(current_user)%>" class="text-center px-3">
             <%=image_tag 'icons8-judge-60 (1).png', class:'w-16 h-16'%>
             <p class="py-8 text-lg">Enchères</p>
@@ -65,20 +59,7 @@
       </div>
     </div>
   </div>
-  <div class="width-30 px-5 border-l border-gray-100">
-    <%if current_user.store%>
-      <div class="h-72 overflow-y-auto">
-        <p class="text-2xl">Mes commandes</p>
-      </div>
-    <% end %>
-    <div class='overflow-y-auto'>
-      <p class="text-2xl">Mes favoris</p>
-      <div class='<%= current_user ? 'h-72 grid grid-cols-2 gap-1 overflow-y-auto': 'h-36r grid grid-cols-3 gap-1 overflow-y-auto'%>'>
-        <%if @favorites.length>0 %>
-          <%= render partial: 'favorite', collection: @favorites%>
-        <%end%>
-      </div>
-    </div>
+
   </div>
 </div>
 
