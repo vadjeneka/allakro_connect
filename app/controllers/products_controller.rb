@@ -53,7 +53,6 @@ class ProductsController < ApplicationController
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
-      redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
       if (params[:product][:quantity]).to_i >= 0
         stock = @product.build_stock(quantity: (params[:product][:quantity]).to_i)        
       else
