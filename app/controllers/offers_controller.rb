@@ -19,7 +19,8 @@ class OffersController < ApplicationController
     if @offer.amount > @bid.initial_price &&  @offer.amount > top
       @offer.with_lock do
         if @offer.save
-          OrderMailer.with(offer: @offer).confirm_order_email.deliver_later
+          BidMailer.with(bid: @bid).new_offer_email.deliver_later
+          BidMailer.with(bid: @bid).new_offer_owner_email.deliver_later
           redirect_to store_product_bid_offers_path(@bid.product.store, @bid.product, @bid), notice: "Votre offre a été enregistrée"
         else
           flash[:error] = "Votre offre n'a pas été enregistré"

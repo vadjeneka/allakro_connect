@@ -66,6 +66,7 @@ class BidsController < ApplicationController
     if quantity
       winner = Offer
       @bid.update(validated: true)
+      BidMailer.with(bid: @bid).bid_closed_email.deliver_later
       #TODO: increment stock of product from inventory
       quantity.update(quantity: 0)
       @accepted_offer = @bid.offers.top.first
