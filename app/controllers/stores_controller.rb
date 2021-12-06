@@ -16,7 +16,6 @@ class StoresController < ApplicationController
   end
 
   def show
-    # raise params.inspect
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products
@@ -24,10 +23,8 @@ class StoresController < ApplicationController
   end
 
   def create
-    # raise store_params[:background].inspect
     @store = current_user.build_store(store_params)
     if @store.save
-      # raise "You here"
       redirect_to store_path(@store), notice: 'Store was successfully created'
     else
       raise "You got errors here"

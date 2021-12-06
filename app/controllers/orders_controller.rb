@@ -28,9 +28,9 @@ class OrdersController < ApplicationController
     if @order.save
       cart.update(validated: true)
       OrderMailer.with(order: @order).new_order_email.deliver_later
-      redirect_to user_orders_path(current_user), notice: 'Order was successfully created'
+      redirect_to user_orders_path(current_user), notice: 'Votre commande a bien été enregistré'
     else
-      flash[:error] = "Couldn't create order"
+      flash[:error] = "Nous n'avons pas pu enregistré votre commande"
       redirect_to user_carts_path(current_user)
     end
   end
@@ -42,16 +42,9 @@ class OrdersController < ApplicationController
 
   def validate_order
     @order = Order.find(params[:id])
-    @order.update(state: "validated")
-    OrderMailer.with(order: @order).confirm_order_email.deliver_later
-
-    # TODO: Si la commande est confirmé, redirect de l'argent de l'argent depuis le compte de l'acheteur
-    Transaction.purchase(@order)
-
-    # TODO: Si la commande est confirmé, retirer de l'argent de l'argent depuis le compte de l'acheteur
-    # TODO: Payer le vendeur
+    validate_user_order(@order) 
     # TODO: Diminuer les stocks des produits
-    redirect_to store_orders_path(@order.cart.store), notice: "La commande ##{@order.id[0,7].upcase} a été validée"
+    redirect_to store_orders_path(@order.cart.store)
   end
 
   def reject_order
@@ -63,6 +56,19 @@ class OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    redirect_to user_carts_path(current_user), notice: "Order was successfully destroyed"
+    redirect_to user_carts_path(current_user), notice: "Votre commande a été supprimé"
+  end
+
+  private
+  def validate_user_order(order)
+    user_balance = order.user.account.balance
+    if user_balance < order.amount
+      order.update(state: "cancelled")
+      flash[:notice] = "Le propriétaire de la commande n'a pas suffisament de fonds !"
+    else
+      Transaction.purchase(order)
+      @order.update(state: "validated")
+      OrderMailer.with(order: @order).confirm_order_email.deliver_later
+    end
   end
 end

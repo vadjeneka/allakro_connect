@@ -16,3 +16,38 @@
     </a>
   </div>
 </div>
+#raise request.env['omniauth.auth'][:extra][:raw_info][:name].split(' ')[1].inspect
+#   #raise resource.inspect
+#   #raise user_params.inspect
+#   #raise params[:user].inspect
+#   #raise resource.first_name.inspect 
+#   # raise resource.inspect
+# raise params.inspect
+# raise @product.stock.quantity.inspect
+# raise @bid.id.inspect
+# raise @bid.errors.messages_for(:start_date).join(',').inspect
+# raise @carts.inspect
+# raise params.inspect
+# raise params.inspect
+# raise Chat.new.inspect
+# raise @chat.inspect
+# raise params.inspect
+# raise message.errors.inspect
+# raise params.inspect
+# raise product_params.inspect
+# raise @already_like.inspect
+# raise params.inspect
+# raise rating_params.inspect
+# raise @rate.inspect
+# raise params.inspect
+# raise store_params[:background].inspect
+# raise "You here"
+# raise @transactions.length.inspect
+# raise transaction_params.inspect
+#   raise self.offers.top.inspect
+#raise auth[:email].inspect
+# raise @transactions.length.inspect
+# raise transaction_params.inspect
+
+
+

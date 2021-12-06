@@ -6,7 +6,6 @@ class CartsController < ApplicationController
       end 
     end
     @carts = current_user.carts.includes(:line_items, :products).where(validated: false)
-    # raise @carts.inspect
   end
 
   def destroy
