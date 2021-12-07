@@ -14,11 +14,12 @@ export default class extends Controller {
     console.log('current_user :',currentUser)
     if (currentUser == messageUser) {
       this.containerTarget.classList.add('rounded-br-none')
-      this.containerTarget.classList.add('bg-gray-200')
+      this.containerTarget.classList.add('bg-red-400')
+      this.containerTarget.classList.add('text-white')
       this.containerTarget.parentElement.classList.add('justify-end')
     } else {
-      this.containerTarget.classList.add('bg-blue-300')
-      this.containerTarget.classList.add('text-green-900')
+      this.containerTarget.classList.add('bg-blue-400')
+      this.containerTarget.classList.add('text-white')
       this.containerTarget.classList.add('rounded-tl-none')
       this.containerTarget.parentElement.classList.add('justify-start')
     }

@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   emptyField(){
-    // console.log('kkk')
+    console.log('kkk')
     this.fieldTarget.value = ''
   }
   enableField(){

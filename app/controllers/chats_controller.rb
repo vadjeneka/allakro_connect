@@ -15,7 +15,6 @@ class ChatsController < ApplicationController
   end
 
   def show
-    # raise params.inspect
     chat = Chat.find(params[:id])
     @message = Message.includes(:user).where(chat_id: chat.id)
     @chat = set_chat
@@ -51,15 +50,12 @@ class ChatsController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     @store = Store.find(params[:store_id])
-    # raise Chat.new.inspect
     @chat = current_user.chats.build({name: @store.name}.merge(store_id: @store.id))
-    # raise @chat.inspect
     if @chat.save
       message = @chat.messages.build(chat_params.merge(user: current_user))
       if message.save
-        redirect_to store_chat_path(@store, @chat), notice:  'Chat was successfully created'
+        redirect_to store_chat_path(@store, @chat)
       else
         raise message.errors.inspect
       end
