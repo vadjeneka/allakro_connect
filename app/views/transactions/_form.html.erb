@@ -1,13 +1,20 @@
-<%= form_with model: [current_user, current_user.account, transaction] do |form|%>
-  <div class="flex">
-    <div class="field">
-        <%= form.number_field :amount, min:'0', class: 'w-5/6 outline-none bg-gray-100 rounded px-3 py-2', placeholder:'montant FCFA'%>
-    </div>
-    <div class="field ">
-        <%= form.select :type_transaction, ['Dépôt', 'Rétrait'], class:'px-4 py-3 rounded-full' %>
-        
-    </div> <br>
 
-    <%= form.submit 'Effectuer', class:'px-3 py-2 w-2/6 rounded bg-red-600 text-white'  %>
-  </div>
+<style>
+  select{
+    width:100%;
+    padding: 0.5rem 0;
+    outline:none;
+  }
+</style>
+<div class='w-full'>
+  <%= form_with model: [current_user, current_user.account, transaction] do |form|%>
+    <div class='py-2'>
+      <%= form.select :type_transaction, ['Dépôt', 'Rétrait'], class:'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' %>
+    </div>
+    <%= form.number_field :amount, min:'0', class: 'w-full outline-none bg-gray-100 rounded my-2 px-3 py-2 block', placeholder:'15.000 FCFA'%>
+    <div class='flex justify-end mt-2'>
+      <%= form.submit 'Effectuer', class:'px-3 py-2 w-3/6 rounded bg-red-600 text-white block'  %>
+    </div>
   <%end%>
+
+</div>

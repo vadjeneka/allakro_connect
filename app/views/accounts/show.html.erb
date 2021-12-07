@@ -5,128 +5,69 @@
   .h-36r{
     height:36rem
   }
-  .width-30{
-      width: 25%;
-  }
-  .width-70{
-      width: 75%;
-    }
   </style>
   
   
   
-  <div class="flex justify-between min-h bg-gray-100 mb-2">
-    <div class="w-4/6 flex px-5">
-      <div class="w-2/5">
-        <p class="py-10 text-4xl">Mon compte</p>
-        <div class='block'>
-          <%= link_to 'Jokou VIP','',class:'w-full block m-1 font-light text-xl py-1'%>
-          <%= link_to 'Mes adresses','',class:'w-full block m-1 font-light text-xl py-1'%>
-          <%= link_to 'Mes options de paiement','',class:'w-full block m-1 font-light text-xl py-1'%>
-          <%= link_to 'Se deconnecter', destroy_user_session_path, method: :delete ,class:'w-full block m-1 font-light text-xl py-1'%>
+<div class="flex justify-center min-h bg-gray-50 py-5 mb-2">
+  <div class="w-3/6 flex px-5">
+    <div class="w-full">
+      <div class="w-full py-3 flex justify-between items-end">
+        <h3 class="text-base font-semibold text-gray-600">
+          Mon portefeuille 
+          <i class="fas fa-hand-holding-usd"></i>
+        </h3>
+        <a href="<%= new_user_account_transaction_path(current_user, current_user.account)%>" 
+          class="px-3 text-gray-600 font-semibold text-md flex items-center">
+          <i class="fal fa-plus-circle text-3xl text-blue-500 mr-2"></i>
+          Nouvelle transaction
+        </a>
+      </div>
+      <div class="w-full h-64 p-5 justify-center items-center overflow-hidden  px-14 bg-white shadow overflow-x-hidden">
+        <div class="text-left flex w-full justify-between pb-7 pt-2 border-b border-gray-100">
+          <div class='w-1/6'>
+            <i class="fas fa-hand-holding-usd text-3xl"></i>
+          </div>
+          <h3 class="text-base font-semibold text-gray-600 w-3/6">Montant réel:</h3>
+          <div class="text-left font-medium text-green-500 text-2xl  w-2/6">
+            <%= number_with_delimiter(@account.balance, :delimiter => '.') %> FCFA
+          </div>
+        </div>
+        <div class="text-left flex w-full justify-between pb-7 pt-2 border-b border-gray-100">
+          <div class='w-1/6'>
+            <i class="fas fa-credit-card text-3xl"></i>
+          </div>
+          <h3 class="text-base font-semibold text-gray-600 w-3/6">Montant prévisionnel:</h3>
+          <div class="text-left font-medium text-green-500 text-2xl w-2/6">
+            <%= number_with_delimiter(@account.balance + @account.transactions.amount_lock , :delimiter => '.') %> FCFA
+          </div>
+        </div> 
+        <div class="text-left flex w-full justify-between pb-7 pt-2 border-b border-gray-100">
+          <div class='w-1/6'>
+            <i class="fas fa-credit-card text-3xl"></i>
+          </div>
+          <h3 class="text-base font-semibold text-gray-600 w-3/6">Montant total bloqué:</h3>
+          <div class="text-left font-medium text-red-600 text-2xl w-2/6">
+            <%= number_with_delimiter(@account.transactions.amount_lock, :delimiter => '.') %> FCFA
+          </div>
         </div>
       </div>
-      <div class="width-70">
-        <div class="w-full py-3 flex justify-between">
-          <p class="text-2xl font-normal text-gray-700"><%=current_user.first_name%></p>
-            <a href="<%= new_user_account_transaction_path(current_user, current_user.account)%>" class="px-3 py-2 bg-green-500 text-black rounded text-sm">
-              <i class="fas fa-plus-circle "></i>
-              Nouvelle transaction
-            </a>
-        </div>
-        <h3 class="text-base font-semibold text-gray-600"> Mon portefeuille <i class="fas fa-hand-holding-usd"></i></h3>
-        <div class="w-full h-64 p-5 flex justify-center items-center overflow-hidden bg-white shadow-lg overflow-x-auto">
-          <table class="table-auto w-full">
-            <tbody class="text-sm divide-y divide-gray-300">
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="font-medium text-gray-800">
-                              <i class="fas fa-hand-holding-usd text-3xl"></i>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap ">
-                        <div class="text-left"><h3 class="text-base font-semibold text-gray-600">Montant réel:</h3></</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-green-500 text-2xl"><%= number_with_delimiter(@account.balance, :delimiter => '.') %> FCFA</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="font-medium text-gray-800">
-                              <i class="fas fa-credit-card text-3xl ml-5"></i>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left"><h3 class="text-base font-semibold text-gray-600 ml-6">Montant prévisionnel:</h3></</div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-green-500 text-2xl ml-6"><%= number_with_delimiter(@account.balance + @account.transactions.amount_lock , :delimiter => '.') %> FCFA</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="font-medium text-gray-800">
-                              <i class="fas fa-lock text-3xl ml-10"></i>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left"><h3 class="text-base font-semibold text-gray-600 ml-10">Montant total bloqué:</h3></div>
-                    </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-red-600 text-2xl ml-10">
-                          <%= number_with_delimiter(@account.transactions.amount_lock, :delimiter => '.') %> FCFA
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
 
-        <h3 class="text-base font-semibold text-gray-600"> Transactions effectuées <i class="fas fa-file-invoice-dollar"></i></h3>
-        <%= render 'thead' %>
-        <div class="w-full h-64 flex justify-center items-center overflow-scroll bg-white shadow-lg">
-          <table class="table w-full mt-5">
-                <tbody class="text-sm divide-y divide-gray-100 py-4">
-                  <% current_user.account.transactions.each do |transaction|%>
-                      <tr class="bg-gray-100">
-                        <td class="p-2 whitespace-nowrap ">
-                            <div class="text-left">
-                              <%= transaction.created_at&.strftime("%a %D")%>
-                            </div>
-                        </td>
-                          <td class="p-2 whitespace-nowrap">
-                              <div class="flex items-center">
-                                  <div class="font-medium text-gray-800">
-                                    <%= transaction.type_transaction%>
-                                  </div>
-                              </div>
-                          </td>
-                          <td class="p-2 whitespace-nowrap">
-                            <% if transaction.type_transaction == 'Dépôt' || transaction.type_transaction == 'Vente' || transaction.type_transaction == 'Déblocage' %>
-                              <div class="text-left font-medium text-green-500">+<%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
-                            <% end %>
-                            
-                            <%if transaction.type_transaction == 'Rétrait' || transaction.type_transaction == 'Achat' || transaction.type_transaction == 'Blocage' %>
-                                <div class="text-left font-medium text-red-600"><%= number_with_delimiter(transaction.amount, :delimiter => '.')%> FCFA</div>
-                            <%end %>
-                          </td>
-                      </tr>
-                    
-                  <% end%>
-                </tbody>
-            </table>
+      <h3 class="text-base font-semibold text-gray-600 pt-3 pb-1"> 
+        Transactions effectuées 
+        <i class="fas fa-file-invoice-dollar"></i>
+      </h3>
+      <div class="w-full h-96 overflow-y-auto bg-white shadow">
+        <%#= render 'thead' %>
+
+        <div class='py-2 '>
+          <%=render partial:'transaction', collection:@transactions%>
         </div>
       </div>
     </div>
+  </div>
 
-  </div> <br>
+</div>
   
   <% content_for :banners do %>
     <%=render 'shared/banners'%>

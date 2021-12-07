@@ -1,0 +1,14 @@
+<div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+  <a href="<%= product_path(tendance.product)%>">
+    <div class="flex items-end justify-end h-56 w-full overflow-none">
+      <% if tendance.product.product_backgrounds.attached? %>
+        <%= image_tag tendance.product.product_backgrounds[0], class:'object-cover  h-64 w-full '%>
+      <%else%>
+        <%=image_tag 'default_product_image.png', class:'h-64 w-full object-cover'%>
+      <% end %>
+    </div>
+    <div class="px-5 py-3">
+    <h3 class="text-gray-700 uppercase"><%= tendance.product.name %></h3>
+    </div>
+  </a>
+</div>

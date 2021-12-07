@@ -16,8 +16,13 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <style>
+    .h_min{
+      min-height: 25rem
+    }
+    </style>
   </head>
-  <% stimulus_controller = controller.controller_name == 'products' ? 'search': ''%>
+  <% stimulus_controller = controller.controller_name == 'products' || 'home' ? 'search': ''%>
   <body data-controller="<%= stimulus_controller%>">
     <%=render 'shared/flashes'%>
     <%#=render 'devise/shared/error_messages'%>

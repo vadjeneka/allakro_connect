@@ -1,0 +1,23 @@
+<div class="bg-white">
+  <main class="my-8">
+      <div class="container mx-auto px-6">
+        <p class='py-2 text-4xl font-medium'>Tendances</p>
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+          <%=render partial: 'tendance',collection:@tendances%>
+        </div>
+        <% if @tendances.empty?%>
+          <p class='text-4xl text-gray-500 text-center'>Aucune tendances actuellement...</p>
+        <% end %>
+      </div>
+  </main>
+</div>
+
+<% content_for :banners do %>
+  <% content_for :search_bar do %>
+    <%=render partial: 'home/searchs'%>
+  <% end %>
+  <%=render 'shared/banners'%>
+<% end %>
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
