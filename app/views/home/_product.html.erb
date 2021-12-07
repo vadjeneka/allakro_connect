@@ -7,8 +7,8 @@
         <%=image_tag 'default_product_image.png', class:'h-64 w-full object-cover'%>
       <% end %>
     </div>
-    <div class="py-2 flex items-center justify-between ">
-      <div class="w-32">
+    <div class="py-2 flex items-center justify-between pr-3 pl-1 overflow-hidden">
+      <div class="w-32  ">
         <p class=" font-medium text-lg"><%=product.name%></p>
         <p class=" font-normal text-sm py-1"><%=number_with_delimiter(product.price, :delimiter => '.')%> FCFA</p>
       </div>
