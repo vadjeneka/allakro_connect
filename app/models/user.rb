@@ -20,6 +20,10 @@ class User < ApplicationRecord
     scope :all_expect, -> (user){ where.not(id: user.id)}
     # Ex:- scope :active, -> {where(:active => true)}
 
+  def admin?
+    email == "admin@techshelter.fr"
+  end
+  
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
       user.provider = provider_data.provider
