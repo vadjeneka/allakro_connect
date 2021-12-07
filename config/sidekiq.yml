@@ -12,6 +12,6 @@
     enable: true
   
   bid_active:
-    every: '30m'
+    every: '2m'
     class: SetBidStateJob
     enable: true
