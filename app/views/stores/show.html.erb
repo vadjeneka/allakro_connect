@@ -8,7 +8,7 @@
 </style>
 
 <div class="min-h-screen flex overflow-hidden">
-  <div class="<%=current_user == @store.user ? 'w-4/5 overflow-hidden' : 'w-full overflow-hidden'%>">
+  <div class="<%=current_user == @store.user ? 'w-full overflow-hidden' : 'w-full overflow-hidden'%>">
     <div class="flex py-10 justify-between items-center w-4/5 mx-auto pr-5">
       <p class="text-4xl font-medium text-center">
         <%= current_user == @store.user ? 'Ma boutique' : "#{@store.name}"%>
