@@ -46,16 +46,4 @@ class User < ApplicationRecord
   def account_creation
     self.create_account!
   end
-<<<<<<< HEAD
-=======
-
-end
-
-def create_account
-  @user = User.last
-  @account = Account.new
-  @user.account = @account
-  @user.save
-  @account.save
->>>>>>> df10bdb15f666288c1fcb5340e9e447ff046df69
 end
