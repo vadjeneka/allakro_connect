@@ -46,10 +46,10 @@ class Transaction < ApplicationRecord
       offer_winner = bid_winner.amount #TODO: on récupère l'offre gagnante
       Transaction.release(bid_winner)
       bid_winner.user.account.withdraw(offer_winner)
-      bid_owner.account.deposit(offer_amount)
+      bid_owner.account.deposit(offer_winner)
 
       Transaction.create!(type_transaction: "Vente aux enchères", amount: offer_winner, account_id: bid_owner.account.id)
-      Transaction.create!(type_transaction: "Achat aux enchères", amount: -offer_winner, account_id: bid_winner.account.id)
+      Transaction.create!(type_transaction: "Achat aux enchères", amount: -offer_winner, account_id: bid_winner.user.account.id)
     end
   end
 end

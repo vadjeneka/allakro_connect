@@ -32,7 +32,7 @@ class BidsController < ApplicationController
         render 'new'
       end
     else
-      flash[:error] = "Quantité insuffisante !"
+      flash[:alert] = "Quantité insuffisante !"
         render 'new'
     end
   end
@@ -63,13 +63,14 @@ class BidsController < ApplicationController
   def update
     @bid = Bid.find(params[:id])
     quantity = Inventory.find_by(bid_id: @bid.id)
-      if @bid.update(validated: true)
+      if Transaction.bid_purcharse(@bid) 
+        @bid.update(validated: true)
         #TODO: increment stock of product from inventory
+        @accepted_offer = @bid.offers.top.first
+        @accepted_offer.update(accepted: true)
         Stock.decrement_quantity(@bid)
         #TODO: purchase bid product
         quantity.update(quantity: 0)
-        @accepted_offer = @bid.offers.top.first
-        @accepted_offer.update(accepted: true)
         redirect_to store_bids_historic_path(@bid.product.store)
         flash[:notice] = "Enchère validée, produit vendu !"
       else
