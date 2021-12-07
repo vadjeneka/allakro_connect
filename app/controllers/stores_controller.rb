@@ -16,6 +16,11 @@ class StoresController < ApplicationController
   end
 
   def show
+    if current_user
+      if current_user.first_name == nil && current_user.town == nil && current_user.city == nil
+        redirect_to edit_profile_path(current_user)
+      end 
+    end
     id = params[:id]
     @store = Store.find(id)
     @store_products = @store.products

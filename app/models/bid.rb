@@ -4,7 +4,7 @@ class Bid < ApplicationRecord
   has_one :active_bid, -> { where(state: 'actived') } 
   has_one :inventory
 
-  validates :initial_price, numericality: { greater_than_or_equal_to: 50000 }
+  validates :initial_price, numericality: { greater_than_or_equal_to: 10000 }
   validates :start_date, 
             :end_date, presence: true
   #validate :right_start_date, :right_end_date
