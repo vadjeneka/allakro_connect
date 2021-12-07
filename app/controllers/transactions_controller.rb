@@ -11,11 +11,15 @@ class TransactionsController < ApplicationController
     @transaction = current_user.account.transactions.build(transaction_params)
     if @transaction.save
       if @transaction.type_transaction == 'Dépôt'
-        balance = current_user.account.balance.to_i + transaction_params[:amount].to_i
-        if current_user.account.update(balance: balance) 
-          redirect_to user_account_path(current_user, current_user.account), notice:'Dépôt effectué avec succès'
+        if transaction_params[:amount].to_i <= 0
+          redirect_to new_user_account_transaction_path(current_user, current_user.account), alert: 'Montant incorrect'
         else
-          raise current_user.account.errors.inspect
+          balance = current_user.account.balance.to_i + transaction_params[:amount].to_i
+          if current_user.account.update(balance: balance) 
+            redirect_to user_account_path(current_user, current_user.account), notice:'Dépôt effectué avec succès'
+          else
+            raise current_user.account.errors.inspect
+          end
         end
       else
         @transaction.type_transaction =='Rétrait'
@@ -26,7 +30,7 @@ class TransactionsController < ApplicationController
               redirect_to user_account_path(current_user, current_user.account), notice:'Rétrait effectué avec succès'
             end
           else
-            redirect_to user_account_path(current_user, current_user.account), notice:' Retrait impossible, solde insuffisant'
+            redirect_to new_user_account_transaction_path(current_user, current_user.account), alert: 'Retrait impossible, solde insuffisant'
           end
         end
       end
