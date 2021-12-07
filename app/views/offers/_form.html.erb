@@ -4,7 +4,7 @@
     <% if current_user %>
       <%= form.submit "Faire une offre", class: "w-1/5 text-center py-3 rounded bg-red-600 text-white hover:bg-green-dark focus:outline-none h-12" %>
     <%else%>
-      <%= link_to 'Connectez-vous dabord', new_user_session_path, class: "w-1/5 text-center py-3 rounded bg-red-600 text-white hover:bg-green-dark focus:outline-none h-12" %>
+      <%= link_to 'Faire une offre', new_user_session_path, class: "w-1/5 text-center py-3 rounded bg-red-600 text-white hover:bg-green-dark focus:outline-none h-12" %>
     <%end%>
   </div>
 <% end %>
