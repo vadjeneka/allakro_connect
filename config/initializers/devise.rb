@@ -272,10 +272,15 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :google_oauth2, '493155442370-16lntr4nkjoo275di7hg1s440ic0j01r.apps.googleusercontent.com', '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'
-  config.omniauth :facebook, '553965522607325', '5c701b495658b9069d8dd9d9b2393ab2'
-  # if Rails.env.production?
-  #   config.omniauth :facebook, Rails.application.credentials.dig(:facebook, '553965522607325'), Rails.application.credentials.dig(:facebook, '5c701b495658b9069d8dd9d9b2393ab2'), token_params: { parse: :json }
+  if Rails.env.production?
+    config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :app_id), Rails.application.credentials.dig(:google, :app_secret)
+    config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :app_id), Rails.application.credentials.dig(:facebook, :app_secret), token_params: { parse: :json }
+  else
+    config.omniauth :google_oauth2, '493155442370-16lntr4nkjoo275di7hg1s440ic0j01r.apps.googleusercontent.com', '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'
+    config.omniauth :facebook, '500288914338480', '795f3a6911fdbcf489f71811e853d75a'
+  end
+    # if Rails.env.production?
+  #  
   # else
   #   'hello'
   # end

@@ -51,3 +51,14 @@
 
 
 
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <a href="<%=omniauth_authorize_path(resource_name, provider)%>" data-method="POST" class="px-5 text-gray-500 font-medium border border-gray-100 mr-5 py-1 rounded-md flex items-center">
+        <%if OmniAuth::Utils.camelize(provider) != 'Facebook' %>
+          <%=image_tag 'Google__G__Logo.svg.png', class:"w-7 h-7 mr-2"%>
+          Continue avec Google
+        <% else %>
+          <%=image_tag 'facebook-round-logo-png-transparent-background-12.png', class:"w-10 h-9 mr-2"%>
+          Continue avec Facebook
+        <% end %>
+      </a>
+    <% end %>
