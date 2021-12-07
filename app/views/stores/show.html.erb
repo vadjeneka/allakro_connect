@@ -38,7 +38,8 @@
     <div class='grid grid-cols-4 gap-1 h-100 w-4/5 my-0 mx-auto'>
       <%=render partial:'product', collection: @store_products%>
     </div>
-    <div class="w-full py-10"> 
+    <%if current_user && current_user.store == @store%>
+      <div class="w-full py-10"> 
         <a href="<%= bids_path %>">
           <p class="text-3xl ml-20">Mes actions</p>
         </a>
@@ -53,6 +54,7 @@
           </a>
         </div>
       </div>
+    <% end %>
   </div>
 </div>
 
