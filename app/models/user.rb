@@ -21,9 +21,6 @@ class User < ApplicationRecord
     # Ex:- scope :active, -> {where(:active => true)}
 
     
-  def admin?
-    email = "admin@techshelter.fr"
-  end
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
       user.provider = auth[:provider]
@@ -50,4 +47,16 @@ class User < ApplicationRecord
   def account_creation
     self.create_account!
   end
+<<<<<<< HEAD
+=======
+
+end
+
+def create_account
+  @user = User.last
+  @account = Account.new
+  @user.account = @account
+  @user.save
+  @account.save
+>>>>>>> df10bdb15f666288c1fcb5340e9e447ff046df69
 end

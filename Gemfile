@@ -76,6 +76,7 @@ gem 'devise'
 
 gem "pundit"
 gem 'omniauth'
+gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
