@@ -1,8 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.action_mailer.asset_host = 'http://localhost:3000' # for assets
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  config.action_mailer.asset_host = 'http://localhost:5000' # for assets
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
   config.action_mailer.delivery_method = :smtp # or :sendmail
   config.action_mailer.perform_deliveries = true

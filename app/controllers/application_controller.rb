@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   # def after_sign_in_path_for(resource)
   #   redirect_to root_path
   # end
-  
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
 
   protected
   def configure_permitted_parameters
@@ -22,4 +24,9 @@ class ApplicationController < ActionController::Base
     cart = Cart.find_by(user_id: user.id, store_id: store.id, validated: false)
     cart.nil? ? Cart.create(user_id: user.id, store_id: store.id) : cart
   end
+  
+  def after_inactive_sign_up_path_for(resource)
+    redirect_to root_path
+  end
+
 end

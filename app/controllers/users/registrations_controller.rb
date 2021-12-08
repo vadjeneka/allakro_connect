@@ -18,4 +18,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_signup_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :city, :phone, :town, :password, :password_confirmation, :avatar])
   end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
+  
+  protected
+
+  def after_inactive_sign_up_path_for(resource)
+    root_path
+  end
 end

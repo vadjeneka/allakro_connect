@@ -1,8 +1,8 @@
 class Bid < ApplicationRecord
   belongs_to :product
-  has_many :offers  
+  has_many :offers , :dependent => :destroy
   has_one :active_bid, -> { where(state: 'actived') } 
-  has_one :inventory
+  has_one :inventory,:dependent => :destroy
 
   validates :initial_price, numericality: { greater_than_or_equal_to: 500 }
   validates :start_date, 

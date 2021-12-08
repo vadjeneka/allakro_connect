@@ -1,13 +1,14 @@
 class Product < ApplicationRecord
-  
   belongs_to :store 
-  has_one :stock
-  has_many :bids
-  has_many :favorites
+  has_one :stock, :dependent => :destroy
+  has_many :bids, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
 
   has_and_belongs_to_many :categories
-  has_many_attached :product_backgrounds
-  has_many :comments
+  has_many_attached :product_backgrounds, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+
+  has_many :tendances, :dependent => :destroy
 
 
   scope :filter_by_name, ->(name) {joins(:categories).where(["lower(products.name) LIKE ? or lower(categories.name) LIKE ?", "%#{name.downcase}%","%#{name.downcase}%"])}

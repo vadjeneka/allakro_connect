@@ -7,7 +7,7 @@
     <p class="text-4xl font-semibold w-full"><%=number_with_delimiter(tendance.product.price, :delimiter => '.')%> FCFA</p>
     <div class="flex py-5">
       <%if current_user %>
-        <a href="<%= store_product_line_items_path(tendance.product.store, tendance.product) %>" class='py-3 px-10 bg-red-600 text-white font-semibold text-lg'> 
+        <a href="<%= store_product_line_items_path(tendance.product.store, tendance.product) %>" data-method="POST" class='py-3 px-10 bg-red-600 text-white font-semibold text-lg'> 
           Ajouter au panier
         </a>
       <% else %>
