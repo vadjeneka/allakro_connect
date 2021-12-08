@@ -6,6 +6,6 @@ class MessageMailer < ApplicationMailer
       @message = params[:message]
       @email = @message.chat.store.user.email
       @firstname = @message.chat.store.user
-      mail(to: @email, subject:"Hi! You received a new message.")
+      mail(to: @email, subject::"Salut, vous avez reçu un nouveau message !")
     end
 end

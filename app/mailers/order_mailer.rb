@@ -3,12 +3,12 @@ class OrderMailer < ApplicationMailer
 
   def new_order_email
     @order = params[:order]
-    mail(to: @order.cart.user.email, subject: "You got a new order!")
+    mail(to: @order.cart.user.email, subject: "Vous avez reçu une commande!")
   end
 
   def confirm_order_email
     @order = params[:order]
-    mail(to: @order.cart.user.email, subject: "Your order has been confirmed!")
+    mail(to: @order.cart.user.email, subject: "Votre commande a bien été confirmée!")
   end
 end
 
