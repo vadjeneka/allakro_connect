@@ -3,8 +3,8 @@
         <thead>
           <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
             <th class="px-4 py-3">ID</th>
-            <th class="px-4 py-3">Clients</th>
-            <th class="px-4 py-3">Nombres d'articles</th>
+            <th class="px-4 py-3">Nom des clients</th>
+            <th class="px-4 py-3">Nbs d'articles</th>
             <th class="px-4 py-3">Prix de la commande</th>
             <th class="px-4 py-3">Status</th>
             <th class="px-4 py-3">Créé le</th>
@@ -28,22 +28,22 @@
               <%= order.cart.line_items.size %>
             </td>
             <td class="px-4 py-3 text-sm border">
-              <%= order.cart.total_price %> FCFA
+              <%= number_with_delimiter( order.cart.total_price, :delimiter => '.') %> FCFA
             </td>
             <td class="px-4 py-3 text-sm border">
               <% if order.state == "cancelled" %>
                 <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                  <%= order.state %>
+                  annulée
                 </span>
               <% end %>
               <% if order.state == "validated" %>
                 <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                  <%= order.state %>
+                  validée
                 </span>
               <% end %>
               <% if order.state == "waiting" %>
                 <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
-                  <%= order.state %>
+                  en attente
                 </span>
               <% end %>
             </td>

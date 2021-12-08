@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
       Transaction.purchase(order)
       @order.update(state: "validated")
       OrderMailer.with(order: @order).confirm_order_email.deliver_later
+      flash[:notice] = "La commande a été validée !"
     end
   end
 end
