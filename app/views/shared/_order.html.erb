@@ -4,7 +4,7 @@
       <%= link_to "Commande ##{order.id[0,7].upcase}", store_order_path(order.cart.store, order) %>
     </h2>
     <h2>
-      Prix : <%= order.cart.total_price %> XOF
+      Prix : <%= number_with_delimiter( order.cart.total_price, :delimiter => '.') %> XOF
     </h2>
     <h2>
       Nombre de produits (<%= order.cart.line_items.count %>)

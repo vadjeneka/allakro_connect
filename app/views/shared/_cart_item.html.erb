@@ -16,7 +16,7 @@
             </a>
           </h3>
           <p class="ml-4">
-            <%= item.total_price %> FCFA
+            <%= number_with_delimiter( item.total_price, :delimiter => '.') %> FCFA
           </p>
         </div>
         <p class="mt-1 text-sm text-gray-500">
@@ -41,7 +41,7 @@
 
           <div class="">
             <button type="button" class="font-medium text-red-600 hover:text-red-500">
-              <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Are you sure ?" class="m-3">
+              <a href="<%= line_item_delete_path(item) %>" data-method="DELETE" data-confirm="Êtes vous sûr?" class="m-3">
               Supprimer 
               </a>
             </button>

@@ -61,7 +61,7 @@ class ChatsController < ApplicationController
       end
     else
       raise @chat.errors.inspect
-      flash[:error]= 'error'
+      flash[:error]= 'erreur!'
       render 'new'
     end
   end
@@ -72,7 +72,7 @@ class ChatsController < ApplicationController
     if @chat.update(chat_params)
       redirect_to user_store_chats_path(@current_user, @store, @chat)
     else
-      flash[:error] = 'error'
+      flash[:error] = 'erreur!'
       render 'edit'
     end
   end
