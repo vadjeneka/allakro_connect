@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   # end
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || root_path
-  end  
+  end
+  
   def after_sign_up_path_for(resource)
     redirect_to root_path
   end
