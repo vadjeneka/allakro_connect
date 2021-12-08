@@ -3,6 +3,6 @@
       <% if offer.user == current_user %>
         <%= offer.user.email %> 
       <% end %>
-      <span class="text-red-600"><%= offer.amount %> XOF</span>
+      <span class="text-red-600"><%= number_with_delimiter( offer.amount, :delimiter => '.') %> XOF</span>
     </h2>
   <% end %>

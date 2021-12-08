@@ -28,7 +28,7 @@
               <%= order.cart.line_items.size %>
             </td>
             <td class="px-4 py-3 text-sm border">
-              <%= order.cart.total_price %> FCFA
+              <%= number_with_delimiter( order.cart.total_price, :delimiter => '.') %> FCFA
             </td>
             <td class="px-4 py-3 text-sm border">
               <% if order.state == "cancelled" %>
