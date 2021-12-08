@@ -23,7 +23,7 @@
               x<%= item.quantity %>
             </div>
             <div class='text-xl text-right font-bold'>
-              <%= item.total_price %> FCFA
+              <%= number_with_delimiter( item.total_price, :delimiter => '.')  %> FCFA
             </div>
           </div>
         </div>
@@ -33,5 +33,5 @@
 </div>
 <% end %>
 <h2 class="text-center font-bold text-3xl m-5">
-  Prix total : <%= order.cart.total_price %> FCFA
+  Prix total : <%= number_with_delimiter( order.cart.total_price, :delimiter => '.') %> FCFA
 </h2>

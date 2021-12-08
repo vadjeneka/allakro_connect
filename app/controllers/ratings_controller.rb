@@ -11,7 +11,7 @@ class RatingsController < ApplicationController
     @product = Product.includes(:store).find(params[:product_id])
     @rate = @product.ratings.build(rating_params.merge(user_id: current_user.id))
     if @rate.save
-      redirect_to user_store_product_path(current_user, @product.store, @product), notice: "Product successfully rate"
+      redirect_to user_store_product_path(current_user, @product.store, @product), notice: "Produit noté avec succès!"
     end
   end
 

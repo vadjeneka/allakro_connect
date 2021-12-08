@@ -30,10 +30,9 @@ class StoresController < ApplicationController
   def create
     @store = current_user.build_store(store_params)
     if @store.save
-      redirect_to store_path(@store), notice: 'Store was successfully created'
+      redirect_to store_path(@store), notice: 'Le store à été créé avec succès!'
     else
-      raise "You got errors here"
-      flash[:error] = "Store could not be created"
+      flash[:error] = "Le store ne peut être créé"
       render 'new'
     end
   end
@@ -45,9 +44,9 @@ class StoresController < ApplicationController
   def update
     @store = Store.find(params[:id])
     if @store.update(store_params)
-      redirect_to profile_path(current_user), notice: 'Information de la boutique mis a jour'
+      redirect_to profile_path(current_user), notice: 'Information de la boutique mis à jour'
     else
-      flash[:error] = 'Cannot update Store'
+      flash[:error] = 'Le store ne peut être mis à jour!'
       render 'edit'
     end
   end
@@ -55,7 +54,7 @@ class StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
-    redirect_to profile_path(current_user), notice: 'Boutique supprime'
+    redirect_to profile_path(current_user), notice: 'Boutique supprimée'
   end
 
 

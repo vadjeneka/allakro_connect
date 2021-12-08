@@ -64,12 +64,12 @@ class ProductsController < ApplicationController
         stock = @product.build_stock(quantity:0)
       end
       if stock.save
-        redirect_to store_path(@product.store), notice: 'Product was successfully created'
+        redirect_to store_path(@product.store), notice: 'Produit créé avec succès!'
       else
         raise stock.errors.inspect
       end
     else
-      flash[:error] = "Product could not be created"
+      flash[:error] = "Le produit ne peut être créé!"
       render 'new'
     end
   end
@@ -87,9 +87,9 @@ class ProductsController < ApplicationController
     # end
     if @product.update(product_params)
       # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
-      redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
+      redirect_to store_product_path(@product.store, @product), notice: 'Produit mis à jour avec succès!'
     else
-      flash[:error] = 'Cannot update Product'
+      flash[:error] = 'Le produit ne peut être mis à jour!'
       render 'edit'
     end
   end
@@ -98,7 +98,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @store = @product.store
     @product.destroy
-    redirect_to store_path(@store), notice: 'Product deleted successfully'
+    redirect_to store_path(@store), notice: 'Produit supprimé avec succès!'
   end
 
   def like
