@@ -4,8 +4,7 @@ class CommentsController < ApplicationController
 
   def index
     @store = Store.find(params[:store_id])
-    @comments = Comment.all
-    
+    @comments = Comment.joins(:product).where('products.store_id = ?', current_user.store.id)
   end
 
   def show 
