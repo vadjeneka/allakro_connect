@@ -1,4 +1,4 @@
-<%= form_with model: [@store, @chat, @messages], data:{remote: false, controller: 'action-on-submit', action: 'ajax:success->action-on-submit#emptyField', 'action-on-submit-target': 'form'} do |form| %>
+<%= form_with model: [@store, @chat, @messages], data:{remote: true, controller: 'action-on-submit', action: 'ajax:success->action-on-submit#emptyField', 'action-on-submit-target': 'form'} do |form| %>
 <div class="w-full flex rounded overflow-hidden">
   <%= form.text_field :content, placeholder:'Ecrivez un message', class:'flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 mr-2',data:{'action-on-submit-target': 'field', action:'keyup->action-on-submit#enableField'} %>
   <% if @chat.errors[:content] %>

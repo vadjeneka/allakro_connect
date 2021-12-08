@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     @products = @products.filter_by_price_range(params[:price][:min], params[:price][:max]) if params.has_key?(:price) && params[:price][:min].present? && params[:price][:max].present?
     @products = @products.filter_by_categories(params[:categories]) if params[:categories].present?
     @products = @products.filter_by_locations(params[:locations]) if params[:locations].present?
-    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present?
+    Search.create!(user_id:current_user.id,content:params[:name]) if params[:name].present? && current_user
     # end
 
     @categories = category_returns
@@ -53,7 +53,6 @@ class ProductsController < ApplicationController
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
-      redirect_to new_store_product_stock_path(@store,@product), notice: 'Product was successfully created'
       if (params[:product][:quantity]).to_i >= 0
         stock = @product.build_stock(quantity: (params[:product][:quantity]).to_i)        
       else
@@ -78,9 +77,9 @@ class ProductsController < ApplicationController
   def update
     # list_img = product_params[:hidden_items].split(',').map(&:to_i)
     @product = Product.find(params[:id])
-    list_img.each do |img|
-      @product.product_backgrounds[img].destroy
-    end
+    # list_img.each do |img|
+    #   @product.product_backgrounds[img].destroy
+    # end
     if @product.update(product_params)
       # @product.product_backgrounds_attachments.where(id: image_ids).delete_all
       redirect_to store_product_path(@product.store, @product), notice: 'Product updated successfully'
@@ -162,8 +161,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      # :hidden_items,
-      product_backgrounds:[],
+      product_backgrounds:[]
     )
   end
 end
