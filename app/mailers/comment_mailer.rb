@@ -4,6 +4,6 @@ class CommentMailer < ApplicationMailer
   def confirm_comment_email
     @comment = params[:comment]
     @email = @comment.product.store.user.email
-    mail(to: @email, subject:"Hi! You received a new comment.")
+    mail(to: @email, subject:"Salut, vous avez reçu un nouveau commentaire !")
   end
 end
