@@ -9,7 +9,7 @@
     <hr>
   </div>
 
-  <div class="min-h-s flex flew-wrap content-start mr-3">
+  <div class="min-h-s flex flew-wrap content-start mr-3 ">
     <% @bids.each do |bid| %>
       <%= render partial: "shared/bid_cart", locals: { bid: bid } %>  
     <% end %>
@@ -23,7 +23,7 @@
     <hr>
   </div>
 
-  <div class='min-h-s'>
+  <div class='min-h-s flex flew-wrap content-start mr-3'>
     <% @coming_bids.each do |bid| %>
       <%= render partial: "shared/bid_cart", locals: { bid: bid } %>
     <% end %>

@@ -20,10 +20,21 @@ class User < ApplicationRecord
     scope :all_expect, -> (user){ where.not(id: user.id)}
     # Ex:- scope :active, -> {where(:active => true)}
 
-    
   def admin?
-    email = "admin@techshelter.fr"
+    email == "admin@techshelter.fr"
   end
+  
+  def self.create_from_provider_data(provider_data)
+    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
+      user.provider = provider_data.provider
+      user.uid = provider_data.uid
+      user.email = provider_data.info.email
+      user.password = Devise.friendly_token[0, 20]
+      # user.skip_confirmation!
+      user.save!
+    end
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
       user.provider = auth[:provider]
@@ -46,7 +57,9 @@ class User < ApplicationRecord
       end
     end
   end
+
   def account_creation
     self.create_account!
   end
+
 end

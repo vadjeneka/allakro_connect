@@ -120,7 +120,7 @@ Rails.application.configure do
 
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
-  :user_name => Rails.application.credentials.dig(:mailtrap, :user_id),
+  :user_name => Rails.application.credentials.dig(:mailtrap, :user_name),
   :password => Rails.application.credentials.dig(:mailtrap, :password),
   :address => 'smtp.mailtrap.io',
   :domain => 'smtp.mailtrap.io',

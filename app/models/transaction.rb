@@ -38,4 +38,18 @@ class Transaction < ApplicationRecord
       Transaction.create!(type_transaction: "Déblocage", amount: top.first.amount, account_id: user.account.id)
     end
   end
+
+  def self.bid_purcharse(bid)
+    ActiveRecord::Base.transaction do
+      bid_owner = bid.product.store.user #TODO: on récupère le bid owner
+      bid_winner = bid.offers.top.first #TODO: on récuprère le top offer
+      offer_winner = bid_winner.amount #TODO: on récupère l'offre gagnante
+      Transaction.release(bid_winner)
+      bid_winner.user.account.withdraw(offer_winner)
+      bid_owner.account.deposit(offer_winner)
+
+      Transaction.create!(type_transaction: "Vente aux enchères", amount: offer_winner, account_id: bid_owner.account.id)
+      Transaction.create!(type_transaction: "Achat aux enchères", amount: -offer_winner, account_id: bid_winner.user.account.id)
+    end
+  end
 end

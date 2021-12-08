@@ -14,7 +14,7 @@ export default class extends Controller {
     console.log('current_user :',currentUser)
     if (currentUser == messageUser) {
       this.containerTarget.classList.add('rounded-br-none')
-      this.containerTarget.classList.add('bg-red-400')
+      this.containerTarget.classList.add('bg-red-500')
       this.containerTarget.classList.add('text-white')
       this.containerTarget.parentElement.classList.add('justify-end')
     } else {
