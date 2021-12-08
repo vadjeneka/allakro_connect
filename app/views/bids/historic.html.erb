@@ -39,19 +39,19 @@
                 <%case bid.state
                   when 'wainting'%>
                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-yellow-100 rounded-sm">
-                      <%= bid.state%>
+                      En attente
                     </span>
                   <%when 'actived'%>
                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
-                      <%= bid.state%>
+                      Activée
                     </span>
                   <%when 'closed'%>
                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-blue-100 rounded-sm">
-                      <%= bid.state%>
+                      Fermée
                     </span>
                   <%when 'cancelled'%>
                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                      <%= bid.state%>
+                      Annulée
                     </span>
                 <%end%>
             </td>
@@ -64,11 +64,11 @@
                     <%case bid.validated
                     when true%>
                       <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-green-100 rounded-sm">
-                        <%= bid.validated%>
+                        OUI
                       </span>
                     <%when false%>
                       <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                        <%= bid.validated%>
+                        NON
                       </span>
                     <%end%>
                 <%end%>

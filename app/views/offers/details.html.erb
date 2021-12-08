@@ -24,7 +24,18 @@
                 bg-green-400
                 rounded-full
               "
-              ><%=@offer.bid.state%></span
+              >
+                <%case @offer.bid.state
+                  when 'wainting'%>
+                      En attente
+                  <%when 'actived'%>
+                      Activée
+                  <%when 'closed'%>
+                      Fermée
+                  <%when 'cancelled'%>
+                      Annulée
+                <%end%>
+              </span
             >
           </div>
           <div>
