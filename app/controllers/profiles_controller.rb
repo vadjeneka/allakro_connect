@@ -16,10 +16,10 @@ class ProfilesController < ApplicationController
 
   def update
     if current_user.update(profile_params)
-      redirect_to profile_path(current_user), notice: 'Profile updated successfully'
+      redirect_to profile_path(current_user), notice: 'Profil mis à jour avec succès!'
     else
       raise current_user.errors.inspect
-      flash[:error] = 'Cannot update Store'
+      flash[:error] = 'Le store ne peut être mis à jour!'
       render 'edit'
     end
   end
