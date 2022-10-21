@@ -1,4 +1,4 @@
-web: bundle exec rails server
+web: bundle exec rails server -b 0.0.0.0
 worker: bundle exec sidekiq -C config/sidekiq.yml
 mailcatcher: mailcatcher --foreground --http-ip=0.0.0.0
 front: ./bin/webpack-dev-server

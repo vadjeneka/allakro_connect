@@ -55,6 +55,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    # raise product_params.inspect
     @product = store.products.build(product_params)
     if @product.save
       @store = @product.store
@@ -158,6 +159,7 @@ class ProductsController < ApplicationController
   end
   
   def product_params
+    # raise params.inspect
     params.require(:product).permit(
       :name,
       :description,
@@ -166,7 +168,7 @@ class ProductsController < ApplicationController
       :all_categories,
       :store_id,
       :is_available,
-      product_backgrounds:[]
+      product_backgrounds: []
     )
   end
 end
