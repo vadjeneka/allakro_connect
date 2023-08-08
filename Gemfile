@@ -76,7 +76,7 @@ gem 'devise'
 
 gem "pundit"
 gem 'omniauth'
-gem 'dotenv-rails'
+# gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
@@ -84,3 +84,4 @@ gem 'notifications'
 gem 'aws-sdk-s3', require: false
 
 gem "tailwindcss-rails", "~> 2.0"
+gem 'foreman'

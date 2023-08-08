@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :chats
   has_many :searches
   has_many :favorites
-  has_many :chats
+  # has_many :chats
   has_many :comments
   has_one :account 
   has_one_attached :avatar
