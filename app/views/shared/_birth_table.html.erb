@@ -1,0 +1,73 @@
+<div class='px-10'>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">Prénom du bébé</th>
+            <th class="px-4 py-3">Nom du bébé</th>
+            <th class="px-4 py-3">Sexe</th>
+            <th class="px-4 py-3">Mode Naissance </th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Née le</th>
+            <th class="px-4 py-3">Nom du père</th>
+            <th class="px-4 py-3">Nom de la mère</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% births.each do |birth| %>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms font-semibold border">
+              <%=  birth.first_name %>
+            </td>
+            <td class="px-4 py-3 border">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                  <%= birth.last_name %>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= birth.sexe %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= birth.birth_mode %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <% if birth.state == "cancelled" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                  annulée
+                </span>
+              <% end %>
+              <% if birth.state == "validated" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                  validée
+                </span>
+              <% end %>
+              <% if birth.state == "waiting" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
+                  en attente
+                </span>
+              <% end %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= birth.date.strftime("%d/%m/%Y") + " à " + birth.date.strftime("%H:%M") %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%=  birth.father_name %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%=  birth.mother_name %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+            <% if birth.state == "waiting" %>
+              <%= link_to "Valider", births_path %>
+            <% end %>
+            <% if birth.state == "validated" %>
+              <%= link_to "Réjeter", births_path %>
+            <% end %>
+            </td>
+          </tr>          
+        <% end %>
+        </tbody>
+      </table>
+</div>

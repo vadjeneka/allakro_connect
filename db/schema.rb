@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_08_214130) do
+ActiveRecord::Schema.define(version: 2023_08_12_135003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2023_08_08_214130) do
     t.string "father_name"
     t.string "mother_name"
     t.string "location"
-    t.boolean "valid"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -103,6 +103,13 @@ ActiveRecord::Schema.define(version: 2023_08_08_214130) do
     t.index ["category_id"], name: "index_categories_products_on_category_id"
     t.index ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id", unique: true
     t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
+  create_table "census", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

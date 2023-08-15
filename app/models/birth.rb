@@ -1,13 +1,13 @@
 class Birth < ApplicationRecord
   validates :first_name,
             :last_name,
-            :birth_date,
+            :date,
             :sexe,
             :location,
-            :birth_date,
+            :birth_mode,
             :father_name,
             :mother_name,
             :location,
-            :date,
-            :valid, presence: true
+            :date, 
+            :state, presence: true
 end

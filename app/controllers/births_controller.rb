@@ -1,6 +1,15 @@
 class BirthsController < ApplicationController
   def index 
-    @births = Birth.all
+    if current_user
+      @births = Birth.all
+    else
+      flash[:notice] = "Connexion réquise"
+      redirect_to new_user_session_path
+    end
+  end
+
+  def show 
+    
   end
 
   private 

@@ -9,7 +9,7 @@ class CreateBirths < ActiveRecord::Migration[6.1]
       t.string :father_name
       t.string :mother_name
       t.string :location
-      t.boolean :valid
+      t.string :state, :default =>  "waiting"
       
       
       t.timestamps

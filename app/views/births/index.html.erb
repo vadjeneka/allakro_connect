@@ -5,19 +5,18 @@
 </style>
 
 <div class="p-5 pl-10">
-  <h2 class="text-3xl font-bold my-7 ml-5">Recensement des actualités d'Allakro </h2>
+  <h2 class="text-3xl font-bold my-7 ml-5">Liste des naissances d'Allakro </h2>
   <hr>
-  <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-10">
-      <!-- birth card -->
-      <%=render 'births/birth'%>
-      <!-- death card -->
-      <%=render 'births/death'%>
-      <!-- job card -->
-      <%=render 'births/job'%>
-      <!-- Aménagement card -->
-      <%=render 'births/location'%>
-    </div>
+  <div class="mt-5 w-full flex ">
+    <div class="flex-grow"></div>
+    <button class="px-2 py-2 ml-2 bg-green-500 text-white w-1/6 mt-3 rounded shadow font-bold hover:bg-purple-900 justify-end items-end">
+      <p class="text-xl text-white">Ajouter une naissance</p>
+    </button>
+  </div>
+  <div class="mt-5">
+    <% if @births %>
+      <%= render partial: "shared/birth_table", locals: { births: @births } %>
+    <% end %>
   </div>
 </div>
 

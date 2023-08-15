@@ -18,18 +18,12 @@
   <div class="px-6 py-4">
 
       <a href="#"
-          class="font-semibold text-lg inline-block hover:text-red-600 transition duration-500 ease-in-out">Répertoire de compétence</a>
+          class="font-semibold text-lg inline-block hover:text-red-600 transition duration-500 ease-in-out">Répertoire des offres de service</a>
       <p class="text-gray-500 text-sm">
           Ici toutes les infos de proposition de service et compétences
       </p>
   </div>
   <div class="px-6 py-4 flex flex-row items-center">
-    <a href="" class="text-red-700 border border-red-600 py-4 px-6 rounded inline-flex items-center">
-      Plus
-      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          viewBox="0 0 24 24" class="w-6 h-6 ml-2">
-          <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-      </svg>
-    </a>
-  </div>
+    <%= link_to raw("Voir plus &rarr;"), births_path, class: "text-red-700 border border-red-600 py-4 px-6 rounded inline-flex items-center" %>
+</div>
 </div>
