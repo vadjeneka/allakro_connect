@@ -1,6 +1,7 @@
 <div class='h_min'>
   <h2 class="text-3xl font-bold text-center my-5">
-    Enchère sur "<%= @bid.product.name %>" 
+    Enchère sur "<%= @bid.product.name %>"
+      
     <p class="text-xl mt-5">
       <% if @bid.state == 'actived' %>
         Fin le <%= @bid.end_date.strftime("%d/%m/%Y") + " à " + @bid.end_date.strftime("%H:%M")  %>
@@ -13,6 +14,16 @@
     </p>
   </h2>
   <%# TODO: Ajouter l'image %>
+  <div class="flex justify-center">
+    <%if @bid.product.product_backgrounds.attached? %>
+      <%@bid.product.product_backgrounds.each do |background| %>
+        <%=image_tag background, class:'h-80 w-80 rounded-lg border-4 border-white ml-2'%>
+      <% end %>
+    <% else %>
+        <%=image_tag 'default_product_image.png', class:'h-24 w-24 object-cover rounded-lg border-4 border-white'%>
+    <% end %>
+  </div><br/><br/>
+
   <% if @bid.state == "actived" %>
     <%# TODO: Create comps for top offer %>
     <% if @bid.product.store.user != current_user %>

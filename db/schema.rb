@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_170358) do
+ActiveRecord::Schema.define(version: 2023_08_12_135003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.integer "balance"
+    t.integer "balance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.uuid "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
@@ -64,6 +64,20 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.index ["product_id"], name: "index_bids_on_product_id"
   end
 
+  create_table "births", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "sexe"
+    t.date "date"
+    t.string "birth_mode"
+    t.string "father_name"
+    t.string "mother_name"
+    t.string "location"
+    t.string "state", default: "waiting"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -91,6 +105,13 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
+  create_table "census", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name"
     t.uuid "user_id", null: false
@@ -98,6 +119,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["store_id"], name: "index_chats_on_store_id"
+    t.index ["user_id", "store_id"], name: "index_chats_on_user_id_and_store_id", unique: true
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
@@ -118,6 +140,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_favorites_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -173,7 +196,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.uuid "bid_id", null: false
     t.uuid "user_id", null: false
     t.integer "amount"
-    t.boolean "accepted", default: true
+    t.boolean "accepted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bid_id"], name: "index_offers_on_bid_id"
@@ -184,7 +207,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.uuid "user_id", null: false
     t.uuid "cart_id", null: false
     t.integer "amount"
-    t.boolean "is_fulfilled"
+    t.string "state", default: "waiting"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
@@ -210,6 +233,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_170358) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_ratings_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_ratings_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 

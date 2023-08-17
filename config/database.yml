@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: jokou_production
   username: jokou
-  password: <%= ENV['jokou_DATABASE_PASSWORD'] %>
+  password: <%= ENV['MY_APP_RENDER_DATABASE_PASSWORD'] %>

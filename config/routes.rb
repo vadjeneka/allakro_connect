@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :births 
+  resources :censuses 
+
   #Historic of offers by user
   get 'profile/:user_id/offers' => "offers#historic", as: "user_offers_historic"
   #Details of offers by user

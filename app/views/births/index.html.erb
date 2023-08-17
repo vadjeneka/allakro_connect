@@ -1,0 +1,29 @@
+<style>
+  .min-h-s{
+    min-height: 10rem;
+  }
+</style>
+
+<div class="p-5 pl-10">
+  <h2 class="text-3xl font-bold my-7 ml-5">Liste des naissances d'Allakro </h2>
+  <hr>
+  <div class="mt-5 w-full flex ">
+    <div class="flex-grow"></div>
+    <button class="px-2 py-2 ml-2 bg-green-500 text-white w-1/6 mt-3 rounded shadow font-bold hover:bg-purple-900 justify-end items-end">
+      <p class="text-xl text-white">Ajouter une naissance</p>
+    </button>
+  </div>
+  <div class="mt-5">
+    <% if @births %>
+      <%= render partial: "shared/birth_table", locals: { births: @births } %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
