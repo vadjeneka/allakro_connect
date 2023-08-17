@@ -31,6 +31,7 @@ GEM
     actionpack (6.1.7.4)
       actionview (= 6.1.7.4)
       activesupport (= 6.1.7.4)
+
       rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
@@ -466,7 +467,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  webpacker (~> 5.0)
+  webpacker (~> 5.2.1)
 
 RUBY VERSION
    ruby 2.7.2p137
