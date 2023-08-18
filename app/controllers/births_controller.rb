@@ -8,6 +8,20 @@ class BirthsController < ApplicationController
     end
   end
 
+  def validate_birth
+    @birth = Birth.find(params[:id])
+    @birth.update(state: "validated")
+    flash[:success] = "Naissance validée"
+    redirect_to births_path
+  end
+
+  def reject_birth
+    @birth = Birth.find(params[:id])
+    @birth.update(state: "cancelled")
+    flash[:notice] = "Naissance rejetée"
+    redirect_to births_path
+  end
+
   def show 
     
   end
