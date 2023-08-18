@@ -16,7 +16,7 @@
         <tbody class="bg-white">
           <% births.each do |birth| %>
           <tr class="text-gray-700">
-            <td class="px-4 py-3 text-ms font-semibold border">
+            <td class="px-4 py-3 text-ms border">
               <%=  birth.first_name %>
             </td>
             <td class="px-4 py-3 border">
@@ -59,19 +59,21 @@
               <%=  birth.mother_name %>
             </td>
             <td class="px-4 py-3 text-sm border">
-              <% if birth.state == "waiting" %>
-              <a href="<%= validate_birth_path(birth) %>" data-method="PUT">
-                <button class="px-2 py-1 ml-2 bg-green-500 rounded shadow text-white ">
-                  Valider
-                </button>
-              </a>
-              <% end %>
-              <% if birth.state == "validated" %>
-                <a href="<%= reject_birth_path(birth) %>" data-method="PUT">
-                  <button class="px-2 py-1 ml-2 bg-red-500 rounded shadow text-white ">
-                    Réjeter
+              <% if @user.admin?  %>
+                <% if birth.state == "waiting" %>
+                <a href="<%= validate_birth_path(birth) %>" data-method="PUT">
+                  <button class="px-2 py-1 ml-2 bg-green-500 rounded shadow text-white ">
+                    Valider
                   </button>
                 </a>
+                <% end %>
+                <% if birth.state == "validated" %>
+                  <a href="<%= reject_birth_path(birth) %>" data-method="PUT">
+                    <button class="px-2 py-1 ml-2 bg-red-500 rounded shadow text-white ">
+                      Réjeter
+                    </button>
+                  </a>
+                <% end %>
               <% end %>
             </td>
           </tr>          

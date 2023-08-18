@@ -1,6 +1,8 @@
 class CensusesController < ApplicationController
   def index
     @censuses = Censu.all
+    @birth_count = Birth.where(state: ["validated", "waiting"]).count
+
   end
 
   private 

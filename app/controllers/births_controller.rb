@@ -1,10 +1,25 @@
 class BirthsController < ApplicationController
   def index 
     if current_user
+      @user = current_user
       @births = Birth.all
     else
       flash[:notice] = "Connexion réquise"
       redirect_to new_user_session_path
+    end
+  end
+
+  def new 
+    @birth = Birth.new
+  end
+
+  def create
+    @birth = Birth.new(birth_params)
+    if @birth.save
+      flash[:success] = "Naissance enregistrée"
+      redirect_to births_path
+    else
+      render :new
     end
   end
 
@@ -28,7 +43,7 @@ class BirthsController < ApplicationController
 
   private 
 
-  def params_birth
+  def birth_params
     params.require(:birth).permit(
       :date,
       :first_name,
@@ -37,7 +52,7 @@ class BirthsController < ApplicationController
       :father_name,
       :mother_name,
       :location,
-      :valid,
+      :state,
       :birth_mode)
   end
 end

@@ -16,7 +16,7 @@
   </div>
   <div class="mt-5">
     <% if @births %>
-      <%= render partial: "shared/birth_table", locals: { births: @births } %>
+      <%= render partial: "shared/birth_table", locals: { births: @births, user: @user } %>
     <% end %>
   </div>
 </div>
