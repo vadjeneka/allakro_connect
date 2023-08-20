@@ -1,0 +1,50 @@
+<div class='px-10'>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">Nom et prénom </th>
+            <th class="px-4 py-3">Fonction </th>
+            <th class="px-4 py-3">Sexe</th>
+            <th class="px-4 py-3">Date de naissance</th>
+            <th class="px-4 py-3">Lieu d'habitation </th>
+            <th class="px-4 py-3">Provénance </th>
+            <th class="px-4 py-3">Actions</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% locations.each do |location| %>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms border">
+              <%=  location.first_last_name_owner %>
+            </td>
+            <td class="px-4 py-3 border">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                  <%= location.function %>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= location.sexe %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= location.date_of_birth %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <%= location.family_location_place %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <%= location.origin_location %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <%= link_to "Details", location_path(location) %>
+            </td>
+          </tr>          
+        <% end %>
+        </tbody>
+      </table>
+</div>

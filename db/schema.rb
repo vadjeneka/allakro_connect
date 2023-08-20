@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_12_135003) do
+ActiveRecord::Schema.define(version: 2023_08_19_222830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -133,6 +133,22 @@ ActiveRecord::Schema.define(version: 2023_08_12_135003) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "deaths", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_last_name_death"
+    t.string "sexe"
+    t.string "function"
+    t.date "date_of_birth"
+    t.date "date_of_death"
+    t.string "death_mode"
+    t.string "death_mode_description"
+    t.string "father_name"
+    t.string "mother_name"
+    t.string "location"
+    t.string "state", default: "waiting"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "product_id", null: false
@@ -162,6 +178,19 @@ ActiveRecord::Schema.define(version: 2023_08_12_135003) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
+  create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_last_name_owner"
+    t.string "sexe"
+    t.string "function"
+    t.date "date_of_birth"
+    t.string "origin_location"
+    t.string "location_mode"
+    t.string "family_location_place"
+    t.string "family_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "content"
     t.uuid "user_id", null: false
@@ -170,6 +199,17 @@ ActiveRecord::Schema.define(version: 2023_08_12_135003) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "moves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_last_name_owner"
+    t.string "sexe"
+    t.string "function"
+    t.date "date_of_birth"
+    t.string "new_destination"
+    t.string "family_location_place"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -243,6 +283,17 @@ ActiveRecord::Schema.define(version: 2023_08_12_135003) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
+  end
+
+  create_table "services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_last_name_owner"
+    t.string "service_name"
+    t.string "skill"
+    t.string "phone_number"
+    t.string "message"
+    t.string "state", default: "waiting"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

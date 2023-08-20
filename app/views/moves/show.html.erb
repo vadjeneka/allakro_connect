@@ -1,0 +1,45 @@
+<div class="p-5 pl-10">
+  <h2 class="text-3xl font-bold my-7 ml-5">Détails sur l'aménagement' </h2>
+  <hr>
+</div>
+<div class="flex p-4">
+  <div class="w-1/2 pr-4">
+    <%= image_tag 'location.jpg', class: "h-auto w-full" %>
+  </div>
+  <div class="w-1/2 grid grid-cols-2 gap-2 justify-between">
+      <div class="">
+        <h4 class="text-xl font-semibold">Nom et prénom :</h4>
+        <p class="text-gray-500"><%= @move.first_last_name_owner %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Fonction:</h4>
+        <p class="text-gray-500"><%= @move.function %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Sexe :</h4>
+        <p class="text-gray-500"><%= @move.sexe %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Date de naissance :</h4>
+        <p class="text-gray-500"><%= @move.date_of_birth %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Destination:</h4>
+        <p class="text-gray-500"><%= @move.new_destination %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Lieu d'habitation :</h4>
+        <p class="text-gray-500"><%= @move.family_location_place %></p>
+      </div>
+
+  </div>
+</div>
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

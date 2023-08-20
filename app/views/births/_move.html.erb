@@ -1,7 +1,7 @@
 <div class="rounded overflow-hidden shadow-lg">
   <div class="relative">
       <a href="#">
-        <%= image_tag("job.jpg") %>
+        <%= image_tag("location.jpg") %>
         <div
             class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
         </div>
@@ -10,20 +10,20 @@
       <a href="!#">
           <div
               class="text-sm absolute top-0 right-0 bg-red-600 px-4 text-white rounded-full h-20 w-20 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-              <span class="font-bold"><%= @service_count %></span>
-              <small>Emplois</small>
+              <span class="font-bold"><%= @move_count %></span>
+              <small>Déménagements</small>
           </div>
       </a>
   </div>
   <div class="px-6 py-4">
 
       <a href="#"
-          class="font-semibold text-lg inline-block hover:text-red-600 transition duration-500 ease-in-out">Répertoire des offres de service</a>
+          class="font-semibold text-lg inline-block hover:text-red-600 transition duration-500 ease-in-out">Répertoire des Déménagements</a>
       <p class="text-gray-500 text-sm">
-          Ici toutes les infos de proposition de service et compétences
+          Ici toutes les infos de Déménagements
       </p>
   </div>
   <div class="px-6 py-4 flex flex-row items-center">
-    <%= link_to raw("Voir plus &rarr;"), services_path, class: "text-red-700 border border-red-600 py-4 px-6 rounded inline-flex items-center" %>
+    <%= link_to raw("Voir plus &rarr;"), moves_path, class: "text-red-700 border border-red-600 py-4 px-6 rounded inline-flex items-center" %>
 </div>
 </div>

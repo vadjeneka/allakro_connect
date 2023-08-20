@@ -1,0 +1,83 @@
+<div class='px-10'>
+  <table class="w-full">
+        <thead>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+            <th class="px-4 py-3">Nom et prénom </th>
+            <th class="px-4 py-3">Service proposé </th>
+            <th class="px-4 py-3">Compétences</th>
+            <th class="px-4 py-3">Téléphone </th>
+            <th class="px-4 py-3">photo</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Actions</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <% services.each do |service| %>
+          <tr class="text-gray-700">
+            <td class="px-4 py-3 text-ms border">
+              <%=  service.first_last_name_owner %>
+            </td>
+            <td class="px-4 py-3 border">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                  <%= service.service_name %>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-xs border">
+              <%= service.skill %>
+            </td>
+            <td class="px-4 py-3 text-sm border">
+              <%= service.phone_number %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <%= image_tag service.photo, class:'object-cover w-14 h-14'  %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <% if service.state == "cancelled" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                  rejetée
+                </span>
+              <% end %>
+              <% if service.state == "validated" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                  approuvée
+                </span>
+              <% end %>
+              <% if service.state == "waiting" %>
+                <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-sm">
+                  en attente
+                </span>
+              <% end %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <%= link_to "Details", service_path(service) %>
+            </td>
+
+            <td class="px-4 py-3 text-sm border">
+              <% if @user.admin?  %>
+                <% if service.state == "waiting" %>
+                <a href="<%= validate_service_path(service) %>" data-method="PUT">
+                  <button class="px-2 py-1 ml-2 bg-green-500 rounded shadow text-white ">
+                    Valider
+                  </button>
+                </a>
+                <% end %>
+                <% if service.state == "validated" %>
+                  <a href="<%= reject_service_path(service) %>" data-method="PUT">
+                    <button class="px-2 py-1 ml-2 bg-red-500 rounded shadow text-white ">
+                      Réjeter
+                    </button>
+                  </a>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>          
+        <% end %>
+        </tbody>
+      </table>
+</div>

@@ -58,6 +58,10 @@ Rails.application.routes.draw do
   end
 
   resources :births 
+  resources :deaths 
+  resources :locations 
+  resources :moves 
+  resources :services 
   resources :censuses 
 
   #Historic of offers by user
@@ -80,6 +84,14 @@ Rails.application.routes.draw do
   #validate/reject birth
   put 'births/:id/validated' => "births#validate_birth", as: "validate_birth"
   put 'births/:id/rejected' => "births#reject_birth", as: "reject_birth"
+
+  #validate/reject death
+  put 'deaths/:id/validated' => "deaths#validate_death", as: "validate_death"
+  put 'deaths/:id/rejected' => "deaths#reject_death", as: "reject_death"
+
+  #validate/reject service
+  put 'services/:id/validated' => "services#validate_service", as: "validate_service"
+  put 'services/:id/rejected' => "services#reject_service", as: "reject_service"
   
   resources :line_items, only: [:create]
   post 'line_items/:id/add' => "line_items#add_quantity", as: "line_item_add"
