@@ -1,0 +1,54 @@
+<div class="p-5 pl-10">
+  <h2 class="text-3xl font-bold my-7 ml-5">Détails sur l'offre </h2>
+  <hr>
+</div>
+<div class="flex p-4">
+  <div class="w-1/2 pr-4 justify-center flex">
+    <%= image_tag @service.photo, class:'object-cover w-1/2 h-18' %>
+  </div>
+  <div class="w-1/2 grid grid-cols-2 gap-2 justify-between">
+      <div class="">
+        <h4 class="text-xl font-semibold">Nom et prénom :</h4>
+        <p class="text-gray-500"><%= @service.first_last_name_owner %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Service proposé:</h4>
+        <p class="text-gray-500"><%= @service.service_name %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Compétences :</h4>
+        <p class="text-gray-500"><%= @service.skill %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Numéro de téléphone :</h4>
+        <p class="text-gray-500"><%= @service.phone_number %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Message:</h4>
+        <p class="text-gray-500"><%= @service.message %></p>
+      </div>
+      <div class="">
+        <h4 class="text-xl font-semibold">Status :</h4>
+        <% if @service.state == "waiting" %>
+          <p class="text-blue-500">En attente </p>
+        <% end %>
+
+        <% if @service.state == "validated" %>
+          <p class="text-green-500">Valider</p>
+        <% end %>
+
+        <% if @service.state == "cancelled" %>
+          <p class="text-red-500">Refuser</p>
+        <% end %>
+      </div>
+  </div>
+</div>
+
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>

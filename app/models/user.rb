@@ -21,7 +21,7 @@ class User < ApplicationRecord
     # Ex:- scope :active, -> {where(:active => true)}
 
   def admin?
-    email == "admin@techshelter.fr"
+    email == "admin@test.fr"
   end
   
   def self.create_from_provider_data(provider_data)

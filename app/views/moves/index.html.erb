@@ -1,0 +1,27 @@
+<style>
+  .min-h-s{
+    min-height: 10rem;
+  }
+</style>
+
+<div class="p-5 pl-10">
+  <h2 class="text-3xl font-bold my-7 ml-5">Liste des Déménagements d'Allakro </h2>
+  <hr>
+  <div class="mt-5 w-full flex ">
+    <div class="flex-grow"></div>
+      <%= link_to 'Ajouter un déménagement', new_move_path, class:'bg-green-600 text-white px-5 py-2 font-medium rounded' %>
+  </div>
+  <div class="mt-5">
+    <% if @moves %>
+      <%= render partial: "shared/move_table", locals: { moves: @moves, user: @user } %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :banners do %>
+  <%=render 'shared/banners'%>
+<% end %>
+
+<% content_for :footer do %>
+  <%=render 'shared/footer'%>
+<% end %>
