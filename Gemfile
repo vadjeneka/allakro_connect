@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# ruby '2.7.2'
-ruby File.read('.ruby-version').strip
+ruby '2.7.2'
+# ruby File.read('.ruby-version').strip
 # for using js with rails
 # gem 'hotwire-rails'
 #radom image during times
