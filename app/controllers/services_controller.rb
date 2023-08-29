@@ -3,10 +3,10 @@ class ServicesController < ApplicationController
   def index
     if current_user 
       @user = current_user
-      @services = Service.all 
+      @services = Service.all.order(created_at: :desc)
     else
       flash[:notice] = "Connexion réquise"
-      redirect_to services_path
+      redirect_to new_user_session_path
     end
   end
 

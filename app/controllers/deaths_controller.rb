@@ -2,7 +2,7 @@ class DeathsController < ApplicationController
   def index
     if current_user
       @user = current_user
-      @deaths = Death.all
+      @deaths = Death.all.order(created_at: :desc)
     else
       flash[:notice] = "Connexion réquise"
       redirect_to new_user_session_path

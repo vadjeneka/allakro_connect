@@ -2,7 +2,7 @@ class MovesController < ApplicationController
   def index 
     if current_user
       @user = current_user
-      @moves = Move.all 
+      @moves = Move.all.order(created_at: :desc) 
     else
       flash[:notice] = "Connexion réquise"
       redirect_to new_user_session_path
