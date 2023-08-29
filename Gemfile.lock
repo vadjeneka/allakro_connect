@@ -120,6 +120,7 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.12.0)
+    escompress (0.3.0)
     et-orbi (1.2.7)
       tzinfo
     faraday (2.7.10)
@@ -435,6 +436,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+  escompress (~> 0.3.0)
   faker!
   foreman
   hotwire-rails

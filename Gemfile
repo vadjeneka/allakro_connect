@@ -87,3 +87,5 @@ gem 'aws-sdk-s3', require: false
 gem "tailwindcss-rails", "~> 2.0"
 gem 'foreman'
 
+
+gem "escompress", "~> 0.3.0"

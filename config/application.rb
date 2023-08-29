@@ -11,6 +11,7 @@ module Jokou
     config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.assets.css_compressor = Escompress::Compressor.new(loader: :css)
 
 
     # Configuration for the application, engines, and railties goes here.
