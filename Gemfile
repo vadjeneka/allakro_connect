@@ -82,7 +82,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 gem 'notifications'
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3'
 
 gem "tailwindcss-rails", "~> 2.0"
 gem 'foreman'
