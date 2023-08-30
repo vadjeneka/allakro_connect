@@ -8,7 +8,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "5.2.2",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "autoprefixer": "^9",
     "esbuild": "^0.3.0",
@@ -23,6 +23,6 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@webpack-cli/serve": "^2.0.5",
     "esbuild": "^0.3.0",
-    "webpack-dev-server": "^3"
+    "webpack-dev-server": "^4.15.1"
   }
 }
