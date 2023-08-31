@@ -16,7 +16,6 @@ amazon:
   region: eu-north-1
   bucket: <%= ENV['BUCKET_NAME'] %>
   endpoint: 'https://sts.eu-north-1.amazonaws.com'
-  public_send: true
   # endpoint: 'arn:aws:s3:eu-north-1:656277479880:accesspoint/allakro'
 
 # Remember not to checkin your GCS keyfile to a repository
