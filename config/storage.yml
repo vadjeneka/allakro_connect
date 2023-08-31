@@ -13,8 +13,8 @@ amazon:
   # secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   access_key_id: <%= ENV['ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SECRET_ACCESS_KEY'] %>
-  region: "eu-north-1"
-  bucket: "allakro"
+  region: eu-north-1
+  bucket: <%= ENV['BUCKET_NAME'] %>
   endpoint: 'https://sts.eu-north-1.amazonaws.com'
   public-read: true
   # endpoint: 'arn:aws:s3:eu-north-1:656277479880:accesspoint/allakro'
